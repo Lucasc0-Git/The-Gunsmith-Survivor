@@ -1,0 +1,450 @@
+[gd_scene format=3 uid="uid://djlib2qfsxxql"]
+
+[ext_resource type="PackedScene" uid="uid://dw8ufghl04u8o" path="res://Scenes/Map.tscn" id="1_idj7w"]
+[ext_resource type="Script" uid="uid://cfk4px6e32ldd" path="res://Scripts/main.gd" id="1_rgh2o"]
+[ext_resource type="PackedScene" uid="uid://2ufc8v56ge5p" path="res://Scenes/Player.tscn" id="2_kln2b"]
+[ext_resource type="PackedScene" uid="uid://7mhxc0w7ug41" path="res://Scenes/hud.tscn" id="3_kln2b"]
+[ext_resource type="Theme" uid="uid://bjx8aflrkpmog" path="res://Themes/StartSceneButton.tres" id="5_pbw6q"]
+[ext_resource type="Script" uid="uid://cq08afe6nx2la" path="res://Scripts/menu.gd" id="5_v1gob"]
+[ext_resource type="Shader" uid="uid://ca464l0rm344h" path="res://Shaders/Menu.gdshader" id="6_jw32o"]
+[ext_resource type="Script" uid="uid://wwrophqv2bdi" path="res://Scripts/opt_menu.gd" id="8_50glp"]
+[ext_resource type="Script" uid="uid://dfs7h6re7rpbi" path="res://Scripts/save_question.gd" id="8_vy5pj"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_50glp"]
+shader = ExtResource("6_jw32o")
+shader_parameter/blur_amount = 8.00000038
+shader_parameter/darkness = 0.4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kp3y5"]
+draw_center = false
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0, 0.6156863, 1, 1)
+border_blend = true
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kk5q7"]
+bg_color = Color(0.34569466, 0.20266101, 0.068465285, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.4627451, 0.2784314, 0.105882354, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+corner_detail = 7
+expand_margin_left = 4.0
+expand_margin_top = 4.0
+expand_margin_right = 4.0
+expand_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gcwlc"]
+bg_color = Color(0.46357596, 0.28002703, 0.10570549, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.301003, 0.1749875, 0.054956123, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+corner_detail = 7
+expand_margin_left = 4.0
+expand_margin_top = 4.0
+expand_margin_right = 4.0
+expand_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dgtb2"]
+bg_color = Color(0.6044932, 0.09624442, 0.11973386, 1)
+skew = Vector2(0.1, 0)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(1, 0.1764706, 0.05490196, 1)
+border_blend = true
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+corner_detail = 7
+shadow_size = 3
+shadow_offset = Vector2(5, 5)
+
+[sub_resource type="Theme" id="Theme_v1gob"]
+Button/colors/font_color = Color(0.8745098, 0.8745098, 0.8745098, 1)
+Button/colors/font_focus_color = Color(0, 0.856228, 0.85622764, 1)
+Button/colors/font_hover_color = Color(0.6507153, 0.90626, 0.99999994, 1)
+Button/colors/font_outline_color = Color(0.17994305, 0.08881388, 0.023755655, 1)
+Button/colors/font_pressed_color = Color(0.5723979, 0, 0.14884555, 1)
+Button/constants/outline_size = 3
+Button/font_sizes/font_size = 26
+Button/styles/focus = SubResource("StyleBoxFlat_kp3y5")
+Button/styles/hover = SubResource("StyleBoxFlat_kk5q7")
+Button/styles/normal = SubResource("StyleBoxFlat_gcwlc")
+Button/styles/pressed = SubResource("StyleBoxFlat_dgtb2")
+
+[sub_resource type="Theme" id="Theme_jw32o"]
+Button/colors/font_color = Color(0.8745098, 0.8745098, 0.8745098, 1)
+Button/colors/font_focus_color = Color(0, 0.856228, 0.85622764, 1)
+Button/colors/font_hover_color = Color(0.6507153, 0.90626, 0.99999994, 1)
+Button/colors/font_outline_color = Color(0.17994305, 0.08881388, 0.023755655, 1)
+Button/colors/font_pressed_color = Color(0.5723979, 0, 0.14884555, 1)
+Button/constants/outline_size = 3
+Button/font_sizes/font_size = 26
+Button/styles/focus = SubResource("StyleBoxFlat_kp3y5")
+Button/styles/hover = SubResource("StyleBoxFlat_kk5q7")
+Button/styles/normal = SubResource("StyleBoxFlat_gcwlc")
+Button/styles/pressed = SubResource("StyleBoxFlat_dgtb2")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_50glp"]
+bg_color = Color(0.40960088, 0.24396306, 0.08871656, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.3019608, 0.1764706, 0.05490196, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+expand_margin_left = 4.0
+expand_margin_top = 4.0
+expand_margin_right = 4.0
+expand_margin_bottom = 4.0
+
+[sub_resource type="Theme" id="Theme_bmxlf"]
+Label/colors/font_color = Color(0.8745098, 0.8745098, 0.8745098, 1)
+Label/colors/font_outline_color = Color(0.18039216, 0.09019608, 0.023529412, 1)
+Label/constants/outline_size = 4
+Label/font_sizes/font_size = 25
+Label/styles/focus = SubResource("StyleBoxFlat_50glp")
+Label/styles/normal = SubResource("StyleBoxFlat_50glp")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bmxlf"]
+draw_center = false
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0, 0.6156863, 1, 1)
+border_blend = true
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4kpch"]
+bg_color = Color(0.34569466, 0.20266101, 0.068465285, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.4627451, 0.2784314, 0.105882354, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+corner_detail = 7
+expand_margin_left = 4.0
+expand_margin_top = 4.0
+expand_margin_right = 4.0
+expand_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_grg3l"]
+bg_color = Color(0.46357596, 0.28002703, 0.10570549, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.301003, 0.1749875, 0.054956123, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+corner_detail = 7
+expand_margin_left = 4.0
+expand_margin_top = 4.0
+expand_margin_right = 4.0
+expand_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_frkhe"]
+bg_color = Color(0.6044932, 0.09624442, 0.11973386, 1)
+skew = Vector2(0.1, 0)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(1, 0.1764706, 0.05490196, 1)
+border_blend = true
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+corner_detail = 7
+shadow_size = 3
+shadow_offset = Vector2(5, 5)
+
+[sub_resource type="Theme" id="Theme_1p5hy"]
+Button/colors/font_color = Color(0.8745098, 0.8745098, 0.8745098, 1)
+Button/colors/font_focus_color = Color(0, 0.856228, 0.85622764, 1)
+Button/colors/font_hover_color = Color(0.6507153, 0.90626, 0.99999994, 1)
+Button/colors/font_outline_color = Color(0.17994305, 0.08881388, 0.023755655, 1)
+Button/colors/font_pressed_color = Color(0.5723979, 0, 0.14884555, 1)
+Button/constants/outline_size = 3
+Button/font_sizes/font_size = 26
+Button/styles/focus = SubResource("StyleBoxFlat_bmxlf")
+Button/styles/hover = SubResource("StyleBoxFlat_4kpch")
+Button/styles/normal = SubResource("StyleBoxFlat_grg3l")
+Button/styles/pressed = SubResource("StyleBoxFlat_frkhe")
+
+[sub_resource type="Theme" id="Theme_50glp"]
+Button/colors/font_color = Color(0.8745098, 0.8745098, 0.8745098, 1)
+Button/colors/font_focus_color = Color(0, 0.856228, 0.85622764, 1)
+Button/colors/font_hover_color = Color(0.6507153, 0.90626, 0.99999994, 1)
+Button/colors/font_outline_color = Color(0.17994305, 0.08881388, 0.023755655, 1)
+Button/colors/font_pressed_color = Color(0.5723979, 0, 0.14884555, 1)
+Button/constants/outline_size = 3
+Button/font_sizes/font_size = 26
+Button/styles/focus = SubResource("StyleBoxFlat_kp3y5")
+Button/styles/hover = SubResource("StyleBoxFlat_kk5q7")
+Button/styles/normal = SubResource("StyleBoxFlat_gcwlc")
+Button/styles/pressed = SubResource("StyleBoxFlat_dgtb2")
+
+[sub_resource type="Theme" id="Theme_vy5pj"]
+Button/colors/font_color = Color(0.8745098, 0.8745098, 0.8745098, 1)
+Button/colors/font_focus_color = Color(0, 0.856228, 0.85622764, 1)
+Button/colors/font_hover_color = Color(0.6507153, 0.90626, 0.99999994, 1)
+Button/colors/font_outline_color = Color(0.17994305, 0.08881388, 0.023755655, 1)
+Button/colors/font_pressed_color = Color(0.5723979, 0, 0.14884555, 1)
+Button/constants/outline_size = 3
+Button/font_sizes/font_size = 26
+Button/styles/focus = SubResource("StyleBoxFlat_kp3y5")
+Button/styles/hover = SubResource("StyleBoxFlat_kk5q7")
+Button/styles/normal = SubResource("StyleBoxFlat_gcwlc")
+Button/styles/pressed = SubResource("StyleBoxFlat_dgtb2")
+
+[node name="Main" type="Node2D" unique_id=211418808]
+process_mode = 3
+script = ExtResource("1_rgh2o")
+
+[node name="Map" parent="." unique_id=1487724397 instance=ExtResource("1_idj7w")]
+process_mode = 1
+
+[node name="Player" parent="." unique_id=1702320918 instance=ExtResource("2_kln2b")]
+z_index = 2
+
+[node name="Camera2D2" type="Camera2D" parent="Player" unique_id=2034350364]
+scale = Vector2(0.33, 0.33)
+limit_enabled = false
+position_smoothing_speed = 10.0
+
+[node name="HUD" parent="." unique_id=1957897222 instance=ExtResource("3_kln2b")]
+process_mode = 1
+
+[node name="Menu" type="CanvasLayer" parent="." unique_id=1854704566]
+process_mode = 2
+layer = 11
+visible = false
+script = ExtResource("5_v1gob")
+
+[node name="ColorRect" type="ColorRect" parent="Menu" unique_id=656746032]
+z_index = 1
+material = SubResource("ShaderMaterial_50glp")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="PauseMenu" type="Control" parent="Menu" unique_id=458564853]
+z_index = 1
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Menu/PauseMenu" unique_id=1090979873]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 15
+
+[node name="ResumeButton" type="Button" parent="Menu/PauseMenu/VBoxContainer" unique_id=1719607810]
+layout_mode = 2
+theme = SubResource("Theme_v1gob")
+text = "Resume"
+
+[node name="MenuButton" type="Button" parent="Menu/PauseMenu/VBoxContainer" unique_id=2000724195]
+layout_mode = 2
+theme = ExtResource("5_pbw6q")
+text = "Menu (w/ save (does not work))"
+
+[node name="OptionsButton" type="Button" parent="Menu/PauseMenu/VBoxContainer" unique_id=112866397]
+layout_mode = 2
+theme = SubResource("Theme_jw32o")
+text = "Options (does not work)"
+
+[node name="QuitButton" type="Button" parent="Menu/PauseMenu/VBoxContainer" unique_id=116100010]
+layout_mode = 2
+tooltip_text = "You will be asked about the weather... and about if u want to save.
+"
+theme = ExtResource("5_pbw6q")
+text = "RageQuit"
+
+[node name="SaveQuestion" type="Control" parent="Menu" unique_id=1192602103]
+process_mode = 2
+z_index = 2
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("8_vy5pj")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Menu/SaveQuestion" unique_id=801730468]
+custom_minimum_size = Vector2(400, 44)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -72.0
+offset_right = 200.0
+offset_bottom = -28.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SaveQuestionLabel" type="Label" parent="Menu/SaveQuestion/VBoxContainer" unique_id=1929687739]
+layout_mode = 2
+size_flags_vertical = 3
+theme = SubResource("Theme_bmxlf")
+text = "Save at least? (does not work)"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Menu/SaveQuestion" unique_id=2087501683]
+custom_minimum_size = Vector2(600, 44)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = 28.0
+offset_right = 300.0
+offset_bottom = 72.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_1p5hy")
+theme_override_constants/separation = 50
+
+[node name="YesButton" type="Button" parent="Menu/SaveQuestion/HBoxContainer" unique_id=1925310382]
+custom_minimum_size = Vector2(275, 0)
+layout_mode = 2
+text = "Yes"
+
+[node name="NoButton" type="Button" parent="Menu/SaveQuestion/HBoxContainer" unique_id=618960048]
+custom_minimum_size = Vector2(275, 0)
+layout_mode = 2
+text = "No"
+
+[node name="BoxContainer" type="BoxContainer" parent="Menu/SaveQuestion" unique_id=933543683]
+custom_minimum_size = Vector2(200, 44)
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 70.0
+offset_top = -114.0
+offset_right = 270.0
+offset_bottom = -70.0
+grow_vertical = 0
+theme = ExtResource("5_pbw6q")
+alignment = 1
+
+[node name="BackButton" type="Button" parent="Menu/SaveQuestion/BoxContainer" unique_id=1761504680]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Back"
+
+[node name="OptMenu" type="Control" parent="Menu" unique_id=1820472067]
+visible = false
+z_index = 2
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("8_50glp")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Menu/OptMenu" unique_id=518445275]
+custom_minimum_size = Vector2(350, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -175.0
+offset_top = -22.0
+offset_right = 175.0
+offset_bottom = 22.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TestButton" type="Button" parent="Menu/OptMenu/VBoxContainer" unique_id=262737679]
+layout_mode = 2
+theme = SubResource("Theme_50glp")
+text = "Testing (dummy)"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Menu/OptMenu" unique_id=1666593165]
+custom_minimum_size = Vector2(200, 44)
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 100.0
+offset_top = -170.0
+offset_right = 200.0
+offset_bottom = -126.0
+grow_vertical = 0
+
+[node name="BackButton" type="Button" parent="Menu/OptMenu/VBoxContainer2" unique_id=1199742362]
+layout_mode = 2
+theme = SubResource("Theme_vy5pj")
+text = "Back"
+
+[connection signal="pressed" from="Menu/PauseMenu/VBoxContainer/ResumeButton" to="Menu" method="_on_resume_button_pressed"]
+[connection signal="pressed" from="Menu/PauseMenu/VBoxContainer/MenuButton" to="Menu" method="_on_menu_button_pressed"]
+[connection signal="pressed" from="Menu/PauseMenu/VBoxContainer/OptionsButton" to="Menu" method="_on_options_button_pressed"]
+[connection signal="pressed" from="Menu/PauseMenu/VBoxContainer/QuitButton" to="Menu" method="_on_quit_button_pressed"]
+[connection signal="pressed" from="Menu/SaveQuestion/HBoxContainer/YesButton" to="Menu/SaveQuestion" method="_on_yes_button_pressed"]
+[connection signal="pressed" from="Menu/SaveQuestion/HBoxContainer/NoButton" to="Menu/SaveQuestion" method="_on_no_button_pressed"]
+[connection signal="pressed" from="Menu/SaveQuestion/BoxContainer/BackButton" to="Menu/SaveQuestion" method="_on_back_button_pressed"]
+[connection signal="pressed" from="Menu/OptMenu/VBoxContainer2/BackButton" to="Menu/OptMenu" method="_on_back_button_pressed"]

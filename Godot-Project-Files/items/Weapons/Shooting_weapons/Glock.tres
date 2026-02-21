@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="WeaponData" format=3 uid="uid://clerpgrevvh7e"]
+
+[ext_resource type="PackedScene" uid="uid://cbw45347x42n7" path="res://Scenes/Bullet.tscn" id="1_vx4tw"]
+[ext_resource type="Texture2D" uid="uid://dgcfntfkmo1bg" path="res://Textures/SURVIVAL HORROR WEAPONS PACK 16X16/2.png" id="2_1ahel"]
+[ext_resource type="Script" uid="uid://d4hnrbyx1okcs" path="res://items/Weapons/weapon_data.gd" id="3_f3u31"]
+
+[resource]
+script = ExtResource("3_f3u31")
+id = "glock"
+icon = ExtResource("2_1ahel")
+bullet_scene = ExtResource("1_vx4tw")
+bullet_shrinking = 0.99
+bullet_scale = Vector2(0.9, 0.9)
+recoil = 60.0
+metadata/_custom_type_script = "uid://d4hnrbyx1okcs"

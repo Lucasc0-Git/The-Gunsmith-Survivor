@@ -1,0 +1,15 @@
+[Rendering order]
+Z 0 = Main
+Z 0 = Map
+Z 2 = Player
+	Z 2 = PlayerSprite
+	Z 2 = Bullet
+	Z 3 = Weapon
+Z 4 = Objects
+
+Z 1 = PauseMenu
+Z 2 = SaveQuestion
+Z 2 = OptMenu
+CanvasLayer 1 = Vignette
+CanvasLayer 10 = Hud
+CanvasLayer 11 = Menu

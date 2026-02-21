@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="WeaponData" format=3 uid="uid://cn2o1vek71aab"]
+
+[ext_resource type="PackedScene" uid="uid://cbw45347x42n7" path="res://Scenes/Bullet.tscn" id="1_6s2c0"]
+[ext_resource type="Script" uid="uid://d4hnrbyx1okcs" path="res://items/Weapons/weapon_data.gd" id="1_whwom"]
+[ext_resource type="Texture2D" uid="uid://3pajlj58aaib" path="res://Textures/SURVIVAL HORROR WEAPONS PACK 16X16/4.png" id="2_7d6s2"]
+
+[resource]
+script = ExtResource("1_whwom")
+id = "shotgun"
+icon = ExtResource("2_7d6s2")
+display_name = "Shotgun"
+fire_rate = 0.9
+bullet_scene = ExtResource("1_6s2c0")
+bullet_scale = Vector2(0.7, 0.7)
+recoil = 150.0
+pellets = 10
+spread = 0.7
+metadata/_custom_type_script = "uid://d4hnrbyx1okcs"

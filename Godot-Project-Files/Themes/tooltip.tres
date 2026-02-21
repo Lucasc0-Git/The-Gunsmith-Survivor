@@ -1,0 +1,47 @@
+[gd_resource type="Theme" format=3 uid="uid://deuxmaj32ren3"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8jye8"]
+bg_color = Color(0.39870548, 0.18900812, 0.070792936, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.27370903, 0.17924899, 0.069950044, 1)
+border_blend = true
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+shadow_size = 2
+shadow_offset = Vector2(3, 3)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h8thi"]
+bg_color = Color(0.38812995, 0.18328753, 0.06779247, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.20468107, 0.11143886, 0.031925354, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+shadow_offset = Vector2(2, 2)
+
+[resource]
+Label/colors/font_color = Color(0.7019608, 0.43137255, 0.14117648, 1)
+Label/colors/font_outline_color = Color(0.2, 0.10980392, 0.039215688, 1)
+Label/colors/font_shadow_color = Color(0, 0, 0, 0.5686275)
+Label/constants/outline_size = 2
+Label/constants/shadow_offset_x = 2
+Label/constants/shadow_offset_y = 2
+Label/font_sizes/font_size = 19
+Label/styles/normal = SubResource("StyleBoxFlat_8jye8")
+RichTextLabel/colors/default_color = Color(0.8666667, 0.5372549, 0.1764706, 1)
+RichTextLabel/colors/font_outline_color = Color(0.2, 0.10980392, 0.039215688, 1)
+RichTextLabel/colors/font_shadow_color = Color(0, 0, 0, 0.49411765)
+RichTextLabel/constants/outline_size = 3
+RichTextLabel/constants/shadow_offset_x = 3
+RichTextLabel/constants/shadow_offset_y = 3
+RichTextLabel/font_sizes/normal_font_size = 16
+RichTextLabel/styles/normal = SubResource("StyleBoxFlat_h8thi")

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="HealData" format=3 uid="uid://bnn77w5wmsbbg"]
+
+[ext_resource type="Texture2D" uid="uid://boei0lpvb6jcx" path="res://Textures/Items/AppleTestImage kopie.png" id="1_28qlu"]
+[ext_resource type="Script" uid="uid://b0r3br1ypg16v" path="res://items/HealItems/heal_data.gd" id="1_ri12g"]
+
+[resource]
+script = ExtResource("1_ri12g")
+id = "apple"
+icon = ExtResource("1_28qlu")
+display_name = "APPLE"
+metadata/_custom_type_script = "uid://b0r3br1ypg16v"

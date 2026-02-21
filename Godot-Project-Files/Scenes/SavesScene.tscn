@@ -1,0 +1,171 @@
+[gd_scene format=3 uid="uid://djsxi6qwus1el"]
+
+[ext_resource type="Script" uid="uid://b1ty3lehdh326" path="res://Scripts/saves_scene.gd" id="1_yg2bk"]
+[ext_resource type="Texture2D" uid="uid://cgvn2rp4tyj7h" path="res://Textures/Start_scene_bg_1.png" id="2_c3ypx"]
+[ext_resource type="Theme" uid="uid://bjx8aflrkpmog" path="res://Themes/StartSceneButton.tres" id="3_eodxt"]
+[ext_resource type="Texture2D" uid="uid://dfd37ht0kpmhd" path="res://Textures/TrashCan.png" id="4_tpvhh"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bmxlf"]
+draw_center = false
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0, 0.6156863, 1, 1)
+border_blend = true
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4kpch"]
+bg_color = Color(0.34569466, 0.20266101, 0.068465285, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.4627451, 0.2784314, 0.105882354, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+corner_detail = 7
+expand_margin_left = 4.0
+expand_margin_top = 4.0
+expand_margin_right = 4.0
+expand_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_grg3l"]
+bg_color = Color(0.46357596, 0.28002703, 0.10570549, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.301003, 0.1749875, 0.054956123, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+corner_detail = 7
+expand_margin_left = 4.0
+expand_margin_top = 4.0
+expand_margin_right = 4.0
+expand_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_frkhe"]
+bg_color = Color(0.6044932, 0.09624442, 0.11973386, 1)
+skew = Vector2(0.1, 0)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(1, 0.1764706, 0.05490196, 1)
+border_blend = true
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+corner_detail = 7
+shadow_size = 3
+shadow_offset = Vector2(5, 5)
+
+[sub_resource type="Theme" id="Theme_c3ypx"]
+Button/colors/font_color = Color(0.8745098, 0.8745098, 0.8745098, 1)
+Button/colors/font_focus_color = Color(0, 0.856228, 0.85622764, 1)
+Button/colors/font_hover_color = Color(0.6507153, 0.90626, 0.99999994, 1)
+Button/colors/font_outline_color = Color(0.17994305, 0.08881388, 0.023755655, 1)
+Button/colors/font_pressed_color = Color(0.5723979, 0, 0.14884555, 1)
+Button/constants/outline_size = 3
+Button/font_sizes/font_size = 26
+Button/styles/focus = SubResource("StyleBoxFlat_bmxlf")
+Button/styles/hover = SubResource("StyleBoxFlat_4kpch")
+Button/styles/normal = SubResource("StyleBoxFlat_grg3l")
+Button/styles/pressed = SubResource("StyleBoxFlat_frkhe")
+
+[node name="Control" type="Control" unique_id=1775585552]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_yg2bk")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1512071004]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_c3ypx")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1954744995]
+custom_minimum_size = Vector2(200, 44)
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 70.0
+offset_top = -114.0
+offset_right = 270.0
+offset_bottom = -70.0
+grow_vertical = 0
+
+[node name="BackButton" type="Button" parent="VBoxContainer" unique_id=439863567]
+layout_mode = 2
+theme = SubResource("Theme_c3ypx")
+text = "Back"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="." unique_id=404850754]
+custom_minimum_size = Vector2(500, 500)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -29.0
+offset_top = -20.0
+offset_right = 29.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("3_eodxt")
+theme_override_constants/separation = 10
+
+[node name="Save1Box" type="HBoxContainer" parent="VBoxContainer2" unique_id=143859673]
+layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="Save1" type="Button" parent="VBoxContainer2/Save1Box" unique_id=433557911]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Save 1"
+
+[node name="Delete" type="Button" parent="VBoxContainer2/Save1Box" unique_id=1476850573]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+icon = ExtResource("4_tpvhh")
+icon_alignment = 1
+expand_icon = true
+
+[node name="Save2Box" type="HBoxContainer" parent="VBoxContainer2" unique_id=2030072747]
+layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="Save2" type="Button" parent="VBoxContainer2/Save2Box" unique_id=1490956188]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Save 2"
+
+[node name="Delete" type="Button" parent="VBoxContainer2/Save2Box" unique_id=1191272785]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+icon = ExtResource("4_tpvhh")
+icon_alignment = 1
+expand_icon = true
+
+[connection signal="pressed" from="VBoxContainer/BackButton" to="." method="_on_back_button_pressed"]

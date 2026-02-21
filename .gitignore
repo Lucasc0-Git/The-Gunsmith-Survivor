@@ -1,0 +1,9 @@
+.import/
+.godot/
+export.cfg
+export_presets.cfg
+*.tmp
+*.import
+*.zip
+*.exe
+/android/

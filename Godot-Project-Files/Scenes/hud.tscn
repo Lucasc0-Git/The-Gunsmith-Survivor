@@ -1,0 +1,138 @@
+[gd_scene format=3 uid="uid://7mhxc0w7ug41"]
+
+[ext_resource type="Script" uid="uid://c74qq44vg1bp3" path="res://Scripts/hud.gd" id="1_e0onf"]
+[ext_resource type="PackedScene" uid="uid://cgk6sjrudbc6" path="res://Scenes/inventory_slot.tscn" id="2_8jye8"]
+[ext_resource type="Theme" uid="uid://biiybeb1k7q2y" path="res://Themes/healthbar.tres" id="2_36asn"]
+[ext_resource type="Script" uid="uid://fv6k6mu114ib" path="res://Scripts/uibars.gd" id="3_7gr8i"]
+[ext_resource type="Theme" uid="uid://xe4871ovy5le" path="res://Themes/hotbar.tres" id="4_t1xeu"]
+[ext_resource type="Script" uid="uid://dbkif3t6rn5sb" path="res://Scripts/inventory.gd" id="5_5ep0j"]
+[ext_resource type="Theme" uid="uid://cplvcielekxaa" path="res://Themes/inventory.tres" id="6_36asn"]
+[ext_resource type="Script" uid="uid://bmxp0irwlane2" path="res://Scripts/hotbar.gd" id="8_4f5kr"]
+[ext_resource type="Theme" uid="uid://deuxmaj32ren3" path="res://Themes/tooltip.tres" id="8_43w4t"]
+[ext_resource type="Script" uid="uid://cjphke4vki0p7" path="res://Scripts/tooltip.gd" id="10_5ep0j"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_36asn"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="Theme" id="Theme_8jye8"]
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_36asn")
+
+[node name="Control" type="CanvasLayer" unique_id=1385382916]
+process_mode = 3
+layer = 10
+script = ExtResource("1_e0onf")
+
+[node name="UI" type="Control" parent="." unique_id=975500842]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("3_7gr8i")
+
+[node name="TopBar" type="PanelContainer" parent="UI" unique_id=25031731]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_right = -980.0
+offset_bottom = 30.0
+grow_horizontal = 2
+theme = SubResource("Theme_8jye8")
+
+[node name="HealthBar" type="ProgressBar" parent="UI/TopBar" unique_id=1463978606]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+theme = ExtResource("2_36asn")
+value = 100.0
+show_percentage = false
+
+[node name="InventoryUI" type="Control" parent="." unique_id=1051386906]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Inventory" type="Control" parent="InventoryUI" unique_id=1444851400]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("5_5ep0j")
+slot_scene = ExtResource("2_8jye8")
+
+[node name="PanelContainer" type="PanelContainer" parent="InventoryUI/Inventory" unique_id=1975318185]
+custom_minimum_size = Vector2(346, 500)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 447.0
+offset_top = 90.0
+offset_right = 793.0
+offset_bottom = 590.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("6_36asn")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="InventoryUI/Inventory/PanelContainer" unique_id=820802469]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="InventoryUI/Inventory/PanelContainer/VBoxContainer" unique_id=2093840551]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Inventory"
+
+[node name="MarginContainer" type="MarginContainer" parent="InventoryUI/Inventory/PanelContainer/VBoxContainer" unique_id=2063125140]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="GridContainer" type="GridContainer" parent="InventoryUI/Inventory/PanelContainer/VBoxContainer/MarginContainer" unique_id=62155159]
+layout_mode = 2
+size_flags_vertical = 3
+columns = 5
+
+[node name="Hotbar" type="Control" parent="InventoryUI" unique_id=2050680401]
+custom_minimum_size = Vector2(340, 74)
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = -94.0
+offset_right = 350.0
+offset_bottom = -20.0
+grow_vertical = 0
+theme = ExtResource("4_t1xeu")
+script = ExtResource("8_4f5kr")
+slot_scene = ExtResource("2_8jye8")
+
+[node name="PanelContainer" type="PanelContainer" parent="InventoryUI/Hotbar" unique_id=500270456]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GridContainer" type="GridContainer" parent="InventoryUI/Hotbar/PanelContainer" unique_id=328297745]
+layout_mode = 2
+columns = 5
+
+[node name="Tooltip" type="RichTextLabel" parent="." unique_id=107183822]
+visible = false
+custom_minimum_size = Vector2(350, 30)
+offset_right = 300.0
+offset_bottom = 30.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("8_43w4t")
+bbcode_enabled = true
+fit_content = true
+scroll_active = false
+script = ExtResource("10_5ep0j")

@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="WeaponItemData" format=3 uid="uid://c814ko2kbbn3p"]
+
+[ext_resource type="Script" uid="uid://duhl153idv7v8" path="res://Scripts/WeaponItemData.gd" id="1_527dj"]
+[ext_resource type="Texture2D" uid="uid://3pajlj58aaib" path="res://Textures/SURVIVAL HORROR WEAPONS PACK 16X16/4.png" id="1_ctbmv"]
+[ext_resource type="Resource" uid="uid://cn2o1vek71aab" path="res://items/Weapons/Shooting_weapons/Shotgun.tres" id="3_lhxjk"]
+
+[resource]
+script = ExtResource("1_527dj")
+weapon_data = ExtResource("3_lhxjk")
+id = "shotgun"
+icon = ExtResource("1_ctbmv")
+display_name = "Shotgun"
+description = "A nice, BIG, shootgun... shoot, I said shootgun again, didn't I? Anyways, it's  a SHOTGUN!"
+metadata/_custom_type_script = "uid://duhl153idv7v8"

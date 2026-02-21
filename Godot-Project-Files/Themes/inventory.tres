@@ -1,0 +1,60 @@
+[gd_resource type="Theme" format=3 uid="uid://cplvcielekxaa"]
+
+[sub_resource type="SystemFont" id="SystemFont_lc3u1"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w421r"]
+bg_color = Color(0.3188036, 0.1544091, 0.012735556, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.6518209, 0.400611, 0.07906235, 1)
+border_blend = true
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+expand_margin_left = 1.0
+expand_margin_top = 1.0
+expand_margin_right = 1.0
+expand_margin_bottom = 1.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lc3u1"]
+bg_color = Color(0.4137905, 0.19568165, 0.029962571, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.21197356, 0.12838632, 0.010918646, 1)
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
+corner_detail = 7
+expand_margin_left = 10.0
+expand_margin_top = 10.0
+expand_margin_right = 10.0
+expand_margin_bottom = 10.0
+shadow_color = Color(0, 0, 0, 0.5137255)
+shadow_size = 5
+shadow_offset = Vector2(4, 4)
+
+[resource]
+GridContainer/constants/h_separation = 4
+GridContainer/constants/v_separation = 4
+Label/colors/font_color = Color(0.8672599, 0.5392819, 0.16852416, 1)
+Label/colors/font_outline_color = Color(0.19849174, 0.11085997, 0, 1)
+Label/colors/font_shadow_color = Color(0, 0, 0, 0.64705884)
+Label/constants/outline_size = 11
+Label/constants/shadow_offset_x = 3
+Label/constants/shadow_offset_y = 3
+Label/constants/shadow_outline_size = 6
+Label/font_sizes/font_size = 35
+Label/fonts/font = SubResource("SystemFont_lc3u1")
+MarginContainer/constants/margin_bottom = 8
+MarginContainer/constants/margin_left = 8
+MarginContainer/constants/margin_right = 8
+MarginContainer/constants/margin_top = 8
+Panel/styles/panel = SubResource("StyleBoxFlat_w421r")
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_lc3u1")
+VBoxContainer/constants/separation = 5

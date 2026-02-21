@@ -1,0 +1,89 @@
+[gd_resource type="Theme" format=3 uid="uid://cvrriksqai0xa"]
+
+[ext_resource type="StyleBox" uid="uid://drolhtsx8qlvs" path="res://Themes/BasicStyleBoxFlat.tres" id="1_it8x4"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6byys"]
+bg_color = Color(0.4627451, 0.2784314, 0.105882354, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.3019608, 0.1764706, 0.05490196, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+expand_margin_left = 4.0
+expand_margin_top = 4.0
+expand_margin_right = 4.0
+expand_margin_bottom = 4.0
+shadow_size = 1
+shadow_offset = Vector2(2, 2)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_it8x4"]
+bg_color = Color(0.4627451, 0.2784314, 0.105882354, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.3019608, 0.1764706, 0.05490196, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x2peb"]
+bg_color = Color(0.3019608, 0.1764706, 0.05490196, 1)
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_mml5s"]
+color = Color(0.3019608, 0.1764706, 0.05490196, 1)
+thickness = 2
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_7k4vb"]
+color = Color(0.3019608, 0.1764706, 0.05490196, 1)
+thickness = 2
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_xeqim"]
+color = Color(0.3019608, 0.1764706, 0.05490196, 1)
+thickness = 2
+
+[resource]
+default_font_size = 24
+CheckButton/colors/button_checked_color = Color(0.6861298, 0.41210297, 0.07574291, 1)
+CheckButton/colors/button_unchecked_color = Color(0.54500437, 0.33215028, 0.13342452, 1)
+CheckButton/colors/font_color = Color(0.8745098, 0.8745098, 0.8745098, 1)
+CheckButton/colors/font_outline_color = Color(0.24365711, 0.13691255, 0.03670308, 1)
+CheckButton/constants/outline_size = 5
+CheckButton/styles/focus = SubResource("StyleBoxFlat_6byys")
+CheckButton/styles/hover = SubResource("StyleBoxFlat_6byys")
+CheckButton/styles/hover_pressed = SubResource("StyleBoxFlat_6byys")
+CheckButton/styles/normal = SubResource("StyleBoxFlat_6byys")
+CheckButton/styles/pressed = SubResource("StyleBoxFlat_6byys")
+OptionButton/colors/font_color = Color(0.875, 0.875, 0.875, 1)
+OptionButton/colors/font_hover_color = Color(0.95, 0.95, 0.95, 1)
+OptionButton/colors/font_outline_color = Color(0.13799316, 0.07073415, 0.013516962, 1)
+OptionButton/constants/arrow_margin = 5
+OptionButton/constants/modulate_arrow = 5
+OptionButton/font_sizes/font_size = 24
+OptionButton/styles/disabled = ExtResource("1_it8x4")
+OptionButton/styles/focus = ExtResource("1_it8x4")
+OptionButton/styles/hover = ExtResource("1_it8x4")
+OptionButton/styles/hover_pressed = ExtResource("1_it8x4")
+OptionButton/styles/normal = ExtResource("1_it8x4")
+OptionButton/styles/panel = ExtResource("1_it8x4")
+OptionButton/styles/pressed = ExtResource("1_it8x4")
+Panel/styles/panel = ExtResource("1_it8x4")
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_it8x4")
+PopupMenu/colors/font_color = Color(0.875, 0.875, 0.875, 1)
+PopupMenu/colors/font_hover_color = Color(0.875, 0.875, 0.875, 1)
+PopupMenu/colors/font_outline_color = Color(0.14969513, 0.07648563, 0.0147492895, 1)
+PopupMenu/constants/outline_size = 6
+PopupMenu/constants/v_separation = 5
+PopupMenu/font_sizes/font_separator_size = 17
+PopupMenu/font_sizes/font_size = 24
+PopupMenu/styles/embedded_border = SubResource("StyleBoxFlat_x2peb")
+PopupMenu/styles/hover = ExtResource("1_it8x4")
+PopupMenu/styles/labeled_separator_left = SubResource("StyleBoxLine_mml5s")
+PopupMenu/styles/labeled_separator_right = SubResource("StyleBoxLine_7k4vb")
+PopupMenu/styles/panel = ExtResource("1_it8x4")
+PopupMenu/styles/separator = SubResource("StyleBoxLine_xeqim")

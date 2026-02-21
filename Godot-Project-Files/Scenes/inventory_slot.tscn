@@ -1,0 +1,70 @@
+[gd_scene format=3 uid="uid://cgk6sjrudbc6"]
+
+[ext_resource type="Theme" uid="uid://cplvcielekxaa" path="res://Themes/inventory.tres" id="1_0v82l"]
+[ext_resource type="Script" uid="uid://dwv74hge5anpj" path="res://Scripts/slot.gd" id="2_0cu6i"]
+
+[node name="Panel" type="Panel" unique_id=1738040959]
+custom_minimum_size = Vector2(64, 64)
+offset_right = 64.0
+offset_bottom = 64.0
+theme = ExtResource("1_0v82l")
+script = ExtResource("2_0cu6i")
+
+[node name="Highlight" type="ColorRect" parent="." unique_id=1386678088]
+visible = false
+self_modulate = Color(1, 1, 1, 0.23137255)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1131121958]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HotbarSlotNumber" type="Label" parent="." unique_id=931426326]
+layout_mode = 0
+offset_right = 20.0
+offset_bottom = 23.0
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_constants/outline_size = 2
+theme_override_constants/shadow_outline_size = 1
+theme_override_font_sizes/font_size = 16
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ItemStackCounter" type="Label" parent="." unique_id=552316926]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -24.0
+offset_top = -30.0
+offset_right = -2.0
+offset_bottom = -2.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.99021095, 0.78629893, 0.5975536, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_constants/outline_size = 4
+theme_override_constants/shadow_outline_size = 1
+theme_override_font_sizes/font_size = 20
+text = "1"
