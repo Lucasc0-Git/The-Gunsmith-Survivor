@@ -1,0 +1,4 @@
+*.tscn linguist-language=GDScript
+*.gd linguist-language=GDScript
+*.gdshader linguist-language=GDShader
+* text=auto eol=lf
