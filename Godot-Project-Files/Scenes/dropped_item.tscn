@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://dfiondsloks5m"]
+
+[ext_resource type="Script" uid="uid://bga5iud4mq1iy" path="res://Scripts/dropped_item.gd" id="1_4ljfv"]
+[ext_resource type="Texture2D" uid="uid://b5kew10tremef" path="res://Textures/Items/wood_item_texture.png" id="1_w6s0x"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4ljfv"]
+radius = 13.038404
+
+[node name="DroppedItem" type="Node2D" unique_id=636355245]
+scale = Vector2(2, 2)
+script = ExtResource("1_4ljfv")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1158947520]
+texture = ExtResource("1_w6s0x")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1431227428]
+collision_layer = 16
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=218700408]
+shape = SubResource("CircleShape2D_4ljfv")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

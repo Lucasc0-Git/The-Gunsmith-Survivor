@@ -14,6 +14,8 @@ class_name BasicBullet
 
 ## The basic var declaration
 var direction := Vector2.ZERO
+var bullet_damage : int
+var has_hit: bool = false
 
 func _ready() -> void:
 	## Start the timer for despawn
@@ -27,7 +29,6 @@ func _physics_process(delta: float) -> void:
 	scale = scale * shrinking_rate
 	if scale <= Vector2(0.00001, 0.00001):
 		queue_free()
-	#move_local_x(bullet_speed * delta)
 
 ## Called so the bullet will despawn
 func _on_despawn_timer_timeout() -> void:
@@ -36,7 +37,13 @@ func _on_despawn_timer_timeout() -> void:
 ## Called when bullet hits something (can recognise the group of the object)
 func _on_body_entered(body: Node2D) -> void:
 	if body.is_in_group("object"):
+		if has_hit:
+			return
+		
+		if body.has_method("take_damage"):
+			body.take_damage(bullet_damage)
 		hit_explosion.emitting = true
+		has_hit = true
 		sprite.visible = false
 		collision_shape.set_deferred("disabled", true)
 		await hit_explosion.finished

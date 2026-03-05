@@ -9,21 +9,22 @@ class_name Inventory
 
 ## The basic var declaration
 var tooltip: Tooltip
+
 var glock_item : ItemData
 var shotgun_item : ItemData
 var apple_item : ItemData
+var wood_item : ItemData
+
 var inv_slot : Panel
 var player: Player
 var hud : Hud
-
-## The signal declaration
-signal item_used(item: ItemData)
 
 func _ready() -> void:
 	## Assign proper data to proper items
 	glock_item = ItemRegistry.items["glock"]
 	shotgun_item = ItemRegistry.items["shotgun"]
 	apple_item = ItemRegistry.items["apple"]
+	wood_item = ItemRegistry.items["wood"]
 	
 	visible = false
 	
@@ -37,15 +38,12 @@ func _ready() -> void:
 		slot.connect("mouse_entered_slot", Callable(self, "_show_tooltip"))
 		slot.connect("mouse_exited_slot", Callable(self, "_hide_tooltip"))
 	# Give some slots some items for debugging, needs to be removed after debugging
-	fill_slot(0, glock_item)
-	fill_slot(1, shotgun_item)
-	fill_slot(2, apple_item)
-	fill_slot(3, apple_item)
-	fill_slot(4, apple_item)
-	fill_slot(5, apple_item)
-
-func _on_item_used(item: ItemData) -> void:
-	item_used.emit(item)
+	fill_slot(0, glock_item, 1)
+	fill_slot(1, shotgun_item, 1)
+	fill_slot(2, apple_item, 5)
+	fill_slot(3, apple_item, 10)
+	fill_slot(4, apple_item, 64)
+	fill_slot(5, wood_item, 32)
 
 func _on_slot_left_click(slot: Slot) -> void:
 	if slot.item_data == null:
@@ -59,23 +57,27 @@ func _on_slot_left_click(slot: Slot) -> void:
 
 func move_item_to_hotbar(slot: Slot) -> void:
 	var item := slot.item_data
+	var item_amount := slot.amount
 	if not player:
 		return
 	# Najdi první volné místo v hotbaru
 	for i in range(player.hotbar_slots.size()):
 		if player.hotbar_slots[i] == null:
 			# Přesuň item
-			player.hotbar_slots[i] = item
-			hud.hotbar.set_item(i, item)  # vizuální update hotbaru
+			player.hotbar_slots[i] = slot
+			hud.hotbar.set_item(i, item, item_amount)  # vizuální update hotbaru
 			# Vymaž slot v inventáři
-			slot.item_data = null
-			slot.slot_texture.texture = null
-			slot.item_changed.emit(null)  # aby signály věděly o změně
+			slot.clear()
+			slot.item_changed.emit(null, 0)  # aby signály věděly o změně
 			return
 
-func fill_slot(slot: int, item: ItemData) -> void:
+func fill_slot(slot: int, item: ItemData, amount: int) -> void:
+	if amount > item.max_stack:
+		push_error("Func fill_slot() has the wrong amount!")
+		return
 	inv_slot = grid_container.get_child(slot)
 	inv_slot.item_data = item
+	inv_slot.amount += amount
 	inv_slot.slot_texture.texture = item.icon
 
 func _show_tooltip(item_data: ItemData) -> void:

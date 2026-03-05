@@ -5,10 +5,11 @@ class_name Player
 var current_state: State
 var states := {}
 var target_speed: Vector2
-var hotbar_slots: Array[ItemData] = [] ##Slots of the hotbar
 var current_hotbar_index := 0 ##From which slot it equips item.
 var last_dir: Vector2
 var input_dir: Vector2 = Vector2.ZERO
+var picking_item: ItemData
+var hotbar_slots: Array[SlotData] = []
 
 ## The @onready vars declaration
 @onready var anim_player: AnimatedSprite2D = $AnimatedSprite2D
@@ -41,7 +42,7 @@ func _ready() -> void:
 	weapon.has_shot.connect(apply_recoil)
 	## Add starting weapons
 	for i in range(5):
-		hotbar_slots.append(null)
+		hotbar_slots.append(SlotData.new())
 	## State machine
 	for child in states_node.get_children():
 		if child is State:
@@ -67,22 +68,23 @@ func change_state(state_name: String) -> void:
 	current_state = states[state_name]
 	current_state.enter()
 
-func _on_weapon_selected(data: WeaponData) -> void:
-	weapon.equip(data)
-
 func _on_hotbar_slot_selected(index: int) -> void:
 	on_hotbar_selected_by_ui(index)
 
 ## In hotbar, set [item] on [index]
-func set_hotbar_item(index: int, item: ItemData) -> void:
+func set_hotbar_item(index: int, item: ItemData, amount: int) -> void:
 	if index < 0:
 		return
-	if index>= hotbar_slots.size():
+	if index >= hotbar_slots.size():
 		return
-	hotbar_slots[index] = item
+	hotbar_slots[index].set_item(item, amount)
+	
 	## Update current weapon
 	if index == current_hotbar_index:
 		_update_equipped()
+
+func drop_item(index: int) -> void:
+	pass
 
 func on_hotbar_selected_by_ui(index: int) -> void:
 	current_hotbar_index = index
@@ -91,16 +93,16 @@ func on_hotbar_selected_by_ui(index: int) -> void:
 ## Equip item, which has to be equipped, bc its in the current hotbar slot
 func _update_equipped() -> void:
 	## Declare item var
-	var item: ItemData = null
+	var slot: SlotData = null
 	## Set [item] to whichever is in current hotbar slot
 	if current_hotbar_index >= 0 and current_hotbar_index < hotbar_slots.size():
-		item = hotbar_slots[current_hotbar_index]
+		slot = hotbar_slots[current_hotbar_index]
 	## If there is nothing to equip, call unequip()
-	if item == null:
+	if slot.item_data == null or slot.amount == 0:
 		weapon.unequip()
 		return
 	## Equip the item
-	weapon.equip_item(item)
+	weapon.equip_item(slot.item_data)
 
 ## Move the player by speed in get_input_dir() direction
 func apply_movement(delta: float) -> void:
@@ -113,6 +115,35 @@ func get_input_dir() -> Vector2:
 
 func _process(_delta: float) -> void:
 	input_dir = Input.get_vector("move_left", "move_right", "move_up", "move_down")
+
+func pick_item(item: ItemData) -> void:
+	for slot in hud.inventory.grid_container.get_children():
+		if slot.item_data == item and slot.amount < item.max_stack:
+			slot.amount += 1
+			return
+	
+	for slot in hud.inventory.grid_container.get_children():
+		if slot.item_data == null:
+			slot.set_item(item)
+			slot.amount = 1
+			return
+		else:
+			pass # I need to reverse the picking process so the item stays on ground.
+
+func use_selected_item() -> void:
+	var selected_slot: Slot = get_selected_slot()
+	if selected_slot == null or selected_slot.item_data == null: return
+	
+	weapon.use_item(selected_slot.item_data)
+	
+	selected_slot.amount -= 1
+	
+	if selected_slot.amount <= 0:
+		selected_slot.clear()
+		weapon.unequip()
+
+func get_selected_slot() -> Slot:
+	return hud.hotbar.slots[current_hotbar_index]
 
 ## Called every physics frame
 func _physics_process(delta: float) -> void:

@@ -1,10 +1,14 @@
 extends Node2D
+class_name Map
 
 @onready var map: TileMapLayer = get_node("Map")
 @onready var objects: TileMapLayer = get_node("Objects")
 
 var player: Player
 var world_seed: int
+
+signal world_generated()
+
 @export var world_frequency := 0.05
 @export var grass_frequency := 0.5
 @export var tree_frequency := 0.85
@@ -33,39 +37,11 @@ var tiles := {
 	"dark_grass" = Vector2i(1, 3),
 	"dark_grass2" = Vector2i (1, 4)
 }
+var tree_positions := []
 
 func _ready() -> void:
 	world_seed = GameManager.current_world_seed
 	world_noise.seed = world_seed
-	generate_world()
-
-#func _process(_delta: float) -> void:
-	#var player_tile := map.local_to_map(player.global_position)
-	#
-	#var player_chunk := Vector2i(
-		#floor(player_tile.x / chunk_size),
-		#floor(player_tile.y / chunk_size)
-	#)
-	#load_chunks_around(player_chunk)
-
-#func update_chunks(player_chunk: Vector2i) -> void:
-	#var needed_chunks := {}
-	#for x in range(-render_distance, render_distance + 1):
-		#for y in range(-render_distance, render_distance + 1):
-			#var chunk_pos := player_chunk + Vector2i(x, y)
-			#needed_chunks[chunk_pos] = true
-			#if not loaded_chunks.has(chunk_pos):
-				#generate_chunk(chunk_pos)
-	#for chunk_pos in loaded_chunks.keys():
-		#if not needed_chunks.has(chunk_pos):
-			#unload_chunk(chunk_pos)
-
-#func load_chunks_around(center_chunk: Vector2i) -> void:
-	#for x in range(-render_distance, render_distance + 1):
-		#for y in range(-render_distance, render_distance + 1):
-			#var chunk_pos := center_chunk + Vector2i(x, y)
-			#if not loaded_chunks.has(chunk_pos):
-				#generate_chunk(chunk_pos)
 
 func generate_world() -> void:
 	world_noise.seed = world_seed
@@ -83,10 +59,16 @@ func generate_world() -> void:
 			if world_value < -0.1:
 				tile_coords = Vector2i(5, 0)
 				if tree_value < -0.1:
-					objects.set_cell(Vector2i(x, y), 2, Vector2i(0, 0))
+					pass
+					var tile_pos := Vector2i(x, y)
+					var local_pos := map.map_to_local(tile_pos)
+					var global_pos := map.to_global(local_pos)
+					tree_positions.append(global_pos)
+					#objects.set_cell(Vector2i(x, y), 2, Vector2i(0, 0))
 			else: 
 				tile_coords = be_grass(grass_value)
 			map.set_cell(Vector2i(x, y), 2, tile_coords)
+	emit_signal("world_generated")
 
 func be_grass(grass_value: float) -> Vector2i:
 	if grass_value < -0.15:
@@ -105,40 +87,10 @@ func be_grass(grass_value: float) -> Vector2i:
 		return tiles.dark_grass2
 	else: return Vector2i(1, 0)
 
-#func generate_chunk(chunk_pos: Vector2i) -> void:
-	#for x in chunk_size:
-		#for y in chunk_size:
-			#var world_x := chunk_pos.x * chunk_size + x
-			#var world_y := chunk_pos.y * chunk_size + y
-			#
-			#noise.frequency = frequency
-			#var value := noise.get_noise_2d(world_x, world_y)
-			#var tile_coords: Vector2i
-			#
-			#if value < -0.2:
-				#tile_coords = Vector2i(1, 1)
-			#elif value < 0.2:
-				#tile_coords = Vector2i(1, 0)
-			#else:
-				#tile_coords = Vector2i(1, 3)
-			#
-			#map.set_cell(Vector2i(world_x, world_y), 2, tile_coords)
-	#loaded_chunks[chunk_pos] = true
-
-#func unload_chunk(chunk_pos: Vector2i) -> void:
-	#for x in chunk_size:
-		#for y in chunk_size:
-			#var world_x := chunk_pos.x * chunk_size + x
-			#var world_y := chunk_pos.y * chunk_size + y
-			#
-			#map.erase_cell(Vector2i(world_x, world_y))
-	#loaded_chunks.erase(chunk_pos)
-
-func spawn_player() -> void:
+func get_spawn_position() -> Vector2:
 	var spawn_tile := find_spawn_tile()
 	var spawn_pos := map.map_to_local(spawn_tile)
-	
-	player.global_position = spawn_pos
+	return spawn_pos
 
 func find_spawn_tile() -> Vector2i:
 	var search_radius := 10

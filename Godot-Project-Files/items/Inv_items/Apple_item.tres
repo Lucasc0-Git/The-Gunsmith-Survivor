@@ -10,6 +10,6 @@ heal_data = ExtResource("1_1vcr0")
 id = "apple"
 icon = ExtResource("2_s38bf")
 display_name = "APPLE"
-max_stack = 16
+max_stack = 64
 description = "This is the most common heal item! An apple!"
 metadata/_custom_type_script = "uid://dewbq7dx7jfw2"

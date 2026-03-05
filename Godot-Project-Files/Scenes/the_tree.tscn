@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://ccmkjea6pv848"]
+
+[ext_resource type="Script" uid="uid://bdy778vaxoajj" path="res://Scripts/the_tree.gd" id="1_fpmds"]
+[ext_resource type="Texture2D" uid="uid://dyk5ihx7hbhg0" path="res://Textures/Treee.png" id="1_w3pkm"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fpmds"]
+size = Vector2(8, 8)
+
+[node name="TheTREE" type="CharacterBody2D" unique_id=1660284462 groups=["object", "tree"]]
+y_sort_enabled = true
+scale = Vector2(3, 3)
+collision_layer = 8
+collision_mask = 38
+script = ExtResource("1_fpmds")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=142450422]
+texture = ExtResource("1_w3pkm")
+offset = Vector2(0, -8)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=358707911]
+position = Vector2(0, -2)
+shape = SubResource("RectangleShape2D_fpmds")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=1489910358]
+position = Vector2(0.333, -8)
+rect = Rect2(-12, -17, 24, 33)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1071082702]
+
+[connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

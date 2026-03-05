@@ -7,6 +7,12 @@ class_name Tooltip
 ## The basic var declaration
 var inventory: Inventory
 
+func _ready() -> void:
+	var font_variation := FontVariation.new()
+	font_variation.base_font = self.get_theme_font("normal_font")
+	font_variation.spacing_glyph = 0
+	self.add_theme_font_override("normal_font", font_variation)
+
 func show_tooltip(item_data: ItemData) -> void:
 	var bb : String = ""
 	bb += "[b]" + item_data.display_name + "[/b]\n"
@@ -16,6 +22,7 @@ func show_tooltip(item_data: ItemData) -> void:
 		bb += "Fire rate: " + str(item_data.weapon_data.fire_rate) + "\n"
 	elif item_data is HealItemData:
 		bb += "Heal: " + str(item_data.heal_data.heal) + " hp" + "\n"
+	
 	
 	visible = true
 	self.bbcode_text = bb

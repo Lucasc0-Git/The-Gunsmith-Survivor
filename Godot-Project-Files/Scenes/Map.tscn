@@ -195,6 +195,7 @@ texture = ExtResource("4_r08cw")
 0:0/size_in_atlas = Vector2i(2, 2)
 0:0/0 = 0
 0:0/0/texture_origin = Vector2i(0, 8)
+0:0/0/y_sort_origin = 7
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-7, -7, -4, -8, 4, -8, 7, -7, 8, -4, 8, 4, 7, 7, 4, 8, -4, 8, -7, 7, -8, 4, -8, -4)
 
 [sub_resource type="TileSet" id="TileSet_00287"]
@@ -210,6 +211,8 @@ shader_parameter/edge_start = 0.2000000095
 shader_parameter/edge_end = 1.0
 
 [node name="Map" type="Node2D" unique_id=780033491]
+z_index = -2
+y_sort_enabled = true
 scale = Vector2(3, 3)
 script = ExtResource("1_qumfl")
 world_frequency = 0.035
@@ -222,9 +225,9 @@ tile_set = SubResource("TileSet_5nsto")
 [node name="Map2" type="TileMapLayer" parent="." unique_id=989491454]
 tile_set = SubResource("TileSet_5nsto")
 
-[node name="Objects" type="TileMapLayer" parent="." unique_id=411843481 groups=["object"]]
+[node name="Objects" type="TileMapLayer" parent="." unique_id=407636040 groups=["object"]]
 process_mode = 1
-z_index = 4
+y_sort_enabled = true
 tile_set = SubResource("TileSet_00287")
 physics_quadrant_size = 8
 

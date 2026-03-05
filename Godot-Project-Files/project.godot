@@ -41,6 +41,9 @@ window/stretch/mode="canvas_items"
 [global_group]
 
 object=""
+player=""
+tree=""
+enemy=""
 
 [input]
 

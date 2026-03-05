@@ -19,19 +19,14 @@ var shotgun_item : ItemData
 ## The signals declaration
 signal inv_toggled(visible: bool)
 
-func _on_item_used(item: ItemData) -> void:
-	if item is WeaponItemData:
-		var weapon_item := item as WeaponItemData
-		emit_signal("weapon_selected", weapon_item.weapon_data)
-
 ## Set the player var by Main.gd script
 func set_player(p: Player) -> void:
 	player = p
 	# connect hotbar signals to player
 	# when a slot changes in UI, tell player to set hotbar item
 	hotbar.slot_item_changed.connect(
-		func(index: int, item: ItemData) -> void:
-			player.set_hotbar_item(index, item)
+		func(index: int, item: ItemData, amount: int) -> void:
+			player.set_hotbar_item(index, item, amount)
 	)
 	# when slot selected (visual) -> update player current index
 	hotbar.slot_selected.connect(

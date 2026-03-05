@@ -7,7 +7,8 @@ func _ready() -> void:
 	var item_files := [
 		"Glock_item.tres",
 		"Shotgun_item.tres",
-		"Apple_item.tres"
+		"Apple_item.tres",
+		"Wood_item.tres"
 	]
 	for file_name : String in item_files:
 		var item_res := load("res://items/Inv_items/" + file_name) as ItemData

@@ -2,7 +2,6 @@
 
 [ext_resource type="PackedScene" uid="uid://dw8ufghl04u8o" path="res://Scenes/Map.tscn" id="1_idj7w"]
 [ext_resource type="Script" uid="uid://cfk4px6e32ldd" path="res://Scripts/main.gd" id="1_rgh2o"]
-[ext_resource type="PackedScene" uid="uid://2ufc8v56ge5p" path="res://Scenes/Player.tscn" id="2_kln2b"]
 [ext_resource type="PackedScene" uid="uid://7mhxc0w7ug41" path="res://Scenes/hud.tscn" id="3_kln2b"]
 [ext_resource type="Theme" uid="uid://bjx8aflrkpmog" path="res://Themes/StartSceneButton.tres" id="5_pbw6q"]
 [ext_resource type="Script" uid="uid://cq08afe6nx2la" path="res://Scripts/menu.gd" id="5_v1gob"]
@@ -237,14 +236,10 @@ script = ExtResource("1_rgh2o")
 
 [node name="Map" parent="." unique_id=1487724397 instance=ExtResource("1_idj7w")]
 process_mode = 1
+y_sort_enabled = false
 
-[node name="Player" parent="." unique_id=1702320918 instance=ExtResource("2_kln2b")]
-z_index = 2
-
-[node name="Camera2D2" type="Camera2D" parent="Player" unique_id=2034350364]
-scale = Vector2(0.33, 0.33)
-limit_enabled = false
-position_smoothing_speed = 10.0
+[node name="YSORT" type="Node2D" parent="." unique_id=2096057636]
+y_sort_enabled = true
 
 [node name="HUD" parent="." unique_id=1957897222 instance=ExtResource("3_kln2b")]
 process_mode = 1
@@ -307,7 +302,7 @@ text = "Options (does not work)"
 
 [node name="QuitButton" type="Button" parent="Menu/PauseMenu/VBoxContainer" unique_id=116100010]
 layout_mode = 2
-tooltip_text = "You will be asked about the weather... and about if u want to save.
+tooltip_text = "
 "
 theme = ExtResource("5_pbw6q")
 text = "RageQuit"

@@ -1,9 +1,6 @@
 extends Node2D
 class_name Weapon
 
-## The export var declaration
-@export var weapon_data: WeaponData
-
 ## The onready var declaration
 @onready var muzzle := $Muzzle
 @onready var sprite := $Sprite2D
@@ -15,6 +12,7 @@ class_name Weapon
 signal has_shot(rotation: float, recoil: float)
 
 ## The basic var declaration
+var weapon_data: WeaponData
 var can_shoot := true
 var shooting := false
 var shoot_on : bool = true
@@ -47,6 +45,10 @@ func equip_item(item: ItemData) -> void:
 		var h := item as HealItemData
 		sprite.texture = h.heal_data.icon
 		can_shoot = true
+	elif item is JustItemData:
+		var j := item as JustItemData
+		sprite.texture = j.just_data.icon
+		can_shoot = true
 
 ## Unequip the item
 func unequip() -> void:
@@ -59,9 +61,8 @@ func unequip() -> void:
 	reload_timer.stop()
 	bang_particles.emitting = false
 
-func shoot() -> void:
-	if equipped_item == null:
-		return
+func use_item(item: ItemData) -> void:
+	equipped_item = item
 	if not can_shoot or not shoot_on:
 		return
 	## If equipped item is a weapon, use it correctly
@@ -70,6 +71,9 @@ func shoot() -> void:
 	## If equipped item is a heal, use it correctly
 	elif equipped_item is HealItemData:
 		_use_heal_item()
+	## If equipped item is a "just", dont use it
+	elif equipped_item is JustItemData:
+		pass
 
 func _shoot_weapon() -> void:
 	bang_particles.emitting = true ##One shot emit.
@@ -86,15 +90,13 @@ func _use_heal_item() -> void:
 	player.heal(data.heal)
 	## Remove the item, bc its used (maybe rework when adding stacking items)
 	hud.hotbar.clear_selected_slot()
-	unequip()
 
 ## Spawn bullet on position with direction
 func _spawn_bullet(i : int) -> void:
 	var bullet := weapon_data.bullet_scene.instantiate()
 	bullet.shrinking_rate = weapon_data.bullet_shrinking
 	bullet.scale = weapon_data.bullet_scale * bullet.scale
-	bullet_damage = float(weapon_data.damage) / float(weapon_data.pellets)
-	bullet_damage = int(bullet_damage)
+	bullet_damage = weapon_data.damage
 	get_tree().current_scene.add_child(bullet)
 	## Position of the bullet
 	bullet.global_position = muzzle.global_position
@@ -110,6 +112,7 @@ func _spawn_bullet(i : int) -> void:
 		var step : float = spread / max(pellets - 1, 1)
 		final_angle = base_angle + start_angle + step * i
 	
+	bullet.bullet_damage = bullet_damage
 	bullet.rotation = final_angle
 	bullet.direction = Vector2.RIGHT.rotated(final_angle)
 
@@ -137,4 +140,4 @@ func _process(_delta: float) -> void:
 		scale = Vector2(0.7, 0.7)
 	## Shoot if its supposed to shoot
 	if shooting and can_shoot:
-		shoot()
+		player.use_selected_item()

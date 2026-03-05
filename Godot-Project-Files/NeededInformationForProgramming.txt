@@ -5,6 +5,7 @@ Z 2 = Player
 	Z 2 = PlayerSprite
 	Z 2 = Bullet
 	Z 3 = Weapon
+Z 2 = TREEEES
 Z 4 = Objects
 
 Z 1 = PauseMenu

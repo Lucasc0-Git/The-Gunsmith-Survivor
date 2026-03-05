@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="JustItemData" format=3 uid="uid://cc0anv7sdlwn4"]
+
+[ext_resource type="Texture2D" uid="uid://b5kew10tremef" path="res://Textures/Items/wood_item_texture.png" id="1_d80sy"]
+[ext_resource type="Script" uid="uid://dlibn88e2w8eo" path="res://Scripts/JustItemData.gd" id="1_r7nbb"]
+[ext_resource type="Resource" uid="uid://b78qijhvk7wy6" path="res://items/JustItems/wood.tres" id="2_onx5x"]
+
+[resource]
+script = ExtResource("1_r7nbb")
+just_data = ExtResource("2_onx5x")
+id = "wood"
+icon = ExtResource("1_d80sy")
+display_name = "Wood"
+stack_size = 64
+max_stack = 64
+description = "Normal wood from normal treees. Used for crafting."
+metadata/_custom_type_script = "uid://dlibn88e2w8eo"
