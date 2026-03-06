@@ -140,10 +140,19 @@ func _process(_delta: float) -> void:
 		scale = Vector2(1, 1)
 		rotation = mouse_dir.angle() - deg_to_rad(45)
 	else:
-		if player.last_dir == Vector2.LEFT:
-			rotation = -deg_to_rad(45) + deg_to_rad(180)
-		elif player.last_dir == Vector2.RIGHT:
-			rotation = -deg_to_rad(45)
+		#if player.last_dir == Vector2.LEFT:
+			#rotation = -deg_to_rad(45) + deg_to_rad(180)
+		#elif player.last_dir == Vector2.RIGHT:
+			#rotation = -deg_to_rad(45)
+		match player.last_dir:
+			Vector2.LEFT:
+				rotation = -deg_to_rad(45) + deg_to_rad(180)
+			Vector2.RIGHT:
+				rotation = -deg_to_rad(45)
+			Vector2.UP:
+				rotation = -deg_to_rad(45) - deg_to_rad(90)
+			Vector2.DOWN:
+				rotation = -deg_to_rad(45) + deg_to_rad(90)
 		scale = Vector2(0.7, 0.7)
 	## Shoot if its supposed to shoot
 	if shooting and can_shoot and shoot_on:

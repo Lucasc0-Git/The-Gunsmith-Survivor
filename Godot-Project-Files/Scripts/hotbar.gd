@@ -41,7 +41,7 @@ func sync_from_player() -> void:
 			slots[i].set_slot_data(hud.player.hotbar_slots[i])
 
 func _on_slot_left_clicked(slot: Slot) -> void:
-	if slot.slot_data.is_empty():
+	if slot.slot_data == null or slot.slot_data.is_empty():
 		return
 	## Shift + leftclick → try to move the item to inventory
 	if Input.is_key_pressed(KEY_SHIFT):
@@ -51,14 +51,15 @@ func _on_slot_left_clicked(slot: Slot) -> void:
 func try_move_item_to_inventory(slot: Slot) -> void:
 	if not hud or not hud.inventory or not hud.inventory.visible:
 		return
-	var slot_data: SlotData = slot.slot_data
+	
+	var slot_data: SlotData = slot.slot_data.copy()
 	if slot_data == null or slot_data.is_empty(): return
 	
 	## Find the first free slot in inventory
 	for inv_slot in hud.inventory.grid_container.get_children():
 		if inv_slot.slot_data.is_empty():
-			inv_slot.set_slot_data(slot_data)
 			slot.clear()
+			inv_slot.set_slot_data(slot_data)
 			var index := slots.find(slot) 
 			var blank_data: SlotData = SlotData.new()
 			slot_item_changed.emit(index, blank_data)

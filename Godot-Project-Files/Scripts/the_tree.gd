@@ -13,7 +13,7 @@ func _ready() -> void:
 
 func drop_items(amount: int) -> void:
 	for i in range(amount):
-		main.drop_item(wood_item, global_position + Vector2(randf_range(-10, 10), randf_range(-10, 10)))
+		main.drop_item(wood_item, global_position + Vector2(randf_range(-15, 15), randf_range(-15, 15)))
 
 func take_damage(amount: int) -> void:
 	health -= amount

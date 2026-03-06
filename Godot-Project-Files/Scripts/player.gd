@@ -117,15 +117,16 @@ func _process(_delta: float) -> void:
 	input_dir = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 
 func pick_item(item: ItemData) -> void:
-	for slot in hud.inventory.grid_container.get_children():
-		if slot.item_data == item and slot.amount < item.max_stack:
-			slot.amount += 1
+	for inv_slot in hud.inventory.grid_container.get_children():
+		var slot_data: SlotData = SlotData.new()
+		if !inv_slot.slot_data == null:
+			slot_data = inv_slot.slot_data
+		
+		if slot_data.item_data == item and slot_data.amount < item.max_stack:
+			inv_slot.add_amount(1)
 			return
-	
-	for slot in hud.inventory.grid_container.get_children():
-		if slot.item_data == null:
-			slot.set_item(item)
-			slot.amount = 1
+		if slot_data.is_empty():
+			inv_slot.set_item(item, 1)
 			return
 		else:
 			pass # I need to reverse the picking process so the item stays on ground.
