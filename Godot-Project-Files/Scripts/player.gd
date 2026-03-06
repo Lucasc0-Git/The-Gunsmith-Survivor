@@ -93,7 +93,7 @@ func on_hotbar_selected_by_ui(index: int) -> void:
 ## Equip item, which has to be equipped, bc its in the current hotbar slot
 func _update_equipped() -> void:
 	## Declare item var
-	var slot_data: SlotData = SlotData.new()
+	var slot_data: SlotData = null
 	## Set [item] to whichever is in current hotbar slot
 	if current_hotbar_index >= 0 and current_hotbar_index < hotbar_slots.size():
 		slot_data = hotbar_slots[current_hotbar_index]
@@ -132,7 +132,7 @@ func pick_item(item: ItemData) -> void:
 
 func use_selected_item() -> void:
 	var selected_slot: Slot = get_selected_slot()
-	if selected_slot.slot_data == null: return
+	if selected_slot.slot_data == null or selected_slot.slot_data.is_empty(): return
 	weapon.use_item(selected_slot.slot_data)
 	if !weapon.is_holding_weapon():
 		selected_slot.remove_amount(1)

@@ -60,13 +60,15 @@ func try_move_item_to_inventory(slot: Slot) -> void:
 			inv_slot.set_slot_data(slot_data)
 			slot.clear()
 			var index := slots.find(slot) 
-			slot_item_changed.emit(index, null)
+			var blank_data: SlotData = SlotData.new()
+			slot_item_changed.emit(index, blank_data)
 			return
 
 func clear_selected_slot() -> void:
 	var slot := slots[selected_slot_index]
 	slot.clear()
-	slot_item_changed.emit(selected_slot_index, null)
+	var blank_data: SlotData = SlotData.new()
+	slot_item_changed.emit(selected_slot_index, blank_data)
 
 ## Select one slot in hotbar, highlight the selected slot
 func select_slot(index: int) -> void:

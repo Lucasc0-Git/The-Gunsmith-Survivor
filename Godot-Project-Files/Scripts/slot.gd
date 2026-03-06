@@ -34,7 +34,6 @@ func _ready() -> void:
 
 func set_slot_data(data: SlotData) -> void:
 	slot_data = data
-	_update_visual()
 
 func set_hotbar_number(index: int) -> void:
 	hotbar_slot_number.visible = true
@@ -73,7 +72,7 @@ func _get_drag_data(_at_position: Vector2) -> Variant:
 	}
 
 func _on_mouse_entered() -> void:
-	if slot_data != null or !slot_data.is_empty():
+	if slot_data != null and !slot_data.is_empty():
 		emit_signal("mouse_entered_slot", slot_data)
 
 func _on_mouse_exited() -> void:

@@ -56,21 +56,19 @@ func _on_slot_left_click(slot: Slot) -> void:
 		return
 
 func move_item_to_hotbar(slot: Slot) -> void:
-	if not player:
+	if !player: return
+	
+	var slot_data: SlotData = slot.slot_data.copy()
+	if slot_data == null or slot_data.is_empty(): 
+		print("cancelling move_item_to_hotbar()")
 		return
 	
-	var slot_data: SlotData = slot.slot_data
-	if slot_data == null: return
-	
-	# Najdi první volné místo v hotbaru
+	# Find first free slot in hotbar
 	for i in range(player.hotbar_slots.size()):
-		if player.hotbar_slots[i] == null:
-			# Přesuň item
-			player.hotbar_slots[i] = slot_data
-			hud.hotbar.set_item(i, slot_data)  # vizuální update hotbaru
-			# Vymaž slot v inventáři
+		if player.hotbar_slots[i].is_empty():
 			slot.clear()
-			slot.item_changed.emit(null)  # aby signály věděly o změně
+			player.set_hotbar_item(i, slot_data)
+			hud.hotbar.set_item(i, slot_data)
 			return
 
 func fill_slot(slot: int, item: ItemData, amount: int) -> void:
