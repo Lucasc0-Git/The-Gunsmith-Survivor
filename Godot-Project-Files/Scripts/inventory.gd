@@ -15,7 +15,7 @@ var shotgun_item : ItemData
 var apple_item : ItemData
 var wood_item : ItemData
 
-var inv_slot : Panel
+var inv_slot : Slot
 var player: Player
 var hud : Hud
 
@@ -32,6 +32,8 @@ func _ready() -> void:
 	for i in range(20): #The range is how much slots will the inventory have
 		var slot := slot_scene.instantiate()
 		slot.slot_left_clicked.connect(_on_slot_left_click)
+		var data: SlotData = SlotData.new()
+		slot.set_slot_data(data)
 		grid_container.add_child(slot) #add the slot as child to grid_container
 	## Connect tooltip signals from all the slots
 	for slot in grid_container.get_children():
@@ -46,29 +48,29 @@ func _ready() -> void:
 	fill_slot(5, wood_item, 32)
 
 func _on_slot_left_click(slot: Slot) -> void:
-	if slot.item_data == null:
+	if slot.slot_data == null or slot.slot_data.is_empty():
 		return
 	## Shift + leftclick → try to move the item to hotbar
 	if Input.is_key_pressed(KEY_SHIFT):
 		move_item_to_hotbar(slot)
 		return
-	# Jinak můžeš volit standardní "use item" akci
-	#emit_signal("item_used", slot.item_data)
 
 func move_item_to_hotbar(slot: Slot) -> void:
-	var item := slot.item_data
-	var item_amount := slot.amount
 	if not player:
 		return
+	
+	var slot_data: SlotData = slot.slot_data
+	if slot_data == null: return
+	
 	# Najdi první volné místo v hotbaru
 	for i in range(player.hotbar_slots.size()):
 		if player.hotbar_slots[i] == null:
 			# Přesuň item
-			player.hotbar_slots[i] = slot
-			hud.hotbar.set_item(i, item, item_amount)  # vizuální update hotbaru
+			player.hotbar_slots[i] = slot_data
+			hud.hotbar.set_item(i, slot_data)  # vizuální update hotbaru
 			# Vymaž slot v inventáři
 			slot.clear()
-			slot.item_changed.emit(null, 0)  # aby signály věděly o změně
+			slot.item_changed.emit(null)  # aby signály věděly o změně
 			return
 
 func fill_slot(slot: int, item: ItemData, amount: int) -> void:
@@ -76,12 +78,13 @@ func fill_slot(slot: int, item: ItemData, amount: int) -> void:
 		push_error("Func fill_slot() has the wrong amount!")
 		return
 	inv_slot = grid_container.get_child(slot)
-	inv_slot.item_data = item
-	inv_slot.amount += amount
-	inv_slot.slot_texture.texture = item.icon
+	var data: SlotData = SlotData.new()
+	data.item_data = item
+	data.amount = amount
+	inv_slot.set_slot_data(data)
 
-func _show_tooltip(item_data: ItemData) -> void:
-	tooltip.show_tooltip(item_data)
+func _show_tooltip(slot_data: SlotData) -> void:
+	tooltip.show_tooltip(slot_data)
 
 func _hide_tooltip() -> void:
 	tooltip.hide_tooltip()

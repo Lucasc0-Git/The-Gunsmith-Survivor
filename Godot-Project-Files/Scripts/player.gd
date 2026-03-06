@@ -72,12 +72,12 @@ func _on_hotbar_slot_selected(index: int) -> void:
 	on_hotbar_selected_by_ui(index)
 
 ## In hotbar, set [item] on [index]
-func set_hotbar_item(index: int, item: ItemData, amount: int) -> void:
+func set_hotbar_item(index: int, slot_data: SlotData) -> void:
 	if index < 0:
 		return
 	if index >= hotbar_slots.size():
 		return
-	hotbar_slots[index].set_item(item, amount)
+	hotbar_slots[index] = slot_data
 	
 	## Update current weapon
 	if index == current_hotbar_index:
@@ -93,16 +93,16 @@ func on_hotbar_selected_by_ui(index: int) -> void:
 ## Equip item, which has to be equipped, bc its in the current hotbar slot
 func _update_equipped() -> void:
 	## Declare item var
-	var slot: SlotData = null
+	var slot_data: SlotData = SlotData.new()
 	## Set [item] to whichever is in current hotbar slot
 	if current_hotbar_index >= 0 and current_hotbar_index < hotbar_slots.size():
-		slot = hotbar_slots[current_hotbar_index]
+		slot_data = hotbar_slots[current_hotbar_index]
 	## If there is nothing to equip, call unequip()
-	if slot.item_data == null or slot.amount == 0:
+	if slot_data == null or slot_data.is_empty():
 		weapon.unequip()
 		return
 	## Equip the item
-	weapon.equip_item(slot.item_data)
+	weapon.equip_item(slot_data)
 
 ## Move the player by speed in get_input_dir() direction
 func apply_movement(delta: float) -> void:
@@ -132,15 +132,10 @@ func pick_item(item: ItemData) -> void:
 
 func use_selected_item() -> void:
 	var selected_slot: Slot = get_selected_slot()
-	if selected_slot == null or selected_slot.item_data == null: return
-	
-	weapon.use_item(selected_slot.item_data)
-	
-	selected_slot.amount -= 1
-	
-	if selected_slot.amount <= 0:
-		selected_slot.clear()
-		weapon.unequip()
+	if selected_slot.slot_data == null: return
+	weapon.use_item(selected_slot.slot_data)
+	if !weapon.is_holding_weapon():
+		selected_slot.remove_amount(1)
 
 func get_selected_slot() -> Slot:
 	return hud.hotbar.slots[current_hotbar_index]

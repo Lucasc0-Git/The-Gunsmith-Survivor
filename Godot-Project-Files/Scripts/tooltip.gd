@@ -13,15 +13,18 @@ func _ready() -> void:
 	font_variation.spacing_glyph = 0
 	self.add_theme_font_override("normal_font", font_variation)
 
-func show_tooltip(item_data: ItemData) -> void:
+func show_tooltip(slot_data: SlotData) -> void:
+	if slot_data.is_empty(): return
 	var bb : String = ""
-	bb += "[b]" + item_data.display_name + "[/b]\n"
-	bb += item_data.description + "\n\n"
-	if item_data is WeaponItemData:
-		bb += "Damage: " + str(item_data.weapon_data.damage) + " hp" + "\n"
-		bb += "Fire rate: " + str(item_data.weapon_data.fire_rate) + "\n"
-	elif item_data is HealItemData:
-		bb += "Heal: " + str(item_data.heal_data.heal) + " hp" + "\n"
+	bb += "[b]" + slot_data.item_data.display_name + "[/b]\n"
+	bb += slot_data.item_data.description + "\n\n"
+	if slot_data.item_data is WeaponItemData:
+		bb += "Damage: " + str(slot_data.item_data.weapon_data.damage) + " hp" + "\n"
+		bb += "Fire rate: " + str(slot_data.item_data.weapon_data.fire_rate) + "\n"
+	elif slot_data.item_data is HealItemData:
+		bb += "Heal: " + str(slot_data.item_data.heal_data.heal) + " hp" + "\n"
+	elif slot_data.item_data is JustItemData:
+		pass
 	
 	
 	visible = true

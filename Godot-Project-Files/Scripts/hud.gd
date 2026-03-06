@@ -25,8 +25,8 @@ func set_player(p: Player) -> void:
 	# connect hotbar signals to player
 	# when a slot changes in UI, tell player to set hotbar item
 	hotbar.slot_item_changed.connect(
-		func(index: int, item: ItemData, amount: int) -> void:
-			player.set_hotbar_item(index, item, amount)
+		func(index: int, slot_data: SlotData) -> void:
+			player.set_hotbar_item(index, slot_data)
 	)
 	# when slot selected (visual) -> update player current index
 	hotbar.slot_selected.connect(

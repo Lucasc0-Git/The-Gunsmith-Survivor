@@ -18,7 +18,7 @@ var shooting := false
 var shoot_on : bool = true
 var bullet_damage : float
 var hud : Hud
-var equipped_item: ItemData = null
+var equipped_item: SlotData = null
 
 func _ready() -> void:
 	await get_tree().physics_frame
@@ -31,9 +31,10 @@ func _input(event: InputEvent) -> void:
 	elif event.is_action_released("shoot"):
 		shooting = false
 
-func equip_item(item: ItemData) -> void:
+func equip_item(slot_data: SlotData) -> void:
 	unequip()
-	equipped_item = item
+	equipped_item = slot_data
+	var item: ItemData = equipped_item.item_data
 	sprite.visible = true
 	if item is WeaponItemData:
 		var w := item as WeaponItemData
@@ -50,6 +51,9 @@ func equip_item(item: ItemData) -> void:
 		sprite.texture = j.just_data.icon
 		can_shoot = true
 
+func is_holding_weapon() -> bool:
+	return true if equipped_item.item_data is WeaponItemData else false
+
 ## Unequip the item
 func unequip() -> void:
 	equipped_item = null
@@ -61,19 +65,24 @@ func unequip() -> void:
 	reload_timer.stop()
 	bang_particles.emitting = false
 
-func use_item(item: ItemData) -> void:
-	equipped_item = item
-	if not can_shoot or not shoot_on:
-		return
+func use_item(slot_data: SlotData) -> void:
+	equipped_item = slot_data
+	if !equipped_item: return
 	## If equipped item is a weapon, use it correctly
-	if equipped_item is WeaponItemData:
+	if equipped_item.item_data is WeaponItemData:
 		_shoot_weapon()
 	## If equipped item is a heal, use it correctly
-	elif equipped_item is HealItemData:
+	elif equipped_item.item_data is HealItemData:
 		_use_heal_item()
+		if equipped_item.amount <= 0:
+			unequip()
 	## If equipped item is a "just", dont use it
-	elif equipped_item is JustItemData:
+	elif equipped_item.item_data is JustItemData:
 		pass
+		
+		
+		if equipped_item.amount <= 0:
+			unequip()
 
 func _shoot_weapon() -> void:
 	bang_particles.emitting = true ##One shot emit.
@@ -84,12 +93,10 @@ func _shoot_weapon() -> void:
 	reload_timer.start(weapon_data.fire_rate)
 
 func _use_heal_item() -> void:
-	var heal_item := equipped_item as HealItemData
+	var heal_item := equipped_item.item_data as HealItemData
 	var data := heal_item.heal_data
 	## Heal player by the [heal] amount
 	player.heal(data.heal)
-	## Remove the item, bc its used (maybe rework when adding stacking items)
-	hud.hotbar.clear_selected_slot()
 
 ## Spawn bullet on position with direction
 func _spawn_bullet(i : int) -> void:
@@ -126,9 +133,9 @@ func inv_toggled(inv_visible: bool) -> void:
 		shoot_on = true
 
 func _process(_delta: float) -> void:
-	if equipped_item == null:
+	if equipped_item == null or equipped_item.is_empty():
 		return
-	if equipped_item and equipped_item.has_method("is_rotatable") and equipped_item.is_rotatable():
+	if equipped_item and equipped_item.item_data.has_method("is_rotatable") and equipped_item.item_data.is_rotatable():
 		var mouse_dir := get_global_mouse_position() - global_position
 		scale = Vector2(1, 1)
 		rotation = mouse_dir.angle() - deg_to_rad(45)
@@ -139,5 +146,5 @@ func _process(_delta: float) -> void:
 			rotation = -deg_to_rad(45)
 		scale = Vector2(0.7, 0.7)
 	## Shoot if its supposed to shoot
-	if shooting and can_shoot:
+	if shooting and can_shoot and shoot_on:
 		player.use_selected_item()

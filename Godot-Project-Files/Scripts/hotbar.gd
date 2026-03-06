@@ -15,7 +15,7 @@ var selected_slot_index := 0
 
 ## The signals declaration
 signal slot_selected(index: int)
-signal slot_item_changed(index: int, item: ItemData, amount: int)
+signal slot_item_changed(index: int, slot_data: SlotData)
 
 func _ready() -> void:
 	for i in range(slot_count): ##Add slots to hotbar
@@ -23,8 +23,8 @@ func _ready() -> void:
 		var slot := slot_scene.instantiate()
 		## Connect signals
 		slot.item_changed.connect(
-			func(item: ItemData, amount: int, idx := index) -> void:
-				_on_slot_item_changed(idx, item, amount)
+			func(slot_data: SlotData, idx := index) -> void:
+				_on_slot_item_changed(idx, slot_data)
 		)
 		slot.slot_left_clicked.connect(_on_slot_left_clicked)
 		## Add slot to hotbar
@@ -38,13 +38,10 @@ func _ready() -> void:
 func sync_from_player() -> void:
 	if hud and hud.player:
 		for i in range(slots.size()):
-			var data_slot := hud.player.hotbar_slots[i]
-			
-			slots[i].item_data = data_slot.item_data
-			slots[i].amount = data_slot.amount
+			slots[i].set_slot_data(hud.player.hotbar_slots[i])
 
 func _on_slot_left_clicked(slot: Slot) -> void:
-	if slot.item_data == null:
+	if slot.slot_data.is_empty():
 		return
 	## Shift + leftclick → try to move the item to inventory
 	if Input.is_key_pressed(KEY_SHIFT):
@@ -54,13 +51,13 @@ func _on_slot_left_clicked(slot: Slot) -> void:
 func try_move_item_to_inventory(slot: Slot) -> void:
 	if not hud or not hud.inventory or not hud.inventory.visible:
 		return
-	var item := slot.item_data
-	if item == null:
-		return
+	var slot_data: SlotData = slot.slot_data
+	if slot_data == null or slot_data.is_empty(): return
+	
 	## Find the first free slot in inventory
 	for inv_slot in hud.inventory.grid_container.get_children():
-		if inv_slot.item_data == null:
-			inv_slot.set_item(item)
+		if inv_slot.slot_data.is_empty():
+			inv_slot.set_slot_data(slot_data)
 			slot.clear()
 			var index := slots.find(slot) 
 			slot_item_changed.emit(index, null)
@@ -95,10 +92,10 @@ func _on_item_amount_changed(new_amount: int) -> void:
 	var slot := slots[selected_slot_index]
 	slot.amount = new_amount
 
-func set_item(index: int, item: ItemData, amount: int) -> void:
-	slots[index].set_item(item, amount)
+func set_item(index: int, slot_data: SlotData) -> void:
+	slots[index].set_slot_data(slot_data)
 
-func _on_slot_item_changed(index: int, item: ItemData, amount: int) -> void:
-	slot_item_changed.emit(index, item, amount)
+func _on_slot_item_changed(index: int, slot_data: SlotData) -> void:
+	slot_item_changed.emit(index, slot_data)
 	if hud and hud.player:
-		hud.player.set_hotbar_item(index, item, amount)
+		hud.player.set_hotbar_item(index, slot_data)

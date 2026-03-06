@@ -15,26 +15,9 @@ var slot_data: SlotData = null:
 		_slot_data = value
 		_update_visual()
 
-## The export var declaration
-#var amount: int = 0:
-	#get:
-		#return _amount
-	#set(value):
-		#_amount = value
-		#_update_visual()
-#
-#var item_data : ItemData = null:
-	#get:
-		#return _item_data
-	#set(value):
-		#_item_data = value
-		#_update_visual()
-
 ## The basic var declaration
 var drop_accepted := false
 var _slot_data: SlotData = null
-#var _amount: int = 0
-#var _item_data : ItemData
 
 ## The signals declaration
 signal item_changed(slot_data: SlotData)
@@ -46,8 +29,8 @@ func _ready() -> void:
 	amount_counter.visible = true
 	hotbar_slot_number.visible = false
 	_update_visual()
-	slot_texture.connect("mouse_entered", Callable(self, "_on_mouse_entered"))
-	slot_texture.connect("mouse_exited", Callable(self, "_on_mouse_exited"))
+	self.connect("mouse_entered", Callable(self, "_on_mouse_entered"))
+	self.connect("mouse_exited", Callable(self, "_on_mouse_exited"))
 
 func set_slot_data(data: SlotData) -> void:
 	slot_data = data
@@ -58,6 +41,7 @@ func set_hotbar_number(index: int) -> void:
 	hotbar_slot_number.text = str(index)
 
 func _update_visual() -> void:
+	if !is_node_ready(): return
 	if slot_data == null or slot_data.is_empty():
 		slot_texture.texture = null
 		amount_counter.text = ""
@@ -80,7 +64,7 @@ func _get_drag_data(_at_position: Vector2) -> Variant:
 	var preview := TextureRect.new()
 	preview.texture = slot_data.item_data.icon
 	preview.expand = true
-	preview.custom_minimum_size = Vector2(48, 48)
+	preview.custom_minimum_size = Vector2(40, 40)
 	set_drag_preview(preview)
 	## Returns some values
 	return {
@@ -89,7 +73,7 @@ func _get_drag_data(_at_position: Vector2) -> Variant:
 	}
 
 func _on_mouse_entered() -> void:
-	if slot_data.item_data != null:
+	if slot_data != null or !slot_data.is_empty():
 		emit_signal("mouse_entered_slot", slot_data)
 
 func _on_mouse_exited() -> void:
@@ -97,7 +81,7 @@ func _on_mouse_exited() -> void:
 
 ## Called at the drop
 func _can_drop_data(_at_position: Vector2, data: Variant) -> bool:
-	return typeof(data) == TYPE_DICTIONARY and data.has("item_data")
+	return typeof(data) == TYPE_DICTIONARY and data.has("slot_data")
 
 func _drop_data(_at_position: Vector2, data: Variant) -> void:
 	drop_accepted = true
@@ -113,7 +97,7 @@ func _drop_data(_at_position: Vector2, data: Variant) -> void:
 		emit_signal("item_changed", slot_data)
 		from_slot.emit_signal("item_changed", from_slot.slot_data)
 	else:
-		set_item(data["slot_data"])
+		set_slot_data(data["slot_data"])
 		if data.has("from_slot") and data["from_slot"] is Slot:
 			data["from_slot"].clear()
 		emit_signal("item_changed", slot_data)
@@ -124,18 +108,18 @@ func swap_items(other_slot: Slot) -> void:
 	slot_data = other_slot.slot_data
 	other_slot.slot_data = temp_slot_data
 	
-	if slot_data != null or !slot_data.is_empty():
+	if slot_data != null and !slot_data.is_empty():
 		slot_texture.texture = slot_data.item_data.icon
 	else:
 		slot_texture.texture = null
-	
 	other_slot.amount_counter.visible = true
-	if other_slot.item_data != null:
-		other_slot.slot_texture.texture = other_slot.item_data.icon
+	
+	if other_slot.slot_data != null and  !other_slot.slot_data.is_empty():
+		other_slot.slot_texture.texture = other_slot.slot_data.item_data.icon
 	else:
 		other_slot.slot_texture.texture = null
 
-func set_item(item: ItemData, amount: int = 1) -> void:
+func set_item(item: ItemData, amount: int) -> void:
 	if slot_data == null:
 		slot_data = SlotData.new()
 	slot_data.item_data = item
@@ -174,15 +158,10 @@ func _notification(what: int) -> void:
 ## Called when the drop fails
 func on_drop_failed() -> void:
 	slot_texture.visible = true
+	amount_counter.visible = true
 
 func _gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton \
 	and event.button_index == MOUSE_BUTTON_LEFT \
 	and event.pressed:
 		slot_left_clicked.emit(self)
-	
-	#if event is InputEventMouseButton \
-	#and event.button_index == MOUSE_BUTTON_RIGHT \
-	#and event.pressed \
-	#and item_data != null:
-		#item_used.emit(item_data)
