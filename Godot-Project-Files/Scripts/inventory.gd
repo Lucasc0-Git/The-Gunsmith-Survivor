@@ -67,6 +67,7 @@ func move_item_to_hotbar(slot: Slot) -> void:
 	for i in range(player.hotbar_slots.size()):
 		if player.hotbar_slots[i].is_empty():
 			slot.clear()
+			_hide_tooltip()
 			player.set_hotbar_item(i, slot_data)
 			hud.hotbar.set_item(i, slot_data)
 			return

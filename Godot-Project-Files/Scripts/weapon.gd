@@ -139,10 +139,11 @@ func _process(_delta: float) -> void:
 		var mouse_dir := get_global_mouse_position() - global_position
 		scale = Vector2(1, 1)
 		rotation = mouse_dir.angle() - deg_to_rad(45)
-		if get_global_mouse_position().y > player.global_position.y:
-			z_index = 1
+		# in weapon.gd _process()
+		if get_global_mouse_position().y < player.global_position.y:
+			pass   # mouse above = weapon behind sprite
 		else:
-			z_index = -1
+			pass  # mouse below = weapon in front
 	else:
 		match player.last_dir:
 			Vector2.LEFT:
@@ -155,9 +156,9 @@ func _process(_delta: float) -> void:
 				rotation = -deg_to_rad(45) + deg_to_rad(90)
 		scale = Vector2(0.7, 0.7)
 		if player.last_dir.y >= 0:
-			z_index = 1
+			pass
 		else:
-			z_index = -1
+			pass
 	## Shoot if its supposed to shoot
 	if shooting and can_shoot and shoot_on:
 		player.use_selected_item()
