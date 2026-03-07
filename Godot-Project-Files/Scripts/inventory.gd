@@ -44,7 +44,7 @@ func _ready() -> void:
 	fill_slot(1, shotgun_item, 1)
 	fill_slot(2, apple_item, 5)
 	fill_slot(3, apple_item, 10)
-	fill_slot(4, apple_item, 64)
+	fill_slot(4, apple_item, 16)
 	fill_slot(5, wood_item, 32)
 
 func _on_slot_left_click(slot: Slot) -> void:

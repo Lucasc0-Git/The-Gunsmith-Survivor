@@ -117,8 +117,16 @@ func _process(_delta: float) -> void:
 	input_dir = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 
 func pick_item(item: ItemData) -> void:
+	var slot_data: SlotData = SlotData.new()
+	for hotbar_slot in hud.hotbar.grid_container.get_children():
+		if !hotbar_slot.slot_data == null:
+			slot_data = hotbar_slot.slot_data
+		if slot_data.item_data == item and slot_data.amount < item.max_stack:
+			hotbar_slot.add_amount(1)
+			return
+	
+	slot_data = SlotData.new()
 	for inv_slot in hud.inventory.grid_container.get_children():
-		var slot_data: SlotData = SlotData.new()
 		if !inv_slot.slot_data == null:
 			slot_data = inv_slot.slot_data
 		
