@@ -139,11 +139,11 @@ func _process(_delta: float) -> void:
 		var mouse_dir := get_global_mouse_position() - global_position
 		scale = Vector2(1, 1)
 		rotation = mouse_dir.angle() - deg_to_rad(45)
+		if get_global_mouse_position().y > player.global_position.y:
+			z_index = 1
+		else:
+			z_index = -1
 	else:
-		#if player.last_dir == Vector2.LEFT:
-			#rotation = -deg_to_rad(45) + deg_to_rad(180)
-		#elif player.last_dir == Vector2.RIGHT:
-			#rotation = -deg_to_rad(45)
 		match player.last_dir:
 			Vector2.LEFT:
 				rotation = -deg_to_rad(45) + deg_to_rad(180)
@@ -154,6 +154,10 @@ func _process(_delta: float) -> void:
 			Vector2.DOWN:
 				rotation = -deg_to_rad(45) + deg_to_rad(90)
 		scale = Vector2(0.7, 0.7)
+		if player.last_dir.y >= 0:
+			z_index = 1
+		else:
+			z_index = -1
 	## Shoot if its supposed to shoot
 	if shooting and can_shoot and shoot_on:
 		player.use_selected_item()
