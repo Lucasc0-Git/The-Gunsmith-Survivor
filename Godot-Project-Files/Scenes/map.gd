@@ -10,7 +10,7 @@ var world_seed: int
 signal world_generated()
 
 @export var world_frequency := 0.05
-@export var grass_frequency := 0.5
+@export var grass_frequency := 0.4
 @export var tree_frequency := 0.85
 @export var map_width: int = 100
 @export var map_height: int = 100
@@ -71,7 +71,7 @@ func generate_world() -> void:
 	emit_signal("world_generated")
 
 func be_grass(grass_value: float) -> Vector2i:
-	if grass_value < -0.15:
+	if grass_value < -0.05:
 		return tiles.grass
 	elif grass_value < 0.05:
 		return tiles.grass1
@@ -85,7 +85,7 @@ func be_grass(grass_value: float) -> Vector2i:
 		return tiles.dark_grass
 	elif grass_value < 1.0:
 		return tiles.dark_grass2
-	else: return Vector2i(1, 0)
+	else: return tiles.grass
 
 func get_spawn_position() -> Vector2:
 	var spawn_tile := find_spawn_tile()

@@ -1,10 +1,11 @@
+OUTDATED
 [Rendering order]
 Z 0 = Main
 Z 0 = Map
 Z 2 = Player
 	Z 2 = PlayerSprite
 	Z 2 = Bullet
-	Z 3 = Weapon
+	Z 2 = Weapon
 Z 2 = TREEEES
 Z 4 = Objects
 

@@ -24,13 +24,14 @@ signal item_changed(slot_data: SlotData)
 signal mouse_entered_slot(slot_data: SlotData)
 signal mouse_exited_slot()
 signal slot_left_clicked(slot: Slot)
+signal slot_right_clicked(slot: Slot)
 
 func _ready() -> void:
 	amount_counter.visible = true
 	hotbar_slot_number.visible = false
 	_update_visual()
-	self.connect("mouse_entered", Callable(self, "_on_mouse_entered"))
-	self.connect("mouse_exited", Callable(self, "_on_mouse_exited"))
+	mouse_entered.connect(_on_mouse_entered)
+	mouse_exited.connect(_on_mouse_exited)
 
 func set_slot_data(data: SlotData) -> void:
 	slot_data = data
@@ -92,7 +93,12 @@ func _drop_data(_at_position: Vector2, data: Variant) -> void:
 		return
 	
 	if from_slot is Slot:
-		swap_items(from_slot)
+		if from_slot.slot_data.item_data == slot_data.item_data and from_slot.slot_data.amount + slot_data.amount <= slot_data.item_data.max_stack:
+			add_amount(from_slot.slot_data.amount)
+			from_slot.clear()
+		else:
+			swap_items(from_slot)
+		
 		emit_signal("item_changed", slot_data)
 		from_slot.emit_signal("item_changed", from_slot.slot_data)
 	else:

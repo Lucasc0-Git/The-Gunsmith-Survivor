@@ -32,6 +32,7 @@ func _ready() -> void:
 	for i in range(20): #The range is how much slots will the inventory have
 		var slot := slot_scene.instantiate()
 		slot.slot_left_clicked.connect(_on_slot_left_click)
+		slot.slot_right_clicked.connect(_on_slot_right_click)
 		var data: SlotData = SlotData.new()
 		slot.set_slot_data(data)
 		grid_container.add_child(slot) #add the slot as child to grid_container
@@ -46,6 +47,9 @@ func _ready() -> void:
 	fill_slot(3, apple_item, 10)
 	fill_slot(4, apple_item, 16)
 	fill_slot(5, wood_item, 32)
+
+func _on_slot_right_click(slot: Slot) -> void:
+	pass
 
 func _on_slot_left_click(slot: Slot) -> void:
 	if slot.slot_data == null or slot.slot_data.is_empty():

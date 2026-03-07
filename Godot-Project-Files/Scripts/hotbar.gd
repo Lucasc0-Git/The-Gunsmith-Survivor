@@ -27,6 +27,7 @@ func _ready() -> void:
 				_on_slot_item_changed(idx, slot_data)
 		)
 		slot.slot_left_clicked.connect(_on_slot_left_clicked)
+		slot.slot_right_clicked.connect(_on_slot_right_clicked)
 		## Add slot to hotbar
 		grid_container.add_child(slot)
 		## Set the right-bottom number in hotbar slot
@@ -39,6 +40,9 @@ func sync_from_player() -> void:
 	if hud and hud.player:
 		for i in range(slots.size()):
 			slots[i].set_slot_data(hud.player.hotbar_slots[i])
+
+func _on_slot_right_clicked(slot: Slot) -> void:
+	pass
 
 func _on_slot_left_clicked(slot: Slot) -> void:
 	if slot.slot_data == null or slot.slot_data.is_empty():
