@@ -37,7 +37,6 @@ func drop_item(item: ItemData, pos: Vector2) -> void:
 	var dropped_item := preload("res://Scenes/dropped_item.tscn").instantiate()
 	dropped_item.item_data = item
 	dropped_item.global_position = pos
-	print("connecting dropped item to player.pick_item")
 	dropped_item.picked_up.connect(player.pick_item)
 	Ysort.call_deferred("add_child", dropped_item)
 
