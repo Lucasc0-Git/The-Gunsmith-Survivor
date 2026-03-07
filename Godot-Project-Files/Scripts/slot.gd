@@ -132,6 +132,13 @@ func set_item(item: ItemData, amount: int) -> void:
 	_update_visual()
 	emit_signal("item_changed", slot_data)
 
+func set_amount(value: int) -> void:
+	if slot_data == null or slot_data.is_empty(): return
+	slot_data.amount = value
+	
+	_update_visual()
+	emit_signal("item_changed", slot_data)
+
 func clear() -> void:
 	if slot_data:
 		slot_data.clear()
@@ -170,3 +177,8 @@ func _gui_input(event: InputEvent) -> void:
 	and event.button_index == MOUSE_BUTTON_LEFT \
 	and event.pressed:
 		slot_left_clicked.emit(self)
+	
+	if event is InputEventMouseButton \
+	and event.button_index == MOUSE_BUTTON_RIGHT \
+	and event.pressed:
+		slot_right_clicked.emit(self)

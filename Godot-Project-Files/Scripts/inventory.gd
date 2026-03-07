@@ -49,7 +49,22 @@ func _ready() -> void:
 	fill_slot(5, wood_item, 32)
 
 func _on_slot_right_click(slot: Slot) -> void:
-	pass
+	var slot_data: SlotData = slot.slot_data.copy()
+	if slot_data == null:
+		slot_data = SlotData.new()
+	if slot_data.is_empty(): return
+	var og_amount: int = slot_data.amount
+	if og_amount <= 1: return
+	@warning_ignore("integer_division")
+	var half_amount: int = og_amount / 2
+	for invslot in grid_container.get_children():
+		if invslot.slot_data.is_empty():
+			if invslot == slot: return
+			invslot.set_slot_data(slot_data)
+			invslot.set_amount(slot_data.amount - half_amount)
+			slot.set_amount(half_amount)
+			return
+	
 
 func _on_slot_left_click(slot: Slot) -> void:
 	if slot.slot_data == null or slot.slot_data.is_empty():
