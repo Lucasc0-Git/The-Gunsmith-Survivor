@@ -93,9 +93,11 @@ func _drop_data(_at_position: Vector2, data: Variant) -> void:
 		return
 	
 	if from_slot is Slot:
-		if from_slot.slot_data.item_data == slot_data.item_data and from_slot.slot_data.amount + slot_data.amount <= slot_data.item_data.max_stack:
-			add_amount(from_slot.slot_data.amount)
-			from_slot.clear()
+		if from_slot.slot_data.item_data == slot_data.item_data and slot_data.amount < slot_data.item_data.max_stack:
+			var space_left: int = slot_data.item_data.max_stack - slot_data.amount
+			var adding_amount: int = min(space_left, from_slot.slot_data.amount)
+			add_amount(adding_amount)
+			from_slot.remove_amount(adding_amount)
 		else:
 			swap_items(from_slot)
 		
