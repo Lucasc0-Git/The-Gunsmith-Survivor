@@ -10,6 +10,7 @@ var last_dir: Vector2
 var input_dir: Vector2 = Vector2.ZERO
 var picking_item: ItemData
 var hotbar_slots: Array[SlotData] = []
+var inv_toggled: bool = false
 
 ## The @onready vars declaration
 @onready var anim_player: AnimatedSprite2D = $AnimatedSprite2D
@@ -56,6 +57,7 @@ func set_vars(h: Hud) -> void:
 	inventory_ui = hud.get_node("InventoryUI")
 	##Connect signals
 	hud.hotbar.slot_selected.connect(_on_hotbar_slot_selected)
+	hud.inv_toggled.connect(_on_inv_toggled)
 	##Set vars in other nodes
 	weapon.player = self
 	weapon.hud = hud
@@ -67,6 +69,9 @@ func change_state(state_name: String) -> void:
 		current_state.exit()
 	current_state = states[state_name]
 	current_state.enter()
+
+func _on_inv_toggled(inv_visible: bool) -> void:
+	inv_toggled = inv_visible
 
 func _on_hotbar_slot_selected(index: int) -> void:
 	on_hotbar_selected_by_ui(index)
@@ -133,6 +138,15 @@ func pick_item(item: ItemData) -> void:
 		if slot_data.item_data == item and slot_data.amount < item.max_stack:
 			inv_slot.add_amount(1)
 			return
+	
+	slot_data = SlotData.new()
+	for inv_slot in hud.inventory.grid_container.get_children():
+		if !inv_slot.slot_data == null:
+			slot_data = inv_slot.slot_data
+		
+		if slot_data.item_data == item and slot_data.amount < item.max_stack:
+			inv_slot.add_amount(1)
+			return
 		if slot_data.is_empty():
 			inv_slot.set_item(item, 1)
 			return
@@ -188,6 +202,7 @@ func regen(delta: float) -> void:
 
 ## Select another slot in hotbar
 func switch_weapon(dir: int, by_scrolling: bool) -> void:
+	if inv_toggled: return
 	if by_scrolling:
 		## Select hotbar slot neighbouring with current selected hotbar slot, [dir] is -1 or 1
 		current_hotbar_index += dir

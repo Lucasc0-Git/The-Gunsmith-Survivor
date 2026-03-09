@@ -19,6 +19,7 @@ var shoot_on : bool = true
 var bullet_damage : float
 var hud : Hud
 var equipped_item: SlotData = null
+var hovering: bool = false
 
 func _ready() -> void:
 	await get_tree().physics_frame
@@ -160,5 +161,5 @@ func _process(_delta: float) -> void:
 		else:
 			pass
 	## Shoot if its supposed to shoot
-	if shooting and can_shoot and shoot_on:
+	if shooting and can_shoot and shoot_on and !hovering:
 		player.use_selected_item()

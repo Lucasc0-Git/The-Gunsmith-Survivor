@@ -33,6 +33,7 @@ func _ready() -> void:
 		var slot := slot_scene.instantiate()
 		slot.slot_left_clicked.connect(_on_slot_left_click)
 		slot.slot_right_clicked.connect(_on_slot_right_click)
+		slot.slot_mousewheeled.connect(_on_slot_mousewheeled)
 		var data: SlotData = SlotData.new()
 		slot.set_slot_data(data)
 		grid_container.add_child(slot) #add the slot as child to grid_container
@@ -55,8 +56,7 @@ func _on_slot_right_click(slot: Slot) -> void:
 	if slot_data.is_empty(): return
 	var og_amount: int = slot_data.amount
 	if og_amount <= 1: return
-	@warning_ignore("integer_division")
-	var half_amount: int = og_amount / 2
+	var half_amount: int = int(og_amount / 2.0)
 	for invslot in grid_container.get_children():
 		if invslot.slot_data.is_empty():
 			if invslot == slot: return
@@ -64,7 +64,21 @@ func _on_slot_right_click(slot: Slot) -> void:
 			invslot.set_amount(slot_data.amount - half_amount)
 			slot.set_amount(half_amount)
 			return
+
+func _on_slot_mousewheeled(slot: Slot) -> void:
+	if slot.slot_data == null: 
+		slot.slot_data = SlotData.new()
+	if slot.slot_data.is_empty(): return
 	
+	
+	
+	for invslot in grid_container.get_children():
+		if invslot.slot_data == null:
+			invslot.slot_data = SlotData.new()
+		if invslot.slot_data.is_empty():
+			invslot.set_item(slot.slot_data.item_data, 1)
+			slot.remove_amount(1)
+			return
 
 func _on_slot_left_click(slot: Slot) -> void:
 	if slot.slot_data == null or slot.slot_data.is_empty():
@@ -79,7 +93,6 @@ func move_item_to_hotbar(slot: Slot) -> void:
 	
 	var slot_data: SlotData = slot.slot_data.copy()
 	if slot_data == null or slot_data.is_empty(): 
-		print("cancelling move_item_to_hotbar()")
 		return
 	
 	# Find first free slot in hotbar

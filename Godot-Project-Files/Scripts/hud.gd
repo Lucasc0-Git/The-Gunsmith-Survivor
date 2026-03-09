@@ -34,6 +34,11 @@ func set_player(p: Player) -> void:
 			player.on_hotbar_selected_by_ui(index)
 	)
 	
+	weapon = player.weapon
+	#hotbar.mouse_entered.connect(func() -> void: weapon.hovering = true; print("smthng"))
+	#hotbar.mouse_exited.connect(func() -> void: weapon.hovering = false)
+	
+	
 	# Set vars.
 	tooltip.inventory = inventory
 	hotbar.hud = self
@@ -55,3 +60,11 @@ func _input(event: InputEvent) -> void:
 	## Calls toggle_inv() on "E" pressed
 	if event.is_action_pressed("toggle_inventory"):
 		toggle_inv()
+
+func _on_hotbar_mouse_entered() -> void:
+	weapon.hovering = true
+	print("entered")
+
+func _on_hotbar_mouse_exited() -> void:
+	weapon.hovering = false
+	print("exit")

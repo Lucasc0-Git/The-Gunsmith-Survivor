@@ -25,6 +25,7 @@ signal mouse_entered_slot(slot_data: SlotData)
 signal mouse_exited_slot()
 signal slot_left_clicked(slot: Slot)
 signal slot_right_clicked(slot: Slot)
+signal slot_mousewheeled(slot: Slot)
 
 func _ready() -> void:
 	amount_counter.visible = true
@@ -184,3 +185,8 @@ func _gui_input(event: InputEvent) -> void:
 	and event.button_index == MOUSE_BUTTON_RIGHT \
 	and event.pressed:
 		slot_right_clicked.emit(self)
+	
+	if event is InputEventMouseButton \
+	and event.button_index == MOUSE_BUTTON_WHEEL_DOWN \
+	and event.pressed:
+		slot_mousewheeled.emit(self)
