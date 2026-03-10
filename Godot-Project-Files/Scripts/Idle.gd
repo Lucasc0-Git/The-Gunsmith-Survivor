@@ -3,6 +3,7 @@ extends State
 
 ## Called on function enter
 func enter() -> void:
+	print("Idle entered")
 	## Start playing the idle animation
 	var last_dir: Vector2 = player.last_dir
 	match last_dir:
@@ -18,6 +19,9 @@ func enter() -> void:
 		Vector2.DOWN:
 			player.anim_player.flip_h = false
 			player.anim_player.play("IdleDown")
+
+func exit() -> void:
+	print("Idle exited")
 
 ## Called every physics frame
 func physics_update(_delta: float) -> void:

@@ -1,7 +1,7 @@
 extends Node
 class_name State
 
-var player : CharacterBody2D
+var player : Player
 
 func enter() -> void:
 	pass

@@ -21,10 +21,13 @@ var inv_toggled: bool = false
 @onready var spawn_pos := global_position
 
 ## The export vars declaration
-@export var accel := 500.0
-@export var speed: int = 200
 @export var health_max := 100.0
 @export var health_regen_rate: float = 5
+
+## The const declaration.
+const SPEED: int = 200
+const ACCEL: float = 600
+const DODGE_FORCE: int = 500
 
 ## The signals declaration
 signal health_update(current: float, maximum: float)
@@ -111,8 +114,9 @@ func _update_equipped() -> void:
 
 ## Move the player by speed in get_input_dir() direction
 func apply_movement(delta: float) -> void:
-	target_speed = input_dir * speed
-	velocity = velocity.move_toward(target_speed, accel * delta)
+	target_speed = input_dir * SPEED
+	velocity = velocity.move_toward(target_speed, ACCEL * delta)
+
 
 ## Get [input_dir] for other scripts, like state machine	#Need that so i dont need to change a lot of code
 func get_input_dir() -> Vector2:
@@ -157,7 +161,7 @@ func use_selected_item() -> void:
 	var selected_slot: Slot = get_selected_slot()
 	if selected_slot.slot_data == null or selected_slot.slot_data.is_empty(): return
 	weapon.use_item(selected_slot.slot_data)
-	if !weapon.is_holding_weapon():
+	if weapon.is_holding_usable_item():
 		selected_slot.remove_amount(1)
 
 func get_selected_slot() -> Slot:
@@ -225,7 +229,7 @@ func _input(event: InputEvent) -> void:
 	
 	for i in range(1, 6):
 		if event.is_action_pressed("slot_%d_hotbar" % i):
-			switch_weapon(i - 1, false)
+			switch_weapon(i - 1, false)	
 
 ## Apply reversed velocity on shoot
 func apply_recoil(weapon_rotation: float, recoil_strenght: float) -> void:

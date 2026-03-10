@@ -1,6 +1,9 @@
 extends State
 ## The run state (player moves)
 
+func enter() -> void:
+	print("run entered")
+
 ## Called every physics frame
 func physics_update(_delta: float) -> void:
 	var dir : Vector2 = player.get_input_dir()
@@ -23,5 +26,8 @@ func physics_update(_delta: float) -> void:
 			player.last_dir = Vector2.RIGHT
 	
 	## Change state to "idle" when not moving
-	if player.velocity == Vector2.ZERO:
+	if dir == Vector2.ZERO and player.velocity == Vector2.ZERO:
 		player.change_state("Idle")
+	
+	if Input.is_action_just_pressed("Dodge"):
+		player.change_state("Dodge")

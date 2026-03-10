@@ -25,9 +25,7 @@ func _ready() -> void:
 	shotgun_item = ItemRegistry.items["shotgun"]
 	apple_item = ItemRegistry.items["apple"]
 	wood_item = ItemRegistry.items["wood"]
-	
 	visible = false
-	
 	## Give the inventory some slots
 	for i in range(20): #The range is how much slots will the inventory have
 		var slot := slot_scene.instantiate()
@@ -69,8 +67,6 @@ func _on_slot_mousewheeled(slot: Slot) -> void:
 	if slot.slot_data == null: 
 		slot.slot_data = SlotData.new()
 	if slot.slot_data.is_empty(): return
-	
-	
 	
 	for invslot in grid_container.get_children():
 		if invslot.slot_data == null:

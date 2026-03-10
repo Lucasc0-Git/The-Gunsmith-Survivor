@@ -52,8 +52,8 @@ func equip_item(slot_data: SlotData) -> void:
 		sprite.texture = j.just_data.icon
 		can_shoot = true
 
-func is_holding_weapon() -> bool:
-	return true if equipped_item.item_data is WeaponItemData else false
+func is_holding_usable_item() -> bool:
+	return true if equipped_item.item_data is HealItemData else false
 
 ## Unequip the item
 func unequip() -> void:

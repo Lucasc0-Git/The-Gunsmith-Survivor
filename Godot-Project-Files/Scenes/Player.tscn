@@ -18,6 +18,7 @@
 [ext_resource type="Texture2D" uid="uid://df0j4mv4iublx" path="res://Textures/player/blblblblbl bezeni doprava.png" id="8_ulo2v"]
 [ext_resource type="Texture2D" uid="uid://bc3tg3k1kd6wx" path="res://Textures/bullet.png" id="10_miouo"]
 [ext_resource type="Texture2D" uid="uid://cbjsnlupl5vow" path="res://Textures/player/blbllblblblblbl zezadu.png" id="11_1iu4k"]
+[ext_resource type="Script" uid="uid://dum4t15xgh5x0" path="res://Scripts/Dodge.gd" id="17_1iu4k"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_52ee3"]
 radius = 3.6666667
@@ -161,7 +162,6 @@ scale = Vector2(3, 3)
 collision_layer = 2
 collision_mask = 24
 script = ExtResource("1_dewec")
-accel = 900.0
 health_regen_rate = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1875418815]
@@ -182,6 +182,9 @@ script = ExtResource("6_52ee3")
 
 [node name="State" type="Node" parent="StateMachine" unique_id=1627931652]
 script = ExtResource("5_5ixxa")
+
+[node name="Dodge" type="Node" parent="StateMachine" unique_id=958468643]
+script = ExtResource("17_1iu4k")
 
 [node name="Weapon" type="Node2D" parent="." unique_id=906026636]
 rotation = -0.7853982
