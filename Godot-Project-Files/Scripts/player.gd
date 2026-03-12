@@ -170,7 +170,7 @@ func get_selected_slot() -> Slot:
 ## Called every physics frame
 func _physics_process(delta: float) -> void:
 	#For testing things (need to remove them!)
-	if Input.is_action_just_pressed("hurt"):
+	if Input.is_action_just_pressed("DEBUG hurt"):
 		get_hurt(20)
 	
 	## Handle respawn
@@ -193,7 +193,7 @@ func respawn() -> void:
 	velocity = Vector2.ZERO
 
 ## Add health to current health by [amount]
-func heal(amount: int) -> void:
+func heal(amount: float) -> void:
 	health += amount
  
 ## Remove health from current health by [amount]

@@ -42,10 +42,18 @@ func _on_body_entered(body: Node2D) -> void:
 		
 		if body.has_method("take_damage"):
 			body.take_damage(bullet_damage)
-		hit_explosion.emitting = true
-		has_hit = true
-		sprite.visible = false
-		collision_shape.set_deferred("disabled", true)
-		await hit_explosion.finished
-		queue_free()
-		
+		bullet_despawn()
+
+func _on_area_entered(area: Area2D) -> void:
+	if area.is_in_group("enemy_hitbox"):
+		if has_hit: return
+		area.get_parent().take_damage(bullet_damage)
+		bullet_despawn()
+
+func bullet_despawn() -> void:
+	hit_explosion.emitting = true
+	has_hit = true
+	sprite.visible = false
+	collision_shape.set_deferred("disabled", true)
+	await hit_explosion.finished
+	queue_free()

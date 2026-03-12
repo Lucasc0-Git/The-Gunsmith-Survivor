@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://dw8ufghl04u8o" path="res://Scenes/Map.tscn" id="1_idj7w"]
 [ext_resource type="Script" uid="uid://cfk4px6e32ldd" path="res://Scripts/main.gd" id="1_rgh2o"]
+[ext_resource type="PackedScene" uid="uid://c1c2jxjdkyb80" path="res://Scenes/zombie.tscn" id="2_vy5pj"]
 [ext_resource type="PackedScene" uid="uid://7mhxc0w7ug41" path="res://Scenes/hud.tscn" id="3_kln2b"]
 [ext_resource type="Theme" uid="uid://bjx8aflrkpmog" path="res://Themes/StartSceneButton.tres" id="5_pbw6q"]
 [ext_resource type="Script" uid="uid://cq08afe6nx2la" path="res://Scripts/menu.gd" id="5_v1gob"]
@@ -233,6 +234,7 @@ Button/styles/pressed = SubResource("StyleBoxFlat_dgtb2")
 [node name="Main" type="Node2D" unique_id=211418808]
 process_mode = 3
 script = ExtResource("1_rgh2o")
+zombie_scene = ExtResource("2_vy5pj")
 
 [node name="Map" parent="." unique_id=1487724397 instance=ExtResource("1_idj7w")]
 process_mode = 1

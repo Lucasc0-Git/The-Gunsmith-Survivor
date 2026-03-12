@@ -1,9 +1,6 @@
 extends State
 ## The run state (player moves)
 
-func enter() -> void:
-	print("run entered")
-
 ## Called every physics frame
 func physics_update(_delta: float) -> void:
 	var dir : Vector2 = player.get_input_dir()

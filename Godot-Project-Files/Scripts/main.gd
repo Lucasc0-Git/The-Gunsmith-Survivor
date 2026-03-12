@@ -8,10 +8,15 @@ class_name Main
 @onready var menu: CanvasLayer = $Menu
 @onready var Ysort := $YSORT
 
+@export_group("Enemies")
+@export var zombie_scene: PackedScene
+
 func _ready() -> void:
 	
 	var spawn_pos := map.get_spawn_position()
 	spawn_player(spawn_pos)
+	spawn_enemy(zombie_scene, Vector2(50, 50))
+	
 	
 	## Set "player" variable in the hud.gd
 	menu.visible = false
@@ -22,12 +27,20 @@ func _ready() -> void:
 	map.world_generated.connect(_on_world_generated)
 	map.generate_world()
 
+func spawn_enemy(scene: PackedScene, pos: Vector2) -> void:
+	var enemy := scene.instantiate()
+	enemy.global_position = pos
+	Ysort.add_child(enemy)
+
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("exit"):
 		if menu.visible:
 			hide_menu()
 		else:
 			show_menu()
+	
+	if event.is_action_released("DEBUG spawn_enemy"):
+		spawn_enemy(zombie_scene, get_global_mouse_position())
 
 func _on_world_generated() -> void:
 	for pos: Vector2 in map.tree_positions:

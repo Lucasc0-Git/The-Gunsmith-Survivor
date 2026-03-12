@@ -4,10 +4,8 @@ var timer: Timer = Timer.new()
 
 func _ready() -> void:
 	add_child(timer)
-	
 
 func enter() -> void:
-	print("doge entered")
 	player.velocity += player.last_dir * player.DODGE_FORCE
 	timer.start(1)
 	await timer.timeout

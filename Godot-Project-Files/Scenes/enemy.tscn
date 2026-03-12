@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://ho13c5jj0sag"]
+
+[ext_resource type="Script" uid="uid://bhlubgjn46op8" path="res://Scripts/enemy.gd" id="1_hghv2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hghv2"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1f0kj"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hghv2"]
+
+[node name="Enemy" type="CharacterBody2D" unique_id=1249180727 groups=["enemy"]]
+process_mode = 1
+collision_layer = 4
+collision_mask = 14
+script = ExtResource("1_hghv2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=188131912]
+shape = SubResource("RectangleShape2D_hghv2")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=525180353]
+sprite_frames = SubResource("SpriteFrames_1f0kj")
+
+[node name="HitBoxArea" type="Area2D" parent="." unique_id=1555094943 groups=["enemy_hitbox"]]
+collision_layer = 4
+collision_mask = 34
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxArea" unique_id=2106168322]
+shape = SubResource("CapsuleShape2D_hghv2")
+
+[node name="Timer" type="Timer" parent="." unique_id=575764799]
+autostart = true
+
+[connection signal="body_entered" from="HitBoxArea" to="." method="_on_hit_box_area_body_entered"]
+[connection signal="body_exited" from="HitBoxArea" to="." method="_on_hit_box_area_body_exited"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
