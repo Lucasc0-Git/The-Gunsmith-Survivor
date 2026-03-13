@@ -8,6 +8,32 @@
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hghv2"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hghv2"]
+bg_color = Color(0.25294986, 0.316815, 0.35382903, 1)
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 1
+corner_detail = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1f0kj"]
+bg_color = Color(0.8288101, 2.7193873e-06, 5.7756904e-07, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.66560364, 2.8998777e-06, 5.7756904e-07, 1)
+border_blend = true
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 1
+corner_detail = 10
+
+[sub_resource type="Theme" id="Theme_afpow"]
+ProgressBar/styles/background = SubResource("StyleBoxFlat_hghv2")
+ProgressBar/styles/fill = SubResource("StyleBoxFlat_1f0kj")
+
 [node name="Enemy" type="CharacterBody2D" unique_id=1249180727 groups=["enemy"]]
 process_mode = 1
 collision_layer = 4
@@ -26,6 +52,23 @@ collision_mask = 34
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxArea" unique_id=2106168322]
 shape = SubResource("CapsuleShape2D_hghv2")
+
+[node name="HealthBar" type="ProgressBar" parent="." unique_id=1162681200]
+custom_minimum_size = Vector2(40, 7)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -35.0
+offset_right = 20.0
+offset_bottom = -28.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(20, 3.5)
+theme = SubResource("Theme_afpow")
+show_percentage = false
 
 [node name="Timer" type="Timer" parent="." unique_id=575764799]
 autostart = true

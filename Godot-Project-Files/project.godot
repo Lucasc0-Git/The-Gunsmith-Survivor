@@ -19,7 +19,6 @@ config/version="alpha 0.0.1"
 run/main_scene="uid://3jm5jtqlvjfv"
 config/features=PackedStringArray("4.6", "Mobile")
 run/max_fps=75
-boot_splash/stretch_mode=4
 config/icon="res://icon.svg"
 
 [autoload]

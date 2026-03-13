@@ -10,7 +10,3 @@ func move(delta: float) -> void:
 		return
 	else:
 		velocity = direction * speed
-
-func die() -> void:
-	#here goes dropping looooot.
-	queue_free()
