@@ -1,6 +1,11 @@
 [gd_scene format=3 uid="uid://ho13c5jj0sag"]
 
 [ext_resource type="Script" uid="uid://bhlubgjn46op8" path="res://Scripts/enemy.gd" id="1_hghv2"]
+[ext_resource type="Script" uid="uid://di6gyib1icygt" path="res://Scripts/Enemy_state.gd" id="2_1f0kj"]
+[ext_resource type="Script" uid="uid://b2yd5jq123w1v" path="res://Scripts/EnemyChase.gd" id="2_0830c"]
+[ext_resource type="Script" uid="uid://d4mvxnt7s3rjv" path="res://Scripts/EnemyIdle.gd" id="3_ghaa6"]
+[ext_resource type="Script" uid="uid://bwronxr3hjho" path="res://Scripts/EnemyHit.gd" id="4_1dp5w"]
+[ext_resource type="Script" uid="uid://d0argl1pbkxmp" path="res://Scripts/EnemyWonder.gd" id="5_ghaa6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hghv2"]
 
@@ -72,6 +77,23 @@ show_percentage = false
 
 [node name="Timer" type="Timer" parent="." unique_id=575764799]
 autostart = true
+
+[node name="StateMachine" type="Node" parent="." unique_id=389368828]
+
+[node name="Chase" type="Node" parent="StateMachine" unique_id=1016607480]
+script = ExtResource("2_0830c")
+
+[node name="Idle" type="Node" parent="StateMachine" unique_id=1158478414]
+script = ExtResource("3_ghaa6")
+
+[node name="HitPlayer" type="Node" parent="StateMachine" unique_id=1413895096]
+script = ExtResource("4_1dp5w")
+
+[node name="Wonder" type="Node" parent="StateMachine" unique_id=447717311]
+script = ExtResource("5_ghaa6")
+
+[node name="EnemyState" type="Node" parent="StateMachine" unique_id=1569082239]
+script = ExtResource("2_1f0kj")
 
 [connection signal="body_entered" from="HitBoxArea" to="." method="_on_hit_box_area_body_entered"]
 [connection signal="body_exited" from="HitBoxArea" to="." method="_on_hit_box_area_body_exited"]

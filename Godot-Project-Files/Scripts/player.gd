@@ -23,11 +23,11 @@ var inv_toggled: bool = false
 ## The export vars declaration
 @export var health_max := 100.0
 @export var health_regen_rate: float = 5
+@export var dodge_force: int = 400
 
 ## The const declaration.
 const SPEED: int = 200
 const ACCEL: float = 600
-const DODGE_FORCE: int = 500
 
 ## The signals declaration
 signal health_update(current: float, maximum: float)

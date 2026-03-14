@@ -39,8 +39,10 @@ func _input(event: InputEvent) -> void:
 		else:
 			show_menu()
 	
-	if event.is_action_released("DEBUG spawn_enemy"):
-		spawn_enemy(zombie_scene, get_global_mouse_position())
+	if event.is_action_pressed("DEBUG spawn_enemy"):
+		for i in range(20):
+			var rand_pos: Vector2 = Vector2(randi_range(-200, 200), randi_range(-200, 200))
+			spawn_enemy(zombie_scene, get_global_mouse_position() + rand_pos)
 
 func _on_world_generated() -> void:
 	for pos: Vector2 in map.tree_positions:

@@ -6,8 +6,8 @@ func _ready() -> void:
 	add_child(timer)
 
 func enter() -> void:
-	player.velocity += player.last_dir * player.DODGE_FORCE
-	timer.start(1)
+	player.velocity += player.input_dir * player.dodge_force
+	timer.start(0.8)
 	await timer.timeout
 	player.change_state("Run")
 

@@ -3,6 +3,7 @@ class_name Enemy
 
 @onready var attack_timer: Timer = $Timer
 @onready var health_bar: ProgressBar = $HealthBar
+@onready var states_node := $StateMachine
 
 @export var speed: int = 50
 @export var max_health: float = 40
@@ -22,6 +23,8 @@ var health: float = 10:
 var _health: float
 var player_in_range: bool = false
 var player: Player = null
+var current_state: State
+var states := {}
 
 func _ready() -> void:
 	health_bar.visible = false
@@ -29,11 +32,28 @@ func _ready() -> void:
 	health_bar.value = max_health
 	health = max_health
 	player = get_tree().get_first_node_in_group("player")
+	
+	## State machine
+	for child in states_node.get_children():
+		if child is State:
+			states[child.name] = child
+			child.player = self
+	change_state("Idle")
+
+## State machine
+func change_state(state_name: String) -> void:
+	if current_state:
+		current_state.exit()
+	current_state = states[state_name]
+	current_state.enter()
 
 func _physics_process(delta: float) -> void:
 	if player == null: return
 	move(delta)
 	move_and_slide()
+	
+	if current_state:
+		current_state.physics_update(delta)
 
 func move(delta: float) -> void:
 	var direction := global_position.direction_to(player.global_position)
