@@ -11,6 +11,9 @@
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_1f0kj"]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_ghaa6"]
+radius = 15.033297
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hghv2"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hghv2"]
@@ -51,9 +54,16 @@ shape = SubResource("RectangleShape2D_hghv2")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=525180353]
 sprite_frames = SubResource("SpriteFrames_1f0kj")
 
+[node name="AttackRangeArea" type="Area2D" parent="." unique_id=529632555]
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackRangeArea" unique_id=1704195875]
+shape = SubResource("CircleShape2D_ghaa6")
+
 [node name="HitBoxArea" type="Area2D" parent="." unique_id=1555094943 groups=["enemy_hitbox"]]
 collision_layer = 4
-collision_mask = 34
+collision_mask = 32
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxArea" unique_id=2106168322]
 shape = SubResource("CapsuleShape2D_hghv2")
@@ -76,7 +86,6 @@ theme = SubResource("Theme_afpow")
 show_percentage = false
 
 [node name="Timer" type="Timer" parent="." unique_id=575764799]
-autostart = true
 
 [node name="StateMachine" type="Node" parent="." unique_id=389368828]
 
@@ -95,6 +104,6 @@ script = ExtResource("5_ghaa6")
 [node name="EnemyState" type="Node" parent="StateMachine" unique_id=1569082239]
 script = ExtResource("2_1f0kj")
 
-[connection signal="body_entered" from="HitBoxArea" to="." method="_on_hit_box_area_body_entered"]
-[connection signal="body_exited" from="HitBoxArea" to="." method="_on_hit_box_area_body_exited"]
+[connection signal="body_entered" from="AttackRangeArea" to="." method="_on_attack_range_area_body_entered"]
+[connection signal="body_exited" from="AttackRangeArea" to="." method="_on_attack_range_area_body_exited"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -6,8 +6,11 @@ class_name Enemy
 @onready var states_node := $StateMachine
 
 @export var speed: int = 50
+@export var wonder_speed: int = 20
 @export var max_health: float = 40
 @export var damage: float = 15
+@export var accel: int = 300
+@export var chase_range: int = 400
 
 var health: float = 10:
 	get():
@@ -23,8 +26,10 @@ var health: float = 10:
 var _health: float
 var player_in_range: bool = false
 var player: Player = null
-var current_state: State
+var current_state: EnemyState
 var states := {}
+var delta: float
+var chase_forced: bool = false
 
 func _ready() -> void:
 	health_bar.visible = false
@@ -35,10 +40,10 @@ func _ready() -> void:
 	
 	## State machine
 	for child in states_node.get_children():
-		if child is State:
+		if child is EnemyState:
 			states[child.name] = child
-			child.player = self
-	change_state("Idle")
+			child.enemy = self
+	change_state("Wonder")
 
 ## State machine
 func change_state(state_name: String) -> void:
@@ -47,19 +52,20 @@ func change_state(state_name: String) -> void:
 	current_state = states[state_name]
 	current_state.enter()
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if player == null: return
-	move(delta)
+	delta = _delta
 	move_and_slide()
 	
 	if current_state:
 		current_state.physics_update(delta)
 
-func move(delta: float) -> void:
-	var direction := global_position.direction_to(player.global_position)
-	velocity = direction * speed
+func stop_moving() -> void:
+	velocity = velocity.move_toward(Vector2.ZERO, accel)
 
 func take_damage(amount: float) -> void:
+	chase_forced = true
+	change_state("Chase")
 	health -= amount
 	if health <= 0:
 		die()
@@ -68,13 +74,14 @@ func die() -> void:
 	queue_free()
 
 func _on_timer_timeout() -> void:
-	if player == null or !player_in_range: return
+	if player == null: return
 	player.get_hurt(damage)
 
-func _on_hit_box_area_body_entered(body: Node2D) -> void:
+func _on_attack_range_area_body_entered(body: Node2D) -> void:
 	if body is Player:
-		player_in_range = true
+		change_state("HitPlayer")
 
-func _on_hit_box_area_body_exited(body: Node2D) -> void:
+func _on_attack_range_area_body_exited(body: Node2D) -> void:
 	if body is Player:
-		player_in_range = false
+		change_state("Chase")
+		print("player exited range")

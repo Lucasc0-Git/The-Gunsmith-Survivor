@@ -26,9 +26,12 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_iyl7r"]
+radius = 31.016125
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_iyl7r"]
-radius = 14.0
-height = 54.0
+radius = 16.0
+height = 48.0
 
 [node name="Zombie" unique_id=1249180727 instance=ExtResource("1_h3kin")]
 script = ExtResource("2_n70j1")
@@ -36,6 +39,8 @@ lunge_speed = 150
 speed = 60
 max_health = 50.0
 damage = 10.0
+accel = 150
+chase_range = 350
 
 [node name="CollisionShape2D" parent="." index="0" unique_id=188131912]
 shape = SubResource("RectangleShape2D_iyl7r")
@@ -45,8 +50,11 @@ scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_vy0uf")
 autoplay = "default"
 
+[node name="CollisionShape2D" parent="AttackRangeArea" parent_id_path=PackedInt32Array(529632555) index="0" unique_id=1704195875]
+shape = SubResource("CircleShape2D_iyl7r")
+
 [node name="CollisionShape2D" parent="HitBoxArea" parent_id_path=PackedInt32Array(1555094943) index="0" unique_id=2106168322]
 shape = SubResource("CapsuleShape2D_iyl7r")
 
-[node name="HealthBar" parent="." index="3" unique_id=1162681200]
+[node name="HealthBar" parent="." index="4" unique_id=1162681200]
 value = 20.0
