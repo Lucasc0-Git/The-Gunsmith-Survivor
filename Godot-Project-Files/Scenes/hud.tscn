@@ -99,7 +99,7 @@ layout_mode = 2
 size_flags_vertical = 3
 columns = 5
 
-[node name="Hotbar" type="Control" parent="InventoryUI" unique_id=2050680401]
+[node name="Hotbar" type="Control" parent="InventoryUI" unique_id=2050680401 node_paths=PackedStringArray("hud")]
 custom_minimum_size = Vector2(340, 74)
 layout_mode = 1
 anchors_preset = 2
@@ -113,6 +113,7 @@ grow_vertical = 0
 theme = ExtResource("4_t1xeu")
 script = ExtResource("8_4f5kr")
 slot_scene = ExtResource("2_8jye8")
+hud = NodePath("../..")
 
 [node name="PanelContainer" type="PanelContainer" parent="InventoryUI/Hotbar" unique_id=500270456]
 layout_mode = 1

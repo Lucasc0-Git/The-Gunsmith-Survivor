@@ -41,7 +41,6 @@ func set_player(p: Player) -> void:
 	
 	# Set vars.
 	tooltip.inventory = inventory
-	hotbar.hud = self
 	hotbar.sync_from_player()
 	inventory.player = player
 	inventory.tooltip = tooltip

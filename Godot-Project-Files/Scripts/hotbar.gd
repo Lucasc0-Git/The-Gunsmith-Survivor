@@ -7,9 +7,9 @@ class_name Hotbar
 ## The export var declaration
 @export var slot_count := 5
 @export var slot_scene : PackedScene
+@export var hud : Hud
 
 ## The basic var declaration
-var hud : Hud
 var slots: Array[Slot] = []
 var selected_slot_index := 0
 

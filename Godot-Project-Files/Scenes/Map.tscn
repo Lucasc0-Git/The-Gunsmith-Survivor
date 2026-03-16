@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dw8ufghl04u8o"]
 
-[ext_resource type="Script" uid="uid://dxrsfsf7v40si" path="res://Scenes/map.gd" id="1_qumfl"]
+[ext_resource type="Script" uid="uid://dxrsfsf7v40si" path="res://Scripts/map.gd" id="1_qumfl"]
 [ext_resource type="Texture2D" uid="uid://bs8rf6jcx6pww" path="res://Textures/tileset.png" id="2_qumfl"]
 [ext_resource type="Shader" uid="uid://bvkgpc7ge1npf" path="res://Shaders/Vignette.gdshader" id="3_r08cw"]
 [ext_resource type="Texture2D" uid="uid://dyk5ihx7hbhg0" path="res://Textures/Treee.png" id="4_r08cw"]

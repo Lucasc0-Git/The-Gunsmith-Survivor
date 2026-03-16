@@ -240,11 +240,30 @@ zombie_scene = ExtResource("2_vy5pj")
 process_mode = 1
 y_sort_enabled = false
 
+[node name="Spawners" type="Node2D" parent="." unique_id=970257549]
+
 [node name="YSORT" type="Node2D" parent="." unique_id=2096057636]
 y_sort_enabled = true
 
 [node name="HUD" parent="." unique_id=1957897222 instance=ExtResource("3_kln2b")]
 process_mode = 1
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=124717082]
+layer = 11
+
+[node name="Label" type="Label" parent="CanvasLayer" unique_id=1845243131]
+custom_minimum_size = Vector2(100, 50)
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -100.0
+offset_bottom = 50.0
+grow_horizontal = 0
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 25
+text = "Hour 10"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Menu" type="CanvasLayer" parent="." unique_id=1854704566]
 process_mode = 2

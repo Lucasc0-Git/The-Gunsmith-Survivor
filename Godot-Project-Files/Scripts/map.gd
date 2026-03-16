@@ -12,6 +12,7 @@ signal world_generated()
 @export var world_frequency := 0.05
 @export var grass_frequency := 0.4
 @export var tree_frequency := 0.85
+@export var enemy_spawner_frequency := 1
 @export var map_width: int = 100
 @export var map_height: int = 100
 
@@ -23,6 +24,7 @@ var half_h := map_height /2
 var world_noise := FastNoiseLite.new()
 var grass_noise := FastNoiseLite.new()
 var tree_noise := FastNoiseLite.new()
+var spawner_noise := FastNoiseLite.new()
 
 var chunk_size := 32
 var render_distance := 4
@@ -38,6 +40,7 @@ var tiles := {
 	"dark_grass2" = Vector2i (1, 4)
 }
 var tree_positions := []
+var spawner_positions := []
 
 func _ready() -> void:
 	world_seed = GameManager.current_world_seed
@@ -50,22 +53,30 @@ func generate_world() -> void:
 	grass_noise.frequency = grass_frequency
 	tree_noise.seed = world_seed + 2
 	tree_noise.frequency = tree_frequency
+	spawner_noise.seed = world_seed + 3
+	spawner_noise.frequency = enemy_spawner_frequency
 	for x in range(-half_w, half_w + 1):
 		for y in range(-half_h, half_h + 1):
 			var world_value := world_noise.get_noise_2d(x, y)
 			var grass_value := grass_noise.get_noise_2d(x, y)
 			var tree_value := tree_noise.get_noise_2d(x, y)
+			var enemy_value := spawner_noise.get_noise_2d(x, y)
 			var tile_coords : Vector2i
 			if world_value < -0.1:
 				tile_coords = Vector2i(5, 0)
 				if tree_value < -0.1:
-					pass
 					var tile_pos := Vector2i(x, y)
 					var local_pos := map.map_to_local(tile_pos)
 					var global_pos := map.to_global(local_pos)
 					tree_positions.append(global_pos)
 					#objects.set_cell(Vector2i(x, y), 2, Vector2i(0, 0))
-			else: 
+			else:
+				if enemy_value < -0.5:
+					var tile_pos := Vector2i(x, y)
+					var local_pos := map.map_to_local(tile_pos)
+					var global_pos := map.to_global(local_pos)
+					spawner_positions.append(global_pos)
+				
 				tile_coords = be_grass(grass_value)
 			map.set_cell(Vector2i(x, y), 2, tile_coords)
 	emit_signal("world_generated")
