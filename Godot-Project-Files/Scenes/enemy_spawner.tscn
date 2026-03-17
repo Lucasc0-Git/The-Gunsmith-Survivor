@@ -2,6 +2,9 @@
 
 [ext_resource type="Script" uid="uid://3hbruww20tym" path="res://Scripts/enemy_spawner.gd" id="1_ewhtn"]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_4l55s"]
+radius = 352.00143
+
 [node name="Enemy_spawner" type="Node2D" unique_id=1040846501]
 script = ExtResource("1_ewhtn")
 
@@ -21,3 +24,13 @@ offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(1, 1, 1, 0.5137255)
+
+[node name="DisableArea" type="Area2D" parent="." unique_id=730801081]
+collision_layer = 64
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DisableArea" unique_id=2045529879]
+shape = SubResource("CircleShape2D_4l55s")
+
+[connection signal="body_entered" from="DisableArea" to="." method="_on_disable_area_body_entered"]
+[connection signal="body_exited" from="DisableArea" to="." method="_on_disable_area_body_exited"]

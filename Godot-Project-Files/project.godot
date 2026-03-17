@@ -159,6 +159,7 @@ Dodge={
 2d_physics/layer_4="Objects"
 2d_physics/layer_5="Items"
 2d_physics/layer_6="Bullets"
+2d_physics/layer_7="Spawners"
 
 [physics]
 
