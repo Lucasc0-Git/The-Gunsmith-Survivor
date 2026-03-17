@@ -47,8 +47,9 @@ func _ready() -> void:
 	player.set_vars(hud)
 	player.health_update.connect(hud.ui.health_changed)
 	map.player = player
-	map.world_generated.connect(_on_world_generated)
-	map.generate_world()
+	map.region_generated.connect(_on_region_generated)
+	map.generate_region(Vector2i(0, 0))
+	map.generate_region(Vector2i(1, 1))
 	GameManager.set_day(1)
 	GameManager.set_hour(8)
 
@@ -92,10 +93,10 @@ func _input(event: InputEvent) -> void:
 			var rand_pos: Vector2 = Vector2(randi_range(-200, 200), randi_range(-200, 200))
 			spawn_enemy(zombie_scene, get_global_mouse_position() + rand_pos)
 
-func _on_world_generated() -> void:
-	for pos: Vector2 in map.tree_positions:
+func _on_region_generated(new_trees: Array, new_spawners: Array) -> void:
+	for pos: Vector2 in new_trees:
 		spawn_tree(pos)
-	for pos: Vector2 in map.spawner_positions:
+	for pos: Vector2 in new_spawners:
 		add_spawner(pos)
 
 func drop_item(item: ItemData, pos: Vector2) -> void:

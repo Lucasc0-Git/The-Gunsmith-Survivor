@@ -13,7 +13,7 @@ func enter() -> void:
 
 func physics_update(delta: float) -> void:
 	
-	player.velocity = player.velocity.move_toward(Vector2.ZERO, 350 * delta)
+	player.velocity = player.velocity.move_toward(Vector2.ZERO, (float(player.dodge_force) / 1.5) * delta)
 	
 	if player.velocity == Vector2.ZERO:
 		player.change_state("Idle")
