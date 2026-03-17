@@ -9,18 +9,36 @@ class_name Main
 @onready var Ysort := $YSORT
 @onready var label: Label = $CanvasLayer/Label
 @onready var spawners: Node2D = $Spawners
+@onready var canvas_modulate: CanvasModulate = $CanvasModulate
+
+enum TimeOfDay {DAWN, SUNRISE, DAY, SUNSET, DUSK, NIGHT}
+
+@export var lighting_colors: Array[Color] = [
+	Color(0.4, 0.4, 0.6),  # DAWN
+	Color(0.7, 0.6, 0.5),  # SUNRISE
+	Color(1, 1, 1),         # DAY
+	Color(0.7, 0.6, 0.5),  # SUNSET
+	Color(0.4, 0.4, 0.6),  # DUSK
+	Color(0.1, 0.1, 0.2),  # NIGHT
+]
+
+var day_colors := {}
 
 @export_group("Enemies")
 @export var zombie_scene: PackedScene
 
 func _ready() -> void:
-	GameManager.set_day(1)
-	GameManager.set_hour(6)
-	
+	day_colors = {
+		6:  lighting_colors[TimeOfDay.DAWN],
+		7:  lighting_colors[TimeOfDay.SUNRISE],
+		8:  lighting_colors[TimeOfDay.DAY],
+		18: lighting_colors[TimeOfDay.SUNSET],
+		19: lighting_colors[TimeOfDay.DUSK],
+		20: lighting_colors[TimeOfDay.NIGHT],
+	}
+	canvas_modulate.color = day_colors[8]
 	var spawn_pos := map.get_spawn_position()
 	spawn_player(spawn_pos)
-	spawn_enemy(zombie_scene, Vector2(50, 50))
-	
 	label.text = "Hour: " + str(GameManager.current_hour) + ":00"
 	## Set "player" variable in the hud.gd
 	GameManager.hour_changed.connect(_on_hour_changed)
@@ -31,13 +49,31 @@ func _ready() -> void:
 	map.player = player
 	map.world_generated.connect(_on_world_generated)
 	map.generate_world()
+	GameManager.set_day(1)
+	GameManager.set_hour(8)
 
 func _on_hour_changed(hour: int) -> void:
 	label.text = "Hour: " + str(hour) + ":00"
+	_update_lightning(hour)
 	
 	if hour == 12:
 		for spawner: Spawner in spawners.get_children():
 			spawner.spawn_enemy()
+
+func _update_lightning(hour: int) -> void:
+	if !day_colors.has(hour): return
+	var target_color: Color = day_colors[hour]
+	var tween := create_tween()
+	tween.tween_property(canvas_modulate, "color", target_color, 25)
+	
+	var target_vignette: float
+	if hour >= 20 or hour < 6:
+		target_vignette = 0.8
+	elif hour == 6 or hour == 19:
+		target_vignette = 0.9
+	else:
+		target_vignette = 0.95
+	map.set_vignette_strength(target_vignette, 25)
 
 func spawn_enemy(scene: PackedScene, pos: Vector2) -> void:
 	var enemy := scene.instantiate()

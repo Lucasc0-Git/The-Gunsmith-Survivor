@@ -207,8 +207,8 @@ sources/2 = SubResource("TileSetAtlasSource_00287")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5nsto"]
 shader = ExtResource("3_r08cw")
 shader_parameter/edge_strength = 0.74000003515
-shader_parameter/edge_start = 0.2000000095
-shader_parameter/edge_end = 1.0
+shader_parameter/edge_start = 0.106000005035
+shader_parameter/edge_end = 0.95
 
 [node name="Map" type="Node2D" unique_id=780033491]
 z_index = -2

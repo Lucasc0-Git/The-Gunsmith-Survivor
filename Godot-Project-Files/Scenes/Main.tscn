@@ -234,7 +234,10 @@ Button/styles/pressed = SubResource("StyleBoxFlat_dgtb2")
 [node name="Main" type="Node2D" unique_id=211418808]
 process_mode = 3
 script = ExtResource("1_rgh2o")
+lighting_colors = Array[Color]([Color(0.23152995, 0.41536132, 0.7279383, 1), Color(0.9226321, 0.57512456, 0.3179874, 1), Color(1, 1, 1, 1), Color(0.93009645, 0.56672215, 0.35932958, 1), Color(0.26177257, 0.4113937, 0.7190747, 1), Color(0.15909046, 0.15919095, 0.2919402, 1)])
 zombie_scene = ExtResource("2_vy5pj")
+
+[node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=238719044]
 
 [node name="Map" parent="." unique_id=1487724397 instance=ExtResource("1_idj7w")]
 process_mode = 1

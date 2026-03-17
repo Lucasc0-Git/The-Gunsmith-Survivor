@@ -3,6 +3,7 @@ class_name Map
 
 @onready var map: TileMapLayer = get_node("Map")
 @onready var objects: TileMapLayer = get_node("Objects")
+@onready var vignette: ColorRect = $ScreenEffects/Vignette
 
 var player: Player
 var world_seed: int
@@ -43,7 +44,7 @@ var tree_positions := []
 var spawner_positions := []
 
 func _ready() -> void:
-	world_seed = GameManager.current_world_seed
+	world_seed = 500
 	world_noise.seed = world_seed
 
 func generate_world() -> void:
@@ -116,3 +117,12 @@ func find_spawn_tile() -> Vector2i:
 					if atlas != Vector2i(0, 0): #Change this to atlas coords of nonspawnable blocks
 						return tile
 	return Vector2i(0, 0)
+
+func set_vignette_strength(target: float, duration: float) -> void:
+	var tween := create_tween()
+	tween.tween_method(
+		func(val: float) -> void: vignette.material.set_shader_parameter("edge_end", val),
+		vignette.material.get_shader_parameter("edge_end"),
+		target,
+		duration
+	)
