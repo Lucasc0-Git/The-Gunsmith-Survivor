@@ -24,6 +24,8 @@ process_mode = 3
 layer = 10
 script = ExtResource("1_e0onf")
 
+[node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=1767231333]
+
 [node name="UI" type="Control" parent="." unique_id=975500842]
 layout_mode = 3
 anchors_preset = 15

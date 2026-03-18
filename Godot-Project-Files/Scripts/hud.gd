@@ -8,6 +8,7 @@ class_name Hud
 @onready var player : Player
 @onready var weapon : Weapon
 @onready var tooltip: Tooltip = $Tooltip
+@onready var canvas_modulate: CanvasModulate = $CanvasModulate
 
 ## The @onready var declaration
 @onready var hotbar_grid_container: GridContainer = $InventoryUI/Hotbar/PanelContainer/GridContainer
@@ -54,6 +55,11 @@ func toggle_inv() -> void:
 	else: #If is the inventory invisible, turn it visible
 		inventory.visible = true
 		inv_toggled.emit(true)
+
+func tint_hud(new_color: Color, duration: float) -> void:
+	if new_color == canvas_modulate.color: return
+	var tween := create_tween()
+	tween.tween_property(canvas_modulate, "color", new_color, duration)
 
 func _input(event: InputEvent) -> void:
 	## Calls toggle_inv() on "E" pressed

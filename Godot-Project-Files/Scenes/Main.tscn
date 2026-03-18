@@ -235,6 +235,7 @@ Button/styles/pressed = SubResource("StyleBoxFlat_dgtb2")
 process_mode = 3
 script = ExtResource("1_rgh2o")
 lighting_colors = Array[Color]([Color(0.23152995, 0.41536132, 0.7279383, 1), Color(0.9226321, 0.57512456, 0.3179874, 1), Color(1, 1, 1, 1), Color(0.93009645, 0.56672215, 0.35932958, 1), Color(0.26177257, 0.4113937, 0.7190747, 1), Color(0.15909046, 0.15919095, 0.2919402, 1)])
+inventory_darken = Color(0.728822, 0.728822, 0.728822, 1)
 zombie_scene = ExtResource("2_vy5pj")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=238719044]
@@ -271,7 +272,6 @@ vertical_alignment = 1
 [node name="Menu" type="CanvasLayer" parent="." unique_id=1854704566]
 process_mode = 2
 layer = 11
-visible = false
 script = ExtResource("5_v1gob")
 
 [node name="ColorRect" type="ColorRect" parent="Menu" unique_id=656746032]
@@ -412,7 +412,6 @@ size_flags_horizontal = 3
 text = "Back"
 
 [node name="OptMenu" type="Control" parent="Menu" unique_id=1820472067]
-visible = false
 z_index = 2
 layout_mode = 3
 anchors_preset = 15
@@ -438,9 +437,36 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="TestButton" type="Button" parent="Menu/OptMenu/VBoxContainer" unique_id=262737679]
+custom_minimum_size = Vector2(0, 44)
 layout_mode = 2
 theme = SubResource("Theme_50glp")
 text = "Testing (dummy)"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Menu/OptMenu/VBoxContainer" unique_id=1879670090]
+custom_minimum_size = Vector2(0, 44)
+layout_mode = 2
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="InventoryDarkening" type="ColorPickerButton" parent="Menu/OptMenu/VBoxContainer/HBoxContainer" unique_id=1306916893]
+custom_minimum_size = Vector2(44, 44)
+layout_mode = 2
+size_flags_horizontal = 8
+theme = ExtResource("5_pbw6q")
+
+[node name="PanelContainer" type="PanelContainer" parent="Menu/OptMenu/VBoxContainer/HBoxContainer" unique_id=1587009550]
+custom_minimum_size = Vector2(298, 0)
+layout_mode = 2
+theme = ExtResource("5_pbw6q")
+
+[node name="Label" type="Label" parent="Menu/OptMenu/VBoxContainer/HBoxContainer/PanelContainer" unique_id=1829025447]
+custom_minimum_size = Vector2(0, 44)
+layout_mode = 2
+theme = ExtResource("5_pbw6q")
+theme_override_font_sizes/font_size = 24
+text = "Inventory D. (test)"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="Menu/OptMenu" unique_id=1666593165]
 custom_minimum_size = Vector2(200, 44)

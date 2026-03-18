@@ -2,7 +2,7 @@ extends Node2D
 class_name Main
 
 ## The @onready var declaration
-@onready var hud: CanvasLayer = $HUD
+@onready var hud: Hud = $HUD
 @onready var player: Player
 @onready var map: Map = $Map
 @onready var menu: CanvasLayer = $Menu
@@ -23,6 +23,9 @@ enum TimeOfDay {DAWN, SUNRISE, DAY, SUNSET, DUSK, NIGHT}
 ]
 
 var day_colors := {}
+var inventory_tint: CanvasModulate
+
+@export var inventory_darken: Color
 
 @export_group("Enemies")
 @export var zombie_scene: PackedScene
@@ -52,6 +55,7 @@ func _ready() -> void:
 	map.generate_region(Vector2i(1, 1))
 	GameManager.set_day(1)
 	GameManager.set_hour(8)
+	inventory_tint = hud.canvas_modulate
 
 func _on_hour_changed(hour: int) -> void:
 	label.text = "Hour: " + str(hour) + ":00"
@@ -60,6 +64,11 @@ func _on_hour_changed(hour: int) -> void:
 	if hour == 12:
 		for spawner: Spawner in spawners.get_children():
 			spawner.spawn_enemy()
+	
+	if hour >= 18 or hour <= 6:
+		hud.tint_hud(inventory_darken, 25)
+	else:
+		hud.tint_hud(Color(1, 1, 1), 25)
 
 func _update_lightning(hour: int) -> void:
 	if !day_colors.has(hour): return
