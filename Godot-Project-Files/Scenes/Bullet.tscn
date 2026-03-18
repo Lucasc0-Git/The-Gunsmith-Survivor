@@ -6,6 +6,15 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_14k46"]
 radius = 15.0
 
+[sub_resource type="Gradient" id="Gradient_14k46"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_qvus8"]
+gradient = SubResource("Gradient_14k46")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.8632479, 0.1965812)
+
 [node name="Area2D" type="Area2D" unique_id=882397831]
 process_mode = 1
 z_index = -1
@@ -15,8 +24,6 @@ scale = Vector2(0.5, 0.5)
 collision_layer = 32
 collision_mask = 12
 script = ExtResource("1_14k46")
-bullet_speed = null
-damping = null
 shrinking_rate = 0.98
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1863765280]
@@ -52,6 +59,11 @@ scale_amount_min = 0.05
 scale_amount_max = 0.25
 hue_variation_min = -0.5
 hue_variation_max = 0.5
+
+[node name="PointLight2D" type="PointLight2D" parent="." unique_id=1875844923]
+range_z_min = 0
+range_z_max = 0
+texture = SubResource("GradientTexture2D_qvus8")
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

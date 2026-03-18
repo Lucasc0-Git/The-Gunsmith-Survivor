@@ -7,6 +7,7 @@ class_name Weapon
 @onready var reload_timer := $ReloadTimer
 @onready var player : Player
 @onready var bang_particles: CPUParticles2D = $Muzzle/BangParticles
+@onready var bang_light: PointLight2D = $Muzzle/PointLight2D
 
 ## The signal declaration
 signal has_shot(rotation: float, recoil: float)
@@ -92,6 +93,9 @@ func _shoot_weapon() -> void:
 		_spawn_bullet(i)
 	has_shot.emit(rotation, weapon_data.recoil)
 	reload_timer.start(weapon_data.fire_rate)
+	bang_light.enabled = true
+	await get_tree().create_timer(0.05).timeout
+	bang_light.enabled = false
 
 func _use_heal_item() -> void:
 	var heal_item := equipped_item.item_data as HealItemData

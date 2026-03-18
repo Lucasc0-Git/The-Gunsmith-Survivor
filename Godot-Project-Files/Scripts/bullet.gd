@@ -11,6 +11,7 @@ class_name BasicBullet
 @onready var hit_explosion: CPUParticles2D = $HitParticles
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
+@onready var point_light: PointLight2D = $PointLight2D
 
 ## The basic var declaration
 var direction := Vector2.ZERO
@@ -51,6 +52,7 @@ func _on_area_entered(area: Area2D) -> void:
 		bullet_despawn()
 
 func bullet_despawn() -> void:
+	point_light.enabled = false
 	hit_explosion.emitting = true
 	has_hit = true
 	sprite.visible = false

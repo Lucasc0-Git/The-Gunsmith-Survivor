@@ -108,6 +108,15 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="Gradient" id="Gradient_1iu4k"]
+offsets = PackedFloat32Array(0, 0.32217574)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_m0x7a"]
+gradient = SubResource("Gradient_1iu4k")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_arntx"]
 animation = &"Idle"
 
@@ -223,6 +232,17 @@ scale_amount_min = 0.05
 scale_amount_max = 0.1
 hue_variation_min = -1.0
 hue_variation_max = 1.0
+
+[node name="PointLight2D" type="PointLight2D" parent="Weapon/Muzzle" unique_id=1605132735]
+enabled = false
+color = Color(0.82268006, 0.598718, 5.7756904e-07, 1)
+energy = 0.5
+range_z_min = -2
+range_z_max = 2
+shadow_enabled = true
+shadow_color = Color(0, 0, 0, 0.3372549)
+shadow_filter = 1
+texture = SubResource("GradientTexture2D_m0x7a")
 
 [node name="ReloadTimer" type="Timer" parent="Weapon" unique_id=588880394]
 
