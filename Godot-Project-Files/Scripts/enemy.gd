@@ -30,6 +30,8 @@ var current_state: EnemyState
 var states := {}
 var delta: float
 var chase_forced: bool = false
+var the_core: TheCore
+#var chasing_core: bool = false
 
 func _ready() -> void:
 	health_bar.visible = false
@@ -37,6 +39,7 @@ func _ready() -> void:
 	health_bar.value = max_health
 	health = max_health
 	player = get_tree().get_first_node_in_group("player")
+	the_core = get_tree().get_first_node_in_group("thecore")
 	
 	## State machine
 	for child in states_node.get_children():
@@ -60,6 +63,13 @@ func _physics_process(_delta: float) -> void:
 	if current_state:
 		current_state.physics_update(delta)
 
+func get_target() -> Node2D:
+	if chase_forced:
+		return player
+	if GameManager.is_night():
+		return the_core
+	return player
+
 func stop_moving() -> void:
 	velocity = velocity.move_toward(Vector2.ZERO, accel)
 
@@ -74,14 +84,17 @@ func die() -> void:
 	queue_free()
 
 func _on_timer_timeout() -> void:
-	if player == null: return
-	player.get_hurt(damage)
+	var target := get_target()
+	if target == null: return
+	target.take_damage(damage)
 
 func _on_attack_range_area_body_entered(body: Node2D) -> void:
-	if body is Player:
-		change_state("HitPlayer")
+	if body is Player or body is TheCore:
+		print("hit")
+		change_state("Hit")
 
 func _on_attack_range_area_body_exited(body: Node2D) -> void:
 	if body is Player:
 		change_state("Chase")
-		print("player exited range")
+	if body is TheCore:
+		change_state("Wonder")

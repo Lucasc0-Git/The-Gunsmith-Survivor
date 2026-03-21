@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://d4mvxnt7s3rjv" path="res://Scripts/EnemyIdle.gd" id="3_ghaa6"]
 [ext_resource type="Script" uid="uid://bwronxr3hjho" path="res://Scripts/EnemyHit.gd" id="4_1dp5w"]
 [ext_resource type="Script" uid="uid://d0argl1pbkxmp" path="res://Scripts/EnemyWonder.gd" id="5_ghaa6"]
+[ext_resource type="Script" uid="uid://dkufaucbx0jxf" path="res://Scripts/EnemyChaseCore.gd" id="6_1dp5w"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hghv2"]
 
@@ -45,7 +46,7 @@ ProgressBar/styles/fill = SubResource("StyleBoxFlat_1f0kj")
 [node name="Enemy" type="CharacterBody2D" unique_id=1249180727 groups=["enemy"]]
 process_mode = 1
 collision_layer = 4
-collision_mask = 14
+collision_mask = 142
 script = ExtResource("1_hghv2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=188131912]
@@ -56,7 +57,7 @@ sprite_frames = SubResource("SpriteFrames_1f0kj")
 
 [node name="AttackRangeArea" type="Area2D" parent="." unique_id=529632555]
 collision_layer = 4
-collision_mask = 2
+collision_mask = 130
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackRangeArea" unique_id=1704195875]
 shape = SubResource("CircleShape2D_ghaa6")
@@ -95,11 +96,14 @@ script = ExtResource("2_0830c")
 [node name="Idle" type="Node" parent="StateMachine" unique_id=1158478414]
 script = ExtResource("3_ghaa6")
 
-[node name="HitPlayer" type="Node" parent="StateMachine" unique_id=1413895096]
+[node name="Hit" type="Node" parent="StateMachine" unique_id=1413895096]
 script = ExtResource("4_1dp5w")
 
 [node name="Wonder" type="Node" parent="StateMachine" unique_id=447717311]
 script = ExtResource("5_ghaa6")
+
+[node name="ChaseCore" type="Node" parent="StateMachine" unique_id=1859189398]
+script = ExtResource("6_1dp5w")
 
 [node name="EnemyState" type="Node" parent="StateMachine" unique_id=1569082239]
 script = ExtResource("2_1f0kj")

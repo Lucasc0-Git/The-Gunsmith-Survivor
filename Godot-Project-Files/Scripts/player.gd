@@ -200,6 +200,9 @@ func heal(amount: float) -> void:
 func get_hurt(amount: float) -> void:
 	health -= amount
 
+func take_damage(amount: float) -> void:
+	get_hurt(amount)
+
 ## Add health to current health over time
 func regen(delta: float) -> void:
 	health += health_regen_rate * delta

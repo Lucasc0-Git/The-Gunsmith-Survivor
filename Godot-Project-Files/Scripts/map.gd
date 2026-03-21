@@ -16,6 +16,7 @@ signal region_generated(new_tree_positions: Array, new_spawner_positions: Array)
 @export var enemy_spawner_frequency := 1
 @export var map_width: int = 100
 @export var map_height: int = 100
+@export var safe_spawn_area_radius: int = 8
 
 @warning_ignore("integer_division")
 var half_w := map_width / 2
@@ -70,8 +71,16 @@ func generate_region(region_pos: Vector2i) -> void:
 			var grass_value := grass_noise.get_noise_2d(x, y)
 			var tree_value := tree_noise.get_noise_2d(x, y)
 			var enemy_value := spawner_noise.get_noise_2d(x, y)
-			
 			var tile_coords : Vector2i
+			
+			var distance_from_center := Vector2(world_x, world_y).length()
+			if distance_from_center < safe_spawn_area_radius:
+				tile_coords = be_grass(grass_value)
+				map.set_cell(Vector2i(world_x, world_y), 2, tile_coords)
+				continue
+			
+			
+			
 			if world_value < -0.1:
 				tile_coords = Vector2i(5, 0)
 				if tree_value < -0.1:

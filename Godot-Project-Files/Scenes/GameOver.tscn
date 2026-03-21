@@ -1,0 +1,174 @@
+[gd_scene format=3 uid="uid://c1lo7tyhnp1oq"]
+
+[ext_resource type="Shader" uid="uid://ca464l0rm344h" path="res://Shaders/Menu.gdshader" id="1_k52d1"]
+[ext_resource type="Script" uid="uid://c1sj23ub3rplu" path="res://Scripts/game_over.gd" id="1_uib17"]
+[ext_resource type="StyleBox" uid="uid://drolhtsx8qlvs" path="res://Themes/BasicStyleBoxFlat.tres" id="2_ktc4i"]
+[ext_resource type="Theme" uid="uid://bjx8aflrkpmog" path="res://Themes/StartSceneButton.tres" id="3_ktc4i"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_uib17"]
+shader = ExtResource("1_k52d1")
+shader_parameter/blur_amount = 8.00000038
+shader_parameter/darkness = 0.4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bmxlf"]
+draw_center = false
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0, 0.6156863, 1, 1)
+border_blend = true
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4kpch"]
+bg_color = Color(0.34569466, 0.20266101, 0.068465285, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.4627451, 0.2784314, 0.105882354, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+corner_detail = 7
+expand_margin_left = 4.0
+expand_margin_top = 4.0
+expand_margin_right = 4.0
+expand_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_grg3l"]
+bg_color = Color(0.46357596, 0.28002703, 0.10570549, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.301003, 0.1749875, 0.054956123, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+corner_detail = 7
+expand_margin_left = 4.0
+expand_margin_top = 4.0
+expand_margin_right = 4.0
+expand_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_frkhe"]
+bg_color = Color(0.6044932, 0.09624442, 0.11973386, 1)
+skew = Vector2(0.1, 0)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(1, 0.1764706, 0.05490196, 1)
+border_blend = true
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+corner_detail = 7
+shadow_size = 3
+shadow_offset = Vector2(5, 5)
+
+[sub_resource type="Theme" id="Theme_rdiyk"]
+Button/colors/font_color = Color(0.8745098, 0.8745098, 0.8745098, 1)
+Button/colors/font_focus_color = Color(0, 0.856228, 0.85622764, 1)
+Button/colors/font_hover_color = Color(0.6507153, 0.90626, 0.99999994, 1)
+Button/colors/font_outline_color = Color(0.17994305, 0.08881388, 0.023755655, 1)
+Button/colors/font_pressed_color = Color(0.5723979, 0, 0.14884555, 1)
+Button/constants/outline_size = 3
+Button/font_sizes/font_size = 26
+Button/styles/focus = SubResource("StyleBoxFlat_bmxlf")
+Button/styles/hover = SubResource("StyleBoxFlat_4kpch")
+Button/styles/normal = SubResource("StyleBoxFlat_grg3l")
+Button/styles/pressed = SubResource("StyleBoxFlat_frkhe")
+ColorPickerButton/constants/h_separation = 4
+ColorPickerButton/constants/icon_max_width = 20
+ColorPickerButton/font_sizes/font_size = 20
+Label/colors/font_color = Color(1, 1, 1, 1)
+Label/colors/font_outline_color = Color(0, 0, 0, 1)
+Label/constants/outline_size = 2
+Label/font_sizes/font_size = 60
+Label/styles/normal = ExtResource("2_ktc4i")
+Panel/styles/panel = ExtResource("2_ktc4i")
+
+[node name="CanvasLayer" type="CanvasLayer" unique_id=359845920]
+process_mode = 3
+layer = 200
+script = ExtResource("1_uib17")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1869488491]
+z_index = 1
+material = SubResource("ShaderMaterial_uib17")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Label" type="Label" parent="." unique_id=1151040496]
+z_index = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -176.0
+offset_top = -237.0
+offset_right = 176.0
+offset_bottom = -145.99991
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_rdiyk")
+text = "GAME OVER"
+
+[node name="PauseMenu" type="Control" parent="." unique_id=1353277303]
+z_index = 1
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PauseMenu" unique_id=81477979]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 15
+
+[node name="PlayButton" type="Button" parent="PauseMenu/VBoxContainer" unique_id=1872676244]
+layout_mode = 2
+theme = ExtResource("3_ktc4i")
+text = "Play more. \"cheats\" on"
+
+[node name="MenuButton" type="Button" parent="PauseMenu/VBoxContainer" unique_id=1930205418]
+layout_mode = 2
+theme = ExtResource("3_ktc4i")
+text = "Return to title"
+
+[node name="QuitButton" type="Button" parent="PauseMenu/VBoxContainer" unique_id=71943623]
+layout_mode = 2
+tooltip_text = "
+"
+theme = ExtResource("3_ktc4i")
+text = "RageQuit"
+
+[connection signal="pressed" from="PauseMenu/VBoxContainer/PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="PauseMenu/VBoxContainer/MenuButton" to="." method="_on_menu_button_pressed"]
+[connection signal="pressed" from="PauseMenu/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]

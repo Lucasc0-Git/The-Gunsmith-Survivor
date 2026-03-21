@@ -1,0 +1,77 @@
+[gd_scene format=3 uid="uid://s0p5vesfuqst"]
+
+[ext_resource type="Theme" uid="uid://8e2o6m6hejp5" path="res://Themes/the_core_health_bar.tres" id="1_ardag"]
+[ext_resource type="Script" uid="uid://d3h86ubploo74" path="res://Scripts/the_core.gd" id="1_nfbfl"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lfeib"]
+size = Vector2(32, 32)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_lfeib"]
+size = Vector2(32, 32)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ardag"]
+radius = 26.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_nfbfl"]
+radius = 74.02702
+
+[node name="TheCore" type="StaticBody2D" unique_id=683644907 groups=["thecore"]]
+y_sort_enabled = true
+scale = Vector2(3, 3)
+collision_layer = 128
+collision_mask = 30
+script = ExtResource("1_nfbfl")
+max_health = 1500.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=393810766]
+shape = SubResource("RectangleShape2D_lfeib")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2086574311]
+texture = SubResource("PlaceholderTexture2D_lfeib")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=2392371]
+collision_layer = 128
+collision_mask = 4
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D" unique_id=1662495234]
+shape = SubResource("CircleShape2D_ardag")
+
+[node name="CraftingArea" type="Area2D" parent="." unique_id=1741043043]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CraftingArea" unique_id=815767401]
+shape = SubResource("CircleShape2D_nfbfl")
+debug_color = Color(0.6635992, 0.4172203, 0.77571464, 0.41960785)
+
+[node name="HealthBar" type="ProgressBar" parent="." unique_id=1835404684]
+custom_minimum_size = Vector2(32, 7)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -16.0
+offset_top = 7.0
+offset_right = 16.0
+offset_bottom = 14.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(16, 3.5)
+theme = ExtResource("1_ardag")
+value = 50.0
+show_percentage = false
+
+[node name="Label" type="Label" parent="." unique_id=729959056]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.666666
+offset_top = 8.999999
+offset_right = 73.333336
+offset_bottom = 37.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.3, 0.3)
+theme_override_font_sizes/font_size = 20
+text = "The Core"

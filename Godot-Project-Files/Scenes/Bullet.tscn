@@ -22,7 +22,7 @@ z_as_relative = false
 y_sort_enabled = true
 scale = Vector2(0.5, 0.5)
 collision_layer = 32
-collision_mask = 12
+collision_mask = 140
 script = ExtResource("1_14k46")
 shrinking_rate = 0.98
 

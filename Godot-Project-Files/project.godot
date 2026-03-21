@@ -57,6 +57,7 @@ player=""
 tree=""
 enemy=""
 enemy_hitbox=""
+thecore=""
 
 [input]
 
@@ -160,6 +161,7 @@ Dodge={
 2d_physics/layer_5="Items"
 2d_physics/layer_6="Bullets"
 2d_physics/layer_7="Spawners"
+2d_physics/layer_8="TheCore"
 
 [physics]
 

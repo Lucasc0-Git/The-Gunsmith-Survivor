@@ -15,7 +15,7 @@ shader = ExtResource("6_jw32o")
 shader_parameter/blur_amount = 8.00000038
 shader_parameter/darkness = 0.4
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kp3y5"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vy5pj"]
 draw_center = false
 border_width_left = 5
 border_width_top = 5
@@ -28,7 +28,7 @@ corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kk5q7"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1p5hy"]
 bg_color = Color(0.34569466, 0.20266101, 0.068465285, 1)
 border_width_left = 4
 border_width_top = 4
@@ -45,7 +45,7 @@ expand_margin_top = 4.0
 expand_margin_right = 4.0
 expand_margin_bottom = 4.0
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gcwlc"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h1m7h"]
 bg_color = Color(0.46357596, 0.28002703, 0.10570549, 1)
 border_width_left = 4
 border_width_top = 4
@@ -62,7 +62,7 @@ expand_margin_top = 4.0
 expand_margin_right = 4.0
 expand_margin_bottom = 4.0
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dgtb2"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_erwvk"]
 bg_color = Color(0.6044932, 0.09624442, 0.11973386, 1)
 skew = Vector2(0.1, 0)
 border_width_left = 4
@@ -87,10 +87,10 @@ Button/colors/font_outline_color = Color(0.17994305, 0.08881388, 0.023755655, 1)
 Button/colors/font_pressed_color = Color(0.5723979, 0, 0.14884555, 1)
 Button/constants/outline_size = 3
 Button/font_sizes/font_size = 26
-Button/styles/focus = SubResource("StyleBoxFlat_kp3y5")
-Button/styles/hover = SubResource("StyleBoxFlat_kk5q7")
-Button/styles/normal = SubResource("StyleBoxFlat_gcwlc")
-Button/styles/pressed = SubResource("StyleBoxFlat_dgtb2")
+Button/styles/focus = SubResource("StyleBoxFlat_vy5pj")
+Button/styles/hover = SubResource("StyleBoxFlat_1p5hy")
+Button/styles/normal = SubResource("StyleBoxFlat_h1m7h")
+Button/styles/pressed = SubResource("StyleBoxFlat_erwvk")
 
 [sub_resource type="Theme" id="Theme_jw32o"]
 Button/colors/font_color = Color(0.8745098, 0.8745098, 0.8745098, 1)
@@ -100,10 +100,10 @@ Button/colors/font_outline_color = Color(0.17994305, 0.08881388, 0.023755655, 1)
 Button/colors/font_pressed_color = Color(0.5723979, 0, 0.14884555, 1)
 Button/constants/outline_size = 3
 Button/font_sizes/font_size = 26
-Button/styles/focus = SubResource("StyleBoxFlat_kp3y5")
-Button/styles/hover = SubResource("StyleBoxFlat_kk5q7")
-Button/styles/normal = SubResource("StyleBoxFlat_gcwlc")
-Button/styles/pressed = SubResource("StyleBoxFlat_dgtb2")
+Button/styles/focus = SubResource("StyleBoxFlat_vy5pj")
+Button/styles/hover = SubResource("StyleBoxFlat_1p5hy")
+Button/styles/normal = SubResource("StyleBoxFlat_h1m7h")
+Button/styles/pressed = SubResource("StyleBoxFlat_erwvk")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_50glp"]
 bg_color = Color(0.40960088, 0.24396306, 0.08871656, 1)
@@ -205,6 +205,70 @@ Button/styles/hover = SubResource("StyleBoxFlat_4kpch")
 Button/styles/normal = SubResource("StyleBoxFlat_grg3l")
 Button/styles/pressed = SubResource("StyleBoxFlat_frkhe")
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kp3y5"]
+draw_center = false
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0, 0.6156863, 1, 1)
+border_blend = true
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kk5q7"]
+bg_color = Color(0.34569466, 0.20266101, 0.068465285, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.4627451, 0.2784314, 0.105882354, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+corner_detail = 7
+expand_margin_left = 4.0
+expand_margin_top = 4.0
+expand_margin_right = 4.0
+expand_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gcwlc"]
+bg_color = Color(0.46357596, 0.28002703, 0.10570549, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.301003, 0.1749875, 0.054956123, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+corner_detail = 7
+expand_margin_left = 4.0
+expand_margin_top = 4.0
+expand_margin_right = 4.0
+expand_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dgtb2"]
+bg_color = Color(0.6044932, 0.09624442, 0.11973386, 1)
+skew = Vector2(0.1, 0)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(1, 0.1764706, 0.05490196, 1)
+border_blend = true
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+corner_detail = 7
+shadow_size = 3
+shadow_offset = Vector2(5, 5)
+
 [sub_resource type="Theme" id="Theme_50glp"]
 Button/colors/font_color = Color(0.8745098, 0.8745098, 0.8745098, 1)
 Button/colors/font_focus_color = Color(0, 0.856228, 0.85622764, 1)
@@ -268,6 +332,17 @@ theme_override_font_sizes/font_size = 25
 text = "Hour 10"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="CheatMode" type="Label" parent="CanvasLayer" unique_id=2007690564]
+modulate = Color(1, 1, 1, 0.3019608)
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -61.5
+offset_right = 61.5
+offset_bottom = 23.0
+grow_horizontal = 2
+text = "Cheat mode ON"
 
 [node name="Menu" type="CanvasLayer" parent="." unique_id=1854704566]
 process_mode = 2

@@ -10,6 +10,9 @@ var current_day: int = 0
 signal hour_changed(hour: int)
 signal day_changed(day: int)
 
+func _ready() -> void:
+	process_mode = Node.PROCESS_MODE_ALWAYS
+
 func _process(delta: float) -> void:
 	if get_tree().paused: return
 	time += delta
@@ -29,6 +32,8 @@ func _input(event: InputEvent) -> void:
 		#get_tree().quit()
 		pass
 
+func is_night() -> bool:
+	return true if current_hour >= 20 or current_hour < 6 else false
 
 func set_hour(hour: int) -> void:
 	# keep the current day, just change the hour

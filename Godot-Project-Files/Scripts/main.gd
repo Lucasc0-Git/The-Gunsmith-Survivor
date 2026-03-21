@@ -3,13 +3,13 @@ class_name Main
 
 ## The @onready var declaration
 @onready var hud: Hud = $HUD
-@onready var player: Player
 @onready var map: Map = $Map
 @onready var menu: CanvasLayer = $Menu
 @onready var Ysort := $YSORT
 @onready var label: Label = $CanvasLayer/Label
 @onready var spawners: Node2D = $Spawners
 @onready var canvas_modulate: CanvasModulate = $CanvasModulate
+@onready var cheat_mode_label: Label = $CanvasLayer/CheatMode
 
 enum TimeOfDay {DAWN, SUNRISE, DAY, SUNSET, DUSK, NIGHT}
 
@@ -24,6 +24,8 @@ enum TimeOfDay {DAWN, SUNRISE, DAY, SUNSET, DUSK, NIGHT}
 
 var day_colors := {}
 var inventory_tint: CanvasModulate
+var the_core: TheCore
+var player: Player
 
 @export var inventory_darken: Color
 
@@ -40,8 +42,9 @@ func _ready() -> void:
 		20: lighting_colors[TimeOfDay.NIGHT],
 	}
 	canvas_modulate.color = day_colors[8]
-	var spawn_pos := map.get_spawn_position()
-	spawn_player(spawn_pos)
+	cheat_mode_label.visible = false
+	spawn_player(Vector2(0, 0))
+	spawn_the_core(player.global_position + Vector2(0, -200))
 	label.text = "Hour: " + str(GameManager.current_hour) + ":00"
 	## Set "player" variable in the hud.gd
 	GameManager.hour_changed.connect(_on_hour_changed)
@@ -69,6 +72,12 @@ func _on_hour_changed(hour: int) -> void:
 		hud.tint_hud(inventory_darken, 25)
 	else:
 		hud.tint_hud(Color(1, 1, 1), 25)
+
+func game_over() -> void:
+	var game_over_scene := preload("res://Scenes/GameOver.tscn").instantiate()
+	add_child(game_over_scene)
+	AudioManager.play_game_over()
+	get_tree().paused = true
 
 func _update_lightning(hour: int) -> void:
 	if !day_colors.has(hour): return
@@ -130,6 +139,12 @@ func spawn_player(pos: Vector2) -> void:
 	player = preload("res://Scenes/Player.tscn").instantiate()
 	player.global_position = pos
 	Ysort.add_child(player)
+
+func spawn_the_core(pos: Vector2) -> void:
+	the_core = preload("uid://s0p5vesfuqst").instantiate()
+	the_core.global_position = pos
+	the_core.main = self
+	Ysort.add_child(the_core)
 
 func show_menu() -> void:
 	menu.visible = true

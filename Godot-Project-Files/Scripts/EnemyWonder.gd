@@ -20,6 +20,8 @@ func physics_update(delta: float) -> void:
 	
 	if enemy.global_position.distance_to(enemy.player.global_position) < enemy.chase_range:
 		enemy.change_state("Chase")
+	if GameManager.is_night() and enemy.global_position.distance_to(enemy.the_core.global_position) < 2000:
+		enemy.change_state("ChaseCore")
 
 func _on_wonder_timer_timeout() -> void:
 	wonder_timer.start(randf_range(2, 5))

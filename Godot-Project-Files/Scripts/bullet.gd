@@ -28,7 +28,7 @@ func _physics_process(delta: float) -> void:
 		position += direction.normalized() * bullet_speed * delta
 		bullet_speed = max(0, bullet_speed * (1.0 - damping * delta))
 	scale = scale * shrinking_rate
-	if scale <= Vector2(0.00001, 0.00001):
+	if scale <= Vector2(0.0001, 0.0001):
 		queue_free()
 
 ## Called so the bullet will despawn
@@ -43,6 +43,8 @@ func _on_body_entered(body: Node2D) -> void:
 		
 		if body.has_method("take_damage"):
 			body.take_damage(bullet_damage)
+		bullet_despawn()
+	if body.is_in_group("thecore"):
 		bullet_despawn()
 
 func _on_area_entered(area: Area2D) -> void:
