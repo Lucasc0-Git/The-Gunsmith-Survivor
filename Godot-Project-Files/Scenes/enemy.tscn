@@ -102,6 +102,8 @@ script = ExtResource("4_1dp5w")
 [node name="Wonder" type="Node" parent="StateMachine" unique_id=447717311]
 script = ExtResource("5_ghaa6")
 
+[node name="WonderTimer" type="Timer" parent="StateMachine/Wonder" unique_id=706818900]
+
 [node name="ChaseCore" type="Node" parent="StateMachine" unique_id=1859189398]
 script = ExtResource("6_1dp5w")
 

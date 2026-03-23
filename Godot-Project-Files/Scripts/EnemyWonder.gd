@@ -1,19 +1,15 @@
 extends EnemyState
 
-@onready var wonder_timer: Timer = Timer.new()
+@onready var wonder_timer: Timer = $WonderTimer
 
 var wonder_dir : Vector2 = Vector2.ZERO
 
 func _ready() -> void:
-	add_child(wonder_timer)
 	wonder_timer.timeout.connect(_on_wonder_timer_timeout)
 
 func enter() -> void:
-	if not wonder_timer.is_inside_tree():
-		add_child(wonder_timer)
-		if not wonder_timer.timeout.is_connected(_on_wonder_timer_timeout):
-			wonder_timer.timeout.connect(_on_wonder_timer_timeout)
-	wonder_timer.start(1.5)
+	if is_inside_tree():
+		wonder_timer.start(1.5)
 
 func exit() -> void:
 	wonder_timer.stop()
@@ -28,5 +24,6 @@ func physics_update(delta: float) -> void:
 		enemy.change_state("ChaseCore")
 
 func _on_wonder_timer_timeout() -> void:
-	wonder_timer.start(randf_range(2, 5))
+	if is_inside_tree():
+		wonder_timer.start(randf_range(2, 5))
 	wonder_dir = Vector2.from_angle(randf_range(0, TAU))
