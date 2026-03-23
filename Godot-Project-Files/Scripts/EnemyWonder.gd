@@ -9,6 +9,10 @@ func _ready() -> void:
 	wonder_timer.timeout.connect(_on_wonder_timer_timeout)
 
 func enter() -> void:
+	if not wonder_timer.is_inside_tree():
+		add_child(wonder_timer)
+		if not wonder_timer.timeout.is_connected(_on_wonder_timer_timeout):
+			wonder_timer.timeout.connect(_on_wonder_timer_timeout)
 	wonder_timer.start(1.5)
 
 func exit() -> void:

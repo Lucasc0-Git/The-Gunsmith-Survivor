@@ -15,7 +15,7 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 [application]
 
 config/name="The Gunsmith Survivor"
-config/version="alpha 0.0.1"
+config/version="0.0.1-alpha"
 run/main_scene="uid://3jm5jtqlvjfv"
 config/features=PackedStringArray("4.6", "Mobile")
 run/max_fps=75
@@ -38,7 +38,6 @@ gdscript/warnings/untyped_declaration=1
 window/size/viewport_width=1280
 window/size/viewport_height=720
 window/stretch/mode="canvas_items"
-window/stretch/scale_mode="integer"
 
 [file_customization]
 

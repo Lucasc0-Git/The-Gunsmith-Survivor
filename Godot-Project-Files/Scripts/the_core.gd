@@ -5,6 +5,8 @@ class_name TheCore
 
 @export var max_health: float = 500
 
+signal player_entered_crafting_area()
+signal player_exited_crafting_area()
 signal core_health_changed(health: float)
 
 var main: Main
@@ -25,3 +27,11 @@ func _ready() -> void:
 func take_damage(amount: float) -> void:
 	print("thecore was damaged")
 	health -= amount
+
+func _on_crafting_area_body_entered(body: Node2D) -> void:
+	if body is Player:
+		player_entered_crafting_area.emit()
+
+func _on_crafting_area_body_exited(body: Node2D) -> void:
+	if body is Player:
+		player_exited_crafting_area.emit()

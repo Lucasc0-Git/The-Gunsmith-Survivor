@@ -61,10 +61,15 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Inventory" type="Control" parent="InventoryUI" unique_id=1444851400]
+custom_minimum_size = Vector2(346, 500)
 layout_mode = 1
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("5_5ep0j")
 slot_scene = ExtResource("2_8jye8")
 
@@ -76,10 +81,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 447.0
-offset_top = 90.0
-offset_right = 793.0
-offset_bottom = 590.0
+offset_left = -173.0
+offset_top = -250.0
+offset_right = 173.0
+offset_bottom = 250.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("6_36asn")
@@ -128,6 +133,17 @@ grow_vertical = 2
 [node name="GridContainer" type="GridContainer" parent="InventoryUI/Hotbar/PanelContainer" unique_id=328297745]
 layout_mode = 2
 columns = 5
+
+[node name="BasicCrafting" type="Control" parent="InventoryUI" unique_id=1809355824]
+custom_minimum_size = Vector2(74, 500)
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -20.0
+offset_right = 40.0
+offset_bottom = 20.0
+grow_vertical = 2
 
 [node name="Tooltip" type="RichTextLabel" parent="." unique_id=107183822]
 visible = false
