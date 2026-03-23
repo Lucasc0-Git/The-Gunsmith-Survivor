@@ -25,6 +25,7 @@ var health: float = 10:
 
 var _health: float
 var player_in_range: bool = false
+var core_in_range: bool = false
 var player: Player = null
 var current_state: EnemyState
 var states := {}
@@ -63,12 +64,12 @@ func _physics_process(_delta: float) -> void:
 	if current_state:
 		current_state.physics_update(delta)
 
-func get_target() -> Node2D:
-	if chase_forced:
+func get_target() -> Node2D: ##Returns player, the core, OR null.
+	if player_in_range:
 		return player
-	if GameManager.is_night():
+	elif core_in_range:
 		return the_core
-	return player
+	return null
 
 func stop_moving() -> void:
 	velocity = velocity.move_toward(Vector2.ZERO, accel)
@@ -89,12 +90,17 @@ func _on_timer_timeout() -> void:
 	target.take_damage(damage)
 
 func _on_attack_range_area_body_entered(body: Node2D) -> void:
-	if body is Player or body is TheCore:
-		print("hit")
+	if body is Player:
 		change_state("Hit")
+		player_in_range = true
+	if body is TheCore:
+		change_state("Hit")
+		core_in_range = true
 
 func _on_attack_range_area_body_exited(body: Node2D) -> void:
 	if body is Player:
 		change_state("Chase")
+		player_in_range = false
 	if body is TheCore:
 		change_state("Wonder")
+		core_in_range = false

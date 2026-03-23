@@ -3,7 +3,7 @@ class_name TheCore
 
 @onready var progress_bar: ProgressBar = $HealthBar
 
-@export var max_health: float = 500
+@export var max_health: float = 1500
 
 signal player_entered_crafting_area()
 signal player_exited_crafting_area()
@@ -11,7 +11,7 @@ signal core_health_changed(health: float)
 
 var main: Main
 
-var health: float = 500:
+var health: float = max_health:
 	set(value):
 		if value == health: return
 		if value <= 0:
