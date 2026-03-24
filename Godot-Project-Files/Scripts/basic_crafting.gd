@@ -1,0 +1,42 @@
+extends Control
+class_name BasicCraftingUI
+
+@onready var grid_container: GridContainer = $PanelContainer/GridContainer
+@onready var the_core: TheCore
+@onready var basic_craftings: BasicCraftingUIPanel = $BasicCraftingPanels
+
+func _ready() -> void:
+	for i in range(grid_container.get_child_count()):
+		var crafting_slot: Button = grid_container.get_child(i)
+		crafting_slot.toggled.connect(
+			func(toggled_on: bool, idx: int = i) -> void: _on_button_toggled(toggled_on, idx)
+		)
+	
+	await get_tree().process_frame
+	the_core = get_tree().get_first_node_in_group("thecore")
+	
+	the_core.player_entered_crafting_area.connect(show_crafting)
+	the_core.player_exited_crafting_area.connect(hide_crafting)
+
+
+func hide_crafting() -> void:
+	for crafting_slot in grid_container.get_children():
+		crafting_slot.mouse_filter = MOUSE_FILTER_IGNORE
+		crafting_slot.button_pressed = false
+	var tween := create_tween()
+	tween.tween_property(self, "global_position", Vector2(-84.0, 122.0), 0.5)
+
+func show_crafting() -> void:
+	for crafting_slot in grid_container.get_children():
+		crafting_slot.mouse_filter = MOUSE_FILTER_PASS
+		crafting_slot.button_pressed = false
+	var tween := create_tween()
+	tween.tween_property(self, "global_position", Vector2(10.0, 122.0), 0.5)
+
+func _on_button_toggled(toggled_on: bool, index: int) -> void:
+	if index == 0:
+		basic_craftings.toggle_weapons_crafting(toggled_on)
+	elif index == 1:
+		basic_craftings.toggle_tools_crafting(toggled_on)
+	elif index == 2:
+		basic_craftings.toggle_stations_crafting(toggled_on)

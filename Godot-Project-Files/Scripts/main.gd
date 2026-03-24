@@ -44,7 +44,7 @@ func _ready() -> void:
 	canvas_modulate.color = day_colors[8]
 	cheat_mode_label.visible = false
 	spawn_player(Vector2(0, 0))
-	spawn_the_core(player.global_position + Vector2(0, -200))
+	spawn_the_core(player.global_position + Vector2(0, -250))
 	label.text = "Hour: " + str(GameManager.current_hour) + ":00"
 	## Set "player" variable in the hud.gd
 	GameManager.hour_changed.connect(_on_hour_changed)

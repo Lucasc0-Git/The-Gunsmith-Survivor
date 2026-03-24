@@ -13,7 +13,7 @@ size = Vector2(32, 32)
 radius = 26.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_nfbfl"]
-radius = 74.02702
+radius = 57.66763
 
 [node name="TheCore" type="StaticBody2D" unique_id=683644907 groups=["thecore"]]
 y_sort_enabled = true
@@ -36,6 +36,8 @@ collision_mask = 4
 shape = SubResource("CircleShape2D_ardag")
 
 [node name="CraftingArea" type="Area2D" parent="." unique_id=1741043043]
+collision_layer = 128
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CraftingArea" unique_id=815767401]
 shape = SubResource("CircleShape2D_nfbfl")

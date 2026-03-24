@@ -29,6 +29,7 @@ corner_radius_bottom_left = 10
 shadow_offset = Vector2(2, 2)
 
 [resource]
+default_font_size = 0
 Label/colors/font_color = Color(0.7019608, 0.43137255, 0.14117648, 1)
 Label/colors/font_outline_color = Color(0.2, 0.10980392, 0.039215688, 1)
 Label/colors/font_shadow_color = Color(0, 0, 0, 0.5686275)
