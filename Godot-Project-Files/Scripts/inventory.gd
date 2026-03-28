@@ -86,6 +86,29 @@ func _on_slot_left_click(slot: Slot) -> void:
 		move_item_to_hotbar(slot)
 		return
 
+func can_craft(recipe: Dictionary[ItemData, int]) -> bool:
+	for key in recipe:
+		var has_item: bool = false
+		var has_amount: bool = false
+		var required_amount: int = recipe[key]
+		
+		var total_amount: int = 0
+		for slot: Slot in grid_container.get_children():
+			if slot.slot_data == null or slot.slot_data.is_empty(): continue
+			if slot.slot_data.item_data == key:
+				has_item = true
+				total_amount += slot.slot_data.amount
+		
+		if total_amount >= required_amount:
+			has_amount = true
+		if !has_amount or !has_item: return false
+	
+	return true
+
+func rm_items_by_recipe(recipe: Dictionary[ItemData, int]) -> void:
+	for item: ItemData in recipe:
+		remove_item(item, recipe[item])
+
 func find_item(item: ItemData) -> int:
 	var usable_amount: int = 0
 	for slot: Slot in grid_container.get_children():
@@ -130,6 +153,19 @@ func give_item(item: ItemData, amount: int = 1) -> void:
 		slot.set_item(item, adding_amount)
 		amount_to_add -= adding_amount
 		if amount_to_add <= 0: return
+
+func remove_item(item: ItemData, amount: int = 1) -> void:
+	var amount_to_rm: int = amount
+	var slots := grid_container.get_children()
+	for i in range(slots.size() -1, -1, -1):
+		var slot: Slot = slots[i]
+		if slot.slot_data == null or slot.slot_data.is_empty(): continue
+		if slot.slot_data.item_data != item: continue
+		
+		var removing_amount: int = min(slot.slot_data.amount, amount_to_rm)
+		slot.remove_amount(removing_amount)
+		amount_to_rm -= removing_amount
+		if amount_to_rm <= 0: return
 
 func move_item_to_hotbar(slot: Slot) -> void:
 	if !player: return

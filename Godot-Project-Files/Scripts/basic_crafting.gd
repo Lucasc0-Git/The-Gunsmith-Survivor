@@ -55,6 +55,8 @@ func _on_button_toggled(toggled_on: bool, index: int) -> void:
 
 func _process(_delta: float) -> void:
 	if visible:
+		
+		
 		if inventory.do_have_item(wood_item, 30):
 			glock_button.disabled = false
 		else:
@@ -64,9 +66,10 @@ func _process(_delta: float) -> void:
 
 func _on_glock_pressed() -> void:
 	if inventory == null: return
-	if inventory.find_item(wood_item) >= 30:
-		print("give player Glock")
+	
+	if inventory.can_craft(glock_item.crafting_recipe):
 		inventory.give_item(glock_item, 1)
+		inventory.rm_items_by_recipe(glock_item.crafting_recipe)
 
 
 

@@ -9,3 +9,4 @@ class_name ItemData
 @export var current_stack_size: int = 1
 @export var max_stack: int = 1 ##Maximum stacking for the item.
 @export var description : String = "" ##The description of the item used in tooltip.
+@export var crafting_recipe: Dictionary[ItemData, int] ={}
