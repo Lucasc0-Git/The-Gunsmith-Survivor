@@ -8,7 +8,7 @@ class_name BasicCraftingUI
 
 @onready var glock_button: Button = $BasicCraftingPanels/VBoxContainer/Control/WeaponsCraftingContainer/MarginContainer/ScrollContainer/HBoxContainer/Glock
 
-
+var crafting_buttons: Dictionary[Button, ItemData] = {} # Button -> ItemData
 
 var glock_item: ItemData = ItemRegistry.items["glock"]
 var wood_item: ItemData = ItemRegistry.items["wood"]
@@ -27,6 +27,10 @@ func _ready() -> void:
 	
 	the_core.player_entered_crafting_area.connect(show_crafting)
 	the_core.player_exited_crafting_area.connect(hide_crafting)
+	
+	crafting_buttons[glock_button] = glock_item
+	
+	
 	if inventory == null:
 		push_error("Inventory is null")
 
@@ -55,20 +59,16 @@ func _on_button_toggled(toggled_on: bool, index: int) -> void:
 
 func _process(_delta: float) -> void:
 	if visible:
-		
-		
-		if inventory.do_have_item(wood_item, 30):
-			glock_button.disabled = false
-		else:
-			glock_button.disabled = true
+		for button: Button in crafting_buttons.keys():
+			var item: ItemData = crafting_buttons[button]
+			button.disabled = !inventory.can_craft(item.crafting_recipe)
 
 ##The Weapons crafting recipes.
 
 func _on_glock_pressed() -> void:
 	if inventory == null: return
-	
 	if inventory.can_craft(glock_item.crafting_recipe):
-		inventory.give_item(glock_item, 1)
+		inventory.give_item(glock_item)
 		inventory.rm_items_by_recipe(glock_item.crafting_recipe)
 
 

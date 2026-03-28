@@ -41,10 +41,7 @@ func _ready() -> void:
 		slot.connect("mouse_entered_slot", Callable(self, "_show_tooltip"))
 		slot.connect("mouse_exited_slot", Callable(self, "_hide_tooltip"))
 	# Give some slots some items for debugging, needs to be removed after debugging
-	fill_slot(0, glock_item, 1)
 	fill_slot(1, shotgun_item, 1)
-	fill_slot(2, apple_item, 5)
-	fill_slot(3, apple_item, 10)
 	fill_slot(4, apple_item, 16)
 	fill_slot(5, wood_item, 32)
 	
