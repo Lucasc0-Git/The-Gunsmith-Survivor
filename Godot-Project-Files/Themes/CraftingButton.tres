@@ -2,6 +2,19 @@
 
 [ext_resource type="StyleBox" uid="uid://dxh65jyslte1f" path="res://Themes/ButtonStyleBox.tres" id="1_tc7eq"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yrmhf"]
+bg_color = Color(0.339151, 0.21625227, 0.12729603, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.5397266, 0.31198794, 0.00023391545, 1)
+border_blend = true
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tc7eq"]
 bg_color = Color(0.25359428, 0.11687959, 0.009007851, 1)
 border_width_left = 5
@@ -16,7 +29,9 @@ corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
 [resource]
+Button/colors/icon_disabled_color = Color(1, 1, 1, 0.6392157)
 Button/colors/icon_normal_color = Color(1, 1, 1, 1)
 Button/colors/icon_pressed_color = Color(0.87887067, 0.82468975, 0.7761386, 1)
+Button/styles/disabled = SubResource("StyleBoxFlat_yrmhf")
 Button/styles/normal = ExtResource("1_tc7eq")
 Button/styles/pressed = SubResource("StyleBoxFlat_tc7eq")

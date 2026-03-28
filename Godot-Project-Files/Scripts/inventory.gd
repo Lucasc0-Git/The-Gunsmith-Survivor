@@ -14,6 +14,7 @@ var glock_item : ItemData
 var shotgun_item : ItemData
 var apple_item : ItemData
 var wood_item : ItemData
+var basic_crafting: BasicCraftingUI
 
 var inv_slot : Slot
 var player: Player
@@ -46,6 +47,7 @@ func _ready() -> void:
 	fill_slot(3, apple_item, 10)
 	fill_slot(4, apple_item, 16)
 	fill_slot(5, wood_item, 32)
+	
 
 func _on_slot_right_click(slot: Slot) -> void:
 	var slot_data: SlotData = slot.slot_data.copy()
@@ -83,6 +85,51 @@ func _on_slot_left_click(slot: Slot) -> void:
 	if Input.is_key_pressed(KEY_SHIFT):
 		move_item_to_hotbar(slot)
 		return
+
+func find_item(item: ItemData) -> int:
+	var usable_amount: int = 0
+	for slot: Slot in grid_container.get_children():
+		if slot.slot_data == null: 
+			var blank_data: SlotData = SlotData.new()
+			slot.slot_data = blank_data
+		if slot.slot_data.is_empty(): continue
+		if slot.slot_data.item_data == item:
+			usable_amount += slot.slot_data.amount
+	return usable_amount
+
+func do_have_item(item: ItemData, needed_amount: int = 1) -> bool:
+	var total: int = 0
+	for slot: Slot in grid_container.get_children():
+		if slot.slot_data == null: 
+			var blank_data: SlotData = SlotData.new()
+			slot.slot_data = blank_data
+		if slot.slot_data.is_empty(): continue
+		if slot.slot_data.item_data == item:
+			total += slot.slot_data.amount
+	if total >= needed_amount:
+		return true
+	return false
+
+func give_item(item: ItemData, amount: int = 1) -> void:
+	var amount_to_add: int = amount
+	
+	# First pass — fill existing partial stacks
+	for slot: Slot in grid_container.get_children():
+		if slot.slot_data == null or slot.slot_data.is_empty(): continue
+		if slot.slot_data.item_data != item: continue
+		var space_left: int = slot.slot_data.item_data.max_stack - slot.slot_data.amount
+		var adding_amount: int = min(space_left, amount_to_add)
+		slot.add_amount(adding_amount)
+		amount_to_add -= adding_amount
+		if amount_to_add <= 0: return
+	
+	# Second pass — fill empty slots with remainder
+	for slot: Slot in grid_container.get_children():
+		if slot.slot_data == null or !slot.slot_data.is_empty(): continue
+		var adding_amount: int = min(item.max_stack, amount_to_add)
+		slot.set_item(item, adding_amount)
+		amount_to_add -= adding_amount
+		if amount_to_add <= 0: return
 
 func move_item_to_hotbar(slot: Slot) -> void:
 	if !player: return

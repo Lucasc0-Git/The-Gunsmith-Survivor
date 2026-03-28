@@ -3,9 +3,19 @@ class_name BasicCraftingUI
 
 @onready var grid_container: GridContainer = $PanelContainer/GridContainer
 @onready var the_core: TheCore
+@onready var inventory: Inventory
 @onready var basic_craftings: BasicCraftingUIPanel = $BasicCraftingPanels
 
+@onready var glock_button: Button = $BasicCraftingPanels/VBoxContainer/Control/WeaponsCraftingContainer/MarginContainer/ScrollContainer/HBoxContainer/Glock
+
+
+
+var glock_item: ItemData = ItemRegistry.items["glock"]
+var wood_item: ItemData = ItemRegistry.items["wood"]
+
 func _ready() -> void:
+	
+	
 	for i in range(grid_container.get_child_count()):
 		var crafting_slot: Button = grid_container.get_child(i)
 		crafting_slot.toggled.connect(
@@ -17,6 +27,8 @@ func _ready() -> void:
 	
 	the_core.player_entered_crafting_area.connect(show_crafting)
 	the_core.player_exited_crafting_area.connect(hide_crafting)
+	if inventory == null:
+		push_error("Inventory is null")
 
 
 func hide_crafting() -> void:
@@ -40,3 +52,24 @@ func _on_button_toggled(toggled_on: bool, index: int) -> void:
 		basic_craftings.toggle_tools_crafting(toggled_on)
 	elif index == 2:
 		basic_craftings.toggle_stations_crafting(toggled_on)
+
+func _process(_delta: float) -> void:
+	if visible:
+		if inventory.do_have_item(wood_item, 30):
+			glock_button.disabled = false
+		else:
+			glock_button.disabled = true
+
+##The Weapons crafting recipes.
+
+func _on_glock_pressed() -> void:
+	if inventory == null: return
+	if inventory.find_item(wood_item) >= 30:
+		print("give player Glock")
+		inventory.give_item(glock_item, 1)
+
+
+
+##The Tools crafting recipes.
+
+##The Stations crafting recipes.

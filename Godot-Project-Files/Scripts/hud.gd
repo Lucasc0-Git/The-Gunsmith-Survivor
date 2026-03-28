@@ -9,6 +9,7 @@ class_name Hud
 @onready var weapon : Weapon
 @onready var tooltip: Tooltip = $Tooltip
 @onready var canvas_modulate: CanvasModulate = $CanvasModulate
+@onready var basic_crafting: BasicCraftingUI = $InventoryUI/BasicCrafting
 
 ## The @onready var declaration
 @onready var hotbar_grid_container: GridContainer = $InventoryUI/Hotbar/PanelContainer/GridContainer
@@ -46,6 +47,9 @@ func set_player(p: Player) -> void:
 	inventory.player = player
 	inventory.tooltip = tooltip
 	inventory.hud = self
+	inventory.basic_crafting = basic_crafting
+	basic_crafting.inventory = inventory
+	
 
 # Called when "E" is just pressed
 func toggle_inv() -> void:
