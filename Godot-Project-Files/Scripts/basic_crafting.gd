@@ -7,15 +7,16 @@ class_name BasicCraftingUI
 @onready var basic_craftings: BasicCraftingUIPanel = $BasicCraftingPanels
 
 @onready var glock_button: Button = $BasicCraftingPanels/VBoxContainer/Control/WeaponsCraftingContainer/MarginContainer/ScrollContainer/HBoxContainer/Glock
+@onready var shotgun_button: Button = $BasicCraftingPanels/VBoxContainer/Control/WeaponsCraftingContainer/MarginContainer/ScrollContainer/HBoxContainer/Shotgun
+
 
 var crafting_buttons: Dictionary[Button, ItemData] = {} # Button -> ItemData
 
 var glock_item: ItemData = ItemRegistry.items["glock"]
 var wood_item: ItemData = ItemRegistry.items["wood"]
+var shotgun_item: ItemData = ItemRegistry.items["shotgun"]
 
 func _ready() -> void:
-	
-	
 	for i in range(grid_container.get_child_count()):
 		var crafting_slot: Button = grid_container.get_child(i)
 		crafting_slot.toggled.connect(
@@ -29,7 +30,7 @@ func _ready() -> void:
 	the_core.player_exited_crafting_area.connect(hide_crafting)
 	
 	crafting_buttons[glock_button] = glock_item
-	
+	crafting_buttons[shotgun_button] = shotgun_item
 	
 	if inventory == null:
 		push_error("Inventory is null")
@@ -71,7 +72,11 @@ func _on_glock_pressed() -> void:
 		inventory.give_item(glock_item)
 		inventory.rm_items_by_recipe(glock_item.crafting_recipe)
 
-
+func _on_shotgun_pressed() -> void:
+	if inventory == null: return
+	if inventory.can_craft(shotgun_item.crafting_recipe):
+		inventory.give_item(shotgun_item)
+		inventory.rm_items_by_recipe(shotgun_item.crafting_recipe)
 
 ##The Tools crafting recipes.
 

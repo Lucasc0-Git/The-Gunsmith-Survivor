@@ -2,6 +2,9 @@
 
 [ext_resource type="Script" uid="uid://duhl153idv7v8" path="res://Scripts/WeaponItemData.gd" id="1_527dj"]
 [ext_resource type="Texture2D" uid="uid://3pajlj58aaib" path="res://Textures/SURVIVAL HORROR WEAPONS PACK 16X16/4.png" id="1_ctbmv"]
+[ext_resource type="Script" uid="uid://dgi6p7vrp0imi" path="res://Scripts/ItemData.gd" id="1_lhxjk"]
+[ext_resource type="Resource" uid="uid://dmcom6xx0kjas" path="res://items/Inv_items/Glock_item.tres" id="2_k8rhj"]
+[ext_resource type="Resource" uid="uid://cc0anv7sdlwn4" path="res://items/Inv_items/Wood_item.tres" id="3_k8rhj"]
 [ext_resource type="Resource" uid="uid://cn2o1vek71aab" path="res://items/Weapons/Shooting_weapons/Shotgun.tres" id="3_lhxjk"]
 
 [resource]
@@ -11,4 +14,8 @@ id = "shotgun"
 icon = ExtResource("1_ctbmv")
 display_name = "Shotgun"
 description = "A nice, BIG, shootgun... shoot, I said shootgun again, didn't I? Anyways, it's  a SHOTGUN!"
+crafting_recipe = Dictionary[ExtResource("1_lhxjk"), int]({
+ExtResource("2_k8rhj"): 1,
+ExtResource("3_k8rhj"): 32
+})
 metadata/_custom_type_script = "uid://duhl153idv7v8"

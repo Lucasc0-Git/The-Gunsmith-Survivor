@@ -14,6 +14,6 @@ icon = ExtResource("1_jx66i")
 display_name = "Glock"
 description = "A nice and grateful handgun."
 crafting_recipe = Dictionary[ExtResource("1_iujff"), int]({
-ExtResource("2_o4206"): 30
+ExtResource("2_o4206"): 16
 })
 metadata/_custom_type_script = "uid://duhl153idv7v8"
