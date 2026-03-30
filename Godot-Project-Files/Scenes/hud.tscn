@@ -107,11 +107,13 @@ anchor_right = 1.0
 offset_right = -980.0
 offset_bottom = 30.0
 grow_horizontal = 2
+mouse_filter = 2
 theme = SubResource("Theme_8jye8")
 
 [node name="HealthBar" type="ProgressBar" parent="UI/TopBar" unique_id=1463978606]
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
+mouse_filter = 2
 theme = ExtResource("2_36asn")
 value = 100.0
 show_percentage = false
@@ -135,6 +137,7 @@ anchor_right = 0.5
 anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 1
 script = ExtResource("5_5ep0j")
 slot_scene = ExtResource("2_8jye8")
 
@@ -152,6 +155,7 @@ offset_right = 173.0
 offset_bottom = 250.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 1
 theme = ExtResource("6_36asn")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="InventoryUI/Inventory/PanelContainer" unique_id=820802469]
@@ -182,6 +186,7 @@ offset_top = -94.0
 offset_right = 350.0
 offset_bottom = -20.0
 grow_vertical = 0
+mouse_filter = 2
 theme = ExtResource("4_t1xeu")
 script = ExtResource("8_4f5kr")
 slot_scene = ExtResource("2_8jye8")
@@ -194,6 +199,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 1
 
 [node name="GridContainer" type="GridContainer" parent="InventoryUI/Hotbar/PanelContainer" unique_id=328297745]
 layout_mode = 2
@@ -210,6 +216,7 @@ offset_top = -238.0
 offset_right = -10.0
 offset_bottom = 238.0
 grow_vertical = 2
+mouse_filter = 1
 theme = SubResource("Theme_ssfue")
 script = ExtResource("10_piegi")
 
@@ -220,6 +227,7 @@ custom_minimum_size = Vector2(350, 30)
 layout_mode = 0
 offset_right = 350.0
 offset_bottom = 30.0
+mouse_filter = 2
 theme = ExtResource("8_43w4t")
 bbcode_enabled = true
 fit_content = true
@@ -233,6 +241,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 theme = ExtResource("4_t1xeu")
 
 [node name="GridContainer" type="GridContainer" parent="InventoryUI/BasicCrafting/PanelContainer" unique_id=1531151334]
@@ -241,28 +250,35 @@ theme_override_constants/v_separation = 2
 
 [node name="CraftingButton" parent="InventoryUI/BasicCrafting/PanelContainer/GridContainer" unique_id=2118062267 instance=ExtResource("10_4f5kr")]
 layout_mode = 2
+mouse_filter = 1
 text = "weapons"
 
 [node name="CraftingButton2" parent="InventoryUI/BasicCrafting/PanelContainer/GridContainer" unique_id=1462332838 instance=ExtResource("10_4f5kr")]
 layout_mode = 2
+mouse_filter = 1
 text = "tools"
 
 [node name="CraftingButton3" parent="InventoryUI/BasicCrafting/PanelContainer/GridContainer" unique_id=1175637690 instance=ExtResource("10_4f5kr")]
 layout_mode = 2
+mouse_filter = 1
 text = "crafting
 stations"
 
 [node name="CraftingButton4" parent="InventoryUI/BasicCrafting/PanelContainer/GridContainer" unique_id=235883468 instance=ExtResource("10_4f5kr")]
 layout_mode = 2
+mouse_filter = 1
 
 [node name="CraftingButton5" parent="InventoryUI/BasicCrafting/PanelContainer/GridContainer" unique_id=272632742 instance=ExtResource("10_4f5kr")]
 layout_mode = 2
+mouse_filter = 1
 
 [node name="CraftingButton6" parent="InventoryUI/BasicCrafting/PanelContainer/GridContainer" unique_id=767208017 instance=ExtResource("10_4f5kr")]
 layout_mode = 2
+mouse_filter = 1
 
 [node name="CraftingButton7" parent="InventoryUI/BasicCrafting/PanelContainer/GridContainer" unique_id=2008464431 instance=ExtResource("10_4f5kr")]
 layout_mode = 2
+mouse_filter = 1
 
 [node name="BasicCraftingPanels" type="Control" parent="InventoryUI/BasicCrafting" unique_id=453566887 node_paths=PackedStringArray("crafting_tooltip")]
 custom_minimum_size = Vector2(350, 476)
@@ -271,6 +287,7 @@ anchors_preset = 0
 offset_left = 84.0
 offset_right = 434.0
 offset_bottom = 476.0
+mouse_filter = 2
 script = ExtResource("12_i2avg")
 crafting_tooltip = NodePath("../CraftingTooltip")
 
@@ -281,11 +298,13 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 theme_override_constants/separation = 2
 
 [node name="Control" type="Control" parent="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer" unique_id=1458216374]
 custom_minimum_size = Vector2(350, 68)
 layout_mode = 2
+mouse_filter = 2
 
 [node name="WeaponsCraftingContainer" type="PanelContainer" parent="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control" unique_id=70015303]
 custom_minimum_size = Vector2(350, 66)
@@ -301,6 +320,7 @@ offset_right = 175.0
 offset_bottom = 30.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control/WeaponsCraftingContainer" unique_id=1064071253]
 layout_mode = 2
@@ -319,6 +339,7 @@ layout_mode = 2
 [node name="Glock" type="Button" parent="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control/WeaponsCraftingContainer/MarginContainer/ScrollContainer/HBoxContainer" unique_id=2078825733]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
+mouse_filter = 1
 theme = ExtResource("14_ba8gd")
 disabled = true
 action_mode = 0
@@ -329,6 +350,7 @@ expand_icon = true
 [node name="Shotgun" type="Button" parent="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control/WeaponsCraftingContainer/MarginContainer/ScrollContainer/HBoxContainer" unique_id=1609418427]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
+mouse_filter = 1
 theme = ExtResource("14_ba8gd")
 disabled = true
 icon = ExtResource("16_36s6t")
@@ -338,34 +360,42 @@ expand_icon = true
 [node name="Panel3" type="Panel" parent="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control/WeaponsCraftingContainer/MarginContainer/ScrollContainer/HBoxContainer" unique_id=1719569876]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
+mouse_filter = 1
 
 [node name="Panel4" type="Panel" parent="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control/WeaponsCraftingContainer/MarginContainer/ScrollContainer/HBoxContainer" unique_id=371133950]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
+mouse_filter = 1
 
 [node name="Panel5" type="Panel" parent="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control/WeaponsCraftingContainer/MarginContainer/ScrollContainer/HBoxContainer" unique_id=1671633110]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
+mouse_filter = 1
 
 [node name="Panel6" type="Panel" parent="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control/WeaponsCraftingContainer/MarginContainer/ScrollContainer/HBoxContainer" unique_id=931644667]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
+mouse_filter = 1
 
 [node name="Panel7" type="Panel" parent="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control/WeaponsCraftingContainer/MarginContainer/ScrollContainer/HBoxContainer" unique_id=1929579464]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
+mouse_filter = 1
 
 [node name="Panel8" type="Panel" parent="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control/WeaponsCraftingContainer/MarginContainer/ScrollContainer/HBoxContainer" unique_id=872362690]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
+mouse_filter = 1
 
 [node name="Panel9" type="Panel" parent="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control/WeaponsCraftingContainer/MarginContainer/ScrollContainer/HBoxContainer" unique_id=1405938739]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
+mouse_filter = 1
 
 [node name="Control2" type="Control" parent="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer" unique_id=1736031061]
 custom_minimum_size = Vector2(350, 68)
 layout_mode = 2
+mouse_filter = 2
 
 [node name="ToolsCraftingContainer2" type="PanelContainer" parent="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control2" unique_id=618306342]
 custom_minimum_size = Vector2(350, 66)
@@ -381,6 +411,7 @@ offset_right = 175.0
 offset_bottom = 30.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control2/ToolsCraftingContainer2" unique_id=1678976939]
 layout_mode = 2
@@ -399,43 +430,53 @@ layout_mode = 2
 [node name="Panel" type="Panel" parent="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control2/ToolsCraftingContainer2/MarginContainer/ScrollContainer/HBoxContainer" unique_id=803335917]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
+mouse_filter = 1
 
 [node name="Panel2" type="Panel" parent="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control2/ToolsCraftingContainer2/MarginContainer/ScrollContainer/HBoxContainer" unique_id=1640233120]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
+mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxFlat_1a2va")
 
 [node name="Panel3" type="Panel" parent="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control2/ToolsCraftingContainer2/MarginContainer/ScrollContainer/HBoxContainer" unique_id=1367610658]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
+mouse_filter = 1
 
 [node name="Panel4" type="Panel" parent="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control2/ToolsCraftingContainer2/MarginContainer/ScrollContainer/HBoxContainer" unique_id=2056821614]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
+mouse_filter = 1
 
 [node name="Panel5" type="Panel" parent="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control2/ToolsCraftingContainer2/MarginContainer/ScrollContainer/HBoxContainer" unique_id=1195830012]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
+mouse_filter = 1
 
 [node name="Panel6" type="Panel" parent="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control2/ToolsCraftingContainer2/MarginContainer/ScrollContainer/HBoxContainer" unique_id=403650917]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
+mouse_filter = 1
 
 [node name="Panel7" type="Panel" parent="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control2/ToolsCraftingContainer2/MarginContainer/ScrollContainer/HBoxContainer" unique_id=1355072856]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
+mouse_filter = 1
 
 [node name="Panel8" type="Panel" parent="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control2/ToolsCraftingContainer2/MarginContainer/ScrollContainer/HBoxContainer" unique_id=1858992881]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
+mouse_filter = 1
 
 [node name="Panel9" type="Panel" parent="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control2/ToolsCraftingContainer2/MarginContainer/ScrollContainer/HBoxContainer" unique_id=1972736235]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
+mouse_filter = 1
 
 [node name="Control3" type="Control" parent="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer" unique_id=60720787]
 custom_minimum_size = Vector2(350, 68)
 layout_mode = 2
+mouse_filter = 2
 
 [node name="CraftingStationsCraftingContainer3" type="PanelContainer" parent="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control3" unique_id=1521193929]
 custom_minimum_size = Vector2(350, 66)
@@ -451,6 +492,7 @@ offset_right = 175.0
 offset_bottom = 30.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control3/CraftingStationsCraftingContainer3" unique_id=2047585564]
 layout_mode = 2
@@ -469,39 +511,48 @@ layout_mode = 2
 [node name="Panel" type="Panel" parent="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control3/CraftingStationsCraftingContainer3/MarginContainer/ScrollContainer/HBoxContainer" unique_id=304510543]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
+mouse_filter = 1
 
 [node name="Panel2" type="Panel" parent="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control3/CraftingStationsCraftingContainer3/MarginContainer/ScrollContainer/HBoxContainer" unique_id=524611281]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
+mouse_filter = 1
 
 [node name="Panel3" type="Panel" parent="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control3/CraftingStationsCraftingContainer3/MarginContainer/ScrollContainer/HBoxContainer" unique_id=28384053]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
+mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxFlat_ssfue")
 
 [node name="Panel4" type="Panel" parent="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control3/CraftingStationsCraftingContainer3/MarginContainer/ScrollContainer/HBoxContainer" unique_id=970044713]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
+mouse_filter = 1
 
 [node name="Panel5" type="Panel" parent="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control3/CraftingStationsCraftingContainer3/MarginContainer/ScrollContainer/HBoxContainer" unique_id=1958224000]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
+mouse_filter = 1
 
 [node name="Panel6" type="Panel" parent="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control3/CraftingStationsCraftingContainer3/MarginContainer/ScrollContainer/HBoxContainer" unique_id=1544186110]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
+mouse_filter = 1
 
 [node name="Panel7" type="Panel" parent="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control3/CraftingStationsCraftingContainer3/MarginContainer/ScrollContainer/HBoxContainer" unique_id=668187955]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
+mouse_filter = 1
 
 [node name="Panel8" type="Panel" parent="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control3/CraftingStationsCraftingContainer3/MarginContainer/ScrollContainer/HBoxContainer" unique_id=2131497509]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
+mouse_filter = 1
 
 [node name="Panel9" type="Panel" parent="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control3/CraftingStationsCraftingContainer3/MarginContainer/ScrollContainer/HBoxContainer" unique_id=578000557]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
+mouse_filter = 1
 
 [node name="Tooltip" type="RichTextLabel" parent="." unique_id=107183822]
 visible = false
@@ -510,17 +561,26 @@ offset_right = 300.0
 offset_bottom = 30.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+mouse_filter = 2
 theme = ExtResource("8_43w4t")
 bbcode_enabled = true
 fit_content = true
 scroll_active = false
 script = ExtResource("10_5ep0j")
 
-[connection signal="mouse_entered" from="InventoryUI/Hotbar" to="." method="_on_hotbar_mouse_entered"]
-[connection signal="mouse_exited" from="InventoryUI/Hotbar" to="." method="_on_hotbar_mouse_exited"]
+[connection signal="mouse_entered" from="InventoryUI/Hotbar/PanelContainer" to="." method="_on_hotbar_mouse_entered"]
+[connection signal="mouse_exited" from="InventoryUI/Hotbar/PanelContainer" to="." method="_on_hotbar_mouse_exited"]
+[connection signal="mouse_entered" from="InventoryUI/BasicCrafting" to="." method="_on_basic_crafting_mouse_entered"]
+[connection signal="mouse_exited" from="InventoryUI/BasicCrafting" to="." method="_on_basic_crafting_mouse_exited"]
+[connection signal="mouse_entered" from="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control/WeaponsCraftingContainer" to="." method="_on_weapons_crafting_container_mouse_entered"]
+[connection signal="mouse_exited" from="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control/WeaponsCraftingContainer" to="." method="_on_weapons_crafting_container_mouse_exited"]
 [connection signal="mouse_entered" from="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control/WeaponsCraftingContainer/MarginContainer/ScrollContainer/HBoxContainer/Glock" to="InventoryUI/BasicCrafting/BasicCraftingPanels" method="_on_glock_mouse_entered"]
 [connection signal="mouse_exited" from="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control/WeaponsCraftingContainer/MarginContainer/ScrollContainer/HBoxContainer/Glock" to="InventoryUI/BasicCrafting/BasicCraftingPanels" method="_on_glock_mouse_exited"]
 [connection signal="pressed" from="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control/WeaponsCraftingContainer/MarginContainer/ScrollContainer/HBoxContainer/Glock" to="InventoryUI/BasicCrafting" method="_on_glock_pressed"]
 [connection signal="mouse_entered" from="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control/WeaponsCraftingContainer/MarginContainer/ScrollContainer/HBoxContainer/Shotgun" to="InventoryUI/BasicCrafting/BasicCraftingPanels" method="_on_shotgun_mouse_entered"]
 [connection signal="mouse_exited" from="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control/WeaponsCraftingContainer/MarginContainer/ScrollContainer/HBoxContainer/Shotgun" to="InventoryUI/BasicCrafting/BasicCraftingPanels" method="_on_shotgun_mouse_exited"]
 [connection signal="pressed" from="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control/WeaponsCraftingContainer/MarginContainer/ScrollContainer/HBoxContainer/Shotgun" to="InventoryUI/BasicCrafting" method="_on_shotgun_pressed"]
+[connection signal="mouse_entered" from="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control2/ToolsCraftingContainer2" to="." method="_on_tools_crafting_container_2_mouse_entered"]
+[connection signal="mouse_exited" from="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control2/ToolsCraftingContainer2" to="." method="_on_tools_crafting_container_2_mouse_exited"]
+[connection signal="mouse_entered" from="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control3/CraftingStationsCraftingContainer3" to="." method="_on_crafting_stations_crafting_container_3_mouse_entered"]
+[connection signal="mouse_exited" from="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control3/CraftingStationsCraftingContainer3" to="." method="_on_crafting_stations_crafting_container_3_mouse_exited"]

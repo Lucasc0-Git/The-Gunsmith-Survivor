@@ -71,9 +71,29 @@ func _input(event: InputEvent) -> void:
 		toggle_inv()
 
 func _on_hotbar_mouse_entered() -> void:
-	weapon.hovering = true
-	print("entered")
-
+	toggle_hovering(true)
 func _on_hotbar_mouse_exited() -> void:
-	weapon.hovering = false
-	print("exit")
+	toggle_hovering(false)
+
+func _on_basic_crafting_mouse_entered() -> void:
+	toggle_hovering(true)
+func _on_basic_crafting_mouse_exited() -> void:
+	toggle_hovering(false)
+
+func _on_weapons_crafting_container_mouse_entered() -> void:
+	toggle_hovering(true)
+func _on_weapons_crafting_container_mouse_exited() -> void:
+	toggle_hovering(false)
+
+func _on_tools_crafting_container_2_mouse_entered() -> void:
+	toggle_hovering(true)
+func _on_tools_crafting_container_2_mouse_exited() -> void:
+	toggle_hovering(false)
+
+func _on_crafting_stations_crafting_container_3_mouse_entered() -> void:
+	toggle_hovering(true)
+func _on_crafting_stations_crafting_container_3_mouse_exited() -> void:
+	toggle_hovering(false)
+
+func toggle_hovering(hovering_on: bool) -> void:
+	weapon.hovering = hovering_on
