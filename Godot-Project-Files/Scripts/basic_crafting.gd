@@ -29,6 +29,7 @@ func _ready() -> void:
 	the_core.player_entered_crafting_area.connect(show_crafting)
 	the_core.player_exited_crafting_area.connect(hide_crafting)
 	
+	## When adding more craftable items, need to add here.
 	crafting_buttons[glock_button] = glock_item
 	crafting_buttons[shotgun_button] = shotgun_item
 	
@@ -42,11 +43,14 @@ func hide_crafting() -> void:
 		crafting_slot.button_pressed = false
 	var tween := create_tween()
 	tween.tween_property(self, "global_position", Vector2(-84.0, 122.0), 0.5)
+	await tween.finished
+	visible = false
 
 func show_crafting() -> void:
-	for crafting_slot in grid_container.get_children():
-		crafting_slot.mouse_filter = MOUSE_FILTER_PASS
-		crafting_slot.button_pressed = false
+	for crafting_button in grid_container.get_children():
+		crafting_button.mouse_filter = MOUSE_FILTER_PASS
+		crafting_button.button_pressed = false
+	visible = true
 	var tween := create_tween()
 	tween.tween_property(self, "global_position", Vector2(10.0, 122.0), 0.5)
 

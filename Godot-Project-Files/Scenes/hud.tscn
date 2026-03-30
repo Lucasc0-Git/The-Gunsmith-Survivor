@@ -18,6 +18,7 @@
 [ext_resource type="Theme" uid="uid://c31ap8kbywywe" path="res://Themes/CraftingButton.tres" id="14_ba8gd"]
 [ext_resource type="Texture2D" uid="uid://dgcfntfkmo1bg" path="res://Textures/SURVIVAL HORROR WEAPONS PACK 16X16/2.png" id="15_36s6t"]
 [ext_resource type="Texture2D" uid="uid://3pajlj58aaib" path="res://Textures/SURVIVAL HORROR WEAPONS PACK 16X16/4.png" id="16_36s6t"]
+[ext_resource type="Script" uid="uid://carukckvk4cbf" path="res://Scripts/crafting_tooltip.gd" id="17_pbtju"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_36asn"]
 content_margin_left = 10.0
@@ -122,6 +123,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 1
 
 [node name="Inventory" type="Control" parent="InventoryUI" unique_id=1444851400]
 custom_minimum_size = Vector2(346, 500)
@@ -211,6 +213,19 @@ grow_vertical = 2
 theme = SubResource("Theme_ssfue")
 script = ExtResource("10_piegi")
 
+[node name="CraftingTooltip" type="RichTextLabel" parent="InventoryUI/BasicCrafting" unique_id=1980866434]
+visible = false
+z_index = 6
+custom_minimum_size = Vector2(350, 30)
+layout_mode = 0
+offset_right = 350.0
+offset_bottom = 30.0
+theme = ExtResource("8_43w4t")
+bbcode_enabled = true
+fit_content = true
+scroll_active = false
+script = ExtResource("17_pbtju")
+
 [node name="PanelContainer" type="PanelContainer" parent="InventoryUI/BasicCrafting" unique_id=854520773]
 layout_mode = 1
 anchors_preset = 15
@@ -249,7 +264,7 @@ layout_mode = 2
 [node name="CraftingButton7" parent="InventoryUI/BasicCrafting/PanelContainer/GridContainer" unique_id=2008464431 instance=ExtResource("10_4f5kr")]
 layout_mode = 2
 
-[node name="BasicCraftingPanels" type="Control" parent="InventoryUI/BasicCrafting" unique_id=453566887]
+[node name="BasicCraftingPanels" type="Control" parent="InventoryUI/BasicCrafting" unique_id=453566887 node_paths=PackedStringArray("crafting_tooltip")]
 custom_minimum_size = Vector2(350, 476)
 layout_mode = 1
 anchors_preset = 0
@@ -257,6 +272,7 @@ offset_left = 84.0
 offset_right = 434.0
 offset_bottom = 476.0
 script = ExtResource("12_i2avg")
+crafting_tooltip = NodePath("../CraftingTooltip")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="InventoryUI/BasicCrafting/BasicCraftingPanels" unique_id=335783447]
 layout_mode = 1
@@ -314,6 +330,7 @@ expand_icon = true
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 theme = ExtResource("14_ba8gd")
+disabled = true
 icon = ExtResource("16_36s6t")
 icon_alignment = 1
 expand_icon = true
@@ -501,5 +518,9 @@ script = ExtResource("10_5ep0j")
 
 [connection signal="mouse_entered" from="InventoryUI/Hotbar" to="." method="_on_hotbar_mouse_entered"]
 [connection signal="mouse_exited" from="InventoryUI/Hotbar" to="." method="_on_hotbar_mouse_exited"]
+[connection signal="mouse_entered" from="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control/WeaponsCraftingContainer/MarginContainer/ScrollContainer/HBoxContainer/Glock" to="InventoryUI/BasicCrafting/BasicCraftingPanels" method="_on_glock_mouse_entered"]
+[connection signal="mouse_exited" from="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control/WeaponsCraftingContainer/MarginContainer/ScrollContainer/HBoxContainer/Glock" to="InventoryUI/BasicCrafting/BasicCraftingPanels" method="_on_glock_mouse_exited"]
 [connection signal="pressed" from="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control/WeaponsCraftingContainer/MarginContainer/ScrollContainer/HBoxContainer/Glock" to="InventoryUI/BasicCrafting" method="_on_glock_pressed"]
+[connection signal="mouse_entered" from="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control/WeaponsCraftingContainer/MarginContainer/ScrollContainer/HBoxContainer/Shotgun" to="InventoryUI/BasicCrafting/BasicCraftingPanels" method="_on_shotgun_mouse_entered"]
+[connection signal="mouse_exited" from="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control/WeaponsCraftingContainer/MarginContainer/ScrollContainer/HBoxContainer/Shotgun" to="InventoryUI/BasicCrafting/BasicCraftingPanels" method="_on_shotgun_mouse_exited"]
 [connection signal="pressed" from="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control/WeaponsCraftingContainer/MarginContainer/ScrollContainer/HBoxContainer/Shotgun" to="InventoryUI/BasicCrafting" method="_on_shotgun_pressed"]

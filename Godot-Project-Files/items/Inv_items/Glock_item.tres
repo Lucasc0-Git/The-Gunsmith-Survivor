@@ -13,6 +13,7 @@ id = "glock"
 icon = ExtResource("1_jx66i")
 display_name = "Glock"
 description = "A nice and grateful handgun."
+crafting_description = "Basic handgun"
 crafting_recipe = Dictionary[ExtResource("1_iujff"), int]({
 ExtResource("2_o4206"): 16
 })

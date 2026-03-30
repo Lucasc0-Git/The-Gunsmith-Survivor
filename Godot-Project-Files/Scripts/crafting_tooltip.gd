@@ -1,11 +1,11 @@
 extends RichTextLabel
-class_name Tooltip
+class_name CraftingTooltip
 
 ## The onready var declaration
-@onready var hud: Hud = get_parent()
+@onready var hud: Hud = get_parent().get_parent().get_parent()
 
 ## The basic var declaration
-var inventory: Inventory
+var basic_crafting: BasicCraftingUI = get_parent()
 
 func _ready() -> void:
 	var font_variation := FontVariation.new()
@@ -13,19 +13,33 @@ func _ready() -> void:
 	font_variation.spacing_glyph = 0
 	self.add_theme_font_override("normal_font", font_variation)
 
-func show_tooltip(slot_data: SlotData) -> void:
-	if slot_data.is_empty(): return
+func show_tooltip(item_data: ItemData) -> void:
+	if item_data == null: return
 	var bb : String = ""
-	bb += "[b]" + slot_data.item_data.display_name + "[/b]\n"
-	bb += slot_data.item_data.description + "\n\n"
-	if slot_data.item_data is WeaponItemData:
-		bb += "Damage: " + str(slot_data.item_data.weapon_data.damage) + " hp" + "\n"
-		bb += "Fire rate: " + str(slot_data.item_data.weapon_data.fire_rate) + "\n"
-	elif slot_data.item_data is HealItemData:
-		bb += "Heal: " + str(slot_data.item_data.heal_data.heal) + " hp" + "\n"
-	elif slot_data.item_data is JustItemData:
-		pass
 	
+	bb += "[b][i]" + "         " + "Craft:" + "[/i][/b]\n"
+	bb += "[b]" + str(item_data.display_name) + "[/b]\n"
+	if item_data.crafting_description == "":
+		bb += str(item_data.description) + "\n"
+	else:
+		bb += str(item_data.crafting_description) + "\n"
+	
+	if item_data is WeaponItemData:
+		bb += "-Damage: " + str(item_data.weapon_data.damage) + "\n"
+	elif item_data is HealItemData:
+		bb += "-HealPowah: " + str(item_data.heal_data.heal) + " "
+		if item_data.heal_data.over_time_heal:
+			bb += "over " + str(item_data.heal_data.time_healing) + "\n"
+		else:
+			bb += "\n"
+	elif item_data is JustItemData:
+		pass #Does nothing
+	
+	bb += "\n"
+	bb += "[b]" + "Crafting requirements:" + "[/b]\n"
+	var crafting_recipe: Dictionary[ItemData, int] = item_data.crafting_recipe
+	for item in crafting_recipe:
+		bb += str(crafting_recipe[item]) + "x " + str(item.display_name) + "\n"
 	
 	visible = true
 	self.bbcode_text = bb

@@ -14,6 +14,7 @@ id = "shotgun"
 icon = ExtResource("1_ctbmv")
 display_name = "Shotgun"
 description = "A nice, BIG, shootgun... shoot, I said shootgun again, didn't I? Anyways, it's  a SHOTGUN!"
+crafting_description = "It's a shotgun. Have expectations for that. shoots a lot of projectiles. Damage is PER PELLET."
 crafting_recipe = Dictionary[ExtResource("1_lhxjk"), int]({
 ExtResource("2_k8rhj"): 1,
 ExtResource("3_k8rhj"): 32
