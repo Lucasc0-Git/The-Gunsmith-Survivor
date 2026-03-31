@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://cd0qec70dw3nr"]
+
+[ext_resource type="PackedScene" uid="uid://dkitsyaxgt7kk" path="res://Scenes/BuildScene.tscn" id="1_1fo8t"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1fo8t"]
+resource_local_to_scene = true
+size = Vector2(10, 10)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_xt2a8"]
+size = Vector2(10, 30)
+
+[sub_resource type="Gradient" id="Gradient_1fo8t"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_nwv1x"]
+gradient = SubResource("Gradient_1fo8t")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.8304348, 0.8826087)
+
+[node name="TorchScene" unique_id=1835171183 node_paths=PackedStringArray("collision_shape") instance=ExtResource("1_1fo8t")]
+scale = Vector2(1, 1)
+collision_shape = NodePath("CollisionShape2D")
+
+[node name="CollisionShape2D" parent="." index="0" unique_id=2132263509]
+shape = SubResource("RectangleShape2D_1fo8t")
+
+[node name="Sprite2D" parent="." index="1" unique_id=880745754]
+position = Vector2(0, -10)
+texture = SubResource("PlaceholderTexture2D_xt2a8")
+
+[node name="PointLight2D" type="PointLight2D" parent="." index="2" unique_id=658442655]
+position = Vector2(0, -20)
+color = Color(0.98078555, 0.86241084, 0.1367845, 1)
+energy = 0.8
+texture = SubResource("GradientTexture2D_nwv1x")
+texture_scale = 8.52

@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://dkitsyaxgt7kk"]
+
+[ext_resource type="Script" uid="uid://cp7e21a3y70bn" path="res://Scripts/Building/build_scene.gd" id="1_xsqm1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a3tq2"]
+resource_local_to_scene = true
+
+[node name="BuildScene" type="StaticBody2D" unique_id=1835171183]
+scale = Vector2(3, 3)
+collision_layer = 8
+collision_mask = 0
+script = ExtResource("1_xsqm1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2132263509]
+shape = SubResource("RectangleShape2D_a3tq2")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=880745754]

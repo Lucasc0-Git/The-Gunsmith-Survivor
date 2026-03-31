@@ -1,6 +1,7 @@
 [gd_resource type="Resource" script_class="BuildData" format=3 uid="uid://bf004hbb1btvf"]
 
 [ext_resource type="Script" uid="uid://bvtttnj03tb3h" path="res://items/BuildItems/build_data.gd" id="1_ppw65"]
+[ext_resource type="PackedScene" uid="uid://cd0qec70dw3nr" path="res://Scenes/torch_scene.tscn" id="1_tgr3j"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_ppw65"]
 size = Vector2(3, 13)
@@ -9,4 +10,6 @@ size = Vector2(3, 13)
 script = ExtResource("1_ppw65")
 id = "torch"
 icon = SubResource("PlaceholderTexture2D_ppw65")
+build_scene = ExtResource("1_tgr3j")
+is_light_source = true
 metadata/_custom_type_script = "uid://bvtttnj03tb3h"

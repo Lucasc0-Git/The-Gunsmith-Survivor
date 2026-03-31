@@ -1,0 +1,2 @@
+extends BuildScene
+class_name StationBuildScene

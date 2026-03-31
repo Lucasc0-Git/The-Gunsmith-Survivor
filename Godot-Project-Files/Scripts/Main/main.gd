@@ -32,6 +32,9 @@ var player: Player
 @export_group("Enemies")
 @export var zombie_scene: PackedScene
 
+#@export_group("Building")
+#@export var torch_scene: PackedScene
+
 func _ready() -> void:
 	day_colors = {
 		6:  lighting_colors[TimeOfDay.DAWN],
@@ -52,6 +55,7 @@ func _ready() -> void:
 	hud.set_player(player)
 	player.set_vars(hud)
 	player.health_update.connect(hud.ui.health_changed)
+	player.main = self
 	map.player = player
 	map.region_generated.connect(_on_region_generated)
 	map.generate_region(Vector2i(0, 0))
@@ -128,6 +132,11 @@ func spawn_tree(pos: Vector2) -> void:
 	var tree := preload("res://Scenes/the_tree.tscn").instantiate()
 	tree.global_position = pos
 	Ysort.add_child(tree)
+
+func spawn_building(pos: Vector2, build_scene: PackedScene) -> void:
+	var building: BuildScene = build_scene.instantiate()
+	building.global_position = pos
+	Ysort.add_child(building)
 
 func add_spawner(pos: Vector2) -> void:
 	var spawner := preload("res://Scenes/enemy_spawner.tscn").instantiate()

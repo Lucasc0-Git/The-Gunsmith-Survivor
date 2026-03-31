@@ -21,6 +21,8 @@ var bullet_damage : float
 var hud : Hud
 var equipped_item: SlotData = null
 var hovering: bool = false
+var holding_build: bool = false
+var build_preview: BuildScene
 
 func _ready() -> void:
 	await get_tree().physics_frame
@@ -38,6 +40,9 @@ func equip_item(slot_data: SlotData) -> void:
 	equipped_item = slot_data
 	var item: ItemData = equipped_item.item_data
 	sprite.visible = true
+	if build_preview:
+		build_preview.collision_shape.set_deferred("disabled", true)
+		build_preview.visible = false
 	if item is WeaponItemData:
 		var w := item as WeaponItemData
 		weapon_data = w.weapon_data
@@ -55,10 +60,15 @@ func equip_item(slot_data: SlotData) -> void:
 	elif item is BuildItemData:
 		var b := item as BuildItemData
 		sprite.texture = b.build_data.icon
+		build_preview = item.build_data.build_scene.instantiate() #instantiate the build scene
+		build_preview.modulate = item.build_data.transparent_color #set transparency to 50
+		build_preview.collision_shape.set_deferred("disabled", true)
+		player.main.add_child(build_preview)
+		holding_build = true
 		can_shoot = true
 
 func is_holding_usable_item() -> bool:
-	return true if equipped_item.item_data is HealItemData or BuildItemData else false
+	return true if equipped_item.item_data is HealItemData else false
 
 ## Unequip the item
 func unequip() -> void:
@@ -70,6 +80,11 @@ func unequip() -> void:
 	can_shoot = false
 	reload_timer.stop()
 	bang_particles.emitting = false
+	holding_build = false
+	if build_preview:
+		build_preview.visible = false
+		build_preview.collision_shape.set_deferred("disabled", true)
+		build_preview.queue_free()
 
 func use_item(slot_data: SlotData) -> void:
 	equipped_item = slot_data
@@ -170,6 +185,17 @@ func _process(_delta: float) -> void:
 			pass
 		else:
 			pass
+	
+	if holding_build:
+		var mouse_pos := get_global_mouse_position()
+		var distance := global_position.distance_to(mouse_pos)
+		if distance <= player.build_reach:
+			build_preview.visible = true
+			build_preview.global_position = mouse_pos #update position of the preview to the mouse_pos
+		else:
+			build_preview.visible = false
+			#set build scene preview visible = false
+		
 	## Shoot if its supposed to shoot
 	if shooting and can_shoot and shoot_on and !hovering:
 		player.use_selected_item()

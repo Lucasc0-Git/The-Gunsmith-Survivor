@@ -11,6 +11,7 @@ var input_dir: Vector2 = Vector2.ZERO
 var picking_item: ItemData
 var hotbar_slots: Array[SlotData] = []
 var inv_toggled: bool = false
+var main: Main
 
 ## The @onready vars declaration
 @onready var anim_player: AnimatedSprite2D = $AnimatedSprite2D
@@ -24,6 +25,7 @@ var inv_toggled: bool = false
 @export var health_max := 100.0
 @export var health_regen_rate: float = 5
 @export var dodge_force: int = 400
+@export var build_reach: int = 800
 
 ## The const declaration.
 const SPEED: int = 200
