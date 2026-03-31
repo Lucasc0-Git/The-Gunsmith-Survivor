@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="HealItemData" format=3 uid="uid://c21s0v61v37yq"]
 
 [ext_resource type="Resource" uid="uid://bnn77w5wmsbbg" path="res://items/HealItems/Apple.tres" id="1_1vcr0"]
-[ext_resource type="Script" uid="uid://dgi6p7vrp0imi" path="res://Scripts/Items/ItemData.gd" id="1_32ang"]
-[ext_resource type="Script" uid="uid://dewbq7dx7jfw2" path="res://items/ItemData/HealItemData.gd" id="1_ngqfd"]
+[ext_resource type="Script" uid="uid://dgi6p7vrp0imi" path="res://Scripts/ItemData.gd" id="1_32ang"]
+[ext_resource type="Script" uid="uid://dewbq7dx7jfw2" path="res://Scripts/HealItemData.gd" id="1_ngqfd"]
 [ext_resource type="Resource" uid="uid://cc0anv7sdlwn4" path="res://items/Inv_items/Wood_item.tres" id="2_qbyc8"]
 [ext_resource type="Texture2D" uid="uid://boei0lpvb6jcx" path="res://Textures/Items/AppleTestImage kopie.png" id="2_s38bf"]
 

@@ -1,2 +1,0 @@
-extends BuildScene
-class_name StationScene

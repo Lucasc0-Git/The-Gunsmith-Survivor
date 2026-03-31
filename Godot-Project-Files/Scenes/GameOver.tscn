@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://c1lo7tyhnp1oq"]
 
 [ext_resource type="Shader" uid="uid://ca464l0rm344h" path="res://Shaders/Menu.gdshader" id="1_k52d1"]
-[ext_resource type="Script" uid="uid://c1sj23ub3rplu" path="res://Scripts/Main/game_over.gd" id="1_uib17"]
+[ext_resource type="Script" uid="uid://c1sj23ub3rplu" path="res://Scripts/game_over.gd" id="1_uib17"]
 [ext_resource type="StyleBox" uid="uid://drolhtsx8qlvs" path="res://Themes/BasicStyleBoxFlat.tres" id="2_ktc4i"]
 [ext_resource type="Theme" uid="uid://bjx8aflrkpmog" path="res://Themes/StartSceneButton.tres" id="3_ktc4i"]
 

@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="JustItemData" format=3 uid="uid://cc0anv7sdlwn4"]
 
 [ext_resource type="Texture2D" uid="uid://b5kew10tremef" path="res://Textures/Items/wood_item_texture.png" id="1_d80sy"]
-[ext_resource type="Script" uid="uid://dlibn88e2w8eo" path="res://items/ItemData/JustItemData.gd" id="1_r7nbb"]
+[ext_resource type="Script" uid="uid://dlibn88e2w8eo" path="res://Scripts/JustItemData.gd" id="1_r7nbb"]
 [ext_resource type="Resource" uid="uid://b78qijhvk7wy6" path="res://items/JustItems/wood.tres" id="2_onx5x"]
 
 [resource]

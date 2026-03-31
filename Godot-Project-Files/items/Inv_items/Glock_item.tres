@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="WeaponItemData" format=3 uid="uid://dmcom6xx0kjas"]
 
-[ext_resource type="Script" uid="uid://duhl153idv7v8" path="res://items/ItemData/WeaponItemData.gd" id="1_cv42g"]
-[ext_resource type="Script" uid="uid://dgi6p7vrp0imi" path="res://Scripts/Items/ItemData.gd" id="1_iujff"]
+[ext_resource type="Script" uid="uid://duhl153idv7v8" path="res://Scripts/WeaponItemData.gd" id="1_cv42g"]
+[ext_resource type="Script" uid="uid://dgi6p7vrp0imi" path="res://Scripts/ItemData.gd" id="1_iujff"]
 [ext_resource type="Texture2D" uid="uid://dgcfntfkmo1bg" path="res://Textures/SURVIVAL HORROR WEAPONS PACK 16X16/2.png" id="1_jx66i"]
 [ext_resource type="Resource" uid="uid://cc0anv7sdlwn4" path="res://items/Inv_items/Wood_item.tres" id="2_o4206"]
 [ext_resource type="Resource" uid="uid://clerpgrevvh7e" path="res://items/Weapons/Shooting_weapons/Glock.tres" id="3_iujff"]

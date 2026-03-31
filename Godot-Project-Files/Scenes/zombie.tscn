@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://c1c2jxjdkyb80"]
 
 [ext_resource type="PackedScene" uid="uid://ho13c5jj0sag" path="res://Scenes/enemy.tscn" id="1_h3kin"]
-[ext_resource type="Script" uid="uid://bg25d48du3ere" path="res://Scripts/Enemy/zombie.gd" id="2_n70j1"]
+[ext_resource type="Script" uid="uid://bg25d48du3ere" path="res://Scripts/zombie.gd" id="2_n70j1"]
 [ext_resource type="Texture2D" uid="uid://cb5fu83sce68g" path="res://Textures/player/bllblblbllb.png" id="3_iyl7r"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_iyl7r"]
@@ -35,6 +35,7 @@ height = 48.0
 
 [node name="Zombie" unique_id=1249180727 instance=ExtResource("1_h3kin")]
 script = ExtResource("2_n70j1")
+lunge_speed = 150
 speed = 60
 max_health = 50.0
 damage = 10.0

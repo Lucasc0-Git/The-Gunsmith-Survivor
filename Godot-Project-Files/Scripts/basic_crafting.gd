@@ -16,8 +16,6 @@ var glock_item: ItemData = ItemRegistry.items["glock"]
 var wood_item: ItemData = ItemRegistry.items["wood"]
 var shotgun_item: ItemData = ItemRegistry.items["shotgun"]
 
-var _tween: Tween
-
 func _ready() -> void:
 	for i in range(grid_container.get_child_count()):
 		var crafting_slot: Button = grid_container.get_child(i)
@@ -38,28 +36,23 @@ func _ready() -> void:
 	if inventory == null:
 		push_error("Inventory is null")
 
+
 func hide_crafting() -> void:
-	if _tween: _tween.kill()
 	for crafting_slot in grid_container.get_children():
 		crafting_slot.mouse_filter = MOUSE_FILTER_IGNORE
 		crafting_slot.button_pressed = false
-	_tween = create_tween()
-	_tween.set_ease(Tween.EASE_IN)
-	_tween.set_trans(Tween.TRANS_CUBIC)
-	_tween.tween_property(self, "global_position", Vector2(-84.0, 122.0), 0.5)
-	await _tween.finished
+	var tween := create_tween()
+	tween.tween_property(self, "global_position", Vector2(-84.0, 122.0), 0.5)
+	await tween.finished
 	visible = false
 
 func show_crafting() -> void:
-	if _tween: _tween.kill()
 	for crafting_button in grid_container.get_children():
 		crafting_button.mouse_filter = MOUSE_FILTER_PASS
 		crafting_button.button_pressed = false
 	visible = true
-	_tween = create_tween()
-	_tween.set_ease(Tween.EASE_OUT)
-	_tween.set_trans(Tween.TRANS_CUBIC)
-	_tween.tween_property(self, "global_position", Vector2(10.0, 122.0), 0.5)
+	var tween := create_tween()
+	tween.tween_property(self, "global_position", Vector2(10.0, 122.0), 0.5)
 
 func _on_button_toggled(toggled_on: bool, index: int) -> void:
 	if index == 0:

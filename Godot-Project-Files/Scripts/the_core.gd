@@ -25,13 +25,18 @@ func _ready() -> void:
 	progress_bar.value = max_health
 
 func take_damage(amount: float) -> void:
+	print("thecore was damaged")
 	health -= amount
 
 func _on_crafting_area_body_entered(body: Node2D) -> void:
+	print("body entered")
 	if body is Player:
 		player_entered_crafting_area.emit()
+		print("player entered")
 
 func _on_crafting_area_body_exited(body: Node2D) -> void:
+	print("body exited")
 	if body is Player:
 		player_exited_crafting_area.emit()
+		print("player exited")
 		
