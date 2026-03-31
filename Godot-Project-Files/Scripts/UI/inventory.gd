@@ -14,6 +14,7 @@ var glock_item : ItemData
 var shotgun_item : ItemData
 var apple_item : ItemData
 var wood_item : ItemData
+var torch_item: ItemData
 var basic_crafting: BasicCraftingUI
 
 var inv_slot : Slot
@@ -26,6 +27,7 @@ func _ready() -> void:
 	shotgun_item = ItemRegistry.items["shotgun"]
 	apple_item = ItemRegistry.items["apple"]
 	wood_item = ItemRegistry.items["wood"]
+	torch_item = ItemRegistry.items["torch"]
 	visible = false
 	## Give the inventory some slots
 	for i in range(20): #The range is how much slots will the inventory have
@@ -44,7 +46,7 @@ func _ready() -> void:
 	fill_slot(1, shotgun_item, 1)
 	fill_slot(4, apple_item, 16)
 	fill_slot(5, wood_item, 32)
-	
+	fill_slot(2, torch_item, 16)
 
 func _on_slot_right_click(slot: Slot) -> void:
 	var slot_data: SlotData = slot.slot_data.copy()

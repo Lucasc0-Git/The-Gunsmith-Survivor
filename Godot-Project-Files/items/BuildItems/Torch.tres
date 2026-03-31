@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="BuildData" format=3 uid="uid://bf004hbb1btvf"]
+
+[ext_resource type="Script" uid="uid://bvtttnj03tb3h" path="res://items/BuildItems/build_data.gd" id="1_ppw65"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_ppw65"]
+size = Vector2(3, 13)
+
+[resource]
+script = ExtResource("1_ppw65")
+id = "torch"
+icon = SubResource("PlaceholderTexture2D_ppw65")
+metadata/_custom_type_script = "uid://bvtttnj03tb3h"

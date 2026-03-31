@@ -2,6 +2,7 @@ extends Resource
 class_name ItemData
 
 ## Data for every item in the game
+
 @export var id: String ##Unique name (like "glock", "shotgun").
 @export var icon: Texture2D ##The texture of the item showed in inventory.
 @export var display_name: String ##The name of the item for da player.

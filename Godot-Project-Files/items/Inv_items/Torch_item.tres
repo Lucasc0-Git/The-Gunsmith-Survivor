@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="BuildItemData" format=3 uid="uid://b0725nycjx8ul"]
+
+[ext_resource type="Script" uid="uid://dgi6p7vrp0imi" path="res://items/ItemData/ItemData.gd" id="1_fm7p0"]
+[ext_resource type="Resource" uid="uid://bf004hbb1btvf" path="res://items/BuildItems/Torch.tres" id="1_pdhbd"]
+[ext_resource type="Script" uid="uid://bmqu0kgfa7xur" path="res://items/ItemData/BuildItemData.gd" id="2_pdhbd"]
+[ext_resource type="Resource" uid="uid://cc0anv7sdlwn4" path="res://items/Inv_items/Wood_item.tres" id="3_soymg"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_soymg"]
+size = Vector2(5, 10)
+
+[resource]
+script = ExtResource("2_pdhbd")
+build_data = ExtResource("1_pdhbd")
+id = "torch"
+icon = SubResource("PlaceholderTexture2D_soymg")
+display_name = "Torch"
+max_stack = 16
+description = "A basic light source."
+crafting_description = "A torch. Light source."
+crafting_recipe = Dictionary[ExtResource("1_fm7p0"), int]({
+ExtResource("3_soymg"): 5
+})
+metadata/_custom_type_script = "uid://bmqu0kgfa7xur"

@@ -52,9 +52,13 @@ func equip_item(slot_data: SlotData) -> void:
 		var j := item as JustItemData
 		sprite.texture = j.just_data.icon
 		can_shoot = true
+	elif item is BuildItemData:
+		var b := item as BuildItemData
+		sprite.texture = b.build_data.icon
+		can_shoot = true
 
 func is_holding_usable_item() -> bool:
-	return true if equipped_item.item_data is HealItemData else false
+	return true if equipped_item.item_data is HealItemData or BuildItemData else false
 
 ## Unequip the item
 func unequip() -> void:
@@ -81,8 +85,10 @@ func use_item(slot_data: SlotData) -> void:
 	## If equipped item is a "just", dont use it
 	elif equipped_item.item_data is JustItemData:
 		pass
-		
-		
+		if equipped_item.amount <= 0:
+			unequip()
+	elif equipped_item.item_data is BuildItemData:
+		pass
 		if equipped_item.amount <= 0:
 			unequip()
 
