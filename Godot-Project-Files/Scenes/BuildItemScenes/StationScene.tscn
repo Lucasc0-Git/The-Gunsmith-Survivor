@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://cnmmxeg4dq0jw"]
+
+[ext_resource type="PackedScene" uid="uid://bhxpwjtv47n1p" path="res://Scenes/BuildItemScenes/BuildScene.tscn" id="1_216jb"]
+[ext_resource type="Script" uid="uid://bn8g25hhoc751" path="res://Scripts/Building/station_scene.gd" id="2_i4sxr"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_i4sxr"]
+
+[node name="StationScene" unique_id=1281351029 instance=ExtResource("1_216jb")]
+script = ExtResource("2_i4sxr")
+
+[node name="CraftingArea" type="Area2D" parent="." index="2" unique_id=906568866]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CraftingArea" index="0" unique_id=77883417]
+shape = SubResource("CircleShape2D_i4sxr")

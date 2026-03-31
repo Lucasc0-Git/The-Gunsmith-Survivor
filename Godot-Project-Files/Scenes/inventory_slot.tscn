@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cgk6sjrudbc6"]
 
 [ext_resource type="Theme" uid="uid://cplvcielekxaa" path="res://Themes/inventory.tres" id="1_0v82l"]
-[ext_resource type="Script" uid="uid://dwv74hge5anpj" path="res://Scripts/slot.gd" id="2_0cu6i"]
+[ext_resource type="Script" uid="uid://dwv74hge5anpj" path="res://Scripts/HUD/slot.gd" id="2_0cu6i"]
 
 [node name="Panel" type="Panel" unique_id=1738040959]
 custom_minimum_size = Vector2(64, 64)

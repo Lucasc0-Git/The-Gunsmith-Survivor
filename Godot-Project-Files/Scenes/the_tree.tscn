@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://ccmkjea6pv848"]
 
-[ext_resource type="Script" uid="uid://bdy778vaxoajj" path="res://Scripts/the_tree.gd" id="1_fpmds"]
+[ext_resource type="Script" uid="uid://bdy778vaxoajj" path="res://Scripts/Main/the_tree.gd" id="1_fpmds"]
 [ext_resource type="Texture2D" uid="uid://dyk5ihx7hbhg0" path="res://Textures/Treee.png" id="1_w3pkm"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fpmds"]

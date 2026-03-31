@@ -32,6 +32,9 @@ var player: Player
 @export_group("Enemies")
 @export var zombie_scene: PackedScene
 
+@export_group("Buildable scenes")
+@export var torch: PackedScene
+
 func _ready() -> void:
 	day_colors = {
 		6:  lighting_colors[TimeOfDay.DAWN],
