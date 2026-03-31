@@ -1,12 +1,12 @@
 [gd_scene format=3 uid="uid://ho13c5jj0sag"]
 
-[ext_resource type="Script" uid="uid://bhlubgjn46op8" path="res://Scripts/enemy.gd" id="1_hghv2"]
-[ext_resource type="Script" uid="uid://di6gyib1icygt" path="res://Scripts/Enemy_state.gd" id="2_1f0kj"]
-[ext_resource type="Script" uid="uid://b2yd5jq123w1v" path="res://Scripts/EnemyChase.gd" id="2_0830c"]
-[ext_resource type="Script" uid="uid://d4mvxnt7s3rjv" path="res://Scripts/EnemyIdle.gd" id="3_ghaa6"]
-[ext_resource type="Script" uid="uid://bwronxr3hjho" path="res://Scripts/EnemyHit.gd" id="4_1dp5w"]
-[ext_resource type="Script" uid="uid://d0argl1pbkxmp" path="res://Scripts/EnemyWonder.gd" id="5_ghaa6"]
-[ext_resource type="Script" uid="uid://dkufaucbx0jxf" path="res://Scripts/EnemyChaseCore.gd" id="6_1dp5w"]
+[ext_resource type="Script" uid="uid://bhlubgjn46op8" path="res://Scripts/Enemy/enemy.gd" id="1_hghv2"]
+[ext_resource type="Script" uid="uid://di6gyib1icygt" path="res://Scripts/Enemy/Enemy_state.gd" id="2_1f0kj"]
+[ext_resource type="Script" uid="uid://b2yd5jq123w1v" path="res://Scripts/Enemy/EnemyChase.gd" id="2_0830c"]
+[ext_resource type="Script" uid="uid://d4mvxnt7s3rjv" path="res://Scripts/Enemy/EnemyIdle.gd" id="3_ghaa6"]
+[ext_resource type="Script" uid="uid://bwronxr3hjho" path="res://Scripts/Enemy/EnemyHit.gd" id="4_1dp5w"]
+[ext_resource type="Script" uid="uid://d0argl1pbkxmp" path="res://Scripts/Enemy/EnemyWonder.gd" id="5_ghaa6"]
+[ext_resource type="Script" uid="uid://dkufaucbx0jxf" path="res://Scripts/Enemy/EnemyChaseCore.gd" id="6_1dp5w"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hghv2"]
 

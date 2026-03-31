@@ -2,7 +2,7 @@
 
 [ext_resource type="Theme" uid="uid://c31ap8kbywywe" path="res://Themes/CraftingButton.tres" id="1_mnqv2"]
 [ext_resource type="Texture2D" uid="uid://dgcfntfkmo1bg" path="res://Textures/SURVIVAL HORROR WEAPONS PACK 16X16/2.png" id="2_mi3ei"]
-[ext_resource type="Script" uid="uid://batlm5mgn7pr7" path="res://Scripts/crafting_button.gd" id="3_mi3ei"]
+[ext_resource type="Script" uid="uid://batlm5mgn7pr7" path="res://Scripts/UI/crafting_button.gd" id="3_mi3ei"]
 
 [node name="CraftingButton" type="Button" unique_id=2118062267]
 custom_minimum_size = Vector2(64, 64)

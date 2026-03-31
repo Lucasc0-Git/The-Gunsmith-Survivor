@@ -1,14 +1,14 @@
 [gd_scene format=3 uid="uid://djlib2qfsxxql"]
 
 [ext_resource type="PackedScene" uid="uid://dw8ufghl04u8o" path="res://Scenes/Map.tscn" id="1_idj7w"]
-[ext_resource type="Script" uid="uid://cfk4px6e32ldd" path="res://Scripts/main.gd" id="1_rgh2o"]
+[ext_resource type="Script" uid="uid://cfk4px6e32ldd" path="res://Scripts/Main/main.gd" id="1_rgh2o"]
 [ext_resource type="PackedScene" uid="uid://c1c2jxjdkyb80" path="res://Scenes/zombie.tscn" id="2_vy5pj"]
 [ext_resource type="PackedScene" uid="uid://7mhxc0w7ug41" path="res://Scenes/hud.tscn" id="3_kln2b"]
 [ext_resource type="Theme" uid="uid://bjx8aflrkpmog" path="res://Themes/StartSceneButton.tres" id="5_pbw6q"]
-[ext_resource type="Script" uid="uid://cq08afe6nx2la" path="res://Scripts/menu.gd" id="5_v1gob"]
+[ext_resource type="Script" uid="uid://cq08afe6nx2la" path="res://Scripts/UI/menu.gd" id="5_v1gob"]
 [ext_resource type="Shader" uid="uid://ca464l0rm344h" path="res://Shaders/Menu.gdshader" id="6_jw32o"]
-[ext_resource type="Script" uid="uid://wwrophqv2bdi" path="res://Scripts/opt_menu.gd" id="8_50glp"]
-[ext_resource type="Script" uid="uid://dfs7h6re7rpbi" path="res://Scripts/save_question.gd" id="8_vy5pj"]
+[ext_resource type="Script" uid="uid://wwrophqv2bdi" path="res://Scripts/UI/opt_menu.gd" id="8_50glp"]
+[ext_resource type="Script" uid="uid://dfs7h6re7rpbi" path="res://Scripts/UI/save_question.gd" id="8_vy5pj"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_50glp"]
 shader = ExtResource("6_jw32o")

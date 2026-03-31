@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dfiondsloks5m"]
 
-[ext_resource type="Script" uid="uid://bga5iud4mq1iy" path="res://Scripts/dropped_item.gd" id="1_4ljfv"]
+[ext_resource type="Script" uid="uid://bga5iud4mq1iy" path="res://Scripts/UI/dropped_item.gd" id="1_4ljfv"]
 [ext_resource type="Texture2D" uid="uid://b5kew10tremef" path="res://Textures/Items/wood_item_texture.png" id="1_w6s0x"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4ljfv"]

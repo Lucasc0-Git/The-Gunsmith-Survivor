@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://s0p5vesfuqst"]
 
 [ext_resource type="Theme" uid="uid://8e2o6m6hejp5" path="res://Themes/the_core_health_bar.tres" id="1_ardag"]
-[ext_resource type="Script" uid="uid://d3h86ubploo74" path="res://Scripts/the_core.gd" id="1_nfbfl"]
+[ext_resource type="Script" uid="uid://d3h86ubploo74" path="res://Scripts/Main/the_core.gd" id="1_nfbfl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lfeib"]
 size = Vector2(32, 32)

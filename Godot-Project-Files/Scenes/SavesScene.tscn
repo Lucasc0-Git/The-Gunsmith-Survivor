@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://djsxi6qwus1el"]
 
-[ext_resource type="Script" uid="uid://b1ty3lehdh326" path="res://Scripts/saves_scene.gd" id="1_yg2bk"]
+[ext_resource type="Script" uid="uid://b1ty3lehdh326" path="res://Scripts/Main/saves_scene.gd" id="1_yg2bk"]
 [ext_resource type="Texture2D" uid="uid://cgvn2rp4tyj7h" path="res://Textures/Start_scene_bg_1.png" id="2_c3ypx"]
 [ext_resource type="Theme" uid="uid://bjx8aflrkpmog" path="res://Themes/StartSceneButton.tres" id="3_eodxt"]
 [ext_resource type="Texture2D" uid="uid://dfd37ht0kpmhd" path="res://Textures/TrashCan.png" id="4_tpvhh"]
