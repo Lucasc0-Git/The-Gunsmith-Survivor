@@ -68,7 +68,7 @@ func equip_item(slot_data: SlotData) -> void:
 		can_shoot = true
 
 func is_holding_usable_item() -> bool:
-	return true if equipped_item.item_data is HealItemData else false
+	return true if equipped_item.item_data is HealItemData or BuildItemData else false
 
 ## Unequip the item
 func unequip() -> void:
@@ -103,9 +103,15 @@ func use_item(slot_data: SlotData) -> void:
 		if equipped_item.amount <= 0:
 			unequip()
 	elif equipped_item.item_data is BuildItemData:
-		pass
+		_spawn_build()
 		if equipped_item.amount <= 0:
 			unequip()
+
+func _spawn_build() -> void:
+	if build_preview.visible:
+		var build_item := equipped_item.item_data as BuildItemData
+		player.main.spawn_building(get_global_mouse_position(), build_item.build_data.build_scene)
+		player.on_use_made()
 
 func _shoot_weapon() -> void:
 	bang_particles.emitting = true ##One shot emit.
@@ -123,6 +129,7 @@ func _use_heal_item() -> void:
 	var data := heal_item.heal_data
 	## Heal player by the [heal] amount
 	player.heal(data.heal)
+	player.on_use_made()
 
 ## Spawn bullet on position with direction
 func _spawn_bullet(i : int) -> void:

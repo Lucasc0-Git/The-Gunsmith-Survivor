@@ -163,7 +163,13 @@ func use_selected_item() -> void:
 	var selected_slot: Slot = get_selected_slot()
 	if selected_slot.slot_data == null or selected_slot.slot_data.is_empty(): return
 	weapon.use_item(selected_slot.slot_data)
+	#if weapon.is_holding_usable_item():
+		#selected_slot.remove_amount(1)
+
+func on_use_made() -> void:
 	if weapon.is_holding_usable_item():
+		var selected_slot: Slot = get_selected_slot()
+		if selected_slot.slot_data == null or selected_slot.slot_data.is_empty(): return
 		selected_slot.remove_amount(1)
 
 func get_selected_slot() -> Slot:
