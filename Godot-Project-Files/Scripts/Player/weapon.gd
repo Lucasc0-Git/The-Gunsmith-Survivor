@@ -97,6 +97,7 @@ func use_item(slot_data: SlotData) -> void:
 		_use_heal_item()
 		if equipped_item.amount <= 0:
 			unequip()
+		player.on_use_made()
 	## If equipped item is a "just", dont use it
 	elif equipped_item.item_data is JustItemData:
 		pass
@@ -106,12 +107,13 @@ func use_item(slot_data: SlotData) -> void:
 		_spawn_build()
 		if equipped_item.amount <= 0:
 			unequip()
+		if build_preview.visible:
+			player.on_use_made()
 
 func _spawn_build() -> void:
 	if build_preview.visible:
 		var build_item := equipped_item.item_data as BuildItemData
 		player.main.spawn_building(get_global_mouse_position(), build_item.build_data.build_scene)
-		player.on_use_made()
 
 func _shoot_weapon() -> void:
 	bang_particles.emitting = true ##One shot emit.
@@ -129,7 +131,6 @@ func _use_heal_item() -> void:
 	var data := heal_item.heal_data
 	## Heal player by the [heal] amount
 	player.heal(data.heal)
-	player.on_use_made()
 
 ## Spawn bullet on position with direction
 func _spawn_bullet(i : int) -> void:
