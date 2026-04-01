@@ -17,6 +17,7 @@ class_name Hud
 ## The basic var declaration
 var glock_item : ItemData
 var shotgun_item : ItemData
+var _inv_tween: Tween
 
 ## The signals declaration
 signal inv_toggled(visible: bool)
@@ -53,12 +54,22 @@ func set_player(p: Player) -> void:
 
 # Called when "E" is just pressed
 func toggle_inv() -> void:
+	if _inv_tween: _inv_tween.kill()
 	if inventory.visible == true: #If is the inventory visible, turn it invible
-		inventory.visible = false
 		inv_toggled.emit(false)
+		_inv_tween = create_tween()
+		_inv_tween.set_ease(Tween.EASE_IN)
+		_inv_tween.set_trans(Tween.TRANS_BACK)
+		_inv_tween.tween_property(inventory, "global_position", Vector2(467, -540), 0.35)
+		await _inv_tween.finished
+		inventory.visible = false
 	else: #If is the inventory invisible, turn it visible
-		inventory.visible = true
 		inv_toggled.emit(true)
+		inventory.visible = true
+		_inv_tween = create_tween()
+		_inv_tween.set_ease(Tween.EASE_OUT)
+		_inv_tween.set_trans(Tween.TRANS_BACK)
+		_inv_tween.tween_property(inventory, "global_position", Vector2(467, 110), 0.35)
 
 func tint_hud(new_color: Color, duration: float) -> void:
 	if new_color == canvas_modulate.color: return
