@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="BuildData" format=3 uid="uid://c1gk6yfutom3p"]
+
+[ext_resource type="Script" uid="uid://bvtttnj03tb3h" path="res://items/BuildItems/build_data.gd" id="1_dvwmd"]
+[ext_resource type="PackedScene" uid="uid://neto6ohpbjvb" path="res://Scenes/basic_station.tscn" id="1_fm854"]
+
+[sub_resource type="Gradient" id="Gradient_x8inx"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ummmy"]
+gradient = SubResource("Gradient_x8inx")
+width = 16
+height = 16
+
+[resource]
+script = ExtResource("1_dvwmd")
+id = "basic_station"
+icon = SubResource("GradientTexture2D_ummmy")
+build_scene = ExtResource("1_fm854")
+metadata/_custom_type_script = "uid://bvtttnj03tb3h"

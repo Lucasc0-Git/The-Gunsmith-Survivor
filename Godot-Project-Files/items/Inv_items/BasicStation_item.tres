@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="BuildItemData" format=3 uid="uid://bgrrw3rasvjj2"]
+
+[ext_resource type="Resource" uid="uid://c1gk6yfutom3p" path="res://items/BuildItems/BasicStation.tres" id="1_68yfr"]
+[ext_resource type="Script" uid="uid://dgi6p7vrp0imi" path="res://items/ItemData/ItemData.gd" id="1_rksjb"]
+[ext_resource type="Script" uid="uid://bmqu0kgfa7xur" path="res://items/ItemData/BuildItemData.gd" id="2_68yfr"]
+[ext_resource type="Resource" uid="uid://cc0anv7sdlwn4" path="res://items/Inv_items/Wood_item.tres" id="3_gmr3f"]
+
+[sub_resource type="Gradient" id="Gradient_gmr3f"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_7en5n"]
+gradient = SubResource("Gradient_gmr3f")
+width = 16
+height = 16
+
+[resource]
+script = ExtResource("2_68yfr")
+build_data = ExtResource("1_68yfr")
+id = "basic_station"
+icon = SubResource("GradientTexture2D_7en5n")
+display_name = "Basic Crafting Station"
+description = "A basic station for crafting. Unlocks the same recipes as The Core."
+crafting_recipe = Dictionary[ExtResource("1_rksjb"), int]({
+ExtResource("3_gmr3f"): 64
+})
+metadata/_custom_type_script = "uid://bmqu0kgfa7xur"

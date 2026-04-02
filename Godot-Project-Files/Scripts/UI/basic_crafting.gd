@@ -8,6 +8,8 @@ class_name BasicCraftingUI
 
 @onready var glock_button: Button = $BasicCraftingPanels/VBoxContainer/Control/WeaponsCraftingContainer/MarginContainer/ScrollContainer/HBoxContainer/Glock
 @onready var shotgun_button: Button = $BasicCraftingPanels/VBoxContainer/Control/WeaponsCraftingContainer/MarginContainer/ScrollContainer/HBoxContainer/Shotgun
+@onready var basic_station_button: Button = $BasicCraftingPanels/VBoxContainer/Control3/CraftingStationsCraftingContainer3/MarginContainer/ScrollContainer/HBoxContainer/BasicStation
+
 
 
 var crafting_buttons: Dictionary[Button, ItemData] = {} # Button -> ItemData
@@ -15,6 +17,8 @@ var crafting_buttons: Dictionary[Button, ItemData] = {} # Button -> ItemData
 var glock_item: ItemData = ItemRegistry.items["glock"]
 var wood_item: ItemData = ItemRegistry.items["wood"]
 var shotgun_item: ItemData = ItemRegistry.items["shotgun"]
+var torch_item: ItemData = ItemRegistry.items["torch"]
+var basic_crafting_item: ItemData = ItemRegistry.items["basic_station"]
 
 var _tween: Tween
 var player: Player
@@ -37,6 +41,7 @@ func _ready() -> void:
 	## When adding more craftable items, need to add here.
 	crafting_buttons[glock_button] = glock_item
 	crafting_buttons[shotgun_button] = shotgun_item
+	crafting_buttons[basic_station_button] = basic_crafting_item
 	
 	if inventory == null:
 		push_error("Inventory is null")
@@ -104,3 +109,9 @@ func _on_shotgun_pressed() -> void:
 ##The Tools crafting recipes.
 
 ##The Stations crafting recipes.
+
+func _on_basic_station_pressed() -> void:
+	if inventory == null: return
+	if inventory.can_craft(basic_crafting_item.crafting_recipe):
+		inventory.give_item(basic_crafting_item)
+		inventory.rm_items_by_recipe(basic_crafting_item.crafting_recipe)

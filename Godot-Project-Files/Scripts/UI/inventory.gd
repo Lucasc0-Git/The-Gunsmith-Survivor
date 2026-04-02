@@ -15,6 +15,7 @@ var shotgun_item : ItemData
 var apple_item : ItemData
 var wood_item : ItemData
 var torch_item: ItemData
+var basic_station_item: ItemData
 var basic_crafting: BasicCraftingUI
 
 var inv_slot : Slot
@@ -28,6 +29,7 @@ func _ready() -> void:
 	apple_item = ItemRegistry.items["apple"]
 	wood_item = ItemRegistry.items["wood"]
 	torch_item = ItemRegistry.items["torch"]
+	basic_station_item = ItemRegistry.items["basic_station"]
 	visible = false
 	## Give the inventory some slots
 	for i in range(20): #The range is how much slots will the inventory have
@@ -44,7 +46,7 @@ func _ready() -> void:
 		slot.connect("mouse_exited_slot", Callable(self, "_hide_tooltip"))
 	# Give some slots some items for debugging, needs to be removed after debugging
 	fill_slot(1, shotgun_item, 1)
-	fill_slot(4, apple_item, 16)
+	fill_slot(4, basic_station_item, 1)
 	fill_slot(5, wood_item, 32)
 	fill_slot(2, torch_item, 16)
 

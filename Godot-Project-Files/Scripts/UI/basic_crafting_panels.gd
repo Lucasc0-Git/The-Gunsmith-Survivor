@@ -31,3 +31,8 @@ func _on_shotgun_mouse_entered() -> void:
 	crafting_tooltip.show_tooltip(ItemRegistry.items["shotgun"])
 func _on_shotgun_mouse_exited() -> void:
 	crafting_tooltip.hide_tooltip()
+
+func _on_basic_station_mouse_entered() -> void:
+	crafting_tooltip.show_tooltip(ItemRegistry.items["basic_station"])
+func _on_basic_station_mouse_exited() -> void:
+	crafting_tooltip.hide_tooltip()

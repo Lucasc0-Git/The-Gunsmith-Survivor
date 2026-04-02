@@ -44,6 +44,8 @@ func equip_item(slot_data: SlotData) -> void:
 	if build_preview:
 		build_preview.collision_shape.set_deferred("disabled", true)
 		build_preview.visible = false
+		if build_preview is StationBuildScene:
+			build_preview.crafting_area.monitoring = false
 	if item is WeaponItemData:
 		var w := item as WeaponItemData
 		weapon_data = w.weapon_data
@@ -83,6 +85,8 @@ func unequip() -> void:
 	bang_particles.emitting = false
 	holding_build = false
 	if build_preview:
+		if build_preview is StationBuildScene:
+			build_preview.crafting_area.monitoring = false
 		build_preview.visible = false
 		build_preview.collision_shape.set_deferred("disabled", true)
 		build_preview.queue_free()
@@ -211,6 +215,10 @@ func _process(_delta: float) -> void:
 		var mouse_pos := get_global_mouse_position()
 		var distance := global_position.distance_to(mouse_pos)
 		if distance <= player.build_reach:
+			if build_preview is StationBuildScene:
+				if build_preview.crafting_area.monitoring:
+					build_preview.crafting_area.monitoring = false
+			
 			build_preview.visible = true
 			build_preview.global_position = mouse_pos #update position of the preview to the mouse_pos
 			var build_data: BuildItemData = equipped_item.item_data as BuildItemData

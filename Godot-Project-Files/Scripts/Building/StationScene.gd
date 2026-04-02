@@ -3,7 +3,7 @@ class_name StationBuildScene
 
 ##The ID used in determining, which type of crafting station ts is.
 @export var station_type: GameManager.StationType
-
+@export var crafting_area: Area2D
 
 func _on_crafting_area_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player"):
