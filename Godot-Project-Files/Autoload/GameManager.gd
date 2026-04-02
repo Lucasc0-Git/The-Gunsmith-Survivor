@@ -1,6 +1,8 @@
 extends Node
 ## Handle global things; autoload
 
+enum StationType {BASIC_CRAFTING, WEAPON_CRAFTING}
+
 var current_world_seed: int
 var time: float = 0.0
 var day_length: float = 600.0

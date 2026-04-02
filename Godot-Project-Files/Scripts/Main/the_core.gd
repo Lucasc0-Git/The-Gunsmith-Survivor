@@ -10,6 +10,7 @@ signal player_exited_crafting_area()
 signal core_health_changed(health: float)
 
 var main: Main
+var station_type: GameManager.StationType = GameManager.StationType.BASIC_CRAFTING
 
 var health: float = max_health:
 	set(value):
@@ -25,18 +26,19 @@ func _ready() -> void:
 	progress_bar.value = max_health
 
 func take_damage(amount: float) -> void:
-	print("thecore was damaged")
 	health -= amount
 
 func _on_crafting_area_body_entered(body: Node2D) -> void:
-	print("body entered")
 	if body is Player:
 		player_entered_crafting_area.emit()
-		print("player entered")
+		if station_type not in body.nearby_stations:
+			body.nearby_stations[station_type] = 0
+		body.nearby_stations[station_type] += 1
 
 func _on_crafting_area_body_exited(body: Node2D) -> void:
-	print("body exited")
 	if body is Player:
 		player_exited_crafting_area.emit()
-		print("player exited")
-		
+		if station_type in body.nearby_stations:
+			body.nearby_stations[station_type] -= 1
+			if body.nearby_stations[station_type] <= 0:
+				body.nearby_stations.erase(station_type)

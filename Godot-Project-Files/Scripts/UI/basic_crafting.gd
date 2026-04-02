@@ -17,6 +17,8 @@ var wood_item: ItemData = ItemRegistry.items["wood"]
 var shotgun_item: ItemData = ItemRegistry.items["shotgun"]
 
 var _tween: Tween
+var player: Player
+var crafting_shown: bool = false
 
 func _ready() -> void:
 	for i in range(grid_container.get_child_count()):
@@ -27,9 +29,10 @@ func _ready() -> void:
 	
 	await get_tree().process_frame
 	the_core = get_tree().get_first_node_in_group("thecore")
+	player = the_core.main.player
 	
-	the_core.player_entered_crafting_area.connect(show_crafting)
-	the_core.player_exited_crafting_area.connect(hide_crafting)
+	#the_core.player_entered_crafting_area.connect(show_crafting)
+	#the_core.player_exited_crafting_area.connect(hide_crafting)
 	
 	## When adding more craftable items, need to add here.
 	crafting_buttons[glock_button] = glock_item
@@ -41,6 +44,7 @@ func _ready() -> void:
 
 func hide_crafting() -> void:
 	if _tween: _tween.kill()
+	crafting_shown = false
 	for crafting_slot in grid_container.get_children():
 		crafting_slot.mouse_filter = MOUSE_FILTER_IGNORE
 		crafting_slot.button_pressed = false
@@ -53,6 +57,7 @@ func hide_crafting() -> void:
 
 func show_crafting() -> void:
 	if _tween: _tween.kill()
+	crafting_shown = true
 	for crafting_button in grid_container.get_children():
 		crafting_button.mouse_filter = MOUSE_FILTER_PASS
 		crafting_button.button_pressed = false
@@ -75,6 +80,12 @@ func _process(_delta: float) -> void:
 		for button: Button in crafting_buttons.keys():
 			var item: ItemData = crafting_buttons[button]
 			button.disabled = !inventory.can_craft(item.crafting_recipe)
+	if !crafting_shown:
+		if !player.nearby_stations.is_empty():
+			show_crafting()
+	if crafting_shown:
+		if player.nearby_stations.is_empty():
+			hide_crafting()
 
 ##The Weapons crafting recipes.
 

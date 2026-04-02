@@ -3,18 +3,22 @@
 [ext_resource type="PackedScene" uid="uid://dkitsyaxgt7kk" path="res://Scenes/BuildScene.tscn" id="1_iejvj"]
 [ext_resource type="Script" uid="uid://rqbv7ovyb2pi" path="res://Scripts/Building/StationScene.gd" id="2_xtbca"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_2qyj7"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iejvj"]
 resource_local_to_scene = true
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_3jsmu"]
 
 [node name="StationScene" unique_id=1835171183 instance=ExtResource("1_iejvj")]
 script = ExtResource("2_xtbca")
+station_type = 0
 
 [node name="CollisionShape2D" parent="." index="0" unique_id=2132263509]
-shape = SubResource("RectangleShape2D_2qyj7")
+shape = SubResource("RectangleShape2D_iejvj")
 
 [node name="CraftingArea" type="Area2D" parent="." index="2" unique_id=1112216995]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CraftingArea" index="0" unique_id=62476723]
 shape = SubResource("CircleShape2D_3jsmu")
+
+[connection signal="body_entered" from="CraftingArea" to="." method="_on_crafting_area_body_entered"]
+[connection signal="body_exited" from="CraftingArea" to="." method="_on_crafting_area_body_exited"]

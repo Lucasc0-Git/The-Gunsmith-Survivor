@@ -12,6 +12,7 @@ var picking_item: ItemData
 var hotbar_slots: Array[SlotData] = []
 var inv_toggled: bool = false
 var main: Main
+var nearby_stations: Dictionary[GameManager.StationType, int] = {}
 
 ## The @onready vars declaration
 @onready var anim_player: AnimatedSprite2D = $AnimatedSprite2D
