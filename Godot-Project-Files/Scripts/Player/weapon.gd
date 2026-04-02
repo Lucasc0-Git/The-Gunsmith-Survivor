@@ -23,6 +23,7 @@ var equipped_item: SlotData = null
 var hovering: bool = false
 var holding_build: bool = false
 var build_preview: BuildScene
+var can_place: bool = false
 
 func _ready() -> void:
 	await get_tree().physics_frame
@@ -61,7 +62,7 @@ func equip_item(slot_data: SlotData) -> void:
 		var b := item as BuildItemData
 		sprite.texture = b.build_data.icon
 		build_preview = item.build_data.build_scene.instantiate() #instantiate the build scene
-		build_preview.modulate = item.build_data.transparent_color #set transparency to 50
+		#build_preview.modulate = item.build_data.transparent_color #set transparency to 50
 		build_preview.collision_shape.set_deferred("disabled", true)
 		player.main.add_child(build_preview)
 		holding_build = true
@@ -104,16 +105,16 @@ func use_item(slot_data: SlotData) -> void:
 		if equipped_item.amount <= 0:
 			unequip()
 	elif equipped_item.item_data is BuildItemData:
-		_spawn_build()
-		if equipped_item.amount <= 0:
-			unequip()
-		if build_preview.visible:
-			player.on_use_made()
+		if can_place:
+			_spawn_build()
+			if equipped_item.amount <= 0:
+				unequip()
+			if build_preview.visible:
+				player.on_use_made()
 
 func _spawn_build() -> void:
-	if build_preview.visible:
-		var build_item := equipped_item.item_data as BuildItemData
-		player.main.spawn_building(get_global_mouse_position(), build_item.build_data.build_scene)
+	var build_item := equipped_item.item_data as BuildItemData
+	player.main.spawn_building(get_global_mouse_position(), build_item.build_data.build_scene)
 
 func _shoot_weapon() -> void:
 	bang_particles.emitting = true ##One shot emit.
@@ -166,6 +167,18 @@ func inv_toggled(inv_visible: bool) -> void:
 	else:
 		shoot_on = true
 
+func is_placement_valid() -> bool:
+	var space_state := get_world_2d().direct_space_state
+	var shape_query := PhysicsShapeQueryParameters2D.new()
+	shape_query.shape = build_preview.collision_shape.shape
+	shape_query.transform = build_preview.collision_shape.global_transform
+	
+	shape_query.collision_mask = 0b10001110 ##Works like: 0b+layer8(0=off, 1=on)+layer7+layer6+layer5+layer4+layer3+layer2+layer1
+	
+	shape_query.exclude = [build_preview.get_rid()]
+	var results := space_state.intersect_shape(shape_query)
+	return results.is_empty()
+
 func _process(_delta: float) -> void:
 	if equipped_item == null or equipped_item.is_empty():
 		return
@@ -200,8 +213,16 @@ func _process(_delta: float) -> void:
 		if distance <= player.build_reach:
 			build_preview.visible = true
 			build_preview.global_position = mouse_pos #update position of the preview to the mouse_pos
+			var build_data: BuildItemData = equipped_item.item_data as BuildItemData
+			if is_placement_valid():
+				build_preview.sprite.modulate = build_data.build_data.transparent_color
+				can_place = true
+			else:
+				build_preview.sprite.modulate = build_data.build_data.cant_build_color
+				can_place = false
 		else:
 			build_preview.visible = false
+			can_place = false
 			#set build scene preview visible = false
 		
 	## Shoot if its supposed to shoot
