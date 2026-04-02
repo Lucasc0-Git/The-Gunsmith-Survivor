@@ -106,5 +106,10 @@ func _on_crafting_stations_crafting_container_3_mouse_entered() -> void:
 func _on_crafting_stations_crafting_container_3_mouse_exited() -> void:
 	toggle_hovering(false)
 
+func _on_base_crafting_container_3_mouse_entered() -> void:
+	toggle_hovering(true)
+func _on_base_crafting_container_3_mouse_exited() -> void:
+	toggle_hovering(false)
+
 func toggle_hovering(hovering_on: bool) -> void:
 	weapon.hovering = hovering_on

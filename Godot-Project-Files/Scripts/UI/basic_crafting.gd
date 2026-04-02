@@ -9,6 +9,7 @@ class_name BasicCraftingUI
 @onready var glock_button: Button = $BasicCraftingPanels/VBoxContainer/Control/WeaponsCraftingContainer/MarginContainer/ScrollContainer/HBoxContainer/Glock
 @onready var shotgun_button: Button = $BasicCraftingPanels/VBoxContainer/Control/WeaponsCraftingContainer/MarginContainer/ScrollContainer/HBoxContainer/Shotgun
 @onready var basic_station_button: Button = $BasicCraftingPanels/VBoxContainer/Control3/CraftingStationsCraftingContainer3/MarginContainer/ScrollContainer/HBoxContainer/BasicStation
+@onready var torch_button: Button = $BasicCraftingPanels/VBoxContainer/Control4/BaseCraftingContainer3/MarginContainer/ScrollContainer/HBoxContainer/Torch
 
 
 
@@ -18,7 +19,7 @@ var glock_item: ItemData = ItemRegistry.items["glock"]
 var wood_item: ItemData = ItemRegistry.items["wood"]
 var shotgun_item: ItemData = ItemRegistry.items["shotgun"]
 var torch_item: ItemData = ItemRegistry.items["torch"]
-var basic_crafting_item: ItemData = ItemRegistry.items["basic_station"]
+var basic_station_item: ItemData = ItemRegistry.items["basic_station"]
 
 var _tween: Tween
 var player: Player
@@ -41,7 +42,8 @@ func _ready() -> void:
 	## When adding more craftable items, need to add here.
 	crafting_buttons[glock_button] = glock_item
 	crafting_buttons[shotgun_button] = shotgun_item
-	crafting_buttons[basic_station_button] = basic_crafting_item
+	crafting_buttons[basic_station_button] = basic_station_item
+	crafting_buttons[torch_button] = torch_item
 	
 	if inventory == null:
 		push_error("Inventory is null")
@@ -79,6 +81,8 @@ func _on_button_toggled(toggled_on: bool, index: int) -> void:
 		basic_craftings.toggle_tools_crafting(toggled_on)
 	elif index == 2:
 		basic_craftings.toggle_stations_crafting(toggled_on)
+	elif index == 3:
+		basic_craftings.toggle_base_crafting(toggled_on)
 
 func _process(_delta: float) -> void:
 	if visible:
@@ -112,6 +116,14 @@ func _on_shotgun_pressed() -> void:
 
 func _on_basic_station_pressed() -> void:
 	if inventory == null: return
-	if inventory.can_craft(basic_crafting_item.crafting_recipe):
-		inventory.give_item(basic_crafting_item)
-		inventory.rm_items_by_recipe(basic_crafting_item.crafting_recipe)
+	if inventory.can_craft(basic_station_item.crafting_recipe):
+		inventory.give_item(basic_station_item)
+		inventory.rm_items_by_recipe(basic_station_item.crafting_recipe)
+
+##The Base crafting recipes.
+
+func _on_torch_pressed() -> void:
+	if inventory == null: return
+	if inventory.can_craft(torch_item.crafting_recipe):
+		inventory.give_item(torch_item)
+		inventory.rm_items_by_recipe(torch_item.crafting_recipe)
