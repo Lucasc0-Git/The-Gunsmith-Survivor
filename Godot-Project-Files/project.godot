@@ -44,6 +44,10 @@ window/stretch/mode="canvas_items"
 movie_writer/ogv/encoding_speed=3
 movie_writer/movie_file="/home/lukas/Downloads/gg.avi"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/ai_assistant_hub/plugin.cfg")
+
 [file_customization]
 
 folder_colors={
@@ -171,6 +175,14 @@ Dodge={
 
 2d/default_gravity=0.0
 2d/default_gravity_vector=Vector2(0, 0)
+
+[plugins]
+
+ai_assistant_hub/llm_api="ollama_api"
+ai_assistant_hub/preferences/thinking_target=0
+ai_assistant_hub/preferences/skip_greeting=false
+ai_assistant_hub/preferences/always_scroll_to_bottom=false
+ai_assistant_hub/preferences/audio_hints=true
 
 [rendering]
 

@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="AIAssistantResource" format=3 uid="uid://cg6yfpspl5e8p"]
+
+[ext_resource type="Resource" uid="uid://c0xq2vafep0gu" path="res://addons/ai_assistant_hub/llm_providers/ollama.tres" id="1_jmu5b"]
+[ext_resource type="Script" uid="uid://0ktio6my85jv" path="res://addons/ai_assistant_hub/quick_prompts/ai_quick_prompt_resource.gd" id="2_xkil2"]
+[ext_resource type="Script" uid="uid://co0hawt8me3l4" path="res://addons/ai_assistant_hub/assistants/ai_assistant_resource.gd" id="3_ubcmu"]
+
+[resource]
+script = ExtResource("3_ubcmu")
+type_name = "Teacher"
+ai_model = "gemma4:latest"
+llm_provider = ExtResource("1_jmu5b")
+ai_description = "You are a useful Godot AI assistant. You will give me answers to simple questions about doing something in the Godot Game Engine. You will teach me, how to do it, and why is it the best way. Do not use ** ** for bold type of text."

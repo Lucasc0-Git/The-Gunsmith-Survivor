@@ -1,0 +1,75 @@
+[gd_scene load_steps=9 format=3 uid="uid://dxr0f1xqsje6b"]
+
+[ext_resource type="Texture2D" uid="uid://ba07lvip5fjtx" path="res://addons/ai_assistant_hub/graphics/portraits/portraits_base.png" id="1_6ygms"]
+[ext_resource type="Script" path="res://addons/ai_assistant_hub/bot_portrait.gd" id="1_irxow"]
+[ext_resource type="Texture2D" uid="uid://bqkxfvi24xl6c" path="res://addons/ai_assistant_hub/graphics/portraits/portraits_mouth.png" id="2_5emjf"]
+[ext_resource type="Texture2D" uid="uid://bcfkhh3ljqe6g" path="res://addons/ai_assistant_hub/graphics/portraits/portraits_eyes.png" id="3_opry7"]
+[ext_resource type="Texture2D" uid="uid://crtbbm01emvsf" path="res://addons/ai_assistant_hub/graphics/portraits/portrait_think_hand.png" id="4_yrvbr"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_684wr"]
+atlas = ExtResource("1_6ygms")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_82r0e"]
+atlas = ExtResource("2_5emjf")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kykyr"]
+atlas = ExtResource("3_opry7")
+region = Rect2(0, 0, 16, 16)
+
+[node name="BotPortrait" type="Control"]
+auto_translate_mode = 1
+layout_mode = 3
+anchors_preset = 0
+offset_right = 48.0
+offset_bottom = 48.0
+pivot_offset = Vector2(24, 48)
+size_flags_horizontal = 0
+size_flags_vertical = 0
+script = ExtResource("1_irxow")
+
+[node name="PortraitBase" type="TextureRect" parent="."]
+unique_name_in_owner = true
+auto_translate_mode = 1
+texture_filter = 1
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 0
+offset_right = 48.0
+offset_bottom = 48.0
+texture = SubResource("AtlasTexture_684wr")
+expand_mode = 3
+
+[node name="PortraitMouth" type="TextureRect" parent="."]
+unique_name_in_owner = true
+auto_translate_mode = 1
+texture_filter = 1
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 0
+offset_right = 48.0
+offset_bottom = 48.0
+texture = SubResource("AtlasTexture_82r0e")
+expand_mode = 3
+
+[node name="PortraitEyes" type="TextureRect" parent="."]
+unique_name_in_owner = true
+auto_translate_mode = 1
+texture_filter = 1
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 0
+offset_right = 48.0
+offset_bottom = 48.0
+texture = SubResource("AtlasTexture_kykyr")
+expand_mode = 3
+
+[node name="PortraitThinking" type="TextureRect" parent="."]
+unique_name_in_owner = true
+auto_translate_mode = 1
+visible = false
+texture_filter = 1
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 0
+offset_right = 48.0
+offset_bottom = 48.0
+texture = ExtResource("4_yrvbr")
+expand_mode = 3

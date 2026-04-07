@@ -33,7 +33,7 @@ position = Vector2(0, -2)
 shape = SubResource("RectangleShape2D_1fo8t")
 
 [node name="PointLight2D" type="PointLight2D" parent="." index="2" unique_id=658442655]
-position = Vector2(0, -20)
+position = Vector2(0, -23)
 color = Color(0.9999997, 0.7664219, 0.06867281, 1)
 energy = 0.8
 shadow_color = Color(0, 0, 0, 0.4117647)

@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="AIAssistantResource" format=3 uid="uid://c5d6f3symfphm"]
+
+[ext_resource type="Resource" uid="uid://c0xq2vafep0gu" path="res://addons/ai_assistant_hub/llm_providers/ollama.tres" id="1_0xnat"]
+[ext_resource type="Script" uid="uid://0ktio6my85jv" path="res://addons/ai_assistant_hub/quick_prompts/ai_quick_prompt_resource.gd" id="2_8qfg0"]
+[ext_resource type="Script" uid="uid://co0hawt8me3l4" path="res://addons/ai_assistant_hub/assistants/ai_assistant_resource.gd" id="3_llo51"]
+
+[sub_resource type="Resource" id="Resource_0xnat"]
+script = ExtResource("2_8qfg0")
+action_name = "Check"
+action_prompt = "Check the current script file contents, and tell me, how efficient each function is, and suggest, how would you change it to be better."
+metadata/_custom_type_script = "uid://0ktio6my85jv"
+
+[resource]
+script = ExtResource("3_llo51")
+type_name = "Checker"
+ai_model = "gemma4:26b"
+llm_provider = ExtResource("1_0xnat")
+ai_description = "You are a useful Godot AI assistant. You will check my project, and answer the upcoming questions."
+use_custom_temperature = true
+custom_temperature = 0.07
+quick_prompts = Array[ExtResource("2_8qfg0")]([SubResource("Resource_0xnat")])
