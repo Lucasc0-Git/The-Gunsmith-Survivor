@@ -7,3 +7,4 @@ export_presets.cfg
 *.zip
 *.exe
 /android/
+/Godot-Project-Files/addons
