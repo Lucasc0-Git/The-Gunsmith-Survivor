@@ -34,7 +34,7 @@ scale = Vector2(2, 2)
 texture = ExtResource("1_vlxeq")
 
 [node name="DespawnTimer" type="Timer" parent="." unique_id=147144398]
-wait_time = 5.0
+autostart = true
 
 [node name="HitParticles" type="CPUParticles2D" parent="." unique_id=397815156]
 z_index = 2

@@ -20,7 +20,8 @@ var has_hit: bool = false
 
 func _ready() -> void:
 	## Start the timer for despawn
-	despawn_timer.start()
+	#despawn_timer.start()
+	pass
 
 func _physics_process(delta: float) -> void:
 	## Move the bullet
