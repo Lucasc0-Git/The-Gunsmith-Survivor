@@ -19,7 +19,6 @@
 [ext_resource type="Texture2D" uid="uid://dgcfntfkmo1bg" path="res://Textures/SURVIVAL HORROR WEAPONS PACK 16X16/2.png" id="15_36s6t"]
 [ext_resource type="Texture2D" uid="uid://3pajlj58aaib" path="res://Textures/SURVIVAL HORROR WEAPONS PACK 16X16/4.png" id="16_36s6t"]
 [ext_resource type="Script" uid="uid://carukckvk4cbf" path="res://Scripts/UI/crafting_tooltip.gd" id="17_pbtju"]
-[ext_resource type="Texture2D" uid="uid://lwhn68c5vlhm" path="res://icon.svg" id="19_yidpd"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_36asn"]
 content_margin_left = 10.0
@@ -520,7 +519,8 @@ layout_mode = 2
 mouse_filter = 1
 theme = ExtResource("14_ba8gd")
 disabled = true
-icon = ExtResource("19_yidpd")
+text = "Basic
+station"
 icon_alignment = 1
 expand_icon = true
 

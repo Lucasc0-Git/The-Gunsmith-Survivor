@@ -36,6 +36,7 @@ var player: Player
 #@export var torch_scene: PackedScene
 
 func _ready() -> void:
+	GameManager.main = self
 	day_colors = {
 		6:  lighting_colors[TimeOfDay.DAWN],
 		7:  lighting_colors[TimeOfDay.SUNRISE],

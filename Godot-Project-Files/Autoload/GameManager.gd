@@ -8,6 +8,7 @@ var time: float = 0.0
 var day_length: float = 600.0
 var current_hour: int = 0
 var current_day: int = 0
+var main: Main = null
 
 signal hour_changed(hour: int)
 signal day_changed(day: int)
