@@ -11,7 +11,7 @@ gradient = SubResource("Gradient_wuyca")
 resource_local_to_scene = true
 size = Vector2(14.333333, 21)
 
-[node name="BasicStation" unique_id=1835171183 groups=["object"] instance=ExtResource("1_wuyca")]
+[node name="BasicStation" unique_id=1835171183 instance=ExtResource("1_wuyca")]
 
 [node name="Sprite2D" parent="." index="0" unique_id=880745754]
 scale = Vector2(0.23958331, 0.35416666)

@@ -12,6 +12,7 @@ collision_mask = 0
 script = ExtResource("1_xsqm1")
 collision_shape = NodePath("CollisionShape2D")
 sprite = NodePath("Sprite2D")
+item_id = "apple"
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=880745754]
 

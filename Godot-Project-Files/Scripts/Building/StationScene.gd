@@ -1,3 +1,4 @@
+@tool
 extends BuildScene
 class_name StationBuildScene
 
