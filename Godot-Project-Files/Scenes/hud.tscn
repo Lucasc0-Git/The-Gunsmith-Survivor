@@ -16,9 +16,12 @@
 [ext_resource type="Script" uid="uid://do5m5a13h1vqj" path="res://Scripts/UI/basic_crafting.gd" id="10_piegi"]
 [ext_resource type="Script" uid="uid://bftatnjf1boxh" path="res://Scripts/UI/basic_crafting_panels.gd" id="12_i2avg"]
 [ext_resource type="Theme" uid="uid://c31ap8kbywywe" path="res://Themes/CraftingButton.tres" id="14_ba8gd"]
-[ext_resource type="Texture2D" uid="uid://dgcfntfkmo1bg" path="res://Textures/SURVIVAL HORROR WEAPONS PACK 16X16/2.png" id="15_36s6t"]
-[ext_resource type="Texture2D" uid="uid://3pajlj58aaib" path="res://Textures/SURVIVAL HORROR WEAPONS PACK 16X16/4.png" id="16_36s6t"]
+[ext_resource type="Texture2D" uid="uid://c8mcf46l4fjrm" path="res://Textures/SURVIVAL HORROR WEAPONS PACK 16X16/2.png" id="15_36s6t"]
+[ext_resource type="Texture2D" uid="uid://c0p2t6ihuh23p" path="res://Textures/SURVIVAL HORROR WEAPONS PACK 16X16/4.png" id="16_36s6t"]
 [ext_resource type="Script" uid="uid://carukckvk4cbf" path="res://Scripts/UI/crafting_tooltip.gd" id="17_pbtju"]
+[ext_resource type="Theme" uid="uid://6ytu8ksu8rvq" path="res://Themes/BaseContainer.tres" id="20_0iicw"]
+[ext_resource type="Script" uid="uid://bjnq6fqwqrmfx" path="res://Scripts/UI/build_tooltip.gd" id="20_ajim5"]
+[ext_resource type="Theme" uid="uid://bjx8aflrkpmog" path="res://Themes/StartSceneButton.tres" id="20_yidpd"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_36asn"]
 content_margin_left = 10.0
@@ -661,6 +664,32 @@ fit_content = true
 scroll_active = false
 script = ExtResource("10_5ep0j")
 
+[node name="BuildTooltip" type="Control" parent="." unique_id=1296959716]
+layout_mode = 3
+anchors_preset = 0
+mouse_filter = 2
+script = ExtResource("20_ajim5")
+
+[node name="PanelContainer" type="PanelContainer" parent="BuildTooltip" unique_id=547595057]
+custom_minimum_size = Vector2(125, 100)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme = ExtResource("20_0iicw")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="BuildTooltip/PanelContainer" unique_id=1913114533]
+layout_mode = 2
+
+[node name="PickUpButton" type="Button" parent="BuildTooltip/PanelContainer/VBoxContainer" unique_id=828472040]
+layout_mode = 2
+theme = ExtResource("20_yidpd")
+text = "Pick up"
+
+[node name="TestButton" type="Button" parent="BuildTooltip/PanelContainer/VBoxContainer" unique_id=620661210]
+layout_mode = 2
+theme = ExtResource("20_yidpd")
+text = "Test"
+
 [connection signal="mouse_entered" from="InventoryUI/Hotbar/PanelContainer" to="." method="_on_hotbar_mouse_entered"]
 [connection signal="mouse_exited" from="InventoryUI/Hotbar/PanelContainer" to="." method="_on_hotbar_mouse_exited"]
 [connection signal="mouse_entered" from="InventoryUI/BasicCrafting" to="." method="_on_basic_crafting_mouse_entered"]
@@ -685,3 +714,5 @@ script = ExtResource("10_5ep0j")
 [connection signal="mouse_entered" from="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control4/BaseCraftingContainer3/MarginContainer/ScrollContainer/HBoxContainer/Torch" to="InventoryUI/BasicCrafting/BasicCraftingPanels" method="_on_torch_mouse_entered"]
 [connection signal="mouse_exited" from="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control4/BaseCraftingContainer3/MarginContainer/ScrollContainer/HBoxContainer/Torch" to="InventoryUI/BasicCrafting/BasicCraftingPanels" method="_on_torch_mouse_exited"]
 [connection signal="pressed" from="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control4/BaseCraftingContainer3/MarginContainer/ScrollContainer/HBoxContainer/Torch" to="InventoryUI/BasicCrafting" method="_on_torch_pressed"]
+[connection signal="pressed" from="BuildTooltip/PanelContainer/VBoxContainer/PickUpButton" to="BuildTooltip" method="_on_pick_up_button_pressed"]
+[connection signal="pressed" from="BuildTooltip/PanelContainer/VBoxContainer/TestButton" to="BuildTooltip" method="_on_test_button_pressed"]

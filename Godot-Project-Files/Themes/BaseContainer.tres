@@ -1,0 +1,7 @@
+[gd_resource type="Theme" format=3 uid="uid://6ytu8ksu8rvq"]
+
+[ext_resource type="StyleBox" uid="uid://drolhtsx8qlvs" path="res://Themes/BasicStyleBoxFlat.tres" id="1_186ws"]
+
+[resource]
+default_font_size = 16
+PanelContainer/styles/panel = ExtResource("1_186ws")

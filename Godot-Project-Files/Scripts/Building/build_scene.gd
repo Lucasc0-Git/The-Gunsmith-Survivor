@@ -4,14 +4,21 @@ class_name BuildScene
 
 @export var collision_shape: CollisionShape2D
 @export var sprite: Sprite2D
+@export var mouse_input: Area2D
 
 var _item_id: String = ""
+var main: Main
 
 func _ready() -> void:
 	if Engine.is_editor_hint():
 		if ItemRegistry.items.is_empty():
 			await ItemRegistry.items_loaded
 		notify_property_list_changed()
+	mouse_input.input_event.connect(_on_input_event)
+	if GameManager.main != null:
+		main = GameManager.main
+	else:
+		printerr("The 'main' variable in build_scene.gd is null!")
 
 func _get_property_list() -> Array[Dictionary]:
 	var ids := PackedStringArray()
@@ -50,3 +57,9 @@ func get_item_data() -> ItemData:
 	if _item_id == "" or not Engine.has_singleton("ItemRegistry"):
 		return null
 	return ItemRegistry.items.get(_item_id, null)
+
+func _on_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
+	if event is InputEventMouseButton and event.pressed:
+		if event.button_index == MOUSE_BUTTON_RIGHT:
+			if main:
+				main.show_build_item_tooltip(get_global_mouse_position())

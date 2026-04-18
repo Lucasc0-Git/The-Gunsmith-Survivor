@@ -156,6 +156,10 @@ func spawn_the_core(pos: Vector2) -> void:
 	the_core.main = self
 	Ysort.add_child(the_core)
 
+func show_build_item_tooltip(pos: Vector2) -> void:
+	pass
+	print("imagine showing the tooltip.")
+
 func show_menu() -> void:
 	menu.visible = true
 	get_tree().paused = true
