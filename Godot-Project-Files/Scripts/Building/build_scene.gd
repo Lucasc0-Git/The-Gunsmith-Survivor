@@ -54,7 +54,7 @@ func _set(property: StringName, value: Variant) -> bool:
 	return false
 
 func get_item_data() -> ItemData:
-	if _item_id == "" or not Engine.has_singleton("ItemRegistry"):
+	if _item_id == "":
 		return null
 	return ItemRegistry.items.get(_item_id, null)
 
@@ -62,4 +62,4 @@ func _on_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> voi
 	if event is InputEventMouseButton and event.pressed:
 		if event.button_index == MOUSE_BUTTON_RIGHT:
 			if main:
-				main.show_build_item_tooltip(get_global_mouse_position())
+				main.show_build_item_tooltip(self)

@@ -9,6 +9,8 @@
 [ext_resource type="Shader" uid="uid://ca464l0rm344h" path="res://Shaders/Menu.gdshader" id="6_jw32o"]
 [ext_resource type="Script" uid="uid://wwrophqv2bdi" path="res://Scripts/UI/opt_menu.gd" id="8_50glp"]
 [ext_resource type="Script" uid="uid://dfs7h6re7rpbi" path="res://Scripts/UI/save_question.gd" id="8_vy5pj"]
+[ext_resource type="Script" uid="uid://bjnq6fqwqrmfx" path="res://Scripts/UI/build_tooltip.gd" id="10_4kpch"]
+[ext_resource type="Theme" uid="uid://6ytu8ksu8rvq" path="res://Themes/BaseContainer.tres" id="11_grg3l"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_50glp"]
 shader = ExtResource("6_jw32o")
@@ -295,10 +297,11 @@ Button/styles/hover = SubResource("StyleBoxFlat_kk5q7")
 Button/styles/normal = SubResource("StyleBoxFlat_gcwlc")
 Button/styles/pressed = SubResource("StyleBoxFlat_dgtb2")
 
-[node name="Main" type="Node2D" unique_id=211418808]
+[node name="Main" type="Node2D" unique_id=211418808 node_paths=PackedStringArray("build_tooltip")]
 process_mode = 3
 script = ExtResource("1_rgh2o")
 lighting_colors = Array[Color]([Color(0.23152995, 0.41536132, 0.7279383, 1), Color(0.9226321, 0.57512456, 0.3179874, 1), Color(1, 1, 1, 1), Color(0.93009645, 0.56672215, 0.35932958, 1), Color(0.26177257, 0.4113937, 0.7190747, 1), Color(0.15909046, 0.15919095, 0.2919402, 1)])
+build_tooltip = NodePath("BuildTooltip")
 inventory_darken = Color(0.728822, 0.728822, 0.728822, 1)
 zombie_scene = ExtResource("2_vy5pj")
 
@@ -564,6 +567,45 @@ layout_mode = 2
 theme = SubResource("Theme_vy5pj")
 text = "Back"
 
+[node name="BuildTooltip" type="CanvasLayer" parent="." unique_id=1845281441]
+layer = 7
+visible = false
+script = ExtResource("10_4kpch")
+
+[node name="Control" type="Control" parent="BuildTooltip" unique_id=81234873]
+z_index = 6
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="BuildTooltip/Control" unique_id=503169070]
+custom_minimum_size = Vector2(125, 100)
+layout_mode = 0
+offset_right = 125.0
+offset_bottom = 100.0
+mouse_filter = 2
+theme = ExtResource("11_grg3l")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="BuildTooltip/Control/PanelContainer" unique_id=1493988741]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="PickUpButton" type="Button" parent="BuildTooltip/Control/PanelContainer/VBoxContainer" unique_id=2078925280]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme = ExtResource("5_pbw6q")
+theme_override_font_sizes/font_size = 18
+text = "Pick up"
+
+[node name="TestButton" type="Button" parent="BuildTooltip/Control/PanelContainer/VBoxContainer" unique_id=852486425]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme = ExtResource("5_pbw6q")
+theme_override_font_sizes/font_size = 18
+text = "Test"
+
 [connection signal="pressed" from="Menu/PauseMenu/VBoxContainer/ResumeButton" to="Menu" method="_on_resume_button_pressed"]
 [connection signal="pressed" from="Menu/PauseMenu/VBoxContainer/MenuButton" to="Menu" method="_on_menu_button_pressed"]
 [connection signal="pressed" from="Menu/PauseMenu/VBoxContainer/OptionsButton" to="Menu" method="_on_options_button_pressed"]
@@ -572,3 +614,6 @@ text = "Back"
 [connection signal="pressed" from="Menu/SaveQuestion/HBoxContainer/NoButton" to="Menu/SaveQuestion" method="_on_no_button_pressed"]
 [connection signal="pressed" from="Menu/SaveQuestion/BoxContainer/BackButton" to="Menu/SaveQuestion" method="_on_back_button_pressed"]
 [connection signal="pressed" from="Menu/OptMenu/VBoxContainer2/BackButton" to="Menu/OptMenu" method="_on_back_button_pressed"]
+[connection signal="visibility_changed" from="BuildTooltip" to="BuildTooltip" method="_on_visibility_changed"]
+[connection signal="pressed" from="BuildTooltip/Control/PanelContainer/VBoxContainer/PickUpButton" to="BuildTooltip" method="_on_pick_up_button_pressed"]
+[connection signal="pressed" from="BuildTooltip/Control/PanelContainer/VBoxContainer/TestButton" to="BuildTooltip" method="_on_test_button_pressed"]

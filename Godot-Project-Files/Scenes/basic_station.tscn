@@ -11,6 +11,9 @@ gradient = SubResource("Gradient_wuyca")
 resource_local_to_scene = true
 size = Vector2(14.333333, 21)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jrigy"]
+size = Vector2(16, 22.666668)
+
 [node name="BasicStation" unique_id=1835171183 instance=ExtResource("1_wuyca")]
 
 [node name="Sprite2D" parent="." index="0" unique_id=880745754]
@@ -20,3 +23,8 @@ texture = SubResource("GradientTexture2D_jrigy")
 [node name="CollisionShape2D" parent="." index="1" unique_id=2132263509]
 position = Vector2(0.16666651, 0.5)
 shape = SubResource("RectangleShape2D_wuyca")
+
+[node name="CollisionShape2D" parent="MouseInputMonitor" parent_id_path=PackedInt32Array(1707325614) index="0" unique_id=487905519]
+position = Vector2(-0.33333367, 0)
+shape = SubResource("RectangleShape2D_jrigy")
+debug_color = Color(0.9607843, 0.1764706, 0.25490198, 0.21568628)

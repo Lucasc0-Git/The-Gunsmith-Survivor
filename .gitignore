@@ -8,3 +8,5 @@ export_presets.cfg
 *.exe
 /android/
 /Godot-Project-Files/addons
+*.pck
+*.x86_64

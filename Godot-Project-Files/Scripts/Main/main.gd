@@ -27,6 +27,7 @@ var inventory_tint: CanvasModulate
 var the_core: TheCore
 var player: Player
 
+@export var build_tooltip: BuildTooltip
 @export var inventory_darken: Color
 
 @export_group("Enemies")
@@ -63,6 +64,7 @@ func _ready() -> void:
 	map.generate_region(Vector2i(1, 1))
 	GameManager.set_day(1)
 	GameManager.set_hour(8)
+	build_tooltip.visible = false
 	inventory_tint = hud.canvas_modulate
 
 func _on_hour_changed(hour: int) -> void:
@@ -156,9 +158,14 @@ func spawn_the_core(pos: Vector2) -> void:
 	the_core.main = self
 	Ysort.add_child(the_core)
 
-func show_build_item_tooltip(pos: Vector2) -> void:
-	pass
+func show_build_item_tooltip(target: Node2D) -> void:
+	build_tooltip.tooltip_target = target
+	build_tooltip.visible = true
 	print("imagine showing the tooltip.")
+
+func give_player_item(item_data: ItemData, amount: int = 1) -> void:
+	if !hud: printerr("Trying to give item to player, but hud is null"); return
+	hud.inventory.give_item(item_data, amount)
 
 func show_menu() -> void:
 	menu.visible = true
