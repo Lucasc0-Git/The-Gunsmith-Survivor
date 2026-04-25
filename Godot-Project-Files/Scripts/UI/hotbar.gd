@@ -73,6 +73,10 @@ func try_move_item_to_inventory(slot: Slot) -> void:
 	var slot_data: SlotData = slot.slot_data.copy()
 	if slot_data == null or slot_data.is_empty(): return
 	
+	for inv_slot in hud.inventory.grid_container.get_children():
+		if inv_slot.slot_data == slot_data:
+			pass
+	
 	## Find the first free slot in inventory
 	for inv_slot in hud.inventory.grid_container.get_children():
 		if inv_slot.slot_data.is_empty():
