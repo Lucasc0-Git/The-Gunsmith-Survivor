@@ -48,6 +48,7 @@ func set_player(p: Player) -> void:
 	inventory.player = player
 	inventory.tooltip = tooltip
 	inventory.hud = self
+	inventory.hotbar = hotbar
 	inventory.basic_crafting = basic_crafting
 	basic_crafting.inventory = inventory
 	

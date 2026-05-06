@@ -66,6 +66,29 @@ func _on_slot_left_clicked(slot: Slot) -> void:
 		try_move_item_to_inventory(slot)
 		return
 
+func find_hotbar_item(item: ItemData) -> int:
+	var usable_amount: int = 0
+	for slot: Slot in grid_container.get_children():
+		if slot.slot_data == null: 
+			var blank_data: SlotData = SlotData.new()
+			slot.slot_data = blank_data
+		if slot.slot_data.is_empty(): continue
+		if slot.slot_data.item_data == item:
+			usable_amount += slot.slot_data.amount
+	return usable_amount
+
+func remove_hotbar_item(item: ItemData, amount: int) -> void:
+	if amount <= 0: return
+	var amount_to_rm: int = amount
+	for i in range(slots.size() -1, -1, -1):
+		var slot: Slot = slots[i]
+		if slot.slot_data == null or slot.slot_data.is_empty(): continue
+		if slot.slot_data.item_data != item: continue
+		var removing_amount: int = min(slot.slot_data.amount, amount_to_rm)
+		slot.remove_amount(removing_amount)
+		amount_to_rm -= removing_amount
+		if amount_to_rm <= 0: return
+
 func try_move_item_to_inventory(slot: Slot) -> void:
 	if not hud or not hud.inventory or not hud.inventory.visible:
 		return

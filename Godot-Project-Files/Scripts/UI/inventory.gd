@@ -21,6 +21,7 @@ var basic_crafting: BasicCraftingUI
 var inv_slot : Slot
 var player: Player
 var hud : Hud
+var hotbar: Hotbar
 
 func _ready() -> void:
 	## Assign proper data to proper items
@@ -92,18 +93,12 @@ func can_craft(recipe: Dictionary[ItemData, int]) -> bool:
 		var has_item: bool = false
 		var has_amount: bool = false
 		var required_amount: int = recipe[key]
-		
-		var total_amount: int = 0
-		for slot: Slot in grid_container.get_children():
-			if slot.slot_data == null or slot.slot_data.is_empty(): continue
-			if slot.slot_data.item_data == key:
-				has_item = true
-				total_amount += slot.slot_data.amount
-		
-		if total_amount >= required_amount:
+		var item_count: int = find_item(key)
+		if item_count > 0:
+			has_item = true
+		if item_count >= required_amount:
 			has_amount = true
 		if !has_amount or !has_item: return false
-	
 	return true
 
 func rm_items_by_recipe(recipe: Dictionary[ItemData, int]) -> void:
@@ -119,18 +114,12 @@ func find_item(item: ItemData) -> int:
 		if slot.slot_data.is_empty(): continue
 		if slot.slot_data.item_data == item:
 			usable_amount += slot.slot_data.amount
+	usable_amount += hotbar.find_hotbar_item(item)
 	return usable_amount
 
 func do_have_item(item: ItemData, needed_amount: int = 1) -> bool:
-	var total: int = 0
-	for slot: Slot in grid_container.get_children():
-		if slot.slot_data == null: 
-			var blank_data: SlotData = SlotData.new()
-			slot.slot_data = blank_data
-		if slot.slot_data.is_empty(): continue
-		if slot.slot_data.item_data == item:
-			total += slot.slot_data.amount
-	if total >= needed_amount:
+	var item_count := find_item(item)
+	if item_count >= needed_amount:
 		return true
 	return false
 
@@ -166,7 +155,9 @@ func remove_item(item: ItemData, amount: int = 1) -> void:
 		var removing_amount: int = min(slot.slot_data.amount, amount_to_rm)
 		slot.remove_amount(removing_amount)
 		amount_to_rm -= removing_amount
+		#if i > grid_container.get_child_count(): break
 		if amount_to_rm <= 0: return
+	hotbar.remove_hotbar_item(item, amount_to_rm)
 
 func move_item_to_hotbar(slot: Slot) -> void:
 	if !player: return
