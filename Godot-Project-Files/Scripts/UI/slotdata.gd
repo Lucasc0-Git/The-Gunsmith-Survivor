@@ -7,6 +7,10 @@ var amount: int = 0
 func is_empty() -> bool:
 	return item_data == null or amount <= 0
 
+func is_full() -> bool:
+	if item_data == null: return false
+	return amount >= item_data.max_stack
+
 func clear() -> void:
 	item_data = null
 	amount = 0
