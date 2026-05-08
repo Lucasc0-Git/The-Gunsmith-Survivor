@@ -17,3 +17,11 @@ func copy() -> SlotData:
 	new_data.amount = amount
 	pass # On more vars in SlotData, add it here.
 	return new_data
+
+func equals(other: SlotData) -> bool:
+	if other == null: return false
+	return item_data == other.item_data and amount == other.amount
+
+func is_same_item(other: SlotData) -> bool:
+	if other == null or item_data == null or other.item_data == null: return false
+	return item_data == other.item_data
