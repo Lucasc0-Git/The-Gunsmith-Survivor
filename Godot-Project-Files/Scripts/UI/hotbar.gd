@@ -120,7 +120,7 @@ func try_move_item_to_inventory(slot: Slot) -> void:
 	var amount_to_mv := slot_data.amount
 	
 	for inv_slot: Slot in hud.inventory.grid_container.get_children():
-		if slot_data.equals(inv_slot.slot_data):
+		if slot_data.is_same_item(inv_slot.slot_data):
 			if inv_slot.slot_data.is_full(): continue
 			var space_left: int = inv_slot.slot_data.item_data.max_stack - inv_slot.slot_data.amount
 			var moving_amount: int = min(space_left, amount_to_mv)
