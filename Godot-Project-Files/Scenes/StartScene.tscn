@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://djlib2qfsxxql" path="res://Scenes/Main.tscn" id="2_k8nbv"]
 [ext_resource type="PackedScene" uid="uid://bv3mm8mmj4ot6" path="res://Scenes/OptionsScene.tscn" id="3_ia2xn"]
 [ext_resource type="Texture2D" uid="uid://b2e5u2nkdl7i7" path="res://Textures/Start_scene_bg.png" id="4_u668n"]
+[ext_resource type="Theme" uid="uid://6ytu8ksu8rvq" path="res://Themes/BaseContainer.tres" id="6_28ir6"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bmxlf"]
 draw_center = false
@@ -189,9 +190,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -225.0
-offset_top = -60.0
+offset_top = -150.0
 offset_right = 225.0
-offset_bottom = 290.0
+offset_bottom = 150.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 10
@@ -200,6 +201,11 @@ theme_override_constants/separation = 10
 layout_mode = 2
 theme = ExtResource("1_dgtb2")
 text = "Play New Game"
+
+[node name="TutorialButton" type="Button" parent="VBoxContainer" unique_id=1689194559]
+layout_mode = 2
+theme = ExtResource("1_dgtb2")
+text = "Tutorial"
 
 [node name="SavesButton" type="Button" parent="VBoxContainer" unique_id=1827291946]
 layout_mode = 2
@@ -216,7 +222,70 @@ layout_mode = 2
 theme = SubResource("Theme_ia2xn")
 text = "Quit"
 
+[node name="Control" type="Control" parent="." unique_id=1414951823]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="Control" unique_id=464618162]
+custom_minimum_size = Vector2(500, 500)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -250.0
+offset_right = 250.0
+offset_bottom = 250.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("6_28ir6")
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/PanelContainer" unique_id=88359502]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Control/PanelContainer/MarginContainer" unique_id=1361199848]
+layout_mode = 2
+bbcode_enabled = true
+text = "[outline_size=8][outline_color=black][font_size=24][center][b]Controls[/b][/center][/font_size][/outline_color][/outline_size]
+[font_size=16][outline_size=3][ul]
+Move: W, S, A, D
+Dash: Ctrl
+Inventory: E
+Change hotbar slot: MouseWheel, 1, 2, 3, 4, 5
+[/ul][br]
+[outline_size=8][outline_color=black][font_size=24][center][b]Gameplay[/b][/center][/font_size][/outline_color][/outline_size]
+You are a human that has only two tasks: [color=red]Survive[/color], and protect [color=cyan]The Core[/color]. Once a day will come many enemies that will all [color=red]attack[/color] [color=cyan]The Core[/color] when the day will come to an end. [br]Remember: [b][color=red]When The Core dies, you die![/color][/b]"
+
+[node name="BackButton" type="Button" parent="Control" unique_id=1958315349]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -75.0
+offset_top = 265.0
+offset_right = 75.0
+offset_bottom = 309.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_dgtb2")
+text = "Back"
+
 [connection signal="pressed" from="VBoxContainer/NewGameButton" to="." method="_on_new_game_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/TutorialButton" to="." method="_on_tutorial_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/SavesButton" to="." method="_on_saves_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/OptionsButton" to="." method="_on_options_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="Control/BackButton" to="." method="_on_back_button_pressed"]
