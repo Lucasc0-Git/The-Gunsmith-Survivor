@@ -53,6 +53,13 @@ func set_player(p: Player) -> void:
 	basic_crafting.inventory = inventory
 	
 
+func give_item(item: ItemData, amount: int = 1) -> void:
+	var leftover := hotbar.give_hotbar_item(item, amount)
+	if leftover > 0:
+		inventory.give_item(item, leftover)
+
+
+
 # Called when "E" is just pressed
 func toggle_inv() -> void:
 	if _inv_tween: _inv_tween.kill()

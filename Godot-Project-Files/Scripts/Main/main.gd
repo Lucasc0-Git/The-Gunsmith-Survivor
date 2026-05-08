@@ -165,7 +165,7 @@ func show_build_item_tooltip(target: Node2D) -> void:
 
 func give_player_item(item_data: ItemData, amount: int = 1) -> void:
 	if !hud: printerr("Trying to give item to player, but hud is null"); return
-	hud.inventory.give_item(item_data, amount)
+	hud.give_item(item_data, amount)
 
 func show_menu() -> void:
 	menu.visible = true

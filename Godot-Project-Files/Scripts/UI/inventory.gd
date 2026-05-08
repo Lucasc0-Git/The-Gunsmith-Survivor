@@ -126,6 +126,9 @@ func do_have_item(item: ItemData, needed_amount: int = 1) -> bool:
 func give_item(item: ItemData, amount: int = 1) -> void:
 	var amount_to_add: int = amount
 	
+	
+	
+	
 	# First pass — fill existing partial stacks
 	for slot: Slot in grid_container.get_children():
 		if slot.slot_data == null or slot.slot_data.is_empty(): continue

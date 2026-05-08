@@ -89,6 +89,29 @@ func remove_hotbar_item(item: ItemData, amount: int) -> void:
 		amount_to_rm -= removing_amount
 		if amount_to_rm <= 0: return
 
+func give_hotbar_item(item: ItemData, amount: int) -> int:
+	var amount_to_add: int = amount
+	
+	# First pass — fill existing partial stacks
+	for slot: Slot in grid_container.get_children():
+		if slot.slot_data == null or slot.slot_data.is_empty(): continue
+		if slot.slot_data.item_data != item: continue
+		var space_left: int = slot.slot_data.item_data.max_stack - slot.slot_data.amount
+		var adding_amount: int = min(space_left, amount_to_add)
+		slot.add_amount(adding_amount)
+		amount_to_add -= adding_amount
+		if amount_to_add <= 0: return 0
+	
+	# Second pass — fill empty slots with remainder
+	for slot: Slot in grid_container.get_children():
+		if slot.slot_data == null or !slot.slot_data.is_empty(): continue
+		var adding_amount: int = min(item.max_stack, amount_to_add)
+		slot.set_item(item, adding_amount)
+		amount_to_add -= adding_amount
+		if amount_to_add <= 0: return 0
+	
+	return amount_to_add
+
 func try_move_item_to_inventory(slot: Slot) -> void:
 	if not hud or not hud.inventory or not hud.inventory.visible:
 		return

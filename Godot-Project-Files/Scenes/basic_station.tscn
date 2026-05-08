@@ -15,6 +15,7 @@ size = Vector2(14.333333, 21)
 size = Vector2(16, 22.666668)
 
 [node name="BasicStation" unique_id=1835171183 instance=ExtResource("1_wuyca")]
+item_id = "basic_station"
 
 [node name="Sprite2D" parent="." index="0" unique_id=880745754]
 scale = Vector2(0.23958331, 0.35416666)
