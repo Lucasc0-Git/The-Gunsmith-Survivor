@@ -4,6 +4,7 @@ class_name BasicCraftingUI
 @onready var grid_container: GridContainer = $PanelContainer/GridContainer
 @onready var the_core: TheCore
 @onready var inventory: Inventory
+@onready var hud: Hud
 @onready var basic_craftings: BasicCraftingUIPanel = $BasicCraftingPanels
 
 @onready var glock_button: Button = $BasicCraftingPanels/VBoxContainer/Control/WeaponsCraftingContainer/MarginContainer/ScrollContainer/HBoxContainer/Glock
@@ -45,8 +46,10 @@ func _ready() -> void:
 	crafting_buttons[basic_station_button] = basic_station_item
 	crafting_buttons[torch_button] = torch_item
 	
+	hud = inventory.hud
 	if inventory == null:
-		push_error("Inventory is null")
+		push_error("Inventory in basic_crafting.gd is null")
+		push_error("Hud in basic_crafting.gd is null")
 
 
 func hide_crafting() -> void:
@@ -101,13 +104,13 @@ func _process(_delta: float) -> void:
 func _on_glock_pressed() -> void:
 	if inventory == null: return
 	if inventory.can_craft(glock_item.crafting_recipe):
-		inventory.give_item(glock_item)
+		hud.give_item(glock_item)
 		inventory.rm_items_by_recipe(glock_item.crafting_recipe)
 
 func _on_shotgun_pressed() -> void:
 	if inventory == null: return
 	if inventory.can_craft(shotgun_item.crafting_recipe):
-		inventory.give_item(shotgun_item)
+		hud.give_item(shotgun_item)
 		inventory.rm_items_by_recipe(shotgun_item.crafting_recipe)
 
 ##The Tools crafting recipes.
@@ -117,7 +120,7 @@ func _on_shotgun_pressed() -> void:
 func _on_basic_station_pressed() -> void:
 	if inventory == null: return
 	if inventory.can_craft(basic_station_item.crafting_recipe):
-		inventory.give_item(basic_station_item)
+		hud.give_item(basic_station_item)
 		inventory.rm_items_by_recipe(basic_station_item.crafting_recipe)
 
 ##The Base crafting recipes.
@@ -125,5 +128,5 @@ func _on_basic_station_pressed() -> void:
 func _on_torch_pressed() -> void:
 	if inventory == null: return
 	if inventory.can_craft(torch_item.crafting_recipe):
-		inventory.give_item(torch_item)
+		hud.give_item(torch_item)
 		inventory.rm_items_by_recipe(torch_item.crafting_recipe)
