@@ -115,13 +115,21 @@ func give_hotbar_item(item: ItemData, amount: int) -> int:
 func try_move_item_to_inventory(slot: Slot) -> void:
 	if not hud or not hud.inventory or not hud.inventory.visible:
 		return
-	
 	var slot_data: SlotData = slot.slot_data.copy()
 	if slot_data == null or slot_data.is_empty(): return
+	var amount_to_mv := slot_data.amount
 	
-	for inv_slot in hud.inventory.grid_container.get_children():
-		if inv_slot.slot_data == slot_data:
-			pass
+	for inv_slot: Slot in hud.inventory.grid_container.get_children():
+		if slot_data.equals(inv_slot.slot_data):
+			if inv_slot.slot_data.is_full(): continue
+			var space_left: int = inv_slot.slot_data.item_data.max_stack - inv_slot.slot_data.amount
+			var moving_amount: int = min(space_left, amount_to_mv)
+			slot.remove_amount(moving_amount)
+			inv_slot.add_amount(moving_amount)
+			var index := slots.find(slot)
+			slot_item_changed.emit(index, slot.slot_data)
+			amount_to_mv -= moving_amount
+			if amount_to_mv <= 0: return
 	
 	## Find the first free slot in inventory
 	for inv_slot in hud.inventory.grid_container.get_children():

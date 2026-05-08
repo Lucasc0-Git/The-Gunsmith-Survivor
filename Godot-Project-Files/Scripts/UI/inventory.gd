@@ -168,14 +168,31 @@ func move_item_to_hotbar(slot: Slot) -> void:
 	var slot_data: SlotData = slot.slot_data.copy()
 	if slot_data == null or slot_data.is_empty(): 
 		return
+	var amount_to_mv := slot_data.amount
+	
+	for i in range(player.hotbar_slots.size()):
+		if player.hotbar_slots[i].is_empty(): continue
+		if player.hotbar_slots[i].item_data != slot_data.item_data: continue
+		if player.hotbar_slots[i].amount >= player.hotbar_slots[i].item_data.max_stack: continue
+		var space_left: int = player.hotbar_slots[i].item_data.max_stack - player.hotbar_slots[i].amount
+		var moving_amount: int = min(space_left, amount_to_mv)
+		slot.remove_amount(moving_amount)
+		hotbar.slots[i].add_amount(moving_amount)
+		amount_to_mv -= moving_amount
+		if amount_to_mv <= 0: return
+	
+	if amount_to_mv <= 0: return
 	
 	# Find first free slot in hotbar
 	for i in range(player.hotbar_slots.size()):
 		if player.hotbar_slots[i].is_empty():
 			slot.clear()
 			_hide_tooltip()
-			player.set_hotbar_item(i, slot_data)
-			hud.hotbar.set_item(i, slot_data)
+			var mv_item_data: SlotData = SlotData.new()
+			mv_item_data.item_data = slot_data.item_data
+			mv_item_data.amount = amount_to_mv
+			player.set_hotbar_item(i, mv_item_data)
+			hotbar.set_item(i, mv_item_data)
 			return
 
 func fill_slot(slot: int, item: ItemData, amount: int) -> void:
