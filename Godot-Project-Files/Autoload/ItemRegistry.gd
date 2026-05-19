@@ -8,19 +8,12 @@ var loaded: bool = false
 signal items_loaded
 
 func _ready() -> void:
-	print("✅ ItemRegistry _ready() called")
-	print("   Tree position: ", get_path())
-	print("   Current scene exists? ", get_tree().current_scene != null)
-	
-	
 	print("Loading items...")
 	load_items()
 	items_loaded.emit()
 	loaded = true
 	print("Items loaded")
 	notify_property_list_changed()
-
-
 
 func load_items() -> void:
 	items.clear()

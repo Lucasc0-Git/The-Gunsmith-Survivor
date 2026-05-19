@@ -59,12 +59,6 @@ func _ready() -> void:
 	crafting_buttons[shotgun_button] = shotgun_item
 	crafting_buttons[basic_station_button] = basic_station_item
 	crafting_buttons[torch_button] = torch_item
-	print("ItemRegistry: ", ItemRegistry)
-	print("ItemRegistry type: ", ItemRegistry.get_class())
-	print("ItemRegistry path: ", ItemRegistry.get_path())
-	print("Items registered: ", str(ItemRegistry.items.size()) if ItemRegistry.items else "N/A")
-	print("glock in ItemRegistry: ", str(ItemRegistry.items.get("glock")))
-	print("glock in Basic_Crafting: ", str(glock_item))
 	
 	hud = inventory.hud
 	if inventory == null:
