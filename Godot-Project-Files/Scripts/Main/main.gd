@@ -124,10 +124,10 @@ func _on_region_generated(new_trees: Array, new_spawners: Array) -> void:
 	for pos: Vector2 in new_spawners:
 		add_spawner(pos)
 
-func drop_item(item: ItemData, pos: Vector2) -> void:
+func drop_item(item: ItemData, pos: Vector2, random_range: int) -> void:
 	var dropped_item := preload("res://Scenes/dropped_item.tscn").instantiate()
 	dropped_item.item_data = item
-	dropped_item.global_position = pos
+	dropped_item.global_position = pos + Vector2(randi_range(random_range, -random_range), randi_range(random_range, -random_range))
 	dropped_item.picked_up.connect(player.pick_item)
 	Ysort.call_deferred("add_child", dropped_item)
 

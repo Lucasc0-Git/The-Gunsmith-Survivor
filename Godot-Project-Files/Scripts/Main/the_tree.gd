@@ -14,9 +14,9 @@ func _ready() -> void:
 	
 	wood_item = ItemRegistry.items.get("wood")
 
-func drop_items(amount: int) -> void:
+func drop_items(amount: int, random_range: int) -> void:
 	for i in range(amount):
-		main.drop_item(wood_item, global_position + Vector2(randf_range(-15, 15), randf_range(-15, 15)))
+		main.drop_item(wood_item, global_position, random_range)
 
 func take_damage(amount: int) -> void:
 	health -= amount
@@ -24,7 +24,7 @@ func take_damage(amount: int) -> void:
 		destroy()
 
 func destroy() -> void:
-	drop_items(1)
+	drop_items(1, 20)
 	queue_free()
 
 func _on_visible_on_screen_notifier_2d_screen_entered() -> void:
