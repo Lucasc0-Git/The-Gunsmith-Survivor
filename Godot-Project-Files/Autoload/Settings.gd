@@ -20,20 +20,18 @@ func apply_settings() -> void:
 	apply_sounds(sounds)
 
 func apply_fullscreen(enabled: bool) -> void:
-	if fullscreen == enabled:
-		return
-	
-	
 	fullscreen = enabled
 	
 	if enabled:
-		# True fullscreen → borderless false, čistý fullscreen
+		# True fullscreen → borderless false, clean fullscreen
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 		DisplayServer.window_set_flag(DisplayServer.WINDOW_FLAG_BORDERLESS, true)
 	else:
-		# Windowed → klasické okno, borderless off
+		# Windowed → classic window, borderless off
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
 		DisplayServer.window_set_flag(DisplayServer.WINDOW_FLAG_BORDERLESS, false)
+		DisplayServer.window_move_to_foreground()
+		DisplayServer.window_set_size(Vector2i(1280, 720))
 	
 	save()
 	fullscreen_changed.emit(enabled)
@@ -61,7 +59,9 @@ func save() -> void:
 	cfg.set_value("video", "fullscreen", fullscreen)
 	cfg.set_value("video", "vsync", vsync)
 	cfg.set_value("sounds", "global_sounds", sounds)
-	cfg.save(CONFIG_PATH)
+	var err := cfg.save(CONFIG_PATH)
+	if err != OK:
+		push_warning("Failed to save settings! Error code: %d" % err)
 
 func load_cfg() -> void:
 	var cfg := ConfigFile.new()
