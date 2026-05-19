@@ -9,7 +9,10 @@ var health: int = 50
 var wood_item : ItemData
 
 func _ready() -> void:
-	wood_item = ItemRegistry.items["wood"]
+	if not ItemRegistry or not ItemRegistry.loaded:
+		await ItemRegistry.items_loaded
+	
+	wood_item = ItemRegistry.items.get("wood")
 
 func drop_items(amount: int) -> void:
 	for i in range(amount):

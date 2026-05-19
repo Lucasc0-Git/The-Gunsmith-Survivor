@@ -16,17 +16,31 @@ class_name BasicCraftingUI
 
 var crafting_buttons: Dictionary[Button, ItemData] = {} # Button -> ItemData
 
-var glock_item: ItemData = ItemRegistry.items["glock"]
-var wood_item: ItemData = ItemRegistry.items["wood"]
-var shotgun_item: ItemData = ItemRegistry.items["shotgun"]
-var torch_item: ItemData = ItemRegistry.items["torch"]
-var basic_station_item: ItemData = ItemRegistry.items["basic_station"]
+var glock_item: ItemData
+var wood_item: ItemData
+var shotgun_item: ItemData
+var torch_item: ItemData
+var apple_item: ItemData
+var basic_station_item: ItemData
 
 var _tween: Tween
 var player: Player
 var crafting_shown: bool = false
+var main: Main
 
 func _ready() -> void:
+	if not ItemRegistry or not ItemRegistry.loaded:
+		await ItemRegistry.items_loaded
+	
+	glock_item = ItemRegistry.items.get("glock")
+	shotgun_item = ItemRegistry.items.get("shotgun")
+	apple_item = ItemRegistry.items.get("apple")
+	wood_item = ItemRegistry.items.get("wood")
+	torch_item = ItemRegistry.items.get("torch")
+	basic_station_item = ItemRegistry.items.get("basic_station")
+	
+	
+	
 	for i in range(grid_container.get_child_count()):
 		var crafting_slot: Button = grid_container.get_child(i)
 		crafting_slot.toggled.connect(
@@ -45,6 +59,12 @@ func _ready() -> void:
 	crafting_buttons[shotgun_button] = shotgun_item
 	crafting_buttons[basic_station_button] = basic_station_item
 	crafting_buttons[torch_button] = torch_item
+	print("ItemRegistry: ", ItemRegistry)
+	print("ItemRegistry type: ", ItemRegistry.get_class())
+	print("ItemRegistry path: ", ItemRegistry.get_path())
+	print("Items registered: ", str(ItemRegistry.items.size()) if ItemRegistry.items else "N/A")
+	print("glock in ItemRegistry: ", str(ItemRegistry.items.get("glock")))
+	print("glock in Basic_Crafting: ", str(glock_item))
 	
 	hud = inventory.hud
 	if inventory == null:
@@ -91,7 +111,8 @@ func _process(_delta: float) -> void:
 	if visible:
 		for button: Button in crafting_buttons.keys():
 			var item: ItemData = crafting_buttons[button]
-			button.disabled = !inventory.can_craft(item.crafting_recipe)
+			if item:
+				button.disabled = !inventory.can_craft(item.crafting_recipe)
 	if !crafting_shown:
 		if !player.nearby_stations.is_empty():
 			show_crafting()

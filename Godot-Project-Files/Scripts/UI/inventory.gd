@@ -24,13 +24,16 @@ var hud : Hud
 var hotbar: Hotbar
 
 func _ready() -> void:
+	if not ItemRegistry or not ItemRegistry.loaded:
+		await ItemRegistry.items_loaded
+	
 	## Assign proper data to proper items
-	glock_item = ItemRegistry.items["glock"]
-	shotgun_item = ItemRegistry.items["shotgun"]
-	apple_item = ItemRegistry.items["apple"]
-	wood_item = ItemRegistry.items["wood"]
-	torch_item = ItemRegistry.items["torch"]
-	basic_station_item = ItemRegistry.items["basic_station"]
+	glock_item = ItemRegistry.items.get("glock")
+	shotgun_item = ItemRegistry.items.get("shotgun")
+	apple_item = ItemRegistry.items.get("apple")
+	wood_item = ItemRegistry.items.get("wood")
+	torch_item = ItemRegistry.items.get("torch")
+	basic_station_item = ItemRegistry.items.get("basic_station")
 	visible = false
 	## Give the inventory some slots
 	for i in range(20): #The range is how much slots will the inventory have
