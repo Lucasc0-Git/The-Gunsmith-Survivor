@@ -10,6 +10,8 @@ extends Control
 var world_seed := randi()
 
 func _ready() -> void:
+	
+	
 	tutorial_panel.visible = false
 	GameManager.current_world_seed = world_seed
 
