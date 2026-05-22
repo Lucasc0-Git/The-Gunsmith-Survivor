@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="CloseWeaponItemData" format=3 uid="uid://1k1aht8itx4c"]
+
+[ext_resource type="Script" uid="uid://dgi6p7vrp0imi" path="res://items/ItemData/ItemData.gd" id="1_13v0x"]
+[ext_resource type="Resource" uid="uid://c5ux63v6x08u7" path="res://items/Weapons/Close_range_weapons/wooden_axe.tres" id="1_besl8"]
+[ext_resource type="Script" uid="uid://ngdtvmokbgwc" path="res://items/ItemData/CloseWeaponItemData.gd" id="2_wlesk"]
+[ext_resource type="Resource" uid="uid://cc0anv7sdlwn4" path="res://items/Inv_items/Wood_item.tres" id="3_3lkuj"]
+[ext_resource type="Texture2D" uid="uid://b81agdoybaaqs" path="res://Textures/SURVIVAL HORROR WEAPONS PACK 16X16/21.png" id="4_t8eax"]
+
+[resource]
+script = ExtResource("2_wlesk")
+close_weapon_data = ExtResource("1_besl8")
+id = "wooden_axe"
+icon = ExtResource("4_t8eax")
+display_name = "Wooden Axe"
+description = "An axe. Possibly the worst possible quality. Who knows..."
+crafting_description = "A wooden axe. Excellents at deforestation!"
+crafting_recipe = Dictionary[ExtResource("1_13v0x"), int]({
+ExtResource("3_3lkuj"): 32
+})
+metadata/_custom_type_script = "uid://ngdtvmokbgwc"

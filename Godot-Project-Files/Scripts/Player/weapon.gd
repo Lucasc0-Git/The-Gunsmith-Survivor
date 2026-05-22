@@ -46,6 +46,7 @@ func equip_item(slot_data: SlotData) -> void:
 		build_preview.visible = false
 		if build_preview is StationBuildScene:
 			build_preview.crafting_area.monitoring = false
+	
 	if item is WeaponItemData:
 		var w := item as WeaponItemData
 		weapon_data = w.weapon_data
@@ -68,6 +69,21 @@ func equip_item(slot_data: SlotData) -> void:
 		build_preview.collision_shape.set_deferred("disabled", true)
 		player.main.add_child(build_preview)
 		holding_build = true
+		can_shoot = true
+	elif item is CloseWeaponItemData:
+		var c := item as CloseWeaponItemData
+		sprite.texture = c.close_weapon_data.icon
+		
+		weapon_data = c.close_weapon_data
+		
+		can_shoot = reload_timer.time_left <= 0
+		
+	
+	
+	else:
+		var i := item as ItemData
+		if i.icon:
+			sprite.texture = i.icon
 		can_shoot = true
 
 func is_holding_usable_item() -> bool:
@@ -94,8 +110,11 @@ func unequip() -> void:
 func use_item(slot_data: SlotData) -> void:
 	equipped_item = slot_data
 	if !equipped_item: return
+	
+	if equipped_item.item_data is CloseWeaponItemData:
+		_swing_weapon()
 	## If equipped item is a weapon, use it correctly
-	if equipped_item.item_data is WeaponItemData:
+	elif equipped_item.item_data is WeaponItemData:
 		_shoot_weapon()
 	## If equipped item is a heal, use it correctly
 	elif equipped_item.item_data is HealItemData:
@@ -108,6 +127,7 @@ func use_item(slot_data: SlotData) -> void:
 		pass
 		if equipped_item.amount <= 0:
 			unequip()
+	## If equipped item is a buildable thing, try to build it at the cursor.
 	elif equipped_item.item_data is BuildItemData:
 		if can_place:
 			_spawn_build()
@@ -119,6 +139,12 @@ func use_item(slot_data: SlotData) -> void:
 func _spawn_build() -> void:
 	var build_item := equipped_item.item_data as BuildItemData
 	player.main.spawn_building(get_global_mouse_position(), build_item.build_data.build_scene)
+
+func _swing_weapon() -> void:
+	pass
+	reload_timer.start(weapon_data.fire_rate)
+	can_shoot = false
+	print("Swinging ", equipped_item.item_data.id)
 
 func _shoot_weapon() -> void:
 	bang_particles.emitting = true ##One shot emit.
