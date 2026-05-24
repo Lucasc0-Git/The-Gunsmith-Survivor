@@ -11,7 +11,7 @@ class_name BasicCraftingUI
 @onready var shotgun_button: Button = $BasicCraftingPanels/VBoxContainer/Control/WeaponsCraftingContainer/MarginContainer/ScrollContainer/HBoxContainer/Shotgun
 @onready var basic_station_button: Button = $BasicCraftingPanels/VBoxContainer/Control3/CraftingStationsCraftingContainer3/MarginContainer/ScrollContainer/HBoxContainer/BasicStation
 @onready var torch_button: Button = $BasicCraftingPanels/VBoxContainer/Control4/BaseCraftingContainer3/MarginContainer/ScrollContainer/HBoxContainer/Torch
-
+@onready var wooden_axe_button: Button = $BasicCraftingPanels/VBoxContainer/Control2/ToolsCraftingContainer2/MarginContainer/ScrollContainer/HBoxContainer/WoodenAxe
 
 
 var crafting_buttons: Dictionary[Button, ItemData] = {} # Button -> ItemData
@@ -22,6 +22,7 @@ var shotgun_item: ItemData
 var torch_item: ItemData
 var apple_item: ItemData
 var basic_station_item: ItemData
+var wooden_axe_item: ItemData
 
 var _tween: Tween
 var player: Player
@@ -38,7 +39,7 @@ func _ready() -> void:
 	wood_item = ItemRegistry.items.get("wood")
 	torch_item = ItemRegistry.items.get("torch")
 	basic_station_item = ItemRegistry.items.get("basic_station")
-	
+	wooden_axe_item = ItemRegistry.items.get("wooden_axe")
 	
 	
 	for i in range(grid_container.get_child_count()):
@@ -59,6 +60,7 @@ func _ready() -> void:
 	crafting_buttons[shotgun_button] = shotgun_item
 	crafting_buttons[basic_station_button] = basic_station_item
 	crafting_buttons[torch_button] = torch_item
+	crafting_buttons[wooden_axe_button] = wooden_axe_item
 	
 	hud = inventory.hud
 	if inventory == null:
@@ -129,6 +131,12 @@ func _on_shotgun_pressed() -> void:
 		inventory.rm_items_by_recipe(shotgun_item.crafting_recipe)
 
 ##The Tools crafting recipes.
+
+func _on_wooden_axe_pressed() -> void:
+	if !inventory: return
+	if inventory.can_craft(wooden_axe_item.crafting_recipe):
+		hud.give_item(wooden_axe_item)
+		inventory.rm_items_by_recipe(wooden_axe_item.crafting_recipe)
 
 ##The Stations crafting recipes.
 

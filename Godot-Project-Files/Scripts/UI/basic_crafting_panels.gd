@@ -46,3 +46,8 @@ func _on_torch_mouse_entered() -> void:
 	crafting_tooltip.show_tooltip(ItemRegistry.items["torch"])
 func _on_torch_mouse_exited() -> void:
 	crafting_tooltip.hide_tooltip()
+
+func _on_wooden_axe_mouse_entered() -> void:
+	crafting_tooltip.show_tooltip(ItemRegistry.items["wooden_axe"])
+func _on_wooden_axe_mouse_exited() -> void:
+	crafting_tooltip.hide_tooltip()
