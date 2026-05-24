@@ -117,52 +117,11 @@ gradient = SubResource("Gradient_1iu4k")
 fill = 1
 fill_from = Vector2(0.5, 0.5)
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_arntx"]
-animation = &"Idle"
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1iu4k"]
+size = Vector2(2, 40)
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_lslt6"]
-animation = &"Run_down"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ulo2v"]
-animation = &"Run_sideways"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_1iu4k"]
-animation = &"Run_up"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_m0x7a"]
-animation = &"Run_sideways"
-
-[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_miouo"]
-blend_point_0/node = SubResource("AnimationNodeAnimation_arntx")
-blend_point_0/pos = Vector2(0, 0)
-blend_point_1/node = SubResource("AnimationNodeAnimation_lslt6")
-blend_point_1/pos = Vector2(0, -1)
-blend_point_2/node = SubResource("AnimationNodeAnimation_ulo2v")
-blend_point_2/pos = Vector2(1, 0)
-blend_point_3/node = SubResource("AnimationNodeAnimation_1iu4k")
-blend_point_3/pos = Vector2(0, 1)
-blend_point_4/node = SubResource("AnimationNodeAnimation_m0x7a")
-blend_point_4/pos = Vector2(-1, 0)
-
-[sub_resource type="Animation" id="Animation_5v66d"]
-resource_name = "Idle"
-
-[sub_resource type="Animation" id="Animation_x63xi"]
-resource_name = "Run_down"
-
-[sub_resource type="Animation" id="Animation_i2e8t"]
-resource_name = "Run_sideways"
-
-[sub_resource type="Animation" id="Animation_qidb7"]
-resource_name = "Run_up"
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_70hv0"]
-_data = {
-&"Idle": SubResource("Animation_5v66d"),
-&"Run_down": SubResource("Animation_x63xi"),
-&"Run_sideways": SubResource("Animation_i2e8t"),
-&"Run_up": SubResource("Animation_qidb7")
-}
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_1iu4k"]
+size = Vector2(2, 30)
 
 [node name="Player" type="CharacterBody2D" unique_id=370768033 groups=["player"]]
 process_mode = 1
@@ -246,15 +205,24 @@ texture = SubResource("GradientTexture2D_m0x7a")
 
 [node name="ReloadTimer" type="Timer" parent="Weapon" unique_id=588880394]
 
-[node name="AnimationTree" type="AnimationTree" parent="." unique_id=411036729]
-tree_root = SubResource("AnimationNodeBlendSpace2D_miouo")
-anim_player = NodePath("../AnimationPlayer")
-parameters/blend_position = Vector2(0, 0)
+[node name="HitArea" type="Area2D" parent="Weapon" unique_id=1540411679 groups=["melee_hit"]]
+collision_layer = 0
+collision_mask = 12
+monitoring = false
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1301314179]
-libraries/ = SubResource("AnimationLibrary_70hv0")
-autoplay = &"Idle"
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Weapon/HitArea" unique_id=1018126513]
+position = Vector2(13.3, 13.3)
+rotation = -0.7853982
+shape = SubResource("RectangleShape2D_1iu4k")
+
+[node name="Sprite2D" type="Sprite2D" parent="Weapon/HitArea/CollisionShape2D" unique_id=829301237]
+visible = false
+scale = Vector2(0.99999994, 0.99999994)
+texture = SubResource("PlaceholderTexture2D_1iu4k")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Weapon" unique_id=1849397695]
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1188595411]
 
 [connection signal="timeout" from="Weapon/ReloadTimer" to="Weapon" method="_on_reload_timer_timeout"]
+[connection signal="body_entered" from="Weapon/HitArea" to="Weapon" method="_on_hit_area_body_entered"]

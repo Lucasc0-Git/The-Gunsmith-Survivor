@@ -1,22 +1,14 @@
 [gd_resource type="Resource" script_class="CloseWeaponData" format=3 uid="uid://c5ux63v6x08u7"]
 
+[ext_resource type="Texture2D" uid="uid://b81agdoybaaqs" path="res://Textures/SURVIVAL HORROR WEAPONS PACK 16X16/21.png" id="1_jfpk8"]
 [ext_resource type="Script" uid="uid://dt4s43sp8mh8q" path="res://items/Weapons/close_weapon_data.gd" id="1_lb60g"]
-
-[sub_resource type="Gradient" id="Gradient_lb60g"]
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_jfpk8"]
-gradient = SubResource("Gradient_lb60g")
-width = 16
-height = 32
 
 [resource]
 script = ExtResource("1_lb60g")
-dmg_range = 50
+dmg_range = 10.0
 id = "wooden_axe"
-icon = SubResource("GradientTexture2D_jfpk8")
-damage = 50
-fire_rate = 1.0
+icon = ExtResource("1_jfpk8")
+damage = 25
 bullet_shrinking = 1.0
 recoil = 0.0
-rotatable = false
 metadata/_custom_type_script = "uid://dt4s43sp8mh8q"

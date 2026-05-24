@@ -8,6 +8,8 @@ class_name Weapon
 @onready var player : Player
 @onready var bang_particles: CPUParticles2D = $Muzzle/BangParticles
 @onready var bang_light: PointLight2D = $Muzzle/PointLight2D
+@onready var hit_area: Area2D = $HitArea
+@onready var hit_area_collision_shape: CollisionShape2D = $HitArea/CollisionShape2D
 
 ## The signal declaration
 signal has_shot(rotation: float, recoil: float)
@@ -28,6 +30,7 @@ var can_place: bool = false
 func _ready() -> void:
 	await get_tree().physics_frame
 	hud.inv_toggled.connect(inv_toggled)
+	hit_area.monitoring = false
 
 func _input(event: InputEvent) -> void:
 	## Handle the shoot input
@@ -141,10 +144,41 @@ func _spawn_build() -> void:
 	player.main.spawn_building(get_global_mouse_position(), build_item.build_data.build_scene)
 
 func _swing_weapon() -> void:
-	pass
-	reload_timer.start(weapon_data.fire_rate)
+	var data: CloseWeaponItemData = equipped_item.item_data as CloseWeaponItemData
+	var close_data: CloseWeaponData = data.close_weapon_data
+	reload_timer.start(close_data.swing_duration + 0.1)
 	can_shoot = false
+	if !hit_area: push_error("HitArea is null!"); return
+	
+	
+	var rect_shape: RectangleShape2D = hit_area_collision_shape.shape as RectangleShape2D
+	if rect_shape:
+		rect_shape.size = Vector2(close_data.close_spread * 0.3, close_data.dmg_range)
+		hit_area_collision_shape.position = Vector2(close_data.dmg_range * 0.5, close_data.dmg_range * 0.5)
+	
+	var original_rotation := rotation_degrees
+	rotation_degrees -= (close_data.close_spread / 2)
+	
+	hit_area.monitoring = true
+	var swing_tween: Tween = create_tween()
+	swing_tween.set_trans(Tween.TRANS_QUAD)
+	swing_tween.set_ease(Tween.EASE_OUT)
+	swing_tween.tween_property(self, "rotation_degrees", original_rotation + (close_data.close_spread/2), close_data.swing_duration)
+	await swing_tween.finished
+	hit_area.monitoring = false
+	
+	
 	print("Swinging ", equipped_item.item_data.id)
+
+func _on_hit_area_body_entered(body: Node2D) -> void:
+	if body.has_method("take_damage"):
+		if !equipped_item.item_data is CloseWeaponItemData: return
+		body.take_damage(equipped_item.item_data.close_weapon_data.damage)
+		var data: CloseWeaponItemData = equipped_item.item_data as CloseWeaponItemData
+		
+		if body is CharacterBody2D:
+			var dir := (body.global_position - player.global_position).normalized()
+			body.velocity += dir * (data.close_weapon_data.knockback)
 
 func _shoot_weapon() -> void:
 	bang_particles.emitting = true ##One shot emit.
