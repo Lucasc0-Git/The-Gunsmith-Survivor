@@ -3,6 +3,8 @@ extends Node
 
 enum StationType {BASIC_CRAFTING, WEAPON_CRAFTING}
 
+const DAMAGE_TYPES: Array[String] = DamageTypes.TYPES
+
 var current_world_seed: int
 var time: float = 0.0
 var day_length: float = 600.0

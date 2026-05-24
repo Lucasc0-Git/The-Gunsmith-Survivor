@@ -13,4 +13,5 @@ bullet_shrinking = 0.99
 muzzle_offset = Vector2(9, 9)
 bullet_scale = Vector2(0.9, 0.9)
 recoil = 60.0
+dmg_type = "long_range"
 metadata/_custom_type_script = "uid://d4hnrbyx1okcs"

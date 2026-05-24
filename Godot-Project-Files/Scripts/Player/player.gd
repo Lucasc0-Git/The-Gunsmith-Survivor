@@ -180,7 +180,7 @@ func get_selected_slot() -> Slot:
 func _physics_process(delta: float) -> void:
 	#For testing things (need to remove them!)
 	if Input.is_action_just_pressed("DEBUG hurt"):
-		get_hurt(20)
+		get_hurt(20, "basic")
 	
 	## Handle respawn
 	if health <= 0:
@@ -206,11 +206,18 @@ func heal(amount: float) -> void:
 	health += amount
  
 ## Remove health from current health by [amount]
-func get_hurt(amount: float) -> void:
-	health -= amount
+func get_hurt(amount: float, dmg_type: String) -> void:
+	var damage := amount
+	if !dmg_type in GameManager.DAMAGE_TYPES: health -= damage; return
+	if dmg_type == DamageTypes.MELEE:
+		damage *= 0.9
+	elif dmg_type == DamageTypes.LONG_RANGE:
+		damage *= 1.1
+	
+	health -= damage
 
-func take_damage(amount: float) -> void:
-	get_hurt(amount)
+func take_damage(amount: float, dmg_type: String) -> void:
+	get_hurt(amount, dmg_type)
 
 ## Add health to current health over time
 func regen(delta: float) -> void:

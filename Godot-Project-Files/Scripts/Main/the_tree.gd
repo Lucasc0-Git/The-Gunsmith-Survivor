@@ -5,7 +5,7 @@ extends CharacterBody2D
 @onready var ysort_node := get_parent()
 @onready var main: Main = get_parent().get_parent()
 
-var health: int = 50
+var health: float = 50
 var wood_item : ItemData
 
 func _ready() -> void:
@@ -18,8 +18,16 @@ func drop_items(amount: int, random_range: int) -> void:
 	for i in range(amount):
 		main.drop_item(wood_item, global_position, random_range)
 
-func take_damage(amount: int) -> void:
-	health -= amount
+func take_damage(amount: float, dmg_type: String) -> void:
+	var damage := amount
+	if !dmg_type in GameManager.DAMAGE_TYPES: health -= damage; return
+	if dmg_type == DamageTypes.MELEE:
+		damage *= 1.25
+	if dmg_type == DamageTypes.LONG_RANGE:
+		damage *= 0.6
+	
+	health -= damage
+	
 	if health <= 0:
 		destroy()
 

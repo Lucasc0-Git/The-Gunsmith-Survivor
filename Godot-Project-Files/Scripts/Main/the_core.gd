@@ -25,8 +25,14 @@ func _ready() -> void:
 	progress_bar.max_value = max_health
 	progress_bar.value = max_health
 
-func take_damage(amount: float) -> void:
-	health -= amount
+func take_damage(amount: float, dmg_type: String) -> void:
+	var damage := amount
+	if !dmg_type in GameManager.DAMAGE_TYPES: health -= damage; return
+	if dmg_type == DamageTypes.MELEE:
+		damage *= 0.9
+	
+	damage *= 0.8
+	health -= damage
 
 func _on_crafting_area_body_entered(body: Node2D) -> void:
 	if body is Player:

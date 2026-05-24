@@ -74,10 +74,16 @@ func get_target() -> Node2D: ##Returns player, the core, OR null.
 func stop_moving() -> void:
 	velocity = velocity.move_toward(Vector2.ZERO, accel)
 
-func take_damage(amount: float) -> void:
+func take_damage(amount: float, dmg_type: String) -> void:
+	var taking_damage := amount
+	if dmg_type in GameManager.DAMAGE_TYPES:
+		if dmg_type == DamageTypes.MELEE:
+			damage *= 1.2
+		
+	
 	chase_forced = true
 	change_state("Chase")
-	health -= amount
+	health -= taking_damage
 	if health <= 0:
 		die()
 
@@ -87,7 +93,7 @@ func die() -> void:
 func _on_timer_timeout() -> void:
 	var target := get_target()
 	if target == null: return
-	target.take_damage(damage)
+	target.take_damage(damage, DamageTypes.MELEE)
 
 func _on_attack_range_area_body_entered(body: Node2D) -> void:
 	if body is Player:

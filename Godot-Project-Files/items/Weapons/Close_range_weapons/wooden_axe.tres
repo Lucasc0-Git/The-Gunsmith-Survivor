@@ -11,4 +11,5 @@ icon = ExtResource("1_jfpk8")
 damage = 25
 bullet_shrinking = 1.0
 recoil = 0.0
+dmg_type = "melee"
 metadata/_custom_type_script = "uid://dt4s43sp8mh8q"

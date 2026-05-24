@@ -173,7 +173,7 @@ func _swing_weapon() -> void:
 func _on_hit_area_body_entered(body: Node2D) -> void:
 	if body.has_method("take_damage"):
 		if !equipped_item.item_data is CloseWeaponItemData: return
-		body.take_damage(equipped_item.item_data.close_weapon_data.damage)
+		body.take_damage(equipped_item.item_data.close_weapon_data.damage, DamageTypes.MELEE)
 		var data: CloseWeaponItemData = equipped_item.item_data as CloseWeaponItemData
 		
 		if body is CharacterBody2D:
