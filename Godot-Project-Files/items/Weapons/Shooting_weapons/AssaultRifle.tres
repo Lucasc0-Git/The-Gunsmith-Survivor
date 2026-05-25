@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="WeaponData" format=3 uid="uid://e5jqh3yjqeag"]
+
+[ext_resource type="PackedScene" uid="uid://cbw45347x42n7" path="res://Scenes/Bullet.tscn" id="1_m71x3"]
+[ext_resource type="Script" uid="uid://d4hnrbyx1okcs" path="res://items/Weapons/weapon_data.gd" id="1_su8nx"]
+[ext_resource type="Texture2D" uid="uid://b8xibgyex24gv" path="res://Textures/SURVIVAL HORROR WEAPONS PACK 16X16/14.png" id="2_odi5v"]
+
+[resource]
+script = ExtResource("1_su8nx")
+id = "assault_rifle"
+icon = ExtResource("2_odi5v")
+damage = 5
+fire_rate = 0.1
+bullet_scene = ExtResource("1_m71x3")
+bullet_shrinking = 0.99
+bullet_scale = Vector2(0.65, 0.65)
+recoil = 40.0
+spread = 0.1
+dmg_type = "long_range"
+metadata/_custom_type_script = "uid://d4hnrbyx1okcs"

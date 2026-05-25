@@ -217,6 +217,9 @@ func _spawn_bullet(i : int) -> void:
 		var start_angle := -spread / 2
 		var step : float = spread / max(pellets - 1, 1)
 		final_angle = base_angle + start_angle + step * i
+	else:
+		var spread := weapon_data.spread
+		final_angle = base_angle + randf_range(-(spread/2), (spread/2))
 	
 	bullet.bullet_damage = bullet_damage
 	bullet.rotation = final_angle

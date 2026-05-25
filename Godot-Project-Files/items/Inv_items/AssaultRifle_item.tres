@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="WeaponItemData" format=3 uid="uid://dptc6ptdk44tx"]
+
+[ext_resource type="Script" uid="uid://dgi6p7vrp0imi" path="res://items/ItemData/ItemData.gd" id="1_macn1"]
+[ext_resource type="Script" uid="uid://duhl153idv7v8" path="res://items/ItemData/WeaponItemData.gd" id="2_f4h1h"]
+[ext_resource type="Texture2D" uid="uid://b8xibgyex24gv" path="res://Textures/SURVIVAL HORROR WEAPONS PACK 16X16/14.png" id="2_g066i"]
+[ext_resource type="Resource" uid="uid://dmcom6xx0kjas" path="res://items/Inv_items/Glock_item.tres" id="2_oh4ko"]
+[ext_resource type="Resource" uid="uid://cc0anv7sdlwn4" path="res://items/Inv_items/Wood_item.tres" id="3_dmslx"]
+[ext_resource type="Resource" uid="uid://e5jqh3yjqeag" path="res://items/Weapons/Shooting_weapons/AssaultRifle.tres" id="4_j3h1m"]
+
+[resource]
+script = ExtResource("2_f4h1h")
+weapon_data = ExtResource("4_j3h1m")
+id = "assault_rifle"
+icon = ExtResource("2_g066i")
+display_name = "Assault Rifle"
+description = "An assault rifle. Comes handy in a horde."
+crafting_recipe = Dictionary[ExtResource("1_macn1"), int]({
+ExtResource("2_oh4ko"): 1,
+ExtResource("3_dmslx"): 128
+})
+metadata/_custom_type_script = "uid://duhl153idv7v8"
