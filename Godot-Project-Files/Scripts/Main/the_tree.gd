@@ -24,7 +24,7 @@ func take_damage(amount: float, dmg_type: String) -> void:
 	if dmg_type == DamageTypes.MELEE:
 		damage *= 1.25
 	if dmg_type == DamageTypes.LONG_RANGE:
-		damage *= 0.6
+		damage *= 0.5
 	
 	health -= damage
 	
