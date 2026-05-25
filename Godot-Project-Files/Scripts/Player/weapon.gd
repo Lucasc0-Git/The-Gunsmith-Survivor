@@ -153,7 +153,7 @@ func _swing_weapon() -> void:
 	
 	var rect_shape: RectangleShape2D = hit_area_collision_shape.shape as RectangleShape2D
 	if rect_shape:
-		rect_shape.size = Vector2(close_data.close_spread * 0.3, close_data.dmg_range)
+		rect_shape.size = Vector2(close_data.dmg_range * 0.3, close_data.dmg_range)
 		hit_area_collision_shape.position = Vector2(close_data.dmg_range * 0.5, close_data.dmg_range * 0.5)
 	
 	var original_rotation := rotation_degrees

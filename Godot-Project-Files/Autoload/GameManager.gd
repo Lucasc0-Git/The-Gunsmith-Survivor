@@ -1,7 +1,7 @@
 extends Node
 ## Handle global things; autoload
 
-enum StationType {BASIC_CRAFTING, WEAPON_CRAFTING}
+enum StationType {BASIC_CRAFTING, BASIC_WEAPON_CRAFTING}
 
 const DAMAGE_TYPES: Array[String] = DamageTypes.TYPES
 
