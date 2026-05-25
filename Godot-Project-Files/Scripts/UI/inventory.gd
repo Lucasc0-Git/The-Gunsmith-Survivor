@@ -97,11 +97,11 @@ func _on_slot_left_click(slot: Slot) -> void:
 		move_item_to_hotbar(slot)
 		return
 
-func can_craft(recipe: Dictionary[ItemData, int]) -> bool:
+func can_craft(recipe: Dictionary[ItemData, int], amount: int = 1) -> bool:
 	for key in recipe:
 		var has_item: bool = false
 		var has_amount: bool = false
-		var required_amount: int = recipe[key]
+		var required_amount: int = recipe[key] * amount
 		var item_count: int = find_item(key)
 		if item_count > 0:
 			has_item = true

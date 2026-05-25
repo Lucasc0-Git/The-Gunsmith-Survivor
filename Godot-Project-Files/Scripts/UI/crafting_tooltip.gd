@@ -38,14 +38,17 @@ func show_tooltip(item_data: ItemData) -> void:
 	bb += "\n"
 	bb += "[b]" + "Crafting requirements:" + "[/b]\n"
 	var crafting_recipe: Dictionary[ItemData, int] = item_data.crafting_recipe
-	for item in crafting_recipe:
-		bb += str(crafting_recipe[item]) + "x " + str(item.display_name) + "\n"
+	for ingredient: ItemData in crafting_recipe:
+		var needed := crafting_recipe[ingredient]
+		var color_prefix := text_color(has_enough(ingredient, needed))
+		bb += color_prefix + str(needed) + "x " + ingredient.display_name + "[color=Color(0.702, 0.431, 0.141)]\n"
 	
 	bb += "[b]" + "Needed crafting stations:" + "[/b]\n"
 	var needed_stations: Dictionary[GameManager.StationType, int] = item_data.needed_stations
 	for station_type: GameManager.StationType in needed_stations.keys():
 		var station_name := GameManager.get_station_name(station_type)
-		bb += text_color(has_station(station_type)) + station_name + "[color=Color(0.702, 0.431, 0.141)]\n"
+		var color_prefix := text_color(has_station(station_type))
+		bb += color_prefix + station_name + "[color=Color(0.702, 0.431, 0.141)]\n"
 	
 	visible = true
 	self.bbcode_text = bb
@@ -66,13 +69,17 @@ func show_tooltip(item_data: ItemData) -> void:
 
 func has_station(station_type: GameManager.StationType) -> bool:
 	if GameManager.has_this_station(station_type):
-		return false
-	return true
+		return true
+	return false
+
+func has_enough(ingredient: ItemData, required_amount: int) -> bool:
+	var current_amount := hud.inventory.find_item(ingredient)
+	return current_amount >= required_amount
 
 func text_color(correct: bool) -> String:
 	if correct:
-		return "[color=red]"
-	return ""
+		return ""
+	return "[color=red]"
 
 func hide_tooltip() -> void:
 	visible = false
