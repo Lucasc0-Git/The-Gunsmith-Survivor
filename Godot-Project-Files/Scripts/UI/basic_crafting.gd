@@ -12,6 +12,7 @@ class_name BasicCraftingUI
 @onready var basic_station_button: Button = $BasicCraftingPanels/VBoxContainer/Control3/CraftingStationsCraftingContainer3/MarginContainer/ScrollContainer/HBoxContainer/BasicStation
 @onready var torch_button: Button = $BasicCraftingPanels/VBoxContainer/Control4/BaseCraftingContainer3/MarginContainer/ScrollContainer/HBoxContainer/Torch
 @onready var wooden_axe_button: Button = $BasicCraftingPanels/VBoxContainer/Control2/ToolsCraftingContainer2/MarginContainer/ScrollContainer/HBoxContainer/WoodenAxe
+@onready var assault_rifle_button: Button = $BasicCraftingPanels/VBoxContainer/Control/WeaponsCraftingContainer/MarginContainer/ScrollContainer/HBoxContainer/AssaultRifle
 
 
 var crafting_buttons: Dictionary[Button, ItemData] = {} # Button -> ItemData
@@ -23,6 +24,7 @@ var torch_item: ItemData
 var apple_item: ItemData
 var basic_station_item: ItemData
 var wooden_axe_item: ItemData
+var assault_rifle_item: ItemData
 
 var _tween: Tween
 var player: Player
@@ -40,6 +42,7 @@ func _ready() -> void:
 	torch_item = ItemRegistry.items.get("torch")
 	basic_station_item = ItemRegistry.items.get("basic_station")
 	wooden_axe_item = ItemRegistry.items.get("wooden_axe")
+	assault_rifle_item = ItemRegistry.items.get("assault_rifle")
 	
 	
 	for i in range(grid_container.get_child_count()):
@@ -61,6 +64,7 @@ func _ready() -> void:
 	crafting_buttons[basic_station_button] = basic_station_item
 	crafting_buttons[torch_button] = torch_item
 	crafting_buttons[wooden_axe_button] = wooden_axe_item
+	crafting_buttons[assault_rifle_button] = assault_rifle_item
 	
 	hud = inventory.hud
 	if inventory == null:
@@ -129,6 +133,12 @@ func _on_shotgun_pressed() -> void:
 	if inventory.can_craft(shotgun_item.crafting_recipe):
 		hud.give_item(shotgun_item)
 		inventory.rm_items_by_recipe(shotgun_item.crafting_recipe)
+
+func _on_assault_rifle_pressed() -> void:
+	if inventory == null: return
+	if inventory.can_craft(assault_rifle_item.crafting_recipe):
+		hud.give_item(assault_rifle_item)
+		inventory.rm_items_by_recipe(assault_rifle_item.crafting_recipe)
 
 ##The Tools crafting recipes.
 

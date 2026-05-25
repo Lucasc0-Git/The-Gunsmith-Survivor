@@ -58,6 +58,7 @@ func _ready() -> void:
 	fill_slot(5, wood_item, 32)
 	fill_slot(2, torch_item, 16)
 	fill_slot(3, assault_rifle_item, 1)
+	fill_slot(6, wooden_axe_item, 1)
 
 func _on_slot_right_click(slot: Slot) -> void:
 	var slot_data: SlotData = slot.slot_data.copy()
