@@ -112,7 +112,12 @@ func _process(_delta: float) -> void:
 		for button: Button in crafting_buttons.keys():
 			var item: ItemData = crafting_buttons[button]
 			if item:
-				button.disabled = !inventory.can_craft(item.crafting_recipe)
+				var can_craft := inventory.can_craft(item.crafting_recipe)
+				var has_station_types := GameManager.has_required_stations(item)
+				if can_craft and has_station_types:
+					button.disabled = false
+				else:
+					button.disabled = true
 	if !crafting_shown:
 		if !player.nearby_stations.is_empty():
 			show_crafting()

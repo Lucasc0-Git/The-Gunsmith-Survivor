@@ -19,4 +19,8 @@ crafting_recipe = Dictionary[ExtResource("1_lhxjk"), int]({
 ExtResource("2_k8rhj"): 1,
 ExtResource("3_k8rhj"): 32
 })
+needed_stations = Dictionary[int, int]({
+0: 1,
+1: 1
+})
 metadata/_custom_type_script = "uid://duhl153idv7v8"

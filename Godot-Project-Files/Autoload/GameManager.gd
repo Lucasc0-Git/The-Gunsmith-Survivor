@@ -1,7 +1,18 @@
 extends Node
 ## Handle global things; autoload
 
-enum StationType {BASIC_CRAFTING, BASIC_WEAPON_CRAFTING}
+enum StationType {
+	BASIC_CRAFTING,
+	BASIC_WEAPON_CRAFTING
+	#Here more stations
+}
+
+const STATION_NAMES: Dictionary[StationType, String] = {
+	StationType.BASIC_CRAFTING: "Basic station",
+	StationType.BASIC_WEAPON_CRAFTING: "Basic weapon station"
+	#Here add to every station type its string name
+}
+
 
 const DAMAGE_TYPES: Array[String] = DamageTypes.TYPES
 
@@ -52,3 +63,17 @@ func set_day(day: int) -> void:
 	time = day * day_length + (float(current_hour) / 24.0) * day_length
 	current_day = day
 	day_changed.emit(current_day)
+
+func has_required_stations(item: ItemData) -> bool:
+	for station_type in item.needed_stations:
+		if main.player.nearby_stations.get(station_type, 0) < item.needed_stations[station_type]:
+			return false
+	return true
+
+func has_this_station(station_type: StationType) -> bool:
+	if main.player.nearby_stations.get(station_type, 0) <= 0:
+		return false
+	return true
+
+func get_station_name(station_type: StationType) -> String:
+	return STATION_NAMES.get(station_type, "ERROR: Unknown station!")
