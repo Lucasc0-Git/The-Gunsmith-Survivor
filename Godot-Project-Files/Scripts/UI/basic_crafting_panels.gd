@@ -56,3 +56,8 @@ func _on_assault_rifle_mouse_entered() -> void:
 	crafting_tooltip.show_tooltip(ItemRegistry.items["assault_rifle"])
 func _on_assault_rifle_mouse_exited() -> void:
 	crafting_tooltip.hide_tooltip()
+
+func _on_basic_smithing_table_mouse_entered() -> void:
+	crafting_tooltip.show_tooltip(ItemRegistry.items["basic_smithing_table"])
+func _on_basic_smithing_table_mouse_exited() -> void:
+	crafting_tooltip.hide_tooltip()

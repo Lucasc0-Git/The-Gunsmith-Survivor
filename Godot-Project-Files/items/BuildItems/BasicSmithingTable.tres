@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="BuildData" format=3 uid="uid://dalvk2gqckf1e"]
+
+[ext_resource type="PackedScene" uid="uid://frp6tk870t52" path="res://Scenes/basic_smithing_table.tscn" id="1_rrq5g"]
+[ext_resource type="Script" uid="uid://bvtttnj03tb3h" path="res://items/BuildItems/build_data.gd" id="2_rfy8m"]
+
+[sub_resource type="Gradient" id="Gradient_2ncgn"]
+offsets = PackedFloat32Array(0.1861702, 1)
+colors = PackedColorArray(0, 0, 0, 1, 1, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_jqdo3"]
+gradient = SubResource("Gradient_2ncgn")
+width = 16
+height = 16
+fill_to = Vector2(1, 1)
+
+[resource]
+script = ExtResource("2_rfy8m")
+id = "basic_smithing_table"
+icon = SubResource("GradientTexture2D_jqdo3")
+build_scene = ExtResource("1_rrq5g")
+metadata/_custom_type_script = "uid://bvtttnj03tb3h"

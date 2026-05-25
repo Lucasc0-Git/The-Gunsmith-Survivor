@@ -537,10 +537,16 @@ station"
 icon_alignment = 1
 expand_icon = true
 
-[node name="Panel2" type="Panel" parent="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control3/CraftingStationsCraftingContainer3/MarginContainer/ScrollContainer/HBoxContainer" unique_id=524611281]
+[node name="BasicSmithingTable" type="Button" parent="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control3/CraftingStationsCraftingContainer3/MarginContainer/ScrollContainer/HBoxContainer" unique_id=1351642476]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 mouse_filter = 1
+theme = ExtResource("14_ba8gd")
+disabled = true
+text = "Basic
+Smith."
+icon_alignment = 1
+expand_icon = true
 
 [node name="Panel3" type="Panel" parent="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control3/CraftingStationsCraftingContainer3/MarginContainer/ScrollContainer/HBoxContainer" unique_id=28384053]
 custom_minimum_size = Vector2(64, 64)
@@ -699,6 +705,9 @@ script = ExtResource("10_5ep0j")
 [connection signal="mouse_entered" from="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control3/CraftingStationsCraftingContainer3/MarginContainer/ScrollContainer/HBoxContainer/BasicStation" to="InventoryUI/BasicCrafting/BasicCraftingPanels" method="_on_basic_station_mouse_entered"]
 [connection signal="mouse_exited" from="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control3/CraftingStationsCraftingContainer3/MarginContainer/ScrollContainer/HBoxContainer/BasicStation" to="InventoryUI/BasicCrafting/BasicCraftingPanels" method="_on_basic_station_mouse_exited"]
 [connection signal="pressed" from="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control3/CraftingStationsCraftingContainer3/MarginContainer/ScrollContainer/HBoxContainer/BasicStation" to="InventoryUI/BasicCrafting" method="_on_basic_station_pressed"]
+[connection signal="mouse_entered" from="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control3/CraftingStationsCraftingContainer3/MarginContainer/ScrollContainer/HBoxContainer/BasicSmithingTable" to="InventoryUI/BasicCrafting/BasicCraftingPanels" method="_on_basic_smithing_table_mouse_entered"]
+[connection signal="mouse_exited" from="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control3/CraftingStationsCraftingContainer3/MarginContainer/ScrollContainer/HBoxContainer/BasicSmithingTable" to="InventoryUI/BasicCrafting/BasicCraftingPanels" method="_on_basic_smithing_table_mouse_exited"]
+[connection signal="pressed" from="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control3/CraftingStationsCraftingContainer3/MarginContainer/ScrollContainer/HBoxContainer/BasicSmithingTable" to="InventoryUI/BasicCrafting" method="_on_basic_smithing_table_pressed"]
 [connection signal="mouse_entered" from="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control4/BaseCraftingContainer3" to="." method="_on_base_crafting_container_3_mouse_entered"]
 [connection signal="mouse_exited" from="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control4/BaseCraftingContainer3" to="." method="_on_base_crafting_container_3_mouse_exited"]
 [connection signal="mouse_entered" from="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control4/BaseCraftingContainer3/MarginContainer/ScrollContainer/HBoxContainer/Torch" to="InventoryUI/BasicCrafting/BasicCraftingPanels" method="_on_torch_mouse_entered"]

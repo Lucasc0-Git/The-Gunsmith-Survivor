@@ -1,0 +1,34 @@
+[gd_scene format=3 uid="uid://frp6tk870t52"]
+
+[ext_resource type="PackedScene" uid="uid://dpo1uptfyrb7h" path="res://Scenes/station_scene.tscn" id="1_mt6lx"]
+
+[sub_resource type="Gradient" id="Gradient_6ch76"]
+colors = PackedColorArray(0, 0, 0, 1, 1, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_7metw"]
+gradient = SubResource("Gradient_6ch76")
+width = 16
+height = 35
+fill_to = Vector2(1, 0.5641026)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mt6lx"]
+resource_local_to_scene = true
+size = Vector2(14.666667, 18)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ec566"]
+size = Vector2(16, 34.666664)
+
+[node name="BasicSmithingTable" unique_id=1835171183 instance=ExtResource("1_mt6lx")]
+station_type = 1
+item_id = "basic_smithing_table"
+
+[node name="Sprite2D" parent="." index="0" unique_id=880745754]
+position = Vector2(0, -8)
+texture = SubResource("GradientTexture2D_7metw")
+
+[node name="CollisionShape2D" parent="." index="1" unique_id=2132263509]
+shape = SubResource("RectangleShape2D_mt6lx")
+
+[node name="CollisionShape2D" parent="MouseInputMonitor" parent_id_path=PackedInt32Array(1707325614) index="0" unique_id=487905519]
+position = Vector2(0, -7.666667)
+shape = SubResource("RectangleShape2D_ec566")

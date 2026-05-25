@@ -3,13 +3,13 @@ extends Node
 
 enum StationType {
 	BASIC_CRAFTING,
-	BASIC_WEAPON_CRAFTING
+	BASIC_SMITHING_TABLE
 	#Here more stations
 }
 
 const STATION_NAMES: Dictionary[StationType, String] = {
 	StationType.BASIC_CRAFTING: "Basic station",
-	StationType.BASIC_WEAPON_CRAFTING: "Basic weapon station"
+	StationType.BASIC_SMITHING_TABLE: "Basic smithing table"
 	#Here add to every station type its string name
 }
 
