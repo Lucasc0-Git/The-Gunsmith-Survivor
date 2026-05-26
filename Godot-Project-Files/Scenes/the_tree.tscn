@@ -3,15 +3,53 @@
 [ext_resource type="Script" uid="uid://bdy778vaxoajj" path="res://Scripts/Main/the_tree.gd" id="1_fpmds"]
 [ext_resource type="Texture2D" uid="uid://dyk5ihx7hbhg0" path="res://Textures/Treee.png" id="1_w3pkm"]
 
+[sub_resource type="Animation" id="Animation_fpmds"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -8)]
+}
+
+[sub_resource type="Animation" id="Animation_20cs3"]
+resource_name = "shake_on_hit"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, -8), Vector2(1, -8.5), Vector2(-1.25, -8), Vector2(1.5, -7.5), Vector2(-1, -8), Vector2(0.75, -8.5), Vector2(-0.75, -8), Vector2(0.5, -8), Vector2(0, -8)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_81toh"]
+_data = {
+&"RESET": SubResource("Animation_fpmds"),
+&"shake_on_hit": SubResource("Animation_20cs3")
+}
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fpmds"]
 size = Vector2(8, 6.3333335)
 
-[node name="TheTREE" type="CharacterBody2D" unique_id=1660284462 groups=["object", "tree"]]
+[node name="TheTREE" type="CharacterBody2D" unique_id=1660284462 node_paths=PackedStringArray("shake_player") groups=["object", "tree"]]
 y_sort_enabled = true
 scale = Vector2(3, 3)
 collision_layer = 8
 collision_mask = 38
 script = ExtResource("1_fpmds")
+shake_player = NodePath("Sprite2D/ShakeAnimationPlayer")
 damage_mulitpliers = Dictionary[int, float]({
 1: 1.5,
 2: 0.4
@@ -20,6 +58,9 @@ damage_mulitpliers = Dictionary[int, float]({
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=142450422]
 texture = ExtResource("1_w3pkm")
 offset = Vector2(0, -8)
+
+[node name="ShakeAnimationPlayer" type="AnimationPlayer" parent="Sprite2D" unique_id=689678790]
+libraries/ = SubResource("AnimationLibrary_81toh")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=1489910358]
 position = Vector2(0.333, -8)

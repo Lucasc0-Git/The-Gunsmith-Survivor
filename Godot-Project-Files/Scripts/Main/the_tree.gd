@@ -5,6 +5,7 @@ extends CharacterBody2D
 @onready var ysort_node := get_parent()
 @onready var main: Main = get_parent().get_parent()
 
+@export var shake_player: AnimationPlayer
 @export var damage_mulitpliers: Dictionary[DamageTypes.DamageType, float] = DamageTypes.get_default_damage_multipliers()
 
 var health: float = 50
@@ -23,11 +24,16 @@ func drop_items(amount: int, random_range: int) -> void:
 func take_damage(amount: float, dmg_type: DamageTypes.DamageType) -> void:
 	var multiplier: float = damage_mulitpliers.get(dmg_type, 1.0)
 	var damage := amount * multiplier
-	
+	play_shake(0.7 if dmg_type == DamageTypes.DamageType.LONG_RANGE else 1.0)
 	health -= damage
 	
 	if health <= 0:
 		destroy()
+
+func play_shake(intensity: float = 1.0) -> void:
+	shake_player.stop()
+	shake_player.speed_scale = intensity
+	shake_player.play("shake_on_hit")
 
 func destroy() -> void:
 	drop_items(1, 20)
