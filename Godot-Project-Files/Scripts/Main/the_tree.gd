@@ -10,6 +10,7 @@ extends CharacterBody2D
 
 var health: float = 50
 var wood_item : ItemData
+var destroyed: bool = false
 
 func _ready() -> void:
 	if not ItemRegistry or not ItemRegistry.loaded:
@@ -22,13 +23,16 @@ func drop_items(amount: int, random_range: int) -> void:
 		main.drop_item(wood_item, global_position, random_range)
 
 func take_damage(amount: float, dmg_type: DamageTypes.DamageType) -> void:
+	if destroyed: return
 	var multiplier: float = damage_mulitpliers.get(dmg_type, 1.0)
 	var damage := amount * multiplier
-	play_shake(0.7 if dmg_type == DamageTypes.DamageType.LONG_RANGE else 1.0)
+	
 	health -= damage
 	
 	if health <= 0:
 		destroy()
+	else:
+		play_shake(0.7 if dmg_type == DamageTypes.DamageType.LONG_RANGE else 1.0)
 
 func play_shake(intensity: float = 1.0) -> void:
 	shake_player.stop()
@@ -36,7 +40,13 @@ func play_shake(intensity: float = 1.0) -> void:
 	shake_player.play("shake_on_hit")
 
 func destroy() -> void:
+	collision.set_deferred("disabled", true)
 	drop_items(1, 20)
+	if GameManager.random_bool():
+		shake_player.play("fall_right")
+	else:
+		shake_player.play("fall_left")
+	await shake_player.animation_finished
 	queue_free()
 
 func _on_visible_on_screen_notifier_2d_screen_entered() -> void:

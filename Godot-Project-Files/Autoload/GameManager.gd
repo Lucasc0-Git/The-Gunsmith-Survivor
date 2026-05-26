@@ -77,3 +77,9 @@ func has_this_station(station_type: StationType) -> bool:
 
 func get_station_name(station_type: StationType) -> String:
 	return STATION_NAMES.get(station_type, "ERROR: Unknown station!")
+
+func random_bool() -> bool:
+	return randf() < 0.5
+
+func random_choice(option_a: Variant, option_b: Variant) -> Variant:
+	return option_a if randf() < 0.5 else option_b
