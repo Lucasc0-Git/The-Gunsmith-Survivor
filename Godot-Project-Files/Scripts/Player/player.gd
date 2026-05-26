@@ -27,6 +27,7 @@ var nearby_stations: Dictionary[GameManager.StationType, int] = {}
 @export var health_regen_rate: float = 5
 @export var dodge_force: int = 400
 @export var build_reach: int = 800
+@export var damage_multipliers: Dictionary[DamageTypes.DamageType, float] = DamageTypes.get_default_damage_multipliers()
 
 ## The const declaration.
 const SPEED: int = 200
@@ -180,7 +181,7 @@ func get_selected_slot() -> Slot:
 func _physics_process(delta: float) -> void:
 	#For testing things (need to remove them!)
 	if Input.is_action_just_pressed("DEBUG hurt"):
-		get_hurt(20, "basic")
+		get_hurt(20, DamageTypes.DamageType.BASIC)
 	
 	## Handle respawn
 	if health <= 0:
@@ -206,17 +207,13 @@ func heal(amount: float) -> void:
 	health += amount
  
 ## Remove health from current health by [amount]
-func get_hurt(amount: float, dmg_type: String) -> void:
-	var damage := amount
-	if !dmg_type in GameManager.DAMAGE_TYPES: health -= damage; return
-	if dmg_type == DamageTypes.MELEE:
-		damage *= 0.9
-	elif dmg_type == DamageTypes.LONG_RANGE:
-		damage *= 1.1
+func get_hurt(amount: float, dmg_type: DamageTypes.DamageType) -> void:
+	var multiplier: float = damage_multipliers.get(dmg_type, 1.0)
+	var damage := amount * multiplier
 	
 	health -= damage
 
-func take_damage(amount: float, dmg_type: String) -> void:
+func take_damage(amount: float, dmg_type: DamageTypes.DamageType) -> void:
 	get_hurt(amount, dmg_type)
 
 ## Add health to current health over time

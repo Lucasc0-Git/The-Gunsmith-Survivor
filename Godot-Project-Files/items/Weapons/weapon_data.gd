@@ -14,5 +14,4 @@ class_name WeaponData
 
 @export var pellets : int = 1 ##The number of shots at the same time.
 @export var spread : float = 0.0 ##How much inaccurate is the weapon, or, with more shots at the same time, it's for the spread of the shots.
-@export_custom(PROPERTY_HINT_ENUM, DamageTypes.DAMAGE_TYPES_HINT) 
-var dmg_type: String
+@export var dmg_type: DamageTypes.DamageType = DamageTypes.DamageType.BASIC

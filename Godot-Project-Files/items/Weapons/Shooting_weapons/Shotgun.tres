@@ -16,5 +16,5 @@ bullet_scale = Vector2(0.7, 0.7)
 recoil = 150.0
 pellets = 10
 spread = 0.7
-dmg_type = "long_range"
+dmg_type = 2
 metadata/_custom_type_script = "uid://d4hnrbyx1okcs"

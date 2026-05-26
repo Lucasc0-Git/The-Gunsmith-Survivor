@@ -17,6 +17,7 @@ class_name BasicBullet
 var direction := Vector2.ZERO
 var bullet_damage : int
 var has_hit: bool = false
+var dmg_type: DamageTypes.DamageType = DamageTypes.DamageType.BASIC
 
 func _ready() -> void:
 	## Start the timer for despawn
@@ -43,7 +44,7 @@ func _on_body_entered(body: Node2D) -> void:
 			return
 		
 		if body.has_method("take_damage"):
-			body.take_damage(bullet_damage, DamageTypes.LONG_RANGE)
+			body.take_damage(bullet_damage, dmg_type)
 		bullet_despawn()
 	if body.is_in_group("thecore"):
 		bullet_despawn()
@@ -51,7 +52,7 @@ func _on_body_entered(body: Node2D) -> void:
 func _on_area_entered(area: Area2D) -> void:
 	if area.is_in_group("enemy_hitbox"):
 		if has_hit: return
-		area.get_parent().take_damage(bullet_damage, DamageTypes.LONG_RANGE)
+		area.get_parent().take_damage(bullet_damage, dmg_type)
 		bullet_despawn()
 
 func bullet_despawn() -> void:

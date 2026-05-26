@@ -4,6 +4,7 @@ class_name TheCore
 @onready var progress_bar: ProgressBar = $HealthBar
 
 @export var max_health: float = 1500
+@export var damage_multipliers: Dictionary[DamageTypes.DamageType, float] = DamageTypes.get_default_damage_multipliers()
 
 signal player_entered_crafting_area()
 signal player_exited_crafting_area()
@@ -25,11 +26,9 @@ func _ready() -> void:
 	progress_bar.max_value = max_health
 	progress_bar.value = max_health
 
-func take_damage(amount: float, dmg_type: String) -> void:
-	var damage := amount
-	if !dmg_type in GameManager.DAMAGE_TYPES: health -= damage; return
-	if dmg_type == DamageTypes.MELEE:
-		damage *= 0.9
+func take_damage(amount: float, dmg_type: DamageTypes.DamageType) -> void:
+	var multiplier: float = damage_multipliers.get(dmg_type, 1.0)
+	var damage := amount * multiplier
 	
 	damage *= 0.8
 	health -= damage

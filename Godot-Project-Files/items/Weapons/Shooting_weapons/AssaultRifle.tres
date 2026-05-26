@@ -15,5 +15,5 @@ bullet_shrinking = 0.99
 bullet_scale = Vector2(0.65, 0.65)
 recoil = 40.0
 spread = 0.1
-dmg_type = "long_range"
+dmg_type = 2
 metadata/_custom_type_script = "uid://d4hnrbyx1okcs"
