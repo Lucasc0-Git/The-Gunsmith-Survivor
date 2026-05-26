@@ -66,6 +66,9 @@ func _ready() -> void:
 	GameManager.set_hour(8)
 	build_tooltip.visible = false
 	inventory_tint = hud.canvas_modulate
+	
+	if !OS.is_debug_build():
+		drop_item(ItemRegistry.items.get("wooden_axe"), Vector2(0, -150))
 
 func _on_hour_changed(hour: int) -> void:
 	label.text = "Hour: " + str(hour) + ":00"
@@ -124,7 +127,7 @@ func _on_region_generated(new_trees: Array, new_spawners: Array) -> void:
 	for pos: Vector2 in new_spawners:
 		add_spawner(pos)
 
-func drop_item(item: ItemData, pos: Vector2, random_range: int) -> void:
+func drop_item(item: ItemData, pos: Vector2, random_range: int = 0) -> void:
 	var dropped_item := preload("res://Scenes/dropped_item.tscn").instantiate()
 	dropped_item.item_data = item
 	dropped_item.global_position = pos + Vector2(randi_range(random_range, -random_range), randi_range(random_range, -random_range))
