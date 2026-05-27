@@ -136,6 +136,8 @@ damage_mulitpliers = Dictionary[int, float]({
 1: 1.5,
 2: 0.4
 })
+regen = 2.0
+low_health_modulate = Color(0.556953, 0.556953, 0.556953, 1)
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=142450422]
 position = Vector2(1, 0)
