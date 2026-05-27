@@ -17,7 +17,8 @@ func _ready() -> void:
 
 func _on_new_game_button_pressed() -> void:
 	AudioManager.play_button_click()
-	get_tree().change_scene_to_packed(MainScene)
+	#get_tree().change_scene_to_packed(MainScene)
+	GameManager.start_new_world()
 
 func _on_options_button_pressed() -> void:
 	AudioManager.play_button_click()

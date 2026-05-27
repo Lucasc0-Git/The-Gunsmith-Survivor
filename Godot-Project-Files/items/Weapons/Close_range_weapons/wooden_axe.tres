@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("1_lb60g")
-dmg_range = 10.0
+dmg_range = 15.0
 id = "wooden_axe"
 icon = ExtResource("1_jfpk8")
 damage = 25

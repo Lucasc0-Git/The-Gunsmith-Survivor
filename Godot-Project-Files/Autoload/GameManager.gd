@@ -83,3 +83,21 @@ func random_bool() -> bool:
 
 func random_choice(option_a: Variant, option_b: Variant) -> Variant:
 	return option_a if randf() < 0.5 else option_b
+
+func wait_for_node(node: Node, timeout: float = 2.0) -> bool:
+	if not node:
+		return false
+	
+	var start_time := Time.get_ticks_msec()
+	
+	while not node.is_inside_tree() or not node.is_node_ready():
+		if Time.get_ticks_msec() - start_time > timeout * 1000:
+			push_warning("Timeout waiting for node: %s" % node.name)
+			return false
+		await get_tree().process_frame
+	
+	return true
+
+func start_new_world() -> void:
+	main = load("res://Scenes/Main.tscn").instantiate()
+	get_tree().change_scene_to_node(main)
