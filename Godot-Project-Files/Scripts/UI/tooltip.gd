@@ -8,6 +8,10 @@ class_name Tooltip
 var inventory: Inventory
 
 func _ready() -> void:
+	while !GameManager.is_game_loaded: await get_tree().process_frame
+	if !inventory: push_error("Tooltip: Inventory is null!")
+	if !hud: push_error("There is nothing to do now... even the Tooltip's parent is null...")
+	
 	var font_variation := FontVariation.new()
 	font_variation.base_font = self.get_theme_font("normal_font")
 	font_variation.spacing_glyph = 0

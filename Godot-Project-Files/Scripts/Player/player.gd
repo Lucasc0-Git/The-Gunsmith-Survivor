@@ -48,6 +48,8 @@ var health : float = health_max:
 func _ready() -> void:
 	while !GameManager.is_game_loaded:
 		await get_tree().process_frame
+	main = GameManager.main
+	
 	
 	##Connect signals
 	weapon.has_shot.connect(apply_recoil)
@@ -62,16 +64,9 @@ func _ready() -> void:
 	change_state("Idle")
 
 ## Set the player var by Main.gd script
-func set_vars(h: Hud) -> void:
-	hud = h
-	inventory_ui = hud.get_node("InventoryUI")
-	##Connect signals
-	hud.hotbar.slot_selected.connect(_on_hotbar_slot_selected)
-	hud.inv_toggled.connect(_on_inv_toggled)
-	##Set vars in other nodes
-	weapon.player = self
-	weapon.hud = hud
-	hud.weapon = weapon
+func set_vars_debug() -> void:
+	if !hud: push_error("Player: HUD is null!")
+	if !inventory_ui: push_error("Player: InventoryUI is null!")
 
 ## State machine
 func change_state(state_name: String) -> void:

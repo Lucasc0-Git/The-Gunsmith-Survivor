@@ -40,6 +40,7 @@ signal world_loaded()
 
 func _ready() -> void:
 	GameManager.is_game_loaded = false
+	get_tree().paused = true
 	day_colors = {
 		6:  lighting_colors[TimeOfDay.DAWN],
 		7:  lighting_colors[TimeOfDay.SUNRISE],
@@ -48,35 +49,87 @@ func _ready() -> void:
 		19: lighting_colors[TimeOfDay.DUSK],
 		20: lighting_colors[TimeOfDay.NIGHT],
 	}
+	##GameManager
+	GameManager.hour_changed.connect(_on_hour_changed)
+	GameManager.set_day(1)
+	GameManager.set_hour(8)
+	
+	##Invis all
+	cheat_mode_label.visible = false
+	menu.visible = false
+	build_tooltip.visible = false
+	
+	
+	##Preload
+	player = preload("res://Scenes/Player.tscn").instantiate()
+	the_core = preload("uid://s0p5vesfuqst").instantiate()
+	
+	##Connect signals
+	await  GameManager.wait_for_node(map)
+	map.region_generated.connect(_on_region_generated)
+	player.health_update.connect(hud.ui.health_changed)
+	
+	##Generate or load the world.
+	generate()
 	
 	
 	canvas_modulate.color = day_colors[8]
-	cheat_mode_label.visible = false
-	spawn_player(Vector2(0, 0))
-	spawn_the_core(player.global_position + Vector2(0, -250))
 	label.text = "Hour: " + str(GameManager.current_hour) + ":00"
 	## Set "player" variable in the hud.gd
-	GameManager.hour_changed.connect(_on_hour_changed)
-	menu.visible = false
-	hud.set_player(player)
-	player.set_vars(hud)
-	player.health_update.connect(hud.ui.health_changed)
-	player.main = self
+	await GameManager.wait_for_node(hud)
+	await GameManager.wait_for_node(player)
+	await GameManager.wait_for_node(player.weapon)
+	
+	
+	##Connect later signals
+	hud.hotbar.slot_item_changed.connect(
+		func(index: int, slot_data: SlotData) -> void:
+			player.set_hotbar_item(index, slot_data)
+	)
+	hud.hotbar.slot_selected.connect(
+		func(index: int) -> void:
+			player.on_hotbar_selected_by_ui(index)
+	)
+	hud.hotbar.slot_selected.connect(player._on_hotbar_slot_selected)
+	hud.inv_toggled.connect(player._on_inv_toggled)
+	
+	##Set hud vars
+	hud.player = player
+	hud.weapon = player.weapon
+	hud.tooltip.inventory = hud.inventory
+	hud.inventory.player = player
+	hud.inventory.tooltip = hud.tooltip
+	hud.inventory.hud = hud
+	hud.inventory.hotbar = hud.hotbar
+	hud.inventory.basic_crafting = hud.basic_crafting
+	hud.basic_crafting.inventory = hud.inventory
+	hud.hotbar.sync_from_player()
+	##Check if everything is ok.
+	hud.set_vars_debug()
+	##Set player vars
+	player.hud = hud
+	player.inventory_ui = hud.get_node("InventoryUI")
+	player.weapon.player = player
+	player.weapon.hud = hud
+	hud.weapon = player.weapon
+	##Check if everything is ok.
+	player.set_vars_debug()
+	
 	map.player = player
-	map.region_generated.connect(_on_region_generated)
-	map.generate_region(Vector2i(0, 0))
-	map.generate_region(Vector2i(1, 1))
-	GameManager.set_day(1)
-	GameManager.set_hour(8)
-	build_tooltip.visible = false
 	inventory_tint = hud.canvas_modulate
 	
-	if !OS.is_debug_build():
-		drop_item(ItemRegistry.items.get("wooden_axe"), Vector2(0, -150))
 	
-	
+	get_tree().paused = false
 	GameManager.is_game_loaded = true
 	world_loaded.emit()
+
+func generate() -> void:
+	map.generate_region(Vector2i(0, 0))
+	map.generate_region(Vector2i(1, 1))
+	spawn_player(Vector2(0, 0))
+	spawn_the_core(player.global_position + Vector2(0, -250))
+	if !OS.is_debug_build():
+		drop_item(ItemRegistry.items.get("wooden_axe"), Vector2(0, -150))
 
 func _on_hour_changed(hour: int) -> void:
 	label.text = "Hour: " + str(hour) + ":00"
@@ -159,12 +212,10 @@ func add_spawner(pos: Vector2) -> void:
 	spawners.add_child(spawner)
 
 func spawn_player(pos: Vector2) -> void:
-	player = preload("res://Scenes/Player.tscn").instantiate()
 	player.global_position = pos
 	Ysort.add_child(player)
 
 func spawn_the_core(pos: Vector2) -> void:
-	the_core = preload("uid://s0p5vesfuqst").instantiate()
 	the_core.global_position = pos
 	the_core.main = self
 	Ysort.add_child(the_core)

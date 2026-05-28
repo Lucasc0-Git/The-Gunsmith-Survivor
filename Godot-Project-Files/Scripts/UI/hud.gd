@@ -23,35 +23,9 @@ var _inv_tween: Tween
 signal inv_toggled(visible: bool)
 
 ## Set the player var by Main.gd script
-func set_player(p: Player) -> void:
-	player = p
-	# connect hotbar signals to player
-	# when a slot changes in UI, tell player to set hotbar item
-	hotbar.slot_item_changed.connect(
-		func(index: int, slot_data: SlotData) -> void:
-			player.set_hotbar_item(index, slot_data)
-	)
-	# when slot selected (visual) -> update player current index
-	hotbar.slot_selected.connect(
-		func(index: int) -> void:
-			player.on_hotbar_selected_by_ui(index)
-	)
-	
-	weapon = player.weapon
-	#hotbar.mouse_entered.connect(func() -> void: weapon.hovering = true; print("smthng"))
-	#hotbar.mouse_exited.connect(func() -> void: weapon.hovering = false)
-	
-	
-	# Set vars.
-	tooltip.inventory = inventory
-	hotbar.sync_from_player()
-	inventory.player = player
-	inventory.tooltip = tooltip
-	inventory.hud = self
-	inventory.hotbar = hotbar
-	inventory.basic_crafting = basic_crafting
-	basic_crafting.inventory = inventory
-	
+func set_vars_debug() -> void:
+	if !player: push_error("HUD: Player is null!")
+	if !weapon: push_error("HUD: Weapon is null!")
 
 func give_item(item: ItemData, amount: int = 1) -> void:
 	var leftover := hotbar.give_hotbar_item(item, amount)

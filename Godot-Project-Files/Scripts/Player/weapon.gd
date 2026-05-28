@@ -30,8 +30,10 @@ var can_place: bool = false
 func _ready() -> void:
 	while  !GameManager.is_game_loaded:
 		await get_tree().process_frame
+	if !hud: push_error("Weapon: HUD is null!")
+	if !player: push_error("Weapon: Player is null!")
 	
-	#await get_tree().physics_frame
+	
 	hud.inv_toggled.connect(inv_toggled)
 	hit_area.monitoring = false
 

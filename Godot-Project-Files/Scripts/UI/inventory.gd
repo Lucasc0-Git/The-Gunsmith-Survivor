@@ -18,8 +18,8 @@ var torch_item: ItemData
 var wooden_axe_item: ItemData
 var assault_rifle_item: ItemData
 var basic_station_item: ItemData
-var basic_crafting: BasicCraftingUI
 
+var basic_crafting: BasicCraftingUI
 var inv_slot : Slot
 var player: Player
 var hud : Hud
@@ -30,6 +30,11 @@ func _ready() -> void:
 		await ItemRegistry.items_loaded
 	while !GameManager.is_game_loaded:
 		await get_tree().process_frame
+	
+	if !hud: push_error("Inventory: HUD is null!")
+	if !player: push_error("Inventory: Player is null!")
+	if !hotbar: push_error("Inventory: Hotbar is null!")
+	if !basic_crafting: push_error("Inventory: BasicCrafting is null!")
 	
 	
 	## Assign proper data to proper items

@@ -56,15 +56,16 @@ func _ready() -> void:
 			func(toggled_on: bool, idx: int = i) -> void: _on_button_toggled(toggled_on, idx)
 		)
 	
-	#await get_tree().process_frame
-	the_core = get_tree().get_first_node_in_group("thecore")
-	player = the_core.main.player
-	if !main:
-		main = the_core.main
+	main = GameManager.main
+	the_core = main.the_core
+	player = main.player
+	hud = main.hud
 	
+	if !main: push_error("BasicCrafting: Main is null!")
+	if !the_core: push_error("BasicCrafting: TheCore is null!")
+	if !player: push_error("BasicCrafting: Player is null!")
+	if !hud: push_error("BasicCrafting: HUD is null!")
 	
-	#the_core.player_entered_crafting_area.connect(show_crafting)
-	#the_core.player_exited_crafting_area.connect(hide_crafting)
 	
 	## When adding more craftable items, need to add here.
 	crafting_buttons[glock_button] = glock_item
@@ -74,11 +75,6 @@ func _ready() -> void:
 	crafting_buttons[wooden_axe_button] = wooden_axe_item
 	crafting_buttons[assault_rifle_button] = assault_rifle_item
 	crafting_buttons[basic_smithing_table_button] = basic_smithing_table_item
-	
-	hud = inventory.hud
-	if inventory == null:
-		push_error("Inventory in basic_crafting.gd is null")
-		push_error("Hud in basic_crafting.gd is null")
 
 
 func hide_crafting() -> void:
