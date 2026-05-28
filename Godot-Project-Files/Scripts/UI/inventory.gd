@@ -28,6 +28,9 @@ var hotbar: Hotbar
 func _ready() -> void:
 	if not ItemRegistry or not ItemRegistry.loaded:
 		await ItemRegistry.items_loaded
+	while !GameManager.is_game_loaded:
+		await get_tree().process_frame
+	
 	
 	## Assign proper data to proper items
 	glock_item = ItemRegistry.items.get("glock")

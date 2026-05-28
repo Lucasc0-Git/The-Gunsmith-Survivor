@@ -18,6 +18,9 @@ signal slot_selected(index: int)
 signal slot_item_changed(index: int, slot_data: SlotData)
 
 func _ready() -> void:
+	while !GameManager.is_game_loaded:
+		await get_tree().process_frame
+	
 	for i in range(slot_count): ##Add slots to hotbar
 		var index := i
 		var slot := slot_scene.instantiate()

@@ -31,11 +31,13 @@ var basic_smithing_table_item: ItemData
 var _tween: Tween
 var player: Player
 var crafting_shown: bool = false
-var main: Main
+var main: Main = GameManager.main
 
 func _ready() -> void:
 	if not ItemRegistry or not ItemRegistry.loaded:
 		await ItemRegistry.items_loaded
+	while !GameManager.is_game_loaded:
+		await get_tree().process_frame
 	
 	glock_item = ItemRegistry.items.get("glock")
 	shotgun_item = ItemRegistry.items.get("shotgun")
@@ -54,9 +56,12 @@ func _ready() -> void:
 			func(toggled_on: bool, idx: int = i) -> void: _on_button_toggled(toggled_on, idx)
 		)
 	
-	await get_tree().process_frame
+	#await get_tree().process_frame
 	the_core = get_tree().get_first_node_in_group("thecore")
 	player = the_core.main.player
+	if !main:
+		main = the_core.main
+	
 	
 	#the_core.player_entered_crafting_area.connect(show_crafting)
 	#the_core.player_exited_crafting_area.connect(hide_crafting)
@@ -112,6 +117,7 @@ func _on_button_toggled(toggled_on: bool, index: int) -> void:
 		basic_craftings.toggle_base_crafting(toggled_on)
 
 func _process(_delta: float) -> void:
+	if !GameManager.is_game_loaded: return
 	if visible:
 		for button: Button in crafting_buttons.keys():
 			var item: ItemData = crafting_buttons[button]

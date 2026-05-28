@@ -22,6 +22,7 @@ var day_length: float = 600.0
 var current_hour: int = 0
 var current_day: int = 0
 var main: Main = null
+var is_game_loaded: bool = false
 
 signal hour_changed(hour: int)
 signal day_changed(day: int)
@@ -30,6 +31,7 @@ func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
 
 func _process(delta: float) -> void:
+	if !is_game_loaded: return
 	if get_tree().paused: return
 	time += delta
 	

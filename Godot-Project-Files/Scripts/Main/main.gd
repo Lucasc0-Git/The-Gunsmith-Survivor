@@ -36,8 +36,10 @@ var player: Player
 #@export_group("Building")
 #@export var torch_scene: PackedScene
 
+signal world_loaded()
+
 func _ready() -> void:
-	#GameManager.main = self
+	GameManager.is_game_loaded = false
 	day_colors = {
 		6:  lighting_colors[TimeOfDay.DAWN],
 		7:  lighting_colors[TimeOfDay.SUNRISE],
@@ -46,6 +48,8 @@ func _ready() -> void:
 		19: lighting_colors[TimeOfDay.DUSK],
 		20: lighting_colors[TimeOfDay.NIGHT],
 	}
+	
+	
 	canvas_modulate.color = day_colors[8]
 	cheat_mode_label.visible = false
 	spawn_player(Vector2(0, 0))
@@ -69,6 +73,10 @@ func _ready() -> void:
 	
 	if !OS.is_debug_build():
 		drop_item(ItemRegistry.items.get("wooden_axe"), Vector2(0, -150))
+	
+	
+	GameManager.is_game_loaded = true
+	world_loaded.emit()
 
 func _on_hour_changed(hour: int) -> void:
 	label.text = "Hour: " + str(hour) + ":00"

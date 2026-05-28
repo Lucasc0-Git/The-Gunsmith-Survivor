@@ -41,6 +41,7 @@ func take_damage(amount: float, dmg_type: DamageTypes.DamageType) -> void:
 		play_shake(0.7 if dmg_type == DamageTypes.DamageType.LONG_RANGE else 1.0)
 
 func _process(delta: float) -> void:
+	if !GameManager.is_game_loaded: return
 	if health < max_health:
 		health += regen * delta
 		update_target_color()
@@ -48,7 +49,7 @@ func _process(delta: float) -> void:
 		health = max_health
 	sprite.modulate = sprite.modulate.lerp(target_color, 3.0 * delta)
 	
-	
+		
 
 func update_target_color() -> void:
 	var health_ratio := health / max_health

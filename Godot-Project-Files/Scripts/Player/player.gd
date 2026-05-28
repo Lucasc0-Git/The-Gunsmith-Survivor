@@ -46,6 +46,9 @@ var health : float = health_max:
 
 ## Called on start; State machine
 func _ready() -> void:
+	while !GameManager.is_game_loaded:
+		await get_tree().process_frame
+	
 	##Connect signals
 	weapon.has_shot.connect(apply_recoil)
 	## Add starting weapons

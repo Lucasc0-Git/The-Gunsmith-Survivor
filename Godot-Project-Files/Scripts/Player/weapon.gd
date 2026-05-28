@@ -28,7 +28,10 @@ var build_preview: BuildScene
 var can_place: bool = false
 
 func _ready() -> void:
-	await get_tree().physics_frame
+	while  !GameManager.is_game_loaded:
+		await get_tree().process_frame
+	
+	#await get_tree().physics_frame
 	hud.inv_toggled.connect(inv_toggled)
 	hit_area.monitoring = false
 
@@ -248,6 +251,7 @@ func is_placement_valid() -> bool:
 	return results.is_empty()
 
 func _process(_delta: float) -> void:
+	if !GameManager.is_game_loaded: return
 	if equipped_item == null or equipped_item.is_empty():
 		return
 	if equipped_item and equipped_item.item_data.has_method("is_rotatable") and equipped_item.item_data.is_rotatable():

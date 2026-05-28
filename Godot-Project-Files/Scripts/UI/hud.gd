@@ -121,3 +121,6 @@ func _on_base_crafting_container_3_mouse_exited() -> void:
 
 func toggle_hovering(hovering_on: bool) -> void:
 	weapon.hovering = hovering_on
+
+func _on_main_world_loaded() -> void:
+	$TextureRect.visible = false

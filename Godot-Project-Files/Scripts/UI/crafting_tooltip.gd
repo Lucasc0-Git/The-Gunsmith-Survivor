@@ -14,6 +14,7 @@ func _ready() -> void:
 	self.add_theme_font_override("normal_font", font_variation)
 
 func show_tooltip(item_data: ItemData) -> void:
+	if !GameManager.is_game_loaded: return
 	if item_data == null: return
 	var bb : String = ""
 	
@@ -85,6 +86,7 @@ func hide_tooltip() -> void:
 	visible = false
 
 func _process(_delta: float) -> void:
+	if !GameManager.is_game_loaded: return
 	if visible:
 		var mouse_pos := get_viewport().get_mouse_position()
 		var tooltip_size : Vector2= size

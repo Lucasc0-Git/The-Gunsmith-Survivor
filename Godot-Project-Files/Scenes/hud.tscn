@@ -85,6 +85,12 @@ bg_color = Color(1.92523e-06, 0.6930749, 0.63886756, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ssfue"]
 bg_color = Color(0.9412422, 0.3624725, 0.59544843, 1)
 
+[sub_resource type="Gradient" id="Gradient_0iicw"]
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ajim5"]
+gradient = SubResource("Gradient_0iicw")
+
 [node name="Control" type="CanvasLayer" unique_id=1385382916]
 process_mode = 3
 layer = 10
@@ -679,6 +685,13 @@ bbcode_enabled = true
 fit_content = true
 scroll_active = false
 script = ExtResource("10_5ep0j")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=988107152]
+offset_left = -33.0
+offset_top = -29.0
+offset_right = 1311.0
+offset_bottom = 736.0
+texture = SubResource("GradientTexture2D_ajim5")
 
 [connection signal="mouse_entered" from="InventoryUI/Hotbar/PanelContainer" to="." method="_on_hotbar_mouse_entered"]
 [connection signal="mouse_exited" from="InventoryUI/Hotbar/PanelContainer" to="." method="_on_hotbar_mouse_exited"]
