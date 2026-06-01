@@ -13,6 +13,7 @@ weapon_data = ExtResource("4_j3h1m")
 id = "assault_rifle"
 icon = ExtResource("2_g066i")
 display_name = "Assault Rifle"
+score_for_crafting = 20
 description = "An assault rifle. Comes handy in a horde."
 crafting_recipe = Dictionary[ExtResource("1_macn1"), int]({
 ExtResource("2_oh4ko"): 1,

@@ -12,6 +12,7 @@ close_weapon_data = ExtResource("1_besl8")
 id = "wooden_axe"
 icon = ExtResource("4_t8eax")
 display_name = "Wooden Axe"
+score_for_crafting = 5
 description = "An axe. Possibly the worst possible quality. Who knows..."
 crafting_description = "A wooden axe. Excellents at deforestation!"
 crafting_recipe = Dictionary[ExtResource("1_13v0x"), int]({

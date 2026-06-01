@@ -12,6 +12,7 @@ extends CharacterBody2D
 @export var health: float = 50
 @export var full_health_modulate: Color = Color(1.0, 1.0, 1.0, 1.0)
 @export var low_health_modulate: Color = Color(0.256, 0.256, 0.256, 1.0)
+@export var score_for_destroy: int = 1
 
 var target_color: Color
 var wood_item : ItemData
@@ -61,6 +62,8 @@ func play_shake(intensity: float = 1.0) -> void:
 	shake_player.play("shake_on_hit")
 
 func destroy() -> void:
+	GameManager.score += score_for_destroy
+	GameManager.more_stats["Resources mined"] += 1
 	collision.set_deferred("disabled", true)
 	drop_items(1, 20)
 	if GameManager.random_bool():

@@ -12,6 +12,7 @@ class_name Enemy
 @export var accel: int = 300
 @export var chase_range: int = 400
 @export var damage_multipliers: Dictionary[DamageTypes.DamageType, float] = DamageTypes.get_default_damage_multipliers()
+@export var score_for_kill: int = 15
 
 var health: float = 10:
 	get():
@@ -86,6 +87,8 @@ func take_damage(amount: float, dmg_type: DamageTypes.DamageType) -> void:
 		die()
 
 func die() -> void:
+	GameManager.score += score_for_kill
+	GameManager.more_stats["Enemies killed"] += 1
 	queue_free()
 
 func _on_timer_timeout() -> void:

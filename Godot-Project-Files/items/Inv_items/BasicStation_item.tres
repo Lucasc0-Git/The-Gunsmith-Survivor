@@ -18,6 +18,7 @@ build_data = ExtResource("1_68yfr")
 id = "basic_station"
 icon = SubResource("GradientTexture2D_7en5n")
 display_name = "Basic Crafting Station"
+score_for_crafting = 20
 description = "A basic station for crafting. Unlocks the same recipes as The Core."
 crafting_recipe = Dictionary[ExtResource("1_rksjb"), int]({
 ExtResource("3_gmr3f"): 64

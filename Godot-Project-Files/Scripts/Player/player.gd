@@ -196,6 +196,10 @@ func _physics_process(delta: float) -> void:
 
 ##Reset of everything (except the inventory), need to replace with something else on death
 func respawn() -> void:
+	
+	GameManager.score -= 50
+	GameManager.more_stats["Deaths"] += 1
+	
 	global_position = spawn_pos
 	health = health_max
 	velocity = Vector2.ZERO

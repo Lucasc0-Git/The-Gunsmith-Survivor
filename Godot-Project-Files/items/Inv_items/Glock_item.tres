@@ -12,6 +12,7 @@ weapon_data = ExtResource("3_iujff")
 id = "glock"
 icon = ExtResource("1_jx66i")
 display_name = "Glock"
+score_for_crafting = 5
 description = "A nice and grateful handgun."
 crafting_description = "Basic handgun"
 crafting_recipe = Dictionary[ExtResource("1_iujff"), int]({

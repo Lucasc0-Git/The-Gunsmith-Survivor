@@ -15,6 +15,7 @@ id = "torch"
 icon = SubResource("PlaceholderTexture2D_soymg")
 display_name = "Torch"
 max_stack = 16
+score_for_crafting = 1
 description = "A basic light source."
 crafting_description = "A torch. Light source."
 crafting_recipe = Dictionary[ExtResource("1_fm7p0"), int]({

@@ -16,6 +16,11 @@ const STATION_NAMES: Dictionary[StationType, String] = {
 
 const DAMAGE_TYPES: Array[String] = DamageTypes.TYPES
 
+const BASE_HOURLY_POINTS: int = 5
+const SCORE_MULTIPLIER: float = 1.2
+const BASE_DAILY_POINTS: int = 15
+const MAX_DAILY_POINTS: int = 400 ##A cap for the exponential calculating of points based on days survived.
+
 var current_world_seed: int
 var time: float = 0.0
 var day_length: float = 600.0
@@ -23,6 +28,15 @@ var current_hour: int = 0
 var current_day: int = 0
 var main: Main = null
 var is_game_loaded: bool = false
+
+var score: int = 0
+var more_stats: Dictionary[String, int] = {
+	"Deaths": 0,
+	"Enemies killed": 0,
+	"Items crafted": 0,
+	"Resources mined": 0,
+	"Buildings built": 0
+}
 
 signal hour_changed(hour: int)
 signal day_changed(day: int)
@@ -37,11 +51,13 @@ func _process(delta: float) -> void:
 	
 	var new_hour := int((time / day_length) * 24) % 24
 	if new_hour != current_hour:
+		score += BASE_HOURLY_POINTS
 		current_hour = new_hour
 		hour_changed.emit(current_hour)
 	
 	var new_day := int(time / day_length)
 	if new_day != current_day:
+		score += int(BASE_DAILY_POINTS * (SCORE_MULTIPLIER ** (new_day - 1)))
 		current_day = new_day
 		day_changed.emit(current_day)
 

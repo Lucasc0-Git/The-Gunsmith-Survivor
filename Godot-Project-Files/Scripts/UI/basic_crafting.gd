@@ -138,18 +138,24 @@ func _on_glock_pressed() -> void:
 	if inventory.can_craft(glock_item.crafting_recipe):
 		hud.give_item(glock_item)
 		inventory.rm_items_by_recipe(glock_item.crafting_recipe)
+		GameManager.more_stats["Items crafted"] += 1
+		GameManager.score += glock_item.score_for_crafting
 
 func _on_shotgun_pressed() -> void:
 	if inventory == null: return
 	if inventory.can_craft(shotgun_item.crafting_recipe):
 		hud.give_item(shotgun_item)
 		inventory.rm_items_by_recipe(shotgun_item.crafting_recipe)
+		GameManager.more_stats["Items crafted"] += 1
+		GameManager.score += shotgun_item.score_for_crafting
 
 func _on_assault_rifle_pressed() -> void:
 	if inventory == null: return
 	if inventory.can_craft(assault_rifle_item.crafting_recipe):
 		hud.give_item(assault_rifle_item)
 		inventory.rm_items_by_recipe(assault_rifle_item.crafting_recipe)
+		GameManager.more_stats["Items crafted"] += 1
+		GameManager.score += assault_rifle_item.score_for_crafting
 
 ##The Tools crafting recipes.
 
@@ -158,6 +164,8 @@ func _on_wooden_axe_pressed() -> void:
 	if inventory.can_craft(wooden_axe_item.crafting_recipe):
 		hud.give_item(wooden_axe_item)
 		inventory.rm_items_by_recipe(wooden_axe_item.crafting_recipe)
+		GameManager.more_stats["Items crafted"] += 1
+		GameManager.score += wooden_axe_item.score_for_crafting
 
 ##The Stations crafting recipes.
 
@@ -166,12 +174,16 @@ func _on_basic_station_pressed() -> void:
 	if inventory.can_craft(basic_station_item.crafting_recipe):
 		hud.give_item(basic_station_item)
 		inventory.rm_items_by_recipe(basic_station_item.crafting_recipe)
+		GameManager.more_stats["Items crafted"] += 1
+		GameManager.score += basic_station_item.score_for_crafting
 
 func _on_basic_smithing_table_pressed() -> void:
 	if inventory == null: return
 	if inventory.can_craft(basic_smithing_table_item.crafting_recipe):
 		hud.give_item(basic_smithing_table_item)
 		inventory.rm_items_by_recipe(basic_smithing_table_item.crafting_recipe)
+		GameManager.more_stats["Items crafted"] += 1
+		GameManager.score += basic_smithing_table_item.score_for_crafting
 
 ##The Base crafting recipes.
 
@@ -180,3 +192,5 @@ func _on_torch_pressed() -> void:
 	if inventory.can_craft(torch_item.crafting_recipe):
 		hud.give_item(torch_item)
 		inventory.rm_items_by_recipe(torch_item.crafting_recipe)
+		GameManager.more_stats["Items crafted"] += 1
+		GameManager.score += torch_item.score_for_crafting

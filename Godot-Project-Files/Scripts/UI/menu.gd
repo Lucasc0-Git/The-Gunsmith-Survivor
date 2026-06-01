@@ -4,8 +4,12 @@ extends CanvasLayer
 @onready var pause_menu: Control = $PauseMenu
 @onready var opt_menu: Control = $OptMenu
 @onready var save_question: Control = $SaveQuestion
+@onready var score_label: Label = $PauseMenu/ScoreLabel
+
+var score_label_value: int = 0
 
 func _ready() -> void:
+	score_label.text = str("Score: ", score_label_value)
 	hide_opt()
 	hide_save_question()
 
@@ -42,3 +46,9 @@ func show_save_question() -> void:
 func hide_save_question() -> void:
 	pause_menu.visible = true
 	save_question.visible = false
+
+func _process(_delta: float) -> void:
+	if pause_menu.visible:
+		if score_label_value != GameManager.score:
+			score_label_value = GameManager.score
+			score_label.text = str("Score: ", score_label_value)

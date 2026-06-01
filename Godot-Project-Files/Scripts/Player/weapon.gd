@@ -145,6 +145,7 @@ func use_item(slot_data: SlotData) -> void:
 				player.on_use_made()
 
 func _spawn_build() -> void:
+	GameManager.more_stats["Buildings built"] += 1
 	var build_item := equipped_item.item_data as BuildItemData
 	player.main.spawn_building(get_global_mouse_position(), build_item.build_data.build_scene)
 

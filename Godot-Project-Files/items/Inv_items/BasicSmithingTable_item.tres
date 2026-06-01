@@ -22,6 +22,7 @@ build_data = ExtResource("1_skm77")
 id = "basic_smithing_table"
 icon = SubResource("GradientTexture2D_jqdo3")
 display_name = "Basic smithing table"
+score_for_crafting = 20
 description = "A basic smithing table. You can craft weapons on this."
 crafting_recipe = Dictionary[ExtResource("2_avpdi"), int]({
 ExtResource("3_wrttk"): 1,

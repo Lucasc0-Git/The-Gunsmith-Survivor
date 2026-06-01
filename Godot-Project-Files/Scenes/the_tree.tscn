@@ -145,6 +145,7 @@ texture = ExtResource("1_w3pkm")
 offset = Vector2(0, -8)
 
 [node name="ShakeAnimationPlayer" type="AnimationPlayer" parent="Sprite2D" unique_id=689678790]
+process_mode = 1
 libraries/ = SubResource("AnimationLibrary_81toh")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=1489910358]
