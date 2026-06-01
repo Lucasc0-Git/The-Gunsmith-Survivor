@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://ccmkjea6pv848"]
+
+[ext_resource type="Script" uid="uid://bd6q76o8pta8l" path="res://Scripts/mining_resource.gd" id="1_gu8i2"]
+[ext_resource type="Texture2D" uid="uid://dyk5ihx7hbhg0" path="res://Textures/Treee.png" id="2_j3vn7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fpmds"]
+size = Vector2(8, 6.3333335)
+
+[node name="MiningResource" type="CharacterBody2D" unique_id=1660284462 groups=["object", "tree"]]
+y_sort_enabled = true
+scale = Vector2(3, 3)
+collision_layer = 8
+collision_mask = 38
+script = ExtResource("1_gu8i2")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=142450422]
+position = Vector2(1, 0)
+texture = ExtResource("2_j3vn7")
+offset = Vector2(0, -8)
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=1489910358]
+position = Vector2(0.333, -8)
+rect = Rect2(-12, -17, 24, 33)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=358707911]
+position = Vector2(0, 1.3333333)
+shape = SubResource("RectangleShape2D_fpmds")
+
+[connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

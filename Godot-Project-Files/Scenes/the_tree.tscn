@@ -1,7 +1,8 @@
-[gd_scene format=3 uid="uid://ccmkjea6pv848"]
+[gd_scene format=3 uid="uid://dmrlknuxtapub"]
 
 [ext_resource type="Script" uid="uid://bdy778vaxoajj" path="res://Scripts/Main/the_tree.gd" id="1_fpmds"]
-[ext_resource type="Texture2D" uid="uid://dyk5ihx7hbhg0" path="res://Textures/Treee.png" id="1_w3pkm"]
+[ext_resource type="PackedScene" uid="uid://ccmkjea6pv848" path="res://Scenes/MiningResource.tscn" id="1_w3pkm"]
+[ext_resource type="Resource" uid="uid://cc0anv7sdlwn4" path="res://items/Inv_items/Wood_item.tres" id="3_20cs3"]
 
 [sub_resource type="Animation" id="Animation_fpmds"]
 length = 0.001
@@ -114,7 +115,7 @@ tracks/0/keys = {
 "values": [Vector2(0, -8), Vector2(1, -8.5), Vector2(-1.25, -8), Vector2(1.5, -7.5), Vector2(-1, -8), Vector2(0.75, -8.5), Vector2(-0.75, -8), Vector2(0.5, -8), Vector2(0, -8)]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_81toh"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_20cs3"]
 _data = {
 &"RESET": SubResource("Animation_fpmds"),
 &"fall_left": SubResource("Animation_3jki7"),
@@ -122,39 +123,19 @@ _data = {
 &"shake_on_hit": SubResource("Animation_20cs3")
 }
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_fpmds"]
-size = Vector2(8, 6.3333335)
-
-[node name="TheTREE" type="CharacterBody2D" unique_id=1660284462 node_paths=PackedStringArray("shake_player") groups=["object", "tree"]]
-y_sort_enabled = true
-scale = Vector2(3, 3)
-collision_layer = 8
-collision_mask = 38
+[node name="TheTREE" unique_id=1660284462 node_paths=PackedStringArray("collision", "shake_player") instance=ExtResource("1_w3pkm")]
 script = ExtResource("1_fpmds")
+collision = NodePath("CollisionShape2D")
 shake_player = NodePath("Sprite2D/ShakeAnimationPlayer")
 damage_mulitpliers = Dictionary[int, float]({
 1: 1.5,
 2: 0.4
 })
 regen = 2.0
-low_health_modulate = Color(0.556953, 0.556953, 0.556953, 1)
+max_health = 50.0
+health = 50.0
+item_data = ExtResource("3_20cs3")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=142450422]
-position = Vector2(1, 0)
-texture = ExtResource("1_w3pkm")
-offset = Vector2(0, -8)
-
-[node name="ShakeAnimationPlayer" type="AnimationPlayer" parent="Sprite2D" unique_id=689678790]
+[node name="ShakeAnimationPlayer" type="AnimationPlayer" parent="Sprite2D" parent_id_path=PackedInt32Array(142450422) index="0" unique_id=995789306]
 process_mode = 1
-libraries/ = SubResource("AnimationLibrary_81toh")
-
-[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=1489910358]
-position = Vector2(0.333, -8)
-rect = Rect2(-12, -17, 24, 33)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=358707911]
-position = Vector2(0, 1.3333333)
-shape = SubResource("RectangleShape2D_fpmds")
-
-[connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_entered"]
-[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
+libraries/ = SubResource("AnimationLibrary_20cs3")
