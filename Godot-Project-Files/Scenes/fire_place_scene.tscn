@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://dkitsyaxgt7kk" path="res://Scenes/BuildScene.tscn" id="1_gke7a"]
 [ext_resource type="Texture2D" uid="uid://811q23arvg4q" path="res://Textures/fireplace_texture.png" id="2_8b8hs"]
+[ext_resource type="Texture2D" uid="uid://ba8x3n310am36" path="res://Textures/Fireplace_smoke.png" id="3_olc4q"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_olc4q"]
 atlas = ExtResource("2_8b8hs")
@@ -137,3 +138,25 @@ texture_scale = 1.5
 [node name="LightAnimPlayer" type="AnimationPlayer" parent="." index="4" unique_id=1062955279]
 libraries/ = SubResource("AnimationLibrary_olc4q")
 autoplay = &"light_base"
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="." index="5" unique_id=1827617777]
+amount = 4
+texture = ExtResource("3_olc4q")
+lifetime = 4.0
+explosiveness = 0.1
+randomness = 0.5
+emission_shape = 1
+emission_sphere_radius = 8.0
+direction = Vector2(0, -1)
+spread = 35.0
+gravity = Vector2(0, -10)
+initial_velocity_min = 20.0
+initial_velocity_max = 40.0
+linear_accel_min = 10.0
+linear_accel_max = 25.0
+damping_min = 10.0
+damping_max = 30.0
+angle_min = -10.0
+angle_max = 10.0
+scale_amount_min = 2.0
+scale_amount_max = 3.0
