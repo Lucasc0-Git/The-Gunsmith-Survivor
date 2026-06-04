@@ -14,6 +14,7 @@ class_name BasicCraftingUI
 @onready var wooden_axe_button: Button = $BasicCraftingPanels/VBoxContainer/Control2/ToolsCraftingContainer2/MarginContainer/ScrollContainer/HBoxContainer/WoodenAxe
 @onready var assault_rifle_button: Button = $BasicCraftingPanels/VBoxContainer/Control/WeaponsCraftingContainer/MarginContainer/ScrollContainer/HBoxContainer/AssaultRifle
 @onready var basic_smithing_table_button: Button = $BasicCraftingPanels/VBoxContainer/Control3/CraftingStationsCraftingContainer3/MarginContainer/ScrollContainer/HBoxContainer/BasicSmithingTable
+@onready var fire_place_button: Button = $BasicCraftingPanels/VBoxContainer/Control4/BaseCraftingContainer3/MarginContainer/ScrollContainer/HBoxContainer/FirePlace
 
 
 var crafting_buttons: Dictionary[Button, ItemData] = {} # Button -> ItemData
@@ -27,6 +28,7 @@ var basic_station_item: ItemData
 var wooden_axe_item: ItemData
 var assault_rifle_item: ItemData
 var basic_smithing_table_item: ItemData
+var fireplace_item: ItemData
 
 var _tween: Tween
 var player: Player
@@ -48,7 +50,7 @@ func _ready() -> void:
 	wooden_axe_item = ItemRegistry.items.get("wooden_axe")
 	assault_rifle_item = ItemRegistry.items.get("assault_rifle")
 	basic_smithing_table_item = ItemRegistry.items.get("basic_smithing_table")
-	
+	fireplace_item = ItemRegistry.items.get("fireplace")
 	
 	for i in range(grid_container.get_child_count()):
 		var crafting_slot: Button = grid_container.get_child(i)
@@ -75,6 +77,7 @@ func _ready() -> void:
 	crafting_buttons[wooden_axe_button] = wooden_axe_item
 	crafting_buttons[assault_rifle_button] = assault_rifle_item
 	crafting_buttons[basic_smithing_table_button] = basic_smithing_table_item
+	crafting_buttons[fire_place_button] = fireplace_item
 
 
 func hide_crafting() -> void:
@@ -194,3 +197,11 @@ func _on_torch_pressed() -> void:
 		inventory.rm_items_by_recipe(torch_item.crafting_recipe)
 		GameManager.more_stats["Items crafted"] += 1
 		GameManager.score += torch_item.score_for_crafting
+
+func _on_fire_place_pressed() -> void:
+	if inventory == null: return
+	if inventory.can_craft(fireplace_item.crafting_recipe):
+		hud.give_item(fireplace_item)
+		inventory.rm_items_by_recipe(fireplace_item.crafting_recipe)
+		GameManager.more_stats["Items crafted"] += 1
+		GameManager.score += fireplace_item.score_for_crafting

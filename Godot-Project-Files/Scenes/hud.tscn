@@ -21,6 +21,7 @@
 [ext_resource type="Script" uid="uid://carukckvk4cbf" path="res://Scripts/UI/crafting_tooltip.gd" id="17_pbtju"]
 [ext_resource type="Texture2D" uid="uid://b8xibgyex24gv" path="res://Textures/SURVIVAL HORROR WEAPONS PACK 16X16/14.png" id="19_0iicw"]
 [ext_resource type="Texture2D" uid="uid://b81agdoybaaqs" path="res://Textures/SURVIVAL HORROR WEAPONS PACK 16X16/21.png" id="19_yidpd"]
+[ext_resource type="Texture2D" uid="uid://lu4v4pqxnb16" path="res://Textures/Items/fireplace_texture_item.png" id="21_ajim5"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_36asn"]
 content_margin_left = 10.0
@@ -632,10 +633,15 @@ mouse_filter = 1
 theme = ExtResource("14_ba8gd")
 text = "torch"
 
-[node name="Panel2" type="Panel" parent="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control4/BaseCraftingContainer3/MarginContainer/ScrollContainer/HBoxContainer" unique_id=1650463834]
+[node name="FirePlace" type="Button" parent="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control4/BaseCraftingContainer3/MarginContainer/ScrollContainer/HBoxContainer" unique_id=26334344]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 mouse_filter = 1
+theme = ExtResource("14_ba8gd")
+disabled = true
+icon = ExtResource("21_ajim5")
+icon_alignment = 1
+expand_icon = true
 
 [node name="Panel3" type="Panel" parent="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control4/BaseCraftingContainer3/MarginContainer/ScrollContainer/HBoxContainer" unique_id=648026212]
 custom_minimum_size = Vector2(64, 64)
@@ -687,6 +693,7 @@ scroll_active = false
 script = ExtResource("10_5ep0j")
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=988107152]
+visible = false
 offset_left = -33.0
 offset_top = -29.0
 offset_right = 1311.0
@@ -726,3 +733,6 @@ texture = SubResource("GradientTexture2D_ajim5")
 [connection signal="mouse_entered" from="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control4/BaseCraftingContainer3/MarginContainer/ScrollContainer/HBoxContainer/Torch" to="InventoryUI/BasicCrafting/BasicCraftingPanels" method="_on_torch_mouse_entered"]
 [connection signal="mouse_exited" from="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control4/BaseCraftingContainer3/MarginContainer/ScrollContainer/HBoxContainer/Torch" to="InventoryUI/BasicCrafting/BasicCraftingPanels" method="_on_torch_mouse_exited"]
 [connection signal="pressed" from="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control4/BaseCraftingContainer3/MarginContainer/ScrollContainer/HBoxContainer/Torch" to="InventoryUI/BasicCrafting" method="_on_torch_pressed"]
+[connection signal="mouse_entered" from="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control4/BaseCraftingContainer3/MarginContainer/ScrollContainer/HBoxContainer/FirePlace" to="InventoryUI/BasicCrafting/BasicCraftingPanels" method="_on_fire_place_mouse_entered"]
+[connection signal="mouse_exited" from="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control4/BaseCraftingContainer3/MarginContainer/ScrollContainer/HBoxContainer/FirePlace" to="InventoryUI/BasicCrafting/BasicCraftingPanels" method="_on_fire_place_mouse_exited"]
+[connection signal="pressed" from="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control4/BaseCraftingContainer3/MarginContainer/ScrollContainer/HBoxContainer/FirePlace" to="InventoryUI/BasicCrafting" method="_on_fire_place_pressed"]

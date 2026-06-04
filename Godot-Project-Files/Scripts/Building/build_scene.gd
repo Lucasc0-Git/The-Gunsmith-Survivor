@@ -3,7 +3,7 @@ extends StaticBody2D
 class_name BuildScene
 
 @export var collision_shape: CollisionShape2D
-@export var sprite: Sprite2D
+@export var sprite: AnimatedSprite2D
 @export var mouse_input: Area2D
 
 var _item_id: String = ""

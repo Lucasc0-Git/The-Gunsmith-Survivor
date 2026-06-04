@@ -61,3 +61,8 @@ func _on_basic_smithing_table_mouse_entered() -> void:
 	crafting_tooltip.show_tooltip(ItemRegistry.items["basic_smithing_table"])
 func _on_basic_smithing_table_mouse_exited() -> void:
 	crafting_tooltip.hide_tooltip()
+
+func _on_fire_place_mouse_entered() -> void:
+	crafting_tooltip.show_tooltip(ItemRegistry.items["fireplace"])
+func _on_fire_place_mouse_exited() -> void:
+	crafting_tooltip.hide_tooltip()

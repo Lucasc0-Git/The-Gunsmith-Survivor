@@ -2,20 +2,23 @@
 
 [ext_resource type="Script" uid="uid://cp7e21a3y70bn" path="res://Scripts/Building/build_scene.gd" id="1_xsqm1"]
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_xsqm1"]
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a3tq2"]
 resource_local_to_scene = true
 
-[node name="BuildScene" type="StaticBody2D" unique_id=1835171183 node_paths=PackedStringArray("collision_shape", "sprite", "mouse_input") groups=["object"]]
+[node name="BuildScene" type="StaticBody2D" unique_id=1835171183 node_paths=PackedStringArray("collision_shape", "mouse_input") groups=["object"]]
 scale = Vector2(3, 3)
 collision_layer = 8
 collision_mask = 0
 script = ExtResource("1_xsqm1")
 collision_shape = NodePath("CollisionShape2D")
-sprite = NodePath("Sprite2D")
 mouse_input = NodePath("MouseInputMonitor")
 item_id = "apple"
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=880745754]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1408510289]
+light_mask = 2
+sprite_frames = SubResource("SpriteFrames_xsqm1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2132263509]
 shape = SubResource("RectangleShape2D_a3tq2")

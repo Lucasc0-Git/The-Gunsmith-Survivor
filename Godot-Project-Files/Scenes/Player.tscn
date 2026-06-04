@@ -143,8 +143,9 @@ damage_multipliers = Dictionary[int, float]({
 shape = SubResource("CapsuleShape2D_52ee3")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=952338954]
+light_mask = 2
 sprite_frames = SubResource("SpriteFrames_ksbbd")
-animation = &"RunSide"
+animation = &"IdleDown"
 autoplay = "IdleDown"
 flip_h = true
 

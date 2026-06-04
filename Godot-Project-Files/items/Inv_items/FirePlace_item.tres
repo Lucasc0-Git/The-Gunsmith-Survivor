@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="BuildItemData" format=3 uid="uid://c8nuioxkkips2"]
+
+[ext_resource type="Script" uid="uid://dgi6p7vrp0imi" path="res://items/ItemData/ItemData.gd" id="1_4m3r2"]
+[ext_resource type="Resource" uid="uid://djj8ylg2fgr54" path="res://items/BuildItems/FirePlace.tres" id="1_jy1c5"]
+[ext_resource type="Script" uid="uid://bmqu0kgfa7xur" path="res://items/ItemData/BuildItemData.gd" id="2_ebjqo"]
+[ext_resource type="Resource" uid="uid://cc0anv7sdlwn4" path="res://items/Inv_items/Wood_item.tres" id="3_h5uwt"]
+[ext_resource type="Resource" uid="uid://b0725nycjx8ul" path="res://items/Inv_items/Torch_item.tres" id="4_o0fac"]
+[ext_resource type="Texture2D" uid="uid://lu4v4pqxnb16" path="res://Textures/Items/fireplace_texture_item.png" id="5_jy1c5"]
+
+[resource]
+script = ExtResource("2_ebjqo")
+build_data = ExtResource("1_jy1c5")
+id = "fireplace"
+icon = ExtResource("5_jy1c5")
+display_name = "Fireplace"
+score_for_crafting = 10
+description = "A warm fireplace. Better light source than torch."
+crafting_recipe = Dictionary[ExtResource("1_4m3r2"), int]({
+ExtResource("3_h5uwt"): 32,
+ExtResource("4_o0fac"): 1
+})
+metadata/_custom_type_script = "uid://bmqu0kgfa7xur"

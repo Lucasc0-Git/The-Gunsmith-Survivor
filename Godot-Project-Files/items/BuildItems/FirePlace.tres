@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="BuildData" format=3 uid="uid://djj8ylg2fgr54"]
+
+[ext_resource type="PackedScene" uid="uid://cly3w7jwve5bl" path="res://Scenes/fire_place_scene.tscn" id="1_6qno5"]
+[ext_resource type="Script" uid="uid://bvtttnj03tb3h" path="res://items/BuildItems/build_data.gd" id="1_mbac7"]
+[ext_resource type="Texture2D" uid="uid://lu4v4pqxnb16" path="res://Textures/Items/fireplace_texture_item.png" id="2_6qno5"]
+
+[resource]
+script = ExtResource("1_mbac7")
+id = "fireplace"
+icon = ExtResource("2_6qno5")
+build_scene = ExtResource("1_6qno5")
+cant_build_color = Color(0.91227055, 4.7168137e-06, 6.738305e-07, 0.5882353)
+is_light_source = true
+metadata/_custom_type_script = "uid://bvtttnj03tb3h"

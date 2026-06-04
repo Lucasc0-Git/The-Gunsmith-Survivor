@@ -2,11 +2,6 @@
 
 [ext_resource type="PackedScene" uid="uid://dpo1uptfyrb7h" path="res://Scenes/station_scene.tscn" id="1_wuyca"]
 
-[sub_resource type="Gradient" id="Gradient_wuyca"]
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_jrigy"]
-gradient = SubResource("Gradient_wuyca")
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wuyca"]
 resource_local_to_scene = true
 size = Vector2(14.333333, 21)
@@ -14,12 +9,9 @@ size = Vector2(14.333333, 21)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jrigy"]
 size = Vector2(16, 22.666668)
 
-[node name="BasicStation" unique_id=1835171183 instance=ExtResource("1_wuyca")]
+[node name="BasicStation" unique_id=1835171183 node_paths=PackedStringArray("sprite") instance=ExtResource("1_wuyca")]
+sprite = NodePath("AnimatedSprite2D")
 item_id = "basic_station"
-
-[node name="Sprite2D" parent="." index="0" unique_id=880745754]
-scale = Vector2(0.23958331, 0.35416666)
-texture = SubResource("GradientTexture2D_jrigy")
 
 [node name="CollisionShape2D" parent="." index="1" unique_id=2132263509]
 position = Vector2(0.16666651, 0.5)
