@@ -8,7 +8,10 @@ var main: Main
 var spawner_disabled: bool = false
 
 func _ready() -> void:
-	pass
+	if OS.is_debug_build():
+		$ColorRect.visible = true
+	else:
+		$ColorRect.visible = false
 
 func spawn_enemy(forced: bool = false) -> void:
 	if !spawner_disabled or forced:
