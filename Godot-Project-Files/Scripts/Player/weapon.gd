@@ -52,6 +52,7 @@ func equip_item(slot_data: SlotData) -> void:
 	if build_preview:
 		build_preview.collision_shape.set_deferred("disabled", true)
 		build_preview.visible = false
+		build_preview.preview_only = true
 		if build_preview is StationBuildScene:
 			build_preview.crafting_area.monitoring = false
 	
@@ -75,6 +76,7 @@ func equip_item(slot_data: SlotData) -> void:
 		build_preview = item.build_data.build_scene.instantiate() #instantiate the build scene
 		#build_preview.modulate = item.build_data.transparent_color #set transparency to 50
 		build_preview.collision_shape.set_deferred("disabled", true)
+		build_preview.preview_only = true
 		player.main.add_child(build_preview)
 		holding_build = true
 		can_shoot = true

@@ -202,6 +202,7 @@ func spawn_tree(pos: Vector2) -> void:
 
 func spawn_building(pos: Vector2, build_scene: PackedScene) -> void:
 	var building: BuildScene = build_scene.instantiate()
+	building.preview_only = false
 	building.global_position = pos
 	Ysort.add_child(building)
 

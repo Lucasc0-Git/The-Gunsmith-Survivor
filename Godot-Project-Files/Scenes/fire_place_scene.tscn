@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://dkitsyaxgt7kk" path="res://Scenes/BuildScene.tscn" id="1_gke7a"]
 [ext_resource type="Texture2D" uid="uid://811q23arvg4q" path="res://Textures/fireplace_texture.png" id="2_8b8hs"]
+[ext_resource type="Script" uid="uid://pbkos7t5fd4s" path="res://Scripts/fire_place_scene.gd" id="2_hmnt5"]
 [ext_resource type="Texture2D" uid="uid://ba8x3n310am36" path="res://Textures/Fireplace_smoke.png" id="3_olc4q"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_olc4q"]
@@ -33,7 +34,7 @@ animations = [{
 "speed": 2.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_olc4q"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hmnt5"]
 resource_local_to_scene = true
 size = Vector2(14, 14)
 
@@ -114,6 +115,7 @@ _data = {
 }
 
 [node name="FirePlace" unique_id=1835171183 node_paths=PackedStringArray("sprite") instance=ExtResource("1_gke7a")]
+script = ExtResource("2_hmnt5")
 sprite = NodePath("AnimatedSprite2D")
 item_id = "fireplace"
 
@@ -123,7 +125,7 @@ autoplay = "default"
 frame_progress = 0.75246906
 
 [node name="CollisionShape2D" parent="." index="1" unique_id=2132263509]
-shape = SubResource("RectangleShape2D_olc4q")
+shape = SubResource("RectangleShape2D_hmnt5")
 
 [node name="CollisionShape2D" parent="MouseInputMonitor" parent_id_path=PackedInt32Array(1707325614) index="0" unique_id=487905519]
 shape = SubResource("RectangleShape2D_8b8hs")
@@ -140,6 +142,7 @@ libraries/ = SubResource("AnimationLibrary_olc4q")
 autoplay = &"light_base"
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="." index="5" unique_id=1827617777]
+emitting = false
 amount = 4
 texture = ExtResource("3_olc4q")
 lifetime = 4.0

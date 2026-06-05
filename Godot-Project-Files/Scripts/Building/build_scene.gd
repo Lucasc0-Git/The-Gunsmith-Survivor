@@ -8,6 +8,7 @@ class_name BuildScene
 
 var _item_id: String = ""
 var main: Main
+var preview_only: bool = true
 
 func _ready() -> void:
 	if Engine.is_editor_hint():
@@ -63,3 +64,13 @@ func _on_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> voi
 		if event.button_index == MOUSE_BUTTON_RIGHT:
 			if main:
 				main.show_build_item_tooltip(self)
+
+func _process(_delta: float) -> void:
+	if not GameManager or not "is_game_loaded" in GameManager:
+		return
+	if !GameManager.is_game_loaded: return
+	if preview_only:
+		$MouseInputMonitor.monitoring = false
+	else:
+		$MouseInputMonitor.monitoring = true
+	
