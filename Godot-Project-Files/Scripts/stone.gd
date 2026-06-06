@@ -37,4 +37,5 @@ func destroy() -> void:
 	drop_items(10, 50)
 	shake_player.play("break")
 	await shake_player.animation_finished
+	call_resource_destroyed()
 	queue_free()

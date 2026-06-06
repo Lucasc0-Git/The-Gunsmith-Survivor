@@ -59,6 +59,7 @@ func destroy() -> void:
 	else:
 		shake_player.play("fall_left")
 	await shake_player.animation_finished
+	call_resource_destroyed()
 	queue_free()
 
 #func _on_visible_on_screen_notifier_2d_screen_entered() -> void:

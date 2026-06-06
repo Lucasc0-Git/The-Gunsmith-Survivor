@@ -127,6 +127,7 @@ max_health = 900.0
 health = 900.0
 score_for_destroy = 25
 item_data = ExtResource("3_80wns")
+type = "stone"
 
 [node name="Sprite2D" parent="." index="0" unique_id=142450422]
 texture = ExtResource("3_oaod5")

@@ -10,6 +10,7 @@ class_name Main
 @onready var spawners: Node2D = $Spawners
 @onready var canvas_modulate: CanvasModulate = $CanvasModulate
 @onready var cheat_mode_label: Label = $CanvasLayer/CheatMode
+@onready var respawn_timers: Node2D = $RespawnTimers
 
 enum TimeOfDay {DAWN, SUNRISE, DAY, SUNSET, DUSK, NIGHT}
 
@@ -26,6 +27,9 @@ var day_colors := {}
 var inventory_tint: CanvasModulate
 var the_core: TheCore
 var player: Player
+
+@export var tree_respawn_time: float = 180.0
+@export var stone_respawn_time: float = 600.0
 
 @export var build_tooltip: BuildTooltip
 @export var inventory_darken: Color
@@ -138,6 +142,24 @@ func generate() -> void:
 	if !OS.is_debug_build():
 		drop_item(ItemRegistry.items.get("wooden_axe"), Vector2(0, -150))
 
+func _on_mining_resource_destroyed(type: String, pos: Vector2) -> void:
+	if type == "tree":
+		var tree_respawn_timer := Timer.new()
+		#tree_respawn_timer.timeout.connect(_on_tree_respawn_timer_timeout)
+		respawn_timers.add_child(tree_respawn_timer)
+		tree_respawn_timer.start(tree_respawn_time)
+		await tree_respawn_timer.timeout
+		spawn_tree(pos)
+	if type == "stone":
+		var stone_respawn_timer := Timer.new()
+		respawn_timers.add_child(stone_respawn_timer)
+		stone_respawn_timer.start(stone_respawn_time)
+		await stone_respawn_timer.timeout
+		spawn_stone(pos)
+
+func _on_tree_respawn_timer_timeout() -> void:
+	pass
+
 func _on_hour_changed(hour: int) -> void:
 	label.text = "Hour: " + str(hour) + ":00"
 	_update_lightning(hour)
@@ -207,11 +229,13 @@ func drop_item(item: ItemData, pos: Vector2, random_range: int = 0) -> void:
 
 func spawn_tree(pos: Vector2) -> void:
 	var tree := preload("res://Scenes/the_tree.tscn").instantiate()
+	tree.resource_destroyed.connect(_on_mining_resource_destroyed)
 	tree.global_position = pos
 	Ysort.add_child(tree)
 
 func spawn_stone(pos: Vector2) -> void:
 	var stone := preload("res://Scenes/stone.tscn").instantiate()
+	stone.resource_destroyed.connect(_on_mining_resource_destroyed)
 	stone.global_position = pos
 	Ysort.add_child(stone)
 

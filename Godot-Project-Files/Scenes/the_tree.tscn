@@ -126,6 +126,7 @@ _data = {
 
 [node name="TheTREE" unique_id=1660284462 node_paths=PackedStringArray("collision", "shake_player") instance=ExtResource("1_w3pkm")]
 script = ExtResource("1_fpmds")
+chance_for_wood_drop = 0.2
 collision = NodePath("CollisionShape2D")
 shake_player = NodePath("Sprite2D/ShakeAnimationPlayer")
 damage_mulitpliers = Dictionary[int, float]({
@@ -136,6 +137,7 @@ regen = 1.0
 max_health = 50.0
 health = 50.0
 item_data = ExtResource("3_20cs3")
+type = "tree"
 
 [node name="Sprite2D" parent="." index="0" unique_id=142450422]
 texture = ExtResource("4_81toh")

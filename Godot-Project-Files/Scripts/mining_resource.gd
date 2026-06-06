@@ -15,6 +15,9 @@ class_name MiningResource
 @export var low_health_modulate: Color = Color(0.256, 0.256, 0.256, 1.0)
 @export var score_for_destroy: int = 1
 @export var item_data: ItemData
+@export_enum("stone", "tree") var type: String
+
+signal resource_destroyed(type: String, pos: Vector2)
 
 var target_color: Color
 var destroyed: bool = false
@@ -63,12 +66,16 @@ func destroy() -> void:
 	GameManager.more_stats["Resources mined"] += 1
 	collision.set_deferred("disabled", true)
 	drop_items(1, 20)
+	call_resource_destroyed()
 	#if GameManager.random_bool():
 		#shake_player.play("fall_right")
 	#else:
 		#shake_player.play("fall_left")
 	#await shake_player.animation_finished
 	queue_free()
+
+func call_resource_destroyed() -> void:
+	resource_destroyed.emit(type, global_position)
 
 func _on_visible_on_screen_notifier_2d_screen_entered() -> void:
 	collision.set_deferred("disabled", false)

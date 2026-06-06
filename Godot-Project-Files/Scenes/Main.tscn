@@ -632,6 +632,8 @@ theme = ExtResource("5_pbw6q")
 theme_override_font_sizes/font_size = 18
 text = "Test"
 
+[node name="RespawnTimers" type="Node2D" parent="." unique_id=617156280]
+
 [connection signal="world_loaded" from="." to="HUD" method="_on_main_world_loaded"]
 [connection signal="pressed" from="Menu/PauseMenu/VBoxContainer/ResumeButton" to="Menu" method="_on_resume_button_pressed"]
 [connection signal="pressed" from="Menu/PauseMenu/VBoxContainer/MenuButton" to="Menu" method="_on_menu_button_pressed"]
