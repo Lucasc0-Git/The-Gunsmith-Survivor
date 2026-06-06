@@ -10,10 +10,14 @@ extends Control
 var world_seed := randi()
 
 func _ready() -> void:
-	
+	GameManager.is_game_loaded = false
 	
 	tutorial_panel.visible = false
 	GameManager.current_world_seed = world_seed
+
+func _process(_delta: float) -> void:
+	if GameManager.is_game_loaded:
+		GameManager.is_game_loaded = false
 
 func _on_new_game_button_pressed() -> void:
 	AudioManager.play_button_click()
