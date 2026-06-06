@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="JustItemData" format=3 uid="uid://4bpscjhtcwh6"]
+
+[ext_resource type="Script" uid="uid://dgi6p7vrp0imi" path="res://items/ItemData/ItemData.gd" id="1_oepsc"]
+[ext_resource type="Texture2D" uid="uid://dptajeglfhnbu" path="res://Textures/Items/stone_item_texture.png" id="2_h2a1t"]
+[ext_resource type="Script" uid="uid://dlibn88e2w8eo" path="res://items/ItemData/JustItemData.gd" id="2_i08sk"]
+[ext_resource type="Resource" uid="uid://bw702x0fi141j" path="res://items/JustItems/stone.tres" id="3_fkoyv"]
+
+[resource]
+script = ExtResource("2_i08sk")
+just_data = ExtResource("3_fkoyv")
+id = "stone"
+icon = ExtResource("2_h2a1t")
+display_name = "Stone"
+max_stack = 32
+description = "A stone. More advanced crafting material then wood."
+metadata/_custom_type_script = "uid://dlibn88e2w8eo"

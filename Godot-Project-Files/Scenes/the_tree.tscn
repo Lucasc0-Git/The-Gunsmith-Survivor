@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://bdy778vaxoajj" path="res://Scripts/Main/the_tree.gd" id="1_fpmds"]
 [ext_resource type="PackedScene" uid="uid://ccmkjea6pv848" path="res://Scenes/MiningResource.tscn" id="1_w3pkm"]
 [ext_resource type="Resource" uid="uid://cc0anv7sdlwn4" path="res://items/Inv_items/Wood_item.tres" id="3_20cs3"]
+[ext_resource type="Texture2D" uid="uid://dyk5ihx7hbhg0" path="res://Textures/Treee.png" id="4_81toh"]
 
 [sub_resource type="Animation" id="Animation_fpmds"]
 length = 0.001
@@ -136,6 +137,9 @@ max_health = 50.0
 health = 50.0
 item_data = ExtResource("3_20cs3")
 
-[node name="ShakeAnimationPlayer" type="AnimationPlayer" parent="Sprite2D" parent_id_path=PackedInt32Array(142450422) index="0" unique_id=995789306]
+[node name="Sprite2D" parent="." index="0" unique_id=142450422]
+texture = ExtResource("4_81toh")
+
+[node name="ShakeAnimationPlayer" type="AnimationPlayer" parent="Sprite2D" index="0" unique_id=995789306]
 process_mode = 1
 libraries/ = SubResource("AnimationLibrary_20cs3")

@@ -1,0 +1,159 @@
+[gd_scene format=3 uid="uid://fubotqq8xgak"]
+
+[ext_resource type="PackedScene" uid="uid://ccmkjea6pv848" path="res://Scenes/MiningResource.tscn" id="1_nqvck"]
+[ext_resource type="Script" uid="uid://bxxy8r5itc27i" path="res://Scripts/stone.gd" id="2_uu3e6"]
+[ext_resource type="Resource" uid="uid://4bpscjhtcwh6" path="res://items/Inv_items/Stone_item.tres" id="3_80wns"]
+[ext_resource type="Texture2D" uid="uid://5gr63lspi2op" path="res://Textures/stone.png" id="3_oaod5"]
+[ext_resource type="Texture2D" uid="uid://ba8x3n310am36" path="res://Textures/Fireplace_smoke.png" id="3_vvu2k"]
+
+[sub_resource type="Animation" id="Animation_oaod5"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -8)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CPUParticles2D:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_80wns"]
+resource_name = "break"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(-0.033333335, 0.4),
+"transitions": PackedFloat32Array(2.6390114, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:offset")
+tracks/1/interp = 0
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(-0.033333335, 0.1, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, -8), Vector2(0, -6), Vector2(0, -6)]
+}
+
+[sub_resource type="Animation" id="Animation_vvu2k"]
+resource_name = "shake_on_hit"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, -8), Vector2(1, -8.5), Vector2(-1.25, -8), Vector2(1.5, -7.5), Vector2(-1, -8), Vector2(0.75, -8.5), Vector2(-0.75, -8), Vector2(0.5, -8), Vector2(0, -8)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CPUParticles2D:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_oaod5"]
+_data = {
+&"RESET": SubResource("Animation_oaod5"),
+&"break": SubResource("Animation_80wns"),
+&"shake_on_hit": SubResource("Animation_vvu2k")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oaod5"]
+size = Vector2(26, 11)
+
+[node name="Stone" unique_id=1660284462 node_paths=PackedStringArray("collision", "shake_player") instance=ExtResource("1_nqvck")]
+script = ExtResource("2_uu3e6")
+base_drop_chance = 0.05
+damage_scaling = 0.01
+max_drop_chance_per_hit = 0.8
+collision = NodePath("CollisionShape2D")
+shake_player = NodePath("Sprite2D/AnimationPlayer")
+damage_mulitpliers = Dictionary[int, float]({
+1: 1.25,
+2: 0.25
+})
+regen = 0.0
+max_health = 900.0
+health = 900.0
+score_for_destroy = 25
+item_data = ExtResource("3_80wns")
+
+[node name="Sprite2D" parent="." index="0" unique_id=142450422]
+texture = ExtResource("3_oaod5")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D" index="0" unique_id=1763102135]
+root_node = NodePath("../..")
+libraries/ = SubResource("AnimationLibrary_oaod5")
+
+[node name="VisibleOnScreenNotifier2D" parent="." index="1" unique_id=1489910358]
+rect = Rect2(-15.999667, -5, 33.666668, 21.666668)
+
+[node name="CollisionShape2D" parent="." index="2" unique_id=358707911]
+position = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_oaod5")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="." index="3" unique_id=1961482758]
+emitting = false
+amount = 5
+texture = ExtResource("3_vvu2k")
+lifetime = 0.2
+one_shot = true
+explosiveness = 1.0
+randomness = 0.5
+lifetime_randomness = 0.5
+spread = 180.0
+initial_velocity_min = 50.0
+initial_velocity_max = 65.0
+angle_min = -90.0
+angle_max = 90.0
+scale_amount_min = 0.5

@@ -125,7 +125,7 @@ func _ready() -> void:
 
 func generate() -> void:
 	map.generate_region(Vector2i(0, 0))
-	map.generate_region(Vector2i(1, 1))
+	#map.generate_region(Vector2i(1, 1))
 	spawn_player(Vector2(0, 0))
 	spawn_the_core(player.global_position + Vector2(0, -250))
 	if !OS.is_debug_build():
@@ -182,11 +182,14 @@ func _input(event: InputEvent) -> void:
 			var rand_pos: Vector2 = Vector2(randi_range(-200, 200), randi_range(-200, 200))
 			spawn_enemy(zombie_scene, get_global_mouse_position() + rand_pos)
 
-func _on_region_generated(new_trees: Array, new_spawners: Array) -> void:
+func _on_region_generated(new_trees: Array, new_spawners: Array, new_stones: Array) -> void:
 	for pos: Vector2 in new_trees:
 		spawn_tree(pos)
 	for pos: Vector2 in new_spawners:
 		add_spawner(pos)
+	for pos: Vector2 in new_stones:
+		spawn_stone(pos)
+		print(pos)
 
 func drop_item(item: ItemData, pos: Vector2, random_range: int = 0) -> void:
 	var dropped_item := preload("res://Scenes/dropped_item.tscn").instantiate()
@@ -199,6 +202,11 @@ func spawn_tree(pos: Vector2) -> void:
 	var tree := preload("res://Scenes/the_tree.tscn").instantiate()
 	tree.global_position = pos
 	Ysort.add_child(tree)
+
+func spawn_stone(pos: Vector2) -> void:
+	var stone := preload("res://Scenes/stone.tscn").instantiate()
+	stone.global_position = pos
+	Ysort.add_child(stone)
 
 func spawn_building(pos: Vector2, build_scene: PackedScene) -> void:
 	var building: BuildScene = build_scene.instantiate()

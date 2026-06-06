@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://ccmkjea6pv848"]
 
 [ext_resource type="Script" uid="uid://bd6q76o8pta8l" path="res://Scripts/mining_resource.gd" id="1_gu8i2"]
-[ext_resource type="Texture2D" uid="uid://dyk5ihx7hbhg0" path="res://Textures/Treee.png" id="2_j3vn7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fpmds"]
 size = Vector2(8, 6.3333335)
@@ -15,7 +14,6 @@ script = ExtResource("1_gu8i2")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=142450422]
 position = Vector2(1, 0)
-texture = ExtResource("2_j3vn7")
 offset = Vector2(0, -8)
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=1489910358]

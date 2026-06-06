@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="JustData" format=3 uid="uid://bw702x0fi141j"]
+
+[ext_resource type="Texture2D" uid="uid://dptajeglfhnbu" path="res://Textures/Items/stone_item_texture.png" id="1_lh51a"]
+[ext_resource type="Script" uid="uid://d4l61gb5qgtsk" path="res://items/JustItems/just_data.gd" id="1_uj7ay"]
+
+[resource]
+script = ExtResource("1_uj7ay")
+id = "stone"
+icon = ExtResource("1_lh51a")
+metadata/_custom_type_script = "uid://d4l61gb5qgtsk"

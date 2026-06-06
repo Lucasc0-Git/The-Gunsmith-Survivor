@@ -8,12 +8,13 @@ class_name Map
 var player: Player
 var world_seed: int
 
-signal region_generated(new_tree_positions: Array, new_spawner_positions: Array)
+signal region_generated(new_tree_positions: Array, new_spawner_positions: Array, new_stones_position: Array)
 
 @export var world_frequency := 0.05
 @export var grass_frequency := 0.4
 @export var tree_frequency := 0.85
 @export var enemy_spawner_frequency := 1
+@export var stone_frequency := 0.9
 @export var map_width: int = 100
 @export var map_height: int = 100
 @export var safe_spawn_area_radius: int = 8
@@ -27,6 +28,7 @@ var world_noise := FastNoiseLite.new()
 var grass_noise := FastNoiseLite.new()
 var tree_noise := FastNoiseLite.new()
 var spawner_noise := FastNoiseLite.new()
+var stone_noise := FastNoiseLite.new()
 
 var chunk_size := 32
 var render_distance := 4
@@ -43,6 +45,7 @@ var tiles := {
 }
 var tree_positions := []
 var spawner_positions := []
+var stone_positions := []
 
 func _ready() -> void:
 	world_seed = GameManager.current_world_seed
@@ -54,6 +57,8 @@ func _ready() -> void:
 	tree_noise.frequency = tree_frequency
 	spawner_noise.seed = world_seed + 3
 	spawner_noise.frequency = enemy_spawner_frequency
+	stone_noise.seed = world_seed + 4
+	stone_noise.frequency = stone_frequency
 
 func generate_region(region_pos: Vector2i) -> void:
 	var offset_x := region_pos.x * map_width
@@ -61,6 +66,7 @@ func generate_region(region_pos: Vector2i) -> void:
 	
 	var new_trees: Array = []
 	var new_spawners: Array = []
+	var new_stones: Array = []
 	
 	for x in range(-half_w, half_w + 1):
 		for y in range(-half_h, half_h + 1):
@@ -71,6 +77,7 @@ func generate_region(region_pos: Vector2i) -> void:
 			var grass_value := grass_noise.get_noise_2d(x, y)
 			var tree_value := tree_noise.get_noise_2d(x, y)
 			var enemy_value := spawner_noise.get_noise_2d(x, y)
+			var stone_value := stone_noise.get_noise_2d(x, y)
 			var tile_coords : Vector2i
 			
 			var distance_from_center := Vector2(world_x, world_y).length()
@@ -79,23 +86,22 @@ func generate_region(region_pos: Vector2i) -> void:
 				map.set_cell(Vector2i(world_x, world_y), 2, tile_coords)
 				continue
 			
-			
-			
-			if world_value < -0.1:
-				tile_coords = Vector2i(5, 0)
-				if tree_value < -0.1:
-					var local_pos := map.map_to_local(Vector2i(world_x, world_y))
-					var global_pos := map.to_global(local_pos)
+			var local_pos := map.map_to_local(Vector2i(world_x, world_y))
+			var global_pos := map.to_global(local_pos)
+			if world_value < -0.1: ## Forest
+				tile_coords = Vector2i(5, 0) ## Forest podzol
+				if tree_value < -0.1: ## Tree
 					new_trees.append(global_pos)
 					#objects.set_cell(Vector2i(x, y), 2, Vector2i(0, 0))
-			else:
-				if enemy_value < -0.5:
-					var local_pos := map.map_to_local(Vector2i(world_x, world_y))
-					var global_pos := map.to_global(local_pos)
+			else: ##Plains
+				if enemy_value < -0.5: ## Spawner
 					new_spawners.append(global_pos)
-				tile_coords = be_grass(grass_value)
+				tile_coords = be_grass(grass_value) ## Grass
+			if stone_value > 0.65: ## Stones
+				new_stones.append(global_pos)
+			
 			map.set_cell(Vector2i(world_x, world_y), 2, tile_coords)
-	emit_signal("region_generated", new_trees, new_spawners)
+	emit_signal("region_generated", new_trees, new_spawners, new_stones)
 
 func be_grass(grass_value: float) -> Vector2i:
 	if grass_value < -0.05:
