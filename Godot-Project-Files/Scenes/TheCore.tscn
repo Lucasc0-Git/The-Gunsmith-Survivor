@@ -21,8 +21,9 @@ scale = Vector2(3, 3)
 collision_layer = 128
 collision_mask = 30
 script = ExtResource("1_nfbfl")
+max_health = 1000.0
 damage_multipliers = Dictionary[int, float]({
-1: 0.5,
+1: 0.9,
 2: 0.8
 })
 
