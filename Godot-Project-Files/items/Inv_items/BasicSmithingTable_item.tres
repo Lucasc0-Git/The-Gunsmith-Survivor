@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://dgi6p7vrp0imi" path="res://items/ItemData/ItemData.gd" id="2_avpdi"]
 [ext_resource type="Resource" uid="uid://bgrrw3rasvjj2" path="res://items/Inv_items/BasicStation_item.tres" id="3_wrttk"]
 [ext_resource type="Resource" uid="uid://cc0anv7sdlwn4" path="res://items/Inv_items/Wood_item.tres" id="4_3yjiv"]
+[ext_resource type="Resource" uid="uid://4bpscjhtcwh6" path="res://items/Inv_items/Stone_item.tres" id="5_avpdi"]
 [ext_resource type="Script" uid="uid://bmqu0kgfa7xur" path="res://items/ItemData/BuildItemData.gd" id="5_n81kn"]
 
 [sub_resource type="Gradient" id="Gradient_2ncgn"]
@@ -26,6 +27,7 @@ score_for_crafting = 20
 description = "A basic smithing table. You can craft weapons on this."
 crafting_recipe = Dictionary[ExtResource("2_avpdi"), int]({
 ExtResource("3_wrttk"): 1,
-ExtResource("4_3yjiv"): 32
+ExtResource("4_3yjiv"): 32,
+ExtResource("5_avpdi"): 8
 })
 metadata/_custom_type_script = "uid://bmqu0kgfa7xur"
