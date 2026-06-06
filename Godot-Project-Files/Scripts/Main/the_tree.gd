@@ -1,6 +1,8 @@
 extends MiningResource
 class_name TheTree
 
+@export var chance_for_wood_drop := 0.2
+
 #func _ready() -> void:
 	#if not ItemRegistry or not ItemRegistry.loaded:
 		#await ItemRegistry.items_loaded
@@ -13,10 +15,13 @@ class_name TheTree
 	#for i in range(amount):
 		#main.drop_item(wood_item, global_position, random_range)
 #
-func take_damage(amount: float, dmg_type: DamageTypes.DamageType) -> void:
+func take_damage(amount: float, dmg_type: DamageTypes.DamageType, weapon_type: String = "Basic") -> void:
 	if destroyed: return
 	var multiplier: float = damage_mulitpliers.get(dmg_type, 1.0)
 	var damage := amount * multiplier
+	if weapon_type == "Axe":
+		if randf() < chance_for_wood_drop:
+			drop_items(1, 40)
 	health -= damage
 	update_target_color()
 	if health <= 0:

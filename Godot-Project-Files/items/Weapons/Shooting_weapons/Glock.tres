@@ -14,4 +14,5 @@ muzzle_offset = Vector2(9, 9)
 bullet_scale = Vector2(0.9, 0.9)
 recoil = 60.0
 dmg_type = 2
+weapon_type = "Pistol"
 metadata/_custom_type_script = "uid://d4hnrbyx1okcs"

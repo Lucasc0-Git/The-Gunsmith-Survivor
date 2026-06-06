@@ -181,7 +181,11 @@ func _swing_weapon() -> void:
 func _on_hit_area_body_entered(body: Node2D) -> void:
 	if body.has_method("take_damage"):
 		if !equipped_item.item_data is CloseWeaponItemData: return
-		body.take_damage(equipped_item.item_data.close_weapon_data.damage, equipped_item.item_data.close_weapon_data.dmg_type)
+		body.take_damage(
+			equipped_item.item_data.close_weapon_data.damage, 
+			equipped_item.item_data.close_weapon_data.dmg_type, 
+			equipped_item.item_data.close_weapon_data.weapon_type
+		)
 		var data: CloseWeaponItemData = equipped_item.item_data as CloseWeaponItemData
 		
 		if body is CharacterBody2D:
@@ -211,6 +215,7 @@ func _spawn_bullet(i : int) -> void:
 	bullet.shrinking_rate = weapon_data.bullet_shrinking
 	bullet.scale = weapon_data.bullet_scale * bullet.scale
 	bullet.dmg_type = equipped_item.item_data.weapon_data.dmg_type
+	bullet.weapon_type = equipped_item.item_data.weapon_data.weapon_type
 	bullet_damage = weapon_data.damage
 	get_tree().current_scene.add_child(bullet)
 	## Position of the bullet

@@ -17,4 +17,5 @@ recoil = 150.0
 pellets = 10
 spread = 0.7
 dmg_type = 2
+weapon_type = "Shotgun"
 metadata/_custom_type_script = "uid://d4hnrbyx1okcs"

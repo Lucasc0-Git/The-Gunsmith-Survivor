@@ -12,4 +12,5 @@ damage = 25
 bullet_shrinking = 1.0
 recoil = 0.0
 dmg_type = 1
+weapon_type = "Axe"
 metadata/_custom_type_script = "uid://dt4s43sp8mh8q"

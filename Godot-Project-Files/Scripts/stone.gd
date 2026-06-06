@@ -5,14 +5,16 @@ class_name Stone
 @export var damage_scaling := 0.02
 @export var max_drop_chance_per_hit := 0.8
 
-func take_damage(amount: float, dmg_type: DamageTypes.DamageType) -> void:
+func take_damage(amount: float, dmg_type: DamageTypes.DamageType, weapon_type: String = "Basic") -> void:
 	if destroyed: return
 	var multiplier: float = damage_mulitpliers.get(dmg_type, 1.0)
 	var damage := amount * multiplier
 	
-	if item_data and damage > 0:
+	if item_data and damage > 10:
 		var drop_chance := base_drop_chance + (damage * damage_scaling)
 		drop_chance = clamp(drop_chance, 0.0, max_drop_chance_per_hit)
+		if weapon_type != "Pickaxe":
+			drop_chance /= 4
 		if randf() < drop_chance:
 			drop_items(1, 35)
 	

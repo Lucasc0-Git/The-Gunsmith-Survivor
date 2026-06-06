@@ -76,7 +76,7 @@ func get_target() -> Node2D: ##Returns player, the core, OR null.
 func stop_moving() -> void:
 	velocity = velocity.move_toward(Vector2.ZERO, accel)
 
-func take_damage(amount: float, dmg_type: DamageTypes.DamageType) -> void:
+func take_damage(amount: float, dmg_type: DamageTypes.DamageType, _weapon_type: String = "Basic") -> void:
 	var multiplier: float = damage_multipliers.get(dmg_type, 1.0)
 	var taking_damage := amount * multiplier
 	
