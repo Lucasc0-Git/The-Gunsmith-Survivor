@@ -178,6 +178,7 @@ func _input(event: InputEvent) -> void:
 			show_menu()
 	
 	if event.is_action_pressed("DEBUG spawn_enemy"):
+		if !OS.is_debug_build(): return
 		for i in range(20):
 			var rand_pos: Vector2 = Vector2(randi_range(-200, 200), randi_range(-200, 200))
 			spawn_enemy(zombie_scene, get_global_mouse_position() + rand_pos)

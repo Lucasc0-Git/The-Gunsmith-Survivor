@@ -177,9 +177,6 @@ func get_selected_slot() -> Slot:
 
 ## Called every physics frame
 func _physics_process(delta: float) -> void:
-	#For testing things (need to remove them!)
-	if Input.is_action_just_pressed("DEBUG hurt"):
-		get_hurt(20, DamageTypes.DamageType.BASIC)
 	
 	## Handle respawn
 	if health <= 0:
@@ -247,7 +244,12 @@ func _input(event: InputEvent) -> void:
 	
 	for i in range(1, 6):
 		if event.is_action_pressed("slot_%d_hotbar" % i):
-			switch_weapon(i - 1, false)	
+			switch_weapon(i - 1, false)
+	
+	## DEBUG thingies.
+	if !OS.is_debug_build(): return
+	if event.is_action_pressed("DEBUG hurt"):
+		get_hurt(20, DamageTypes.DamageType.BASIC)
 
 ## Apply reversed velocity on shoot
 func apply_recoil(weapon_rotation: float, recoil_strenght: float) -> void:
