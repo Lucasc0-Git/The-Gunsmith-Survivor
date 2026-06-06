@@ -125,7 +125,14 @@ func _ready() -> void:
 
 func generate() -> void:
 	map.generate_region(Vector2i(0, 0))
-	#map.generate_region(Vector2i(1, 1))
+	map.generate_region(Vector2i(1, 1))
+	map.generate_region(Vector2i(1, 0))
+	map.generate_region(Vector2i(0, 1))
+	map.generate_region(Vector2i(-1, 0))
+	map.generate_region(Vector2i(-1, 1))
+	map.generate_region(Vector2i(1, -1))
+	map.generate_region(Vector2i(0, -1))
+	map.generate_region(Vector2i(-1, -1))
 	spawn_player(Vector2(0, 0))
 	spawn_the_core(player.global_position + Vector2(0, -250))
 	if !OS.is_debug_build():
@@ -190,7 +197,6 @@ func _on_region_generated(new_trees: Array, new_spawners: Array, new_stones: Arr
 		add_spawner(pos)
 	for pos: Vector2 in new_stones:
 		spawn_stone(pos)
-		print(pos)
 
 func drop_item(item: ItemData, pos: Vector2, random_range: int = 0) -> void:
 	var dropped_item := preload("res://Scenes/dropped_item.tscn").instantiate()
