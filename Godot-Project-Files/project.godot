@@ -30,6 +30,7 @@ AudioManager="*res://Autoload/AudioManager.gd"
 ItemRegistry="*res://Autoload/ItemRegistry.gd"
 Settings="*uid://2dc6q8qil2cg"
 TestingScript="*uid://bjop632e13gxe"
+SaveManager="*uid://cp2ho62yle53y"
 
 [debug]
 

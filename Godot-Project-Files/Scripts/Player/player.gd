@@ -255,3 +255,15 @@ func _input(event: InputEvent) -> void:
 func apply_recoil(weapon_rotation: float, recoil_strenght: float) -> void:
 	var dir := Vector2.RIGHT.rotated(weapon_rotation + deg_to_rad(45))
 	velocity -= dir * recoil_strenght
+
+func save_data() -> Dictionary:
+	return {
+		"position": global_position,
+		"health": health,
+		
+	}
+
+func load_data(data: Dictionary) -> void:
+	global_position = data.get("position", Vector2.ZERO)
+	health = data.get("health", 100)
+	

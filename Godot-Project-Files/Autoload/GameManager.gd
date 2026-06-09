@@ -14,6 +14,8 @@ const STATION_NAMES: Dictionary[StationType, String] = {
 }
 
 
+const CURRENT_GAME_VERSION = 1
+
 const DAMAGE_TYPES: Array[String] = DamageTypes.TYPES
 
 const BASE_HOURLY_POINTS: int = 5
@@ -22,6 +24,7 @@ const BASE_DAILY_POINTS: int = 15
 const MAX_DAILY_POINTS: int = 400 ##A cap for the exponential calculating of points based on days survived.
 
 var current_world_seed: int
+var current_save_name: String = ""
 var time: float = 0.0
 var day_length: float = 600.0
 var current_hour: int = 0

@@ -111,3 +111,18 @@ func _on_attack_range_area_body_exited(body: Node2D) -> void:
 	if body is TheCore:
 		change_state("Wonder")
 		core_in_range = false
+
+func save_data() -> Dictionary:
+	return {
+		"scene_path": scene_file_path,
+		"position": global_position,
+		"health": health,
+		"chase_forced": chase_forced,
+		
+	}
+
+func load_data(data: Dictionary) -> void:
+	global_position = data.get("position", Vector2.ZERO)
+	health = data.get("health", max_health)
+	chase_forced = data.get("chase_forced", false)
+	
