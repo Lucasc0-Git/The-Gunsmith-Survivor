@@ -118,29 +118,6 @@ stacked_outline_count = 1
 stacked_outline_0/size = 3
 stacked_outline_0/color = Color(0.40276054, 0.24210918, 0.08669271, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_50glp"]
-bg_color = Color(0.40960088, 0.24396306, 0.08871656, 1)
-border_width_left = 4
-border_width_top = 4
-border_width_right = 4
-border_width_bottom = 4
-border_color = Color(0.3019608, 0.1764706, 0.05490196, 1)
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-expand_margin_left = 4.0
-expand_margin_top = 4.0
-expand_margin_right = 4.0
-expand_margin_bottom = 4.0
-
-[sub_resource type="Theme" id="Theme_bmxlf"]
-Label/colors/font_color = Color(0.8745098, 0.8745098, 0.8745098, 1)
-Label/colors/font_outline_color = Color(0.18039216, 0.09019608, 0.023529412, 1)
-Label/constants/outline_size = 4
-Label/font_sizes/font_size = 25
-Label/styles/focus = SubResource("StyleBoxFlat_50glp")
-Label/styles/normal = SubResource("StyleBoxFlat_50glp")
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bmxlf"]
 draw_center = false
 border_width_left = 5
@@ -385,7 +362,7 @@ grow_vertical = 2
 mouse_filter = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Menu/PauseMenu" unique_id=1090979873]
-custom_minimum_size = Vector2(400, 0)
+custom_minimum_size = Vector2(300, 0)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -398,22 +375,32 @@ offset_right = 20.0
 offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = 15
+theme_override_constants/separation = 10
 
 [node name="ResumeButton" type="Button" parent="Menu/PauseMenu/VBoxContainer" unique_id=1719607810]
 layout_mode = 2
 theme = SubResource("Theme_v1gob")
 text = "Resume"
 
+[node name="SaveGameButton" type="Button" parent="Menu/PauseMenu/VBoxContainer" unique_id=172256820]
+layout_mode = 2
+theme = ExtResource("5_pbw6q")
+text = "Save"
+
+[node name="LoadGameButton" type="Button" parent="Menu/PauseMenu/VBoxContainer" unique_id=1272137042]
+layout_mode = 2
+theme = ExtResource("5_pbw6q")
+text = "Load"
+
 [node name="MenuButton" type="Button" parent="Menu/PauseMenu/VBoxContainer" unique_id=2000724195]
 layout_mode = 2
 theme = ExtResource("5_pbw6q")
-text = "Menu (w/ save (does not work))"
+text = "Menu"
 
 [node name="OptionsButton" type="Button" parent="Menu/PauseMenu/VBoxContainer" unique_id=112866397]
 layout_mode = 2
 theme = SubResource("Theme_jw32o")
-text = "Options (does not work)"
+text = "Options"
 
 [node name="QuitButton" type="Button" parent="Menu/PauseMenu/VBoxContainer" unique_id=116100010]
 layout_mode = 2
@@ -467,8 +454,9 @@ grow_vertical = 2
 [node name="SaveQuestionLabel" type="Label" parent="Menu/SaveQuestion/VBoxContainer" unique_id=1929687739]
 layout_mode = 2
 size_flags_vertical = 3
-theme = SubResource("Theme_bmxlf")
-text = "Save at least? (does not work)"
+theme = ExtResource("5_pbw6q")
+theme_override_font_sizes/font_size = 28
+text = "Save at least?"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -636,6 +624,7 @@ text = "Test"
 
 [connection signal="world_loaded" from="." to="HUD" method="_on_main_world_loaded"]
 [connection signal="pressed" from="Menu/PauseMenu/VBoxContainer/ResumeButton" to="Menu" method="_on_resume_button_pressed"]
+[connection signal="pressed" from="Menu/PauseMenu/VBoxContainer/SaveGameButton" to="Menu" method="_on_save_game_button_pressed"]
 [connection signal="pressed" from="Menu/PauseMenu/VBoxContainer/MenuButton" to="Menu" method="_on_menu_button_pressed"]
 [connection signal="pressed" from="Menu/PauseMenu/VBoxContainer/OptionsButton" to="Menu" method="_on_options_button_pressed"]
 [connection signal="pressed" from="Menu/PauseMenu/VBoxContainer/QuitButton" to="Menu" method="_on_quit_button_pressed"]

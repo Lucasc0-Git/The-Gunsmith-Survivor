@@ -200,17 +200,17 @@ theme_override_constants/separation = 10
 [node name="NewGameButton" type="Button" parent="VBoxContainer" unique_id=1669989295]
 layout_mode = 2
 theme = ExtResource("1_dgtb2")
-text = "Play New Game"
+text = "Start New Game"
+
+[node name="LoadButton" type="Button" parent="VBoxContainer" unique_id=1827291946]
+layout_mode = 2
+theme = SubResource("Theme_u668n")
+text = "Load"
 
 [node name="TutorialButton" type="Button" parent="VBoxContainer" unique_id=1689194559]
 layout_mode = 2
 theme = ExtResource("1_dgtb2")
 text = "Tutorial"
-
-[node name="SavesButton" type="Button" parent="VBoxContainer" unique_id=1827291946]
-layout_mode = 2
-theme = SubResource("Theme_u668n")
-text = "Saves (do not work)"
 
 [node name="OptionsButton" type="Button" parent="VBoxContainer" unique_id=1597566006]
 layout_mode = 2
@@ -285,8 +285,8 @@ theme = ExtResource("1_dgtb2")
 text = "Back"
 
 [connection signal="pressed" from="VBoxContainer/NewGameButton" to="." method="_on_new_game_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/LoadButton" to="." method="_on_saves_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/TutorialButton" to="." method="_on_tutorial_button_pressed"]
-[connection signal="pressed" from="VBoxContainer/SavesButton" to="." method="_on_saves_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/OptionsButton" to="." method="_on_options_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
 [connection signal="pressed" from="Control/BackButton" to="." method="_on_back_button_pressed"]

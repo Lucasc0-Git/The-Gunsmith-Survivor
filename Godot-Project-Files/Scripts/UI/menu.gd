@@ -17,6 +17,10 @@ func _on_resume_button_pressed() -> void:
 	AudioManager.play_button_click()
 	main.hide_menu()
 
+func _on_save_game_button_pressed() -> void:
+	AudioManager.play_button_click()
+	SaveManager.save_game(GameManager.current_save_name)
+
 func _on_menu_button_pressed() -> void:
 	AudioManager.play_button_click()
 	if get_tree().paused: get_tree().paused = false

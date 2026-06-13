@@ -28,6 +28,7 @@ var inventory_tint: CanvasModulate
 var the_core: TheCore
 var player: Player
 
+
 @export var tree_respawn_time: float = 180.0
 @export var stone_respawn_time: float = 600.0
 
@@ -74,7 +75,12 @@ func _ready() -> void:
 	player.health_update.connect(hud.ui.health_changed)
 	
 	##Generate or load the world.
-	generate()
+	await GameManager.wait_for_node(map)
+	
+	if GameManager.is_loading_save:
+		SaveManager.load_save(GameManager.pending_save_name)
+	else:
+		generate()
 	
 	
 	canvas_modulate.color = day_colors[8]

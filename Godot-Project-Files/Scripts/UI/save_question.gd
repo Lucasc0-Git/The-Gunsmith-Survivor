@@ -6,14 +6,15 @@ extends Control
 
 
 func _on_yes_button_pressed() -> void:
-	pass #ToDo: saving feature.
 	if visible:
+		SaveManager.save_game(GameManager.current_save_name)
 		Settings.save()
 		get_tree().quit()
 
 
 func _on_no_button_pressed() -> void:
 	if visible:
+		Settings.save()
 		get_tree().quit()
 
 

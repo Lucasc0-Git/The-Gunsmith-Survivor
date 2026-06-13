@@ -31,6 +31,8 @@ var current_hour: int = 0
 var current_day: int = 0
 var main: Main = null
 var is_game_loaded: bool = false
+var is_loading_save: bool = false
+var pending_save_name: String = ""
 
 var score: int = 0
 var more_stats: Dictionary[String, int] = {
@@ -120,5 +122,12 @@ func wait_for_node(node: Node, timeout: float = 2.0) -> bool:
 	return true
 
 func start_new_world() -> void:
+	is_loading_save = false
+	main = load("res://Scenes/Main.tscn").instantiate()
+	get_tree().change_scene_to_node(main)
+
+func load_world(save_name: String) -> void:
+	is_loading_save = true
+	pending_save_name = save_name
 	main = load("res://Scenes/Main.tscn").instantiate()
 	get_tree().change_scene_to_node(main)
