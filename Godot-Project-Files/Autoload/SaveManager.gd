@@ -69,8 +69,8 @@ func load_save(save_name: String = "") -> bool:
 	if GameManager.main and GameManager.main.player:
 		GameManager.main.player.load_data(save_data.get("player", {}))
 	
-	_deserialize_enemies(save_data.get("enemies", []))
 	_deserialize_built_objects(save_data.get("built_objects", []))
+	_deserialize_enemies(save_data.get("enemies", []))
 	_deserialize_inventory(save_data.get("inventory", {}))
 	_deserialize_hotbar(save_data.get("hotbar", {}))
 	
@@ -212,11 +212,26 @@ func _deserialize_enemies(data_array: Array) -> void:
 
 #Built objects
 
-func _serialize_built_objects():
-	pass
+func _serialize_built_objects() -> Array:
+	var data := []
+	for child in GameManager.main.Ysort.get_children():
+		if child.is_in_group("built") and child.has_method("save_data"):
+			data.append(child.save_data())
+	return data
 
-func _deserialize_built_objects(data):
-	pass
+func _deserialize_built_objects(data_array: Array) -> void:
+	for child in GameManager.main.Ysort.get_children():
+		if child.is_in_group("built"):
+			child.queue_free()
+	
+	for dict: Dictionary in data_array:
+		var scene_path: String = dict.get("scene_path", "")
+		if scene_path.is_empty():
+		
+		var packed_scene: PackedScene = load(scene_path)
+		if packed_scene:
+				instance.load_data(dict)
+			push_error("Failed to load build scene: " + scene_path)
 
 #Inventory
 
