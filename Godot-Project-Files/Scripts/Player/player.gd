@@ -264,6 +264,6 @@ func save_data() -> Dictionary:
 	}
 
 func load_data(data: Dictionary) -> void:
-	global_position = data.get("position", Vector2.ZERO)
-	health = data.get("health", 100)
+	global_position = SaveManager.dict_to_vec2(data.get("position"))
+	health = float(data.get("health", health_max))
 	

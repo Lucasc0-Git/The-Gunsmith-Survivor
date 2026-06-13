@@ -122,7 +122,7 @@ func save_data() -> Dictionary:
 	}
 
 func load_data(data: Dictionary) -> void:
-	global_position = data.get("position", Vector2.ZERO)
-	health = data.get("health", max_health)
-	chase_forced = data.get("chase_forced", false)
-	
+	global_position = SaveManager.dict_to_vec2(data.get("position"))
+	health = float(data.get("health", max_health))
+	chase_forced = bool(data.get("chase_forced", false))
+	 

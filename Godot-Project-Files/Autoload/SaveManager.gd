@@ -27,6 +27,7 @@ func save_game(save_name: String = "") -> bool:
 		"inventory": _serialize_inventory(),
 		"hotbar": _serialize_hotbar()
 	}
+	save_data = serialize_value(save_data)
 	
 	var file := FileAccess.open(path, FileAccess.WRITE)
 	if file:
@@ -45,6 +46,7 @@ func load_save(save_name: String = "") -> bool:
 		push_warning("Save file not found: " + path)
 		return false
 	
+	
 	var file := FileAccess.open(path, FileAccess.READ)
 	var json_text := file.get_as_text()
 	var json := JSON.new()
@@ -53,14 +55,16 @@ func load_save(save_name: String = "") -> bool:
 		push_error("JSON parse error: " + json.get_error_message())
 		return false
 	
-	var save_data: Dictionary = json.data
+	var raw_data: Dictionary = json.data
+	var save_data: Dictionary = deserialize_value(raw_data)
 	
 	if save_data.get("version", -1) != GameManager.CURRENT_GAME_VERSION:
-		push_warning("Save " + path + "is not in the same version of the game. Continuing...")
+		push_warning("Save version mismatch for " + path + ". Continuing...")
 	
 	GameManager.current_save_name = current_save_name
+	GameManager.is_loading_save = true
 	
-	_deserialize_game_manager(save_data.get("game_manafer", {}))
+	_deserialize_game_manager(save_data.get("game_manager", {}))
 	
 	if GameManager.main and GameManager.main.player:
 		GameManager.main.player.load_data(save_data.get("player", {}))
@@ -103,7 +107,58 @@ func delete_save(save_name: String) -> bool:
 		return true
 	return false
 
-# ================= Help functions ==============
+# ========================= TYPE CONVERSION HELPERS ============================================
+
+func vec2_to_dict(v: Vector2) -> Dictionary:
+	return {"x": v.x, "y": v.y}
+
+func dict_to_vec2(d: Variant) -> Vector2:
+	if d is Dictionary:
+		print("Convering " + str(d) + " as Vector2 with values: (%s, %s)" % [d.get("x", 0.0), d.get("y", 0.0)])
+		return Vector2(
+			float(d.get("x", 0.0)),
+			float(d.get("y", 0.0))
+		)
+	else:
+		print(str(d) + " is not a Dictionary.")
+	return Vector2.ZERO
+
+func serialize_value(value: Variant) -> Variant:
+	if value is Vector2:
+		return vec2_to_dict(value)
+	if value is Array:
+		return value.map(serialize_value)
+	if value is Dictionary:
+		var new_dict := {}
+		for k: Variant in value:
+			new_dict[k] = serialize_value(value[k])
+		return new_dict
+	if value is Object and value.has_method("save_data"):
+		return value.save_data()
+	return value
+
+func deserialize_value(value: Variant) -> Variant:
+	if value is Dictionary:
+		if value.has("x") and value.has("y") and not value.has("z"):
+			return dict_to_vec2(value)
+		var new_dict := {}
+		for k: Variant in value:
+			new_dict[k] = deserialize_value(value[k])
+		return new_dict
+	if value is Array:
+		return value.map(deserialize_value)
+	if value is String:
+		if value.is_valid_int():
+			return int(value)
+		if value.is_valid_float():
+			return float(value)
+		if value.begins_with("#"):
+			return Color(value)
+	return value
+
+
+
+# ========================= HELP FUNCTIONS =====================================================
 
 #GameManager
 func _serialize_game_manager() -> Dictionary:
@@ -113,17 +168,27 @@ func _serialize_game_manager() -> Dictionary:
 		"current_day": GameManager.current_day,
 		"current_hour": GameManager.current_hour,
 		"score": GameManager.score,
-		"more_stats": GameManager.more_stats
+		"more_stats": GameManager.more_stats as Dictionary[String, int]
 	}
 
 func _deserialize_game_manager(data: Dictionary) -> void:
-	GameManager.current_world_seed = data.get("current_world_seed", 0)
+	GameManager.current_world_seed = data.get("current_world_seed", randi())
 	GameManager.time = data.get("time", 0.0)
 	GameManager.set_day(data.get("current_day", 0))
 	GameManager.set_hour(data.get("current_hour", 0))
 	GameManager.score = data.get("score", 0)
-	GameManager.more_stats = data.get("more_stats", {"ERR": "Data Corrupted!"})
-
+	var loaded_stats: Dictionary = data.get("more_stats")
+	if loaded_stats:
+		GameManager.more_stats.clear()
+		for key: String in loaded_stats.keys():
+			if key is String and loaded_stats[key] is int:
+				GameManager.more_stats[key] = loaded_stats[key]
+			else:
+				push_warning("Invalid stat data skipped: " + str(key))
+	else:
+		push_warning("more_stats invalid.")
+	#GameManager.more_stats = data.get("more_stats", {"ERR": 84}) as Dictionary[String, int]
+	
 #Enemies
 
 func _serialize_enemies() -> Array:
