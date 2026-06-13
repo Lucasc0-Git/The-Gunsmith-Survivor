@@ -78,9 +78,11 @@ func _ready() -> void:
 	await GameManager.wait_for_node(map)
 	
 	if GameManager.is_loading_save:
-		SaveManager.load_save(GameManager.pending_save_name)
+		print("Loading the world from save " + GameManager.current_save_name)
+		SaveManager.load_save(GameManager.current_save_name)
 	else:
-		generate()
+		print("Generating the world without load.")
+		generate(GameManager.current_world_seed)
 	
 	
 	canvas_modulate.color = day_colors[8]
@@ -131,18 +133,20 @@ func _ready() -> void:
 	
 	get_tree().paused = false
 	GameManager.is_game_loaded = true
+	print("After generating the game, the seed is: " + str(GameManager.current_world_seed))
 	world_loaded.emit()
 
-func generate() -> void:
-	map.generate_region(Vector2i(0, 0))
-	map.generate_region(Vector2i(1, 1))
-	map.generate_region(Vector2i(1, 0))
-	map.generate_region(Vector2i(0, 1))
-	map.generate_region(Vector2i(-1, 0))
-	map.generate_region(Vector2i(-1, 1))
-	map.generate_region(Vector2i(1, -1))
-	map.generate_region(Vector2i(0, -1))
-	map.generate_region(Vector2i(-1, -1))
+func generate(seed_f_g: int = 12) -> void:
+	print("Generating the world...")
+	map.generate_region(Vector2i(0, 0), seed_f_g)
+	map.generate_region(Vector2i(1, 1), seed_f_g)
+	map.generate_region(Vector2i(1, 0), seed_f_g)
+	map.generate_region(Vector2i(0, 1), seed_f_g)
+	map.generate_region(Vector2i(-1, 0), seed_f_g)
+	map.generate_region(Vector2i(-1, 1), seed_f_g)
+	map.generate_region(Vector2i(1, -1), seed_f_g)
+	map.generate_region(Vector2i(0, -1), seed_f_g)
+	map.generate_region(Vector2i(-1, -1), seed_f_g)
 	spawn_player(Vector2(0, 0))
 	spawn_the_core(player.global_position + Vector2(0, -250))
 	if !OS.is_debug_build():

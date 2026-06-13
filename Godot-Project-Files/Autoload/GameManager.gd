@@ -123,11 +123,13 @@ func wait_for_node(node: Node, timeout: float = 2.0) -> bool:
 
 func start_new_world() -> void:
 	is_loading_save = false
-	main = load("res://Scenes/Main.tscn").instantiate()
+	current_world_seed = randi()
+	main = preload("res://Scenes/Main.tscn").instantiate()
 	get_tree().change_scene_to_node(main)
 
 func load_world(save_name: String) -> void:
 	is_loading_save = true
 	pending_save_name = save_name
-	main = load("res://Scenes/Main.tscn").instantiate()
+	current_save_name = save_name
+	main = preload("res://Scenes/Main.tscn").instantiate()
 	get_tree().change_scene_to_node(main)

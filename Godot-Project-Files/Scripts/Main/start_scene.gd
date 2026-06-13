@@ -7,13 +7,11 @@ extends Control
 @export var MainScene : PackedScene
 @export var OptScene : PackedScene
 
-var world_seed := randi()
 
 func _ready() -> void:
 	GameManager.is_game_loaded = false
 	
 	tutorial_panel.visible = false
-	GameManager.current_world_seed = world_seed
 
 func _process(_delta: float) -> void:
 	if GameManager.is_game_loaded:

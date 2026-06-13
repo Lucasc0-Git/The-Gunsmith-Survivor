@@ -61,10 +61,13 @@ func load_save(save_name: String = "") -> bool:
 	if save_data.get("version", -1) != GameManager.CURRENT_GAME_VERSION:
 		push_warning("Save version mismatch for " + path + ". Continuing...")
 	
-	GameManager.current_save_name = current_save_name
-	GameManager.is_loading_save = true
+	#GameManager.current_save_name = current_save_name
+	#GameManager.is_loading_save = true
 	
 	_deserialize_game_manager(save_data.get("game_manager", {}))
+	
+	var game_manager_data: Dictionary = save_data.get("game_manager", {})
+	GameManager.main.generate(int(game_manager_data.get("current_world_seed", 12)))
 	
 	if GameManager.main and GameManager.main.player:
 		GameManager.main.player.load_data(save_data.get("player", {}))
@@ -172,7 +175,8 @@ func _serialize_game_manager() -> Dictionary:
 	}
 
 func _deserialize_game_manager(data: Dictionary) -> void:
-	GameManager.current_world_seed = data.get("current_world_seed", randi())
+	GameManager.current_world_seed = data.get("current_world_seed", 12)
+	print("Setting current_world_seed via loading the game: " + str(GameManager.current_world_seed))
 	GameManager.time = data.get("time", 0.0)
 	GameManager.set_day(data.get("current_day", 0))
 	GameManager.set_hour(data.get("current_hour", 0))
@@ -236,6 +240,7 @@ func _deserialize_built_objects(data_array: Array) -> void:
 				instance.load_data(dict)
 			else:
 				instance.global_position = dict_to_vec2(dict.get("position", {}))
+			GameManager.main.Ysort.add_child(instance)
 		else:
 			push_error("Failed to load build scene: " + scene_path)
 

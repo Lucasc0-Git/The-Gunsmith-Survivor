@@ -49,6 +49,9 @@ var stone_positions := []
 
 func _ready() -> void:
 	world_seed = GameManager.current_world_seed
+	set_noise_and_seed()
+
+func set_noise_and_seed() -> void:
 	world_noise.seed = world_seed
 	world_noise.frequency = world_frequency
 	grass_noise.seed = world_seed + 1
@@ -60,7 +63,11 @@ func _ready() -> void:
 	stone_noise.seed = world_seed + 4
 	stone_noise.frequency = stone_frequency
 
-func generate_region(region_pos: Vector2i) -> void:
+func generate_region(region_pos: Vector2i, seed_f_g: int = 12) -> void:
+	print("Generating region: " + str(region_pos) + " with this seed: " + str(GameManager.current_world_seed))
+	world_seed = seed_f_g
+	set_noise_and_seed()
+	
 	var offset_x := region_pos.x * map_width
 	var offset_y := region_pos.y * map_height
 	

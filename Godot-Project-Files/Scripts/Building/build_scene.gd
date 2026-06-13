@@ -81,5 +81,5 @@ func save_data() -> Dictionary:
 	}
 
 func load_data(data: Dictionary) -> void:
-	global_position = SaveManager.dict_to_vec2(data.get("position", {"x": 0, "y": 0}))
+	global_position = data.get("position", Vector2(0, 0))
 	
