@@ -41,6 +41,8 @@ func _ready() -> void:
 
 func sync_from_player() -> void:
 	if hud and hud.player:
+		while !is_node_ready():
+			await get_tree().process_frame
 		for i in range(slots.size()):
 			slots[i].set_slot_data(hud.player.hotbar_slots[i])
 
@@ -181,3 +183,23 @@ func _on_slot_item_changed(index: int, slot_data: SlotData) -> void:
 	slot_item_changed.emit(index, slot_data)
 	if hud and hud.player:
 		hud.player.set_hotbar_item(index, slot_data)
+
+func save_data() -> Array:
+	var array := []
+	for slot in slots:
+		array.append(slot.slot_data.save_data())
+	return array
+	
+
+func load_data(data_array: Array) -> void:
+	for slot in slots:
+		slot.slot_data.clear()
+	for i in range(slots.size()):
+		var slot := slots[i]
+		if i < data_array.size():
+			var slot_data := SlotData.new()
+			slot_data.load_data(data_array[i])
+			slot.set_slot_data(slot_data)
+		else:
+			slot.set_slot_data(SlotData.new())
+	select_slot(0)

@@ -227,24 +227,36 @@ func _deserialize_built_objects(data_array: Array) -> void:
 	for dict: Dictionary in data_array:
 		var scene_path: String = dict.get("scene_path", "")
 		if scene_path.is_empty():
+			continue
 		
 		var packed_scene: PackedScene = load(scene_path)
 		if packed_scene:
+			var instance := packed_scene.instantiate() as BuildScene
+			if instance.has_method("load_data"):
 				instance.load_data(dict)
+			else:
+				instance.global_position = dict_to_vec2(dict.get("position", {}))
+		else:
 			push_error("Failed to load build scene: " + scene_path)
 
 #Inventory
 
-func _serialize_inventory():
-	pass
+func _serialize_inventory() -> Array:
+	if GameManager.main.hud.inventory:
+		return GameManager.main.hud.inventory.save_data()
+	return []
 
-func _deserialize_inventory(data):
-	pass
+func _deserialize_inventory(data_array: Array) -> void:
+	if GameManager.main.hud.inventory:
+		GameManager.main.hud.inventory.load_data(data_array)
 
 #Hotbar
 
-func _serialize_hotbar():
-	pass
+func _serialize_hotbar() -> Array:
+	if GameManager.main.hud.hotbar:
+		return GameManager.main.hud.hotbar.save_data()
+	return []
 
-func _deserialize_hotbar(data):
-	pass
+func _deserialize_hotbar(data_array: Array) -> void:
+	if GameManager.main.hud.hotbar:
+		GameManager.main.hud.hotbar.load_data(data_array)

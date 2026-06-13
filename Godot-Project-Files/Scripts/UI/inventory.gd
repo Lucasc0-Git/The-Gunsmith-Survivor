@@ -230,3 +230,23 @@ func _show_tooltip(slot_data: SlotData) -> void:
 
 func _hide_tooltip() -> void:
 	tooltip.hide_tooltip()
+
+func save_data() -> Array:
+	var array := []
+	
+	for slot: Slot in grid_container.get_children():
+		array.append(slot.slot_data.save_data())
+	
+	return array
+
+func load_data(data_array: Array) -> void:
+	var slots := grid_container.get_children()
+	
+	for i in range(slots.size()):
+		var slot_ui := slots[i]
+		if i < data_array.size():
+			var slot_data := SlotData.new()
+			slot_data.load_data(data_array[i])
+			slot_ui.set_slot_data(slot_data)
+		else:
+			slot_ui.set_slot_data(SlotData.new())

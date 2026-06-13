@@ -36,6 +36,7 @@ func _ready() -> void:
 
 func set_slot_data(data: SlotData) -> void:
 	slot_data = data
+	_update_visual()
 
 func set_hotbar_number(index: int) -> void:
 	hotbar_slot_number.visible = true

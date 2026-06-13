@@ -29,3 +29,23 @@ func equals(other: SlotData) -> bool:
 func is_same_item(other: SlotData) -> bool:
 	if other == null or item_data == null or other.item_data == null: return false
 	return item_data == other.item_data
+
+func save_data() -> Dictionary:
+	if is_empty():
+		return {"empty": true}
+	
+	return {
+		"empty": false,
+		"item_id": item_data.id if item_data else "",
+		"amount": amount
+	}
+
+func load_data(data: Dictionary) -> void:
+	if !ItemRegistry: return
+	if data.get("empty", false):
+		clear()
+		return
+	
+	var id: String = data.get("item_id", "")
+	item_data = ItemRegistry.items.get(id)
+	amount = int(data.get("amount", 0))
