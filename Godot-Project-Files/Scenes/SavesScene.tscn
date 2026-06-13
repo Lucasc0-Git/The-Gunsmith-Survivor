@@ -147,7 +147,7 @@ caret_blink = true
 [node name="NewSaveButton" type="Button" parent="HBoxContainer" unique_id=392334568]
 layout_mode = 2
 theme = ExtResource("3_eodxt")
-text = "New Save"
+text = "Start Game"
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="." unique_id=404850754]
 custom_minimum_size = Vector2(500, 400)

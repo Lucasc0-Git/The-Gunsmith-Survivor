@@ -3,6 +3,8 @@ extends Node
 const SAVE_DIR = "user://saves/"
 const CURRENT_VERSION = 1
 
+signal save_list_changed()
+
 var current_save_name: String = "save_slot_1"
 
 func _ready() -> void:
@@ -107,6 +109,7 @@ func delete_save(save_name: String) -> bool:
 	var path := SAVE_DIR + save_name + ".json"
 	if DirAccess.remove_absolute(path) == OK:
 		print("Deleted save: ", save_name)
+		save_list_changed.emit()
 		return true
 	return false
 
