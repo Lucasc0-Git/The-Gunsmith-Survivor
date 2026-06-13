@@ -73,6 +73,7 @@ enemy=""
 enemy_hitbox=""
 thecore=""
 melee_hit=""
+built=""
 
 [input]
 

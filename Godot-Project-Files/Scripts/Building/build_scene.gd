@@ -73,4 +73,13 @@ func _process(_delta: float) -> void:
 		$MouseInputMonitor.monitoring = false
 	else:
 		$MouseInputMonitor.monitoring = true
+
+func save_data() -> Dictionary:
+	return {
+		"scene_path": scene_file_path,
+		"position": global_position,
+	}
+
+func load_data(data: Dictionary) -> void:
+	global_position = SaveManager.dict_to_vec2(data.get("position", {"x": 0, "y": 0}))
 	
