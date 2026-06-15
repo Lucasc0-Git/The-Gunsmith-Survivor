@@ -135,7 +135,7 @@ func _ready() -> void:
 	GameManager.is_game_loaded = true
 	print("After generating the game, the seed is: " + str(GameManager.current_world_seed))
 	world_loaded.emit()
-	SaveManager.save_game(GameManager.current_save_name)
+	#SaveManager.save_game(GameManager.current_save_name)
 
 func generate(seed_f_g: int = 12) -> void:
 	print("Generating the world...")
@@ -282,6 +282,7 @@ func give_player_item(item_data: ItemData, amount: int = 1) -> void:
 
 func show_menu() -> void:
 	menu.visible = true
+	menu.hide_everything()
 	get_tree().paused = true
 
 func hide_menu() -> void:

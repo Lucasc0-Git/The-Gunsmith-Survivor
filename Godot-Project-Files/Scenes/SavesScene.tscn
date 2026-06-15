@@ -2,9 +2,7 @@
 
 [ext_resource type="Script" uid="uid://b1ty3lehdh326" path="res://Scripts/Main/saves_scene.gd" id="1_yg2bk"]
 [ext_resource type="Texture2D" uid="uid://cgvn2rp4tyj7h" path="res://Textures/Start_scene_bg_1.png" id="2_c3ypx"]
-[ext_resource type="Theme" uid="uid://bjx8aflrkpmog" path="res://Themes/StartSceneButton.tres" id="3_eodxt"]
-[ext_resource type="StyleBox" uid="uid://drolhtsx8qlvs" path="res://Themes/BasicStyleBoxFlat.tres" id="3_f5x53"]
-[ext_resource type="Texture2D" uid="uid://dfd37ht0kpmhd" path="res://Textures/TrashCan.png" id="4_tpvhh"]
+[ext_resource type="PackedScene" uid="uid://dtp8sqyey2t46" path="res://Scenes/save_list.tscn" id="3_eodxt"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bmxlf"]
 draw_center = false
@@ -83,10 +81,6 @@ Button/styles/hover = SubResource("StyleBoxFlat_4kpch")
 Button/styles/normal = SubResource("StyleBoxFlat_grg3l")
 Button/styles/pressed = SubResource("StyleBoxFlat_frkhe")
 
-[sub_resource type="Theme" id="Theme_l8o3q"]
-LineEdit/styles/focus = ExtResource("3_f5x53")
-LineEdit/styles/normal = ExtResource("3_f5x53")
-
 [node name="Control" type="Control" unique_id=1775585552]
 layout_mode = 3
 anchors_preset = 15
@@ -105,6 +99,9 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_c3ypx")
 
+[node name="SaveList" parent="." unique_id=714396198 instance=ExtResource("3_eodxt")]
+layout_mode = 1
+
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1954744995]
 custom_minimum_size = Vector2(200, 44)
 layout_mode = 1
@@ -122,83 +119,4 @@ layout_mode = 2
 theme = SubResource("Theme_c3ypx")
 text = "Back"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1136363819]
-custom_minimum_size = Vector2(500, 44)
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -250.0
-offset_top = 100.0
-offset_right = 250.0
-offset_bottom = 140.0
-grow_horizontal = 2
-theme_override_constants/separation = 10
-
-[node name="LineEdit" type="LineEdit" parent="HBoxContainer" unique_id=1529407089]
-layout_mode = 2
-size_flags_horizontal = 3
-theme = SubResource("Theme_l8o3q")
-placeholder_text = "Your save name"
-alignment = 1
-virtual_keyboard_enabled = false
-caret_blink = true
-
-[node name="NewSaveButton" type="Button" parent="HBoxContainer" unique_id=392334568]
-layout_mode = 2
-theme = ExtResource("3_eodxt")
-text = "Start Game"
-
-[node name="VBoxContainer2" type="VBoxContainer" parent="." unique_id=404850754]
-custom_minimum_size = Vector2(500, 400)
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -250.0
-offset_top = -140.0
-offset_right = 250.0
-offset_bottom = 260.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("3_eodxt")
-theme_override_constants/separation = 10
-
-[node name="Save1Box" type="HBoxContainer" parent="VBoxContainer2" unique_id=143859673]
-layout_mode = 2
-theme_override_constants/separation = 10
-alignment = 1
-
-[node name="Save1" type="Button" parent="VBoxContainer2/Save1Box" unique_id=433557911]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Save 1"
-
-[node name="Delete" type="Button" parent="VBoxContainer2/Save1Box" unique_id=1476850573]
-custom_minimum_size = Vector2(50, 0)
-layout_mode = 2
-icon = ExtResource("4_tpvhh")
-icon_alignment = 1
-expand_icon = true
-
-[node name="Save2Box" type="HBoxContainer" parent="VBoxContainer2" unique_id=2030072747]
-layout_mode = 2
-theme_override_constants/separation = 10
-alignment = 1
-
-[node name="Save2" type="Button" parent="VBoxContainer2/Save2Box" unique_id=1490956188]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Save 2"
-
-[node name="Delete" type="Button" parent="VBoxContainer2/Save2Box" unique_id=1191272785]
-custom_minimum_size = Vector2(50, 0)
-layout_mode = 2
-icon = ExtResource("4_tpvhh")
-icon_alignment = 1
-expand_icon = true
-
 [connection signal="pressed" from="VBoxContainer/BackButton" to="." method="_on_back_button_pressed"]
-[connection signal="pressed" from="HBoxContainer/NewSaveButton" to="." method="_on_new_save_button_pressed"]

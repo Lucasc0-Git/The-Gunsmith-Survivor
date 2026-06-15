@@ -1,0 +1,101 @@
+[gd_scene format=3 uid="uid://dtp8sqyey2t46"]
+
+[ext_resource type="Script" uid="uid://du1j5rv7cri42" path="res://Scripts/save_list.gd" id="1_ei7f2"]
+[ext_resource type="StyleBox" uid="uid://drolhtsx8qlvs" path="res://Themes/BasicStyleBoxFlat.tres" id="2_48oe6"]
+[ext_resource type="Theme" uid="uid://bjx8aflrkpmog" path="res://Themes/StartSceneButton.tres" id="3_b4ter"]
+[ext_resource type="Texture2D" uid="uid://dfd37ht0kpmhd" path="res://Textures/TrashCan.png" id="4_t73lp"]
+
+[sub_resource type="Theme" id="Theme_7qfpw"]
+LineEdit/styles/focus = ExtResource("2_48oe6")
+LineEdit/styles/normal = ExtResource("2_48oe6")
+
+[node name="SaveList" type="Control" unique_id=714396198]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_ei7f2")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=2057296508]
+custom_minimum_size = Vector2(500, 44)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -250.0
+offset_top = 100.0
+offset_right = 250.0
+offset_bottom = 144.0
+grow_horizontal = 2
+theme_override_constants/separation = 10
+
+[node name="LineEdit" type="LineEdit" parent="HBoxContainer" unique_id=645015954]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = SubResource("Theme_7qfpw")
+placeholder_text = "Your save name"
+alignment = 1
+virtual_keyboard_enabled = false
+caret_blink = true
+
+[node name="NewSaveButton" type="Button" parent="HBoxContainer" unique_id=1082388565]
+z_index = 197
+layout_mode = 2
+theme = ExtResource("3_b4ter")
+text = "Start Game"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="." unique_id=144451095]
+custom_minimum_size = Vector2(500, 400)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -140.0
+offset_right = 250.0
+offset_bottom = 260.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("3_b4ter")
+theme_override_constants/separation = 10
+
+[node name="Save1Box" type="HBoxContainer" parent="VBoxContainer2" unique_id=1914714879]
+layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="Save1" type="Button" parent="VBoxContainer2/Save1Box" unique_id=1808096731]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Save 1"
+
+[node name="Delete" type="Button" parent="VBoxContainer2/Save1Box" unique_id=1987275125]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+icon = ExtResource("4_t73lp")
+icon_alignment = 1
+expand_icon = true
+
+[node name="Save2Box" type="HBoxContainer" parent="VBoxContainer2" unique_id=2002964233]
+layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="Save2" type="Button" parent="VBoxContainer2/Save2Box" unique_id=169255554]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Save 2"
+
+[node name="Delete" type="Button" parent="VBoxContainer2/Save2Box" unique_id=1002053546]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+icon = ExtResource("4_t73lp")
+icon_alignment = 1
+expand_icon = true
+
+[connection signal="pressed" from="HBoxContainer/NewSaveButton" to="." method="_on_new_save_button_pressed"]

@@ -9,8 +9,12 @@
 [ext_resource type="Shader" uid="uid://ca464l0rm344h" path="res://Shaders/Menu.gdshader" id="6_jw32o"]
 [ext_resource type="Script" uid="uid://wwrophqv2bdi" path="res://Scripts/UI/opt_menu.gd" id="8_50glp"]
 [ext_resource type="Script" uid="uid://dfs7h6re7rpbi" path="res://Scripts/UI/save_question.gd" id="8_vy5pj"]
+[ext_resource type="Script" uid="uid://htglrjy7cjli" path="res://Scripts/Main/load_list.gd" id="10_1p5hy"]
 [ext_resource type="Script" uid="uid://bjnq6fqwqrmfx" path="res://Scripts/UI/build_tooltip.gd" id="10_4kpch"]
+[ext_resource type="StyleBox" uid="uid://drolhtsx8qlvs" path="res://Themes/BasicStyleBoxFlat.tres" id="10_frkhe"]
+[ext_resource type="Texture2D" uid="uid://dfd37ht0kpmhd" path="res://Textures/TrashCan.png" id="11_1p5hy"]
 [ext_resource type="Theme" uid="uid://6ytu8ksu8rvq" path="res://Themes/BaseContainer.tres" id="11_grg3l"]
+[ext_resource type="Script" uid="uid://wj7mwtimcp2m" path="res://Scripts/Main/save_list.gd" id="12_h1m7h"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_50glp"]
 shader = ExtResource("6_jw32o")
@@ -285,6 +289,10 @@ Button/styles/hover = SubResource("StyleBoxFlat_kk5q7")
 Button/styles/normal = SubResource("StyleBoxFlat_gcwlc")
 Button/styles/pressed = SubResource("StyleBoxFlat_dgtb2")
 
+[sub_resource type="Theme" id="Theme_h1m7h"]
+LineEdit/styles/focus = ExtResource("10_frkhe")
+LineEdit/styles/normal = ExtResource("10_frkhe")
+
 [node name="Main" type="Node2D" unique_id=211418808 node_paths=PackedStringArray("build_tooltip")]
 process_mode = 3
 script = ExtResource("1_rgh2o")
@@ -341,7 +349,6 @@ layer = 11
 script = ExtResource("5_v1gob")
 
 [node name="ColorRect" type="ColorRect" parent="Menu" unique_id=656746032]
-z_index = 1
 material = SubResource("ShaderMaterial_50glp")
 anchors_preset = 15
 anchor_right = 1.0
@@ -352,6 +359,7 @@ mouse_filter = 1
 color = Color(0, 0, 0, 1)
 
 [node name="PauseMenu" type="Control" parent="Menu" unique_id=458564853]
+visible = false
 z_index = 1
 layout_mode = 3
 anchors_preset = 15
@@ -426,6 +434,7 @@ vertical_alignment = 1
 
 [node name="SaveQuestion" type="Control" parent="Menu" unique_id=1192602103]
 process_mode = 2
+visible = false
 z_index = 2
 layout_mode = 3
 anchors_preset = 15
@@ -507,6 +516,7 @@ size_flags_horizontal = 3
 text = "Back"
 
 [node name="OptMenu" type="Control" parent="Menu" unique_id=1820472067]
+visible = false
 z_index = 2
 layout_mode = 3
 anchors_preset = 15
@@ -581,6 +591,203 @@ layout_mode = 2
 theme = SubResource("Theme_vy5pj")
 text = "Back"
 
+[node name="LoadList" type="Control" parent="Menu" unique_id=1140004080]
+z_index = 1
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("10_1p5hy")
+
+[node name="Label" type="Label" parent="Menu/LoadList" unique_id=933478259]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -46.0
+offset_top = 60.0
+offset_right = 46.0
+offset_bottom = 113.0
+grow_horizontal = 2
+theme = ExtResource("5_pbw6q")
+theme_override_font_sizes/font_size = 32
+text = "Load:"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Menu/LoadList" unique_id=1914169468]
+custom_minimum_size = Vector2(500, 400)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -200.0
+offset_right = 250.0
+offset_bottom = 200.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("5_pbw6q")
+theme_override_constants/separation = 10
+
+[node name="Save1Box" type="HBoxContainer" parent="Menu/LoadList/VBoxContainer2" unique_id=1078332268]
+layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="Save1" type="Button" parent="Menu/LoadList/VBoxContainer2/Save1Box" unique_id=856748021]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Save 1"
+
+[node name="Delete" type="Button" parent="Menu/LoadList/VBoxContainer2/Save1Box" unique_id=1015649598]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+icon = ExtResource("11_1p5hy")
+icon_alignment = 1
+expand_icon = true
+
+[node name="Save2Box" type="HBoxContainer" parent="Menu/LoadList/VBoxContainer2" unique_id=154700058]
+layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="Save2" type="Button" parent="Menu/LoadList/VBoxContainer2/Save2Box" unique_id=323296122]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Save 2"
+
+[node name="Delete" type="Button" parent="Menu/LoadList/VBoxContainer2/Save2Box" unique_id=1087384506]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+icon = ExtResource("11_1p5hy")
+icon_alignment = 1
+expand_icon = true
+
+[node name="BackButton" type="Button" parent="Menu/LoadList" unique_id=814686292]
+z_index = 1
+custom_minimum_size = Vector2(200, 44)
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 100.0
+offset_top = -170.0
+offset_right = 300.0
+offset_bottom = -126.0
+grow_vertical = 0
+theme = ExtResource("5_pbw6q")
+text = "Back"
+
+[node name="SaveList" type="Control" parent="Menu" unique_id=569947710]
+visible = false
+z_index = 1
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("12_h1m7h")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Menu/SaveList" unique_id=1333893978]
+custom_minimum_size = Vector2(500, 44)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -250.0
+offset_top = 100.0
+offset_right = 250.0
+offset_bottom = 144.0
+grow_horizontal = 2
+theme_override_constants/separation = 10
+
+[node name="LineEdit" type="LineEdit" parent="Menu/SaveList/HBoxContainer" unique_id=1004263887]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = SubResource("Theme_h1m7h")
+placeholder_text = "Your save name"
+alignment = 1
+virtual_keyboard_enabled = false
+caret_blink = true
+
+[node name="SaveButton" type="Button" parent="Menu/SaveList/HBoxContainer" unique_id=891240820]
+z_index = 197
+layout_mode = 2
+theme = ExtResource("5_pbw6q")
+text = "Save"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Menu/SaveList" unique_id=5552519]
+custom_minimum_size = Vector2(500, 400)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -140.0
+offset_right = 250.0
+offset_bottom = 260.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("5_pbw6q")
+theme_override_constants/separation = 10
+
+[node name="Save1Box" type="HBoxContainer" parent="Menu/SaveList/VBoxContainer2" unique_id=1693899550]
+layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="Save1" type="Button" parent="Menu/SaveList/VBoxContainer2/Save1Box" unique_id=763002999]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Save 1"
+
+[node name="Delete" type="Button" parent="Menu/SaveList/VBoxContainer2/Save1Box" unique_id=1781790292]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+icon = ExtResource("11_1p5hy")
+icon_alignment = 1
+expand_icon = true
+
+[node name="Save2Box" type="HBoxContainer" parent="Menu/SaveList/VBoxContainer2" unique_id=970933355]
+layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="Save2" type="Button" parent="Menu/SaveList/VBoxContainer2/Save2Box" unique_id=1220566435]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Save 2"
+
+[node name="Delete" type="Button" parent="Menu/SaveList/VBoxContainer2/Save2Box" unique_id=1144505683]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+icon = ExtResource("11_1p5hy")
+icon_alignment = 1
+expand_icon = true
+
+[node name="BackButton" type="Button" parent="Menu/SaveList" unique_id=1890717930]
+z_index = 1
+custom_minimum_size = Vector2(200, 44)
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 100.0
+offset_top = -170.0
+offset_right = 300.0
+offset_bottom = -126.0
+grow_vertical = 0
+theme = ExtResource("5_pbw6q")
+text = "Back"
+
 [node name="BuildTooltip" type="CanvasLayer" parent="." unique_id=1845281441]
 layer = 7
 visible = false
@@ -625,6 +832,7 @@ text = "Test"
 [connection signal="world_loaded" from="." to="HUD" method="_on_main_world_loaded"]
 [connection signal="pressed" from="Menu/PauseMenu/VBoxContainer/ResumeButton" to="Menu" method="_on_resume_button_pressed"]
 [connection signal="pressed" from="Menu/PauseMenu/VBoxContainer/SaveGameButton" to="Menu" method="_on_save_game_button_pressed"]
+[connection signal="pressed" from="Menu/PauseMenu/VBoxContainer/LoadGameButton" to="Menu" method="_on_load_game_button_pressed"]
 [connection signal="pressed" from="Menu/PauseMenu/VBoxContainer/MenuButton" to="Menu" method="_on_menu_button_pressed"]
 [connection signal="pressed" from="Menu/PauseMenu/VBoxContainer/OptionsButton" to="Menu" method="_on_options_button_pressed"]
 [connection signal="pressed" from="Menu/PauseMenu/VBoxContainer/QuitButton" to="Menu" method="_on_quit_button_pressed"]
@@ -632,6 +840,9 @@ text = "Test"
 [connection signal="pressed" from="Menu/SaveQuestion/HBoxContainer/NoButton" to="Menu/SaveQuestion" method="_on_no_button_pressed"]
 [connection signal="pressed" from="Menu/SaveQuestion/BoxContainer/BackButton" to="Menu/SaveQuestion" method="_on_back_button_pressed"]
 [connection signal="pressed" from="Menu/OptMenu/VBoxContainer2/BackButton" to="Menu/OptMenu" method="_on_back_button_pressed"]
+[connection signal="pressed" from="Menu/LoadList/BackButton" to="Menu" method="_on_load_list_back_button_pressed"]
+[connection signal="pressed" from="Menu/SaveList/HBoxContainer/SaveButton" to="Menu/SaveList" method="_on_save_button_pressed"]
+[connection signal="pressed" from="Menu/SaveList/BackButton" to="Menu" method="_on_save_list_back_button_pressed"]
 [connection signal="visibility_changed" from="BuildTooltip" to="BuildTooltip" method="_on_visibility_changed"]
 [connection signal="pressed" from="BuildTooltip/Control/PanelContainer/VBoxContainer/PickUpButton" to="BuildTooltip" method="_on_pick_up_button_pressed"]
 [connection signal="pressed" from="BuildTooltip/Control/PanelContainer/VBoxContainer/TestButton" to="BuildTooltip" method="_on_test_button_pressed"]
