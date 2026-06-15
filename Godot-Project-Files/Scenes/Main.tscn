@@ -359,7 +359,6 @@ mouse_filter = 1
 color = Color(0, 0, 0, 1)
 
 [node name="PauseMenu" type="Control" parent="Menu" unique_id=458564853]
-visible = false
 z_index = 1
 layout_mode = 3
 anchors_preset = 15
@@ -592,6 +591,7 @@ theme = SubResource("Theme_vy5pj")
 text = "Back"
 
 [node name="LoadList" type="Control" parent="Menu" unique_id=1140004080]
+visible = false
 z_index = 1
 layout_mode = 3
 anchors_preset = 15

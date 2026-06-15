@@ -35,7 +35,7 @@ var is_loading_save: bool = false
 var pending_save_name: String = ""
 
 var score: int = 0
-var more_stats: Dictionary[String, int] = {
+var more_stats: Dictionary = {
 	"Deaths": 0,
 	"Enemies killed": 0,
 	"Items crafted": 0,

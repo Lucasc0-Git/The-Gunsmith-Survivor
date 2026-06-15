@@ -5,7 +5,7 @@ const CURRENT_VERSION = 1
 
 signal save_list_changed()
 
-var current_save_name: String = "save_slot_1"
+var current_save_name: String = "Autosave"
 
 func _ready() -> void:
 	DirAccess.make_dir_absolute(SAVE_DIR)
@@ -174,7 +174,7 @@ func _serialize_game_manager() -> Dictionary:
 		"current_day": GameManager.current_day,
 		"current_hour": GameManager.current_hour,
 		"score": GameManager.score,
-		"more_stats": GameManager.more_stats as Dictionary[String, int]
+		"more_stats": GameManager.more_stats as Dictionary
 	}
 
 func _deserialize_game_manager(data: Dictionary) -> void:
@@ -186,10 +186,12 @@ func _deserialize_game_manager(data: Dictionary) -> void:
 	GameManager.score = data.get("score", 0)
 	var loaded_stats: Dictionary = data.get("more_stats")
 	if loaded_stats:
-		GameManager.more_stats.clear()
+		for key: String in GameManager.more_stats:
+			GameManager.more_stats[key] = 0
+		
 		for key: String in loaded_stats.keys():
-			if key is String and loaded_stats[key] is int:
-				GameManager.more_stats[key] = loaded_stats[key]
+			if key:
+				GameManager.more_stats[key] = int(loaded_stats[key])
 			else:
 				push_warning("Invalid stat data skipped: " + str(key))
 	else:
