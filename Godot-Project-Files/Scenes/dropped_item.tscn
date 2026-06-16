@@ -6,7 +6,7 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_4ljfv"]
 radius = 13.038404
 
-[node name="DroppedItem" type="Node2D" unique_id=636355245]
+[node name="DroppedItem" type="Node2D" unique_id=636355245 groups=["dropped_item"]]
 scale = Vector2(2, 2)
 script = ExtResource("1_4ljfv")
 

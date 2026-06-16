@@ -23,11 +23,13 @@ func save_game(save_name: String = "") -> bool:
 		"version": CURRENT_VERSION, 
 		"timestamp": Time.get_unix_time_from_system(),
 		"game_manager": _serialize_game_manager(),
+		"world_mods": GameManager.main.map.world_mods,
 		"player": GameManager.main.player.save_data() if GameManager.main and GameManager.main.player else {},
 		"enemies": _serialize_enemies(),
 		"built_objects": _serialize_built_objects(),
 		"inventory": _serialize_inventory(),
-		"hotbar": _serialize_hotbar()
+		"hotbar": _serialize_hotbar(),
+		"dropped_items": _serialize_dropped_items()
 	}
 	save_data = serialize_value(save_data)
 	
@@ -68,6 +70,7 @@ func load_save(save_name: String = "") -> bool:
 	
 	_deserialize_game_manager(save_data.get("game_manager", {}))
 	
+	GameManager.main.map.world_mods = save_data.get("world_mods")
 	var game_manager_data: Dictionary = save_data.get("game_manager", {})
 	GameManager.main.generate(int(game_manager_data.get("current_world_seed", 12)))
 	
@@ -78,6 +81,7 @@ func load_save(save_name: String = "") -> bool:
 	_deserialize_enemies(save_data.get("enemies", []))
 	_deserialize_inventory(save_data.get("inventory", {}))
 	_deserialize_hotbar(save_data.get("hotbar", {}))
+	_deserialize_dropped_items(save_data.get("dropped_items", []))
 	
 	print("Game loaded from: ", path)
 	GameManager.is_game_loaded = true
@@ -120,14 +124,11 @@ func vec2_to_dict(v: Vector2) -> Dictionary:
 
 func dict_to_vec2(d: Variant) -> Vector2:
 	if d is Dictionary:
-		print("Convering " + str(d) + " as Vector2 with values: (%s, %s)" % [d.get("x", 0.0), d.get("y", 0.0)])
 		return Vector2(
 			float(d.get("x", 0.0)),
 			float(d.get("y", 0.0))
 		)
-	else:
-		print(str(d) + " is not a Dictionary.")
-	return Vector2.ZERO
+	return d
 
 func serialize_value(value: Variant) -> Variant:
 	if value is Vector2:
@@ -265,8 +266,31 @@ func _deserialize_inventory(data_array: Array) -> void:
 func _serialize_hotbar() -> Array:
 	if GameManager.main.hud.hotbar:
 		return GameManager.main.hud.hotbar.save_data()
+	else:
+		print("serialize: hotbar null")
 	return []
 
 func _deserialize_hotbar(data_array: Array) -> void:
 	if GameManager.main.hud.hotbar:
 		GameManager.main.hud.hotbar.load_data(data_array)
+	else:
+		print("deserialize: hotbar null")
+
+#Dropped items
+
+func _serialize_dropped_items() -> Array:
+	var data_array: Array = []
+	for child in GameManager.main.Ysort.get_children():
+		if child.is_in_group("dropped_item") and child.has_method("save_data"):
+			data_array.append(child.save_data())
+	return data_array
+
+func _deserialize_dropped_items(data_array: Array) -> void:
+	for child in GameManager.main.Ysort.get_children():
+		if child.is_in_group("dropped_item"):
+			child.queue_free()
+	
+	for d: Dictionary in data_array:
+		var item: ItemData = ItemRegistry.items.get(d.get("item_id"))
+		var pos: Vector2 = d.get("pos")
+		GameManager.main.drop_item(item, pos)

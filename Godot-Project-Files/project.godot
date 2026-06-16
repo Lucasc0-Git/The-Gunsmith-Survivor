@@ -74,6 +74,7 @@ enemy_hitbox=""
 thecore=""
 melee_hit=""
 built=""
+dropped_item=""
 
 [input]
 

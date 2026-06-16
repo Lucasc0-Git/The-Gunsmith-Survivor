@@ -154,19 +154,24 @@ func generate(seed_f_g: int = 12) -> void:
 		drop_item(ItemRegistry.items.get("wooden_axe"), Vector2(0, -150))
 
 func _on_mining_resource_destroyed(type: String, pos: Vector2) -> void:
-	if type == "tree":
-		var tree_respawn_timer := Timer.new()
-		#tree_respawn_timer.timeout.connect(_on_tree_respawn_timer_timeout)
-		respawn_timers.add_child(tree_respawn_timer)
-		tree_respawn_timer.start(tree_respawn_time)
-		await tree_respawn_timer.timeout
-		spawn_tree(pos)
-	if type == "stone":
-		var stone_respawn_timer := Timer.new()
-		respawn_timers.add_child(stone_respawn_timer)
-		stone_respawn_timer.start(stone_respawn_time)
-		await stone_respawn_timer.timeout
-		spawn_stone(pos)
+	map.world_mods.append({
+		"pos": pos,
+		"mod_type": "destroyed",
+		"object_type": type
+	})
+	#if type == "tree":
+		#var tree_respawn_timer := Timer.new()
+		##tree_respawn_timer.timeout.connect(_on_tree_respawn_timer_timeout)
+		#respawn_timers.add_child(tree_respawn_timer)
+		#tree_respawn_timer.start(tree_respawn_time)
+		#await tree_respawn_timer.timeout
+		#spawn_tree(pos)
+	#if type == "stone":
+		#var stone_respawn_timer := Timer.new()
+		#respawn_timers.add_child(stone_respawn_timer)
+		#stone_respawn_timer.start(stone_respawn_time)
+		#await stone_respawn_timer.timeout
+		#spawn_stone(pos)
 
 func _on_tree_respawn_timer_timeout() -> void:
 	pass
@@ -224,11 +229,21 @@ func _input(event: InputEvent) -> void:
 			spawn_enemy(zombie_scene, get_global_mouse_position() + rand_pos)
 
 func _on_region_generated(new_trees: Array, new_spawners: Array, new_stones: Array) -> void:
+	var mods: Array = map.world_mods
+	var pos_broke: Array = []
+	for mod: Dictionary in mods:
+		if mod.get("mod_type") == "destroyed":
+			pos_broke.append(mod.get("pos", Vector2.ZERO))
+	
 	for pos: Vector2 in new_trees:
+		if pos in pos_broke:
+			continue
 		spawn_tree(pos)
 	for pos: Vector2 in new_spawners:
 		add_spawner(pos)
 	for pos: Vector2 in new_stones:
+		if pos in pos_broke:
+			continue
 		spawn_stone(pos)
 
 func drop_item(item: ItemData, pos: Vector2, random_range: int = 0) -> void:

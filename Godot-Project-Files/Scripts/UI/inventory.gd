@@ -64,7 +64,7 @@ func _ready() -> void:
 		slot.connect("mouse_exited_slot", Callable(self, "_hide_tooltip"))
 	# Give some slots some items for debugging
 	if OS.is_debug_build():
-		fill_slot(1, shotgun_item, 1)
+		fill_slot(1, basic_station_item, 1)
 		fill_slot(4, fireplace_item, 1)
 		fill_slot(5, wood_item, 32)
 		fill_slot(2, torch_item, 16)
