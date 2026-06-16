@@ -11,8 +11,10 @@ func _ready() -> void:
 func populate_save_list() -> void:
 	for child in v_box_container.get_children():
 		child.queue_free()
+	var saves := SaveManager.get_all_saves()
+	saves.sort_custom(func(a:Dictionary, b:Dictionary) -> bool: return a["timestamp"] > b["timestamp"])
 	
-	for save_info in SaveManager.get_all_saves():
+	for save_info in saves:
 		
 		var h_box: HBoxContainer = HBoxContainer.new()
 		h_box.add_theme_constant_override("separation", 10)
