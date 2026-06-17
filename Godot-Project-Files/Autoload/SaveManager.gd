@@ -31,6 +31,7 @@ func save_game(save_name: String = "") -> bool:
 		"hotbar": _serialize_hotbar(),
 		"dropped_items": _serialize_dropped_items()
 	}
+	
 	save_data = serialize_value(save_data)
 	
 	var file := FileAccess.open(path, FileAccess.WRITE)
@@ -67,6 +68,8 @@ func load_save(save_name: String = "") -> bool:
 	
 	#GameManager.current_save_name = current_save_name
 	#GameManager.is_loading_save = true
+	
+	
 	
 	_deserialize_game_manager(save_data.get("game_manager", {}))
 	

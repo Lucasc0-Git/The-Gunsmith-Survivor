@@ -118,11 +118,18 @@ func save_data() -> Dictionary:
 		"position": global_position,
 		"health": health,
 		"chase_forced": chase_forced,
-		
+		"player_in_range": player_in_range,
+		"core_in_range": core_in_range,
+		"current_state_name": current_state.name if current_state else &"Wonder", # StringName, is faster for comparising
 	}
 
 func load_data(data: Dictionary) -> void:
 	global_position = SaveManager.dict_to_vec2(data.get("position"))
 	health = float(data.get("health", max_health))
 	chase_forced = bool(data.get("chase_forced", false))
-	 
+	player_in_range = bool(data.get("player_in_range", false))
+	core_in_range = bool(data.get("core_in_range", false))
+	if data.has("current_state_name"):
+		var state_name: StringName = data.get("current_state_name", &"Wonder")
+		change_state(state_name)
+	velocity = Vector2.ZERO

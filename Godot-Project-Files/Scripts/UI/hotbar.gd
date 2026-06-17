@@ -12,6 +12,7 @@ class_name Hotbar
 ## The basic var declaration
 var slots: Array[Slot] = []
 var selected_slot_index := 0
+var _pending_load_data := []
 
 ## The signals declaration
 signal slot_selected(index: int)
@@ -31,20 +32,24 @@ func _ready() -> void:
 		)
 		slot.slot_left_clicked.connect(_on_slot_left_clicked)
 		slot.slot_right_clicked.connect(_on_slot_right_clicked)
+		
+		slot.slot_data = SlotData.new()
 		## Add slot to hotbar
 		grid_container.add_child(slot)
 		## Set the right-bottom number in hotbar slot
 		slot.set_hotbar_number(index + 1)
 		## Add the slot to [slots] array
 		slots.append(slot)
+	_apply_loaded_data()
 	select_slot(0)
 
 func sync_from_player() -> void:
 	if hud and hud.player:
 		while !is_node_ready():
 			await get_tree().process_frame
-		for i in range(slots.size()):
-			slots[i].set_slot_data(hud.player.hotbar_slots[i])
+		for i in range(slots.size()): #here is the issue
+			#slots[i].set_slot_data(hud.player.hotbar_slots[i])
+			pass
 
 func _on_slot_right_clicked(slot: Slot) -> void:
 	var slot_data: SlotData = slot.slot_data.copy()
@@ -192,6 +197,13 @@ func save_data() -> Array:
 	
 
 func load_data(data_array: Array) -> void:
+	_pending_load_data = data_array
+
+func _apply_loaded_data() -> void:
+	if _pending_load_data.is_empty():
+		return
+	var data_array := _pending_load_data
+	
 	for slot in slots:
 		slot.slot_data.clear()
 	for i in range(slots.size()):
@@ -202,4 +214,4 @@ func load_data(data_array: Array) -> void:
 			slot.set_slot_data(slot_data)
 		else:
 			slot.set_slot_data(SlotData.new())
-	select_slot(0)
+	_pending_load_data = []

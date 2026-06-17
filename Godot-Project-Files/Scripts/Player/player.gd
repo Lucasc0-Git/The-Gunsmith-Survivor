@@ -13,6 +13,7 @@ var hotbar_slots: Array[SlotData] = []
 var inv_toggled: bool = false
 var main: Main
 var nearby_stations: Dictionary[GameManager.StationType, int] = {}
+var _pending_load_data := {}
 
 ## The @onready vars declaration
 @onready var anim_player: AnimatedSprite2D = $AnimatedSprite2D
@@ -62,6 +63,7 @@ func _ready() -> void:
 			states[child.name] = child
 			child.player = self
 	change_state("Idle")
+	_apply_loaded_data()
 
 ## Set the player var by Main.gd script
 func set_vars_debug() -> void:
@@ -260,10 +262,29 @@ func save_data() -> Dictionary:
 	return {
 		"position": global_position,
 		"health": health,
-		
+		"last_dir": last_dir,
+		"current_state": current_state.name if current_state else &"Idle",
+		"nearby_stations": nearby_stations
 	}
 
 func load_data(data: Dictionary) -> void:
+	_pending_load_data = data
+
+func _apply_loaded_data() -> void:
+	if _pending_load_data.is_empty():
+		return
+	var data := _pending_load_data
+	
 	global_position = SaveManager.dict_to_vec2(data.get("position"))
 	health = float(data.get("health", health_max))
+	last_dir = data.get("last_dir", Vector2.ZERO)
+	if data.has("current_state"):
+		var state_name: StringName = data.get("current_state", &"Idle")
+		change_state(state_name)
 	
+	var d: Dictionary = data.get("nearby_stations", {})
+	var _nearby_stations: Dictionary[GameManager.StationType, int] = {}
+	for key: GameManager.StationType in d:
+		_nearby_stations[key] = d[key]
+	nearby_stations = _nearby_stations
+	_pending_load_data = {}

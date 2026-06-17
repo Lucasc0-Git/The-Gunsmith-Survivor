@@ -25,6 +25,7 @@ var inv_slot : Slot
 var player: Player
 var hud : Hud
 var hotbar: Hotbar
+var _pending_load_data := []
 
 func _ready() -> void:
 	if not ItemRegistry or not ItemRegistry.loaded:
@@ -62,7 +63,11 @@ func _ready() -> void:
 	for slot in grid_container.get_children():
 		slot.connect("mouse_entered_slot", Callable(self, "_show_tooltip"))
 		slot.connect("mouse_exited_slot", Callable(self, "_hide_tooltip"))
+	
+	_apply_loaded_data()
+	
 	# Give some slots some items for debugging
+	if GameManager.is_loading_save: return
 	if OS.is_debug_build():
 		fill_slot(1, basic_station_item, 1)
 		fill_slot(4, fireplace_item, 1)
@@ -240,6 +245,13 @@ func save_data() -> Array:
 	return array
 
 func load_data(data_array: Array) -> void:
+	_pending_load_data = data_array
+
+func _apply_loaded_data() -> void:
+	if _pending_load_data.is_empty():
+		return
+	var data_array := _pending_load_data
+	
 	var slots := grid_container.get_children()
 	
 	for i in range(slots.size()):
@@ -250,3 +262,4 @@ func load_data(data_array: Array) -> void:
 			slot_ui.set_slot_data(slot_data)
 		else:
 			slot_ui.set_slot_data(SlotData.new())
+	_pending_load_data = []
