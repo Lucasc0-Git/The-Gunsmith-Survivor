@@ -48,7 +48,7 @@ func sync_from_player() -> void:
 		while !is_node_ready():
 			await get_tree().process_frame
 		for i in range(slots.size()): #here is the issue
-			#slots[i].set_slot_data(hud.player.hotbar_slots[i])
+			slots[i].set_slot_data(hud.player.hotbar_slots[i])
 			pass
 
 func _on_slot_right_clicked(slot: Slot) -> void:
@@ -212,6 +212,7 @@ func _apply_loaded_data() -> void:
 			var slot_data := SlotData.new()
 			slot_data.load_data(data_array[i])
 			slot.set_slot_data(slot_data)
+			slot_item_changed.emit(i, slot_data)
 		else:
 			slot.set_slot_data(SlotData.new())
 	_pending_load_data = []
