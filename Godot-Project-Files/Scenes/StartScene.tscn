@@ -266,7 +266,7 @@ Change hotbar slot: MouseWheel, 1, 2, 3, 4, 5
 Quick save: F2
 [/ul]
 [outline_size=8][outline_color=black][font_size=24][center][b]Gameplay[/b][/center][/font_size][/outline_color][/outline_size]
-You are a human that has only two tasks: [color=red]Survive[/color], and protect [color=cyan]The Core[/color]. Once a day, many enemies will come and when the day comes to an end, they [color=red]attack[/color] [color=cyan]The Core[/color]. [br]Remember: [b][color=red]When The Core dies, you die![/color][/b]"
+You are a human that has only two tasks: [color=red]Survive[/color], and protect [color=cyan]The Core[/color]. Once a day, you will be tasked to take out a lot of enemies. But if you don't do that, they will [color=black]ALL[/color] [color=red]attack[/color] [color=cyan]The Core[/color] when the night starts. [br]Remember: [b][color=red]When The Core dies, you die![/color][/b] [br][outline_size=1][font_size=12][color=dark_red][center]Good luck...[/center][/color][/font_size][/outline_size]"
 
 [node name="BackButton" type="Button" parent="Control" unique_id=1958315349]
 custom_minimum_size = Vector2(150, 0)

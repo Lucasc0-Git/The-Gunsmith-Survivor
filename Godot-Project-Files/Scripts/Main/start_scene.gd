@@ -20,11 +20,16 @@ func _process(_delta: float) -> void:
 func _on_new_game_button_pressed() -> void:
 	AudioManager.play_button_click()
 	#get_tree().change_scene_to_packed(MainScene)
-	GameManager.start_new_world()
+	if Settings.novice_mode:
+		tutorial_panel.visible = true
+		Settings.set_novice_mode(false)
+	else:
+		GameManager.start_new_world()
 
 func _on_tutorial_button_pressed() -> void:
 	AudioManager.play_button_click()
 	tutorial_panel.visible = true
+	Settings.set_novice_mode(false)
 
 func _on_saves_button_pressed() -> void:
 	AudioManager.play_button_click()
