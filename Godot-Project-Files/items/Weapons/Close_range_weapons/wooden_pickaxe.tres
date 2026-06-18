@@ -7,10 +7,10 @@
 script = ExtResource("1_0xd63")
 dmg_range = 20.0
 knockback = 150.0
+afterswing_time = 0.6
 id = "wooden_pickaxe"
 icon = ExtResource("1_4ta5a")
 damage = 30
-fire_rate = 0.5
 recoil = 0.0
 dmg_type = 1
 weapon_type = "Pickaxe"

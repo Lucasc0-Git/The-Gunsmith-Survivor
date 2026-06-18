@@ -154,7 +154,7 @@ func _spawn_build() -> void:
 func _swing_weapon() -> void:
 	var data: CloseWeaponItemData = equipped_item.item_data as CloseWeaponItemData
 	var close_data: CloseWeaponData = data.close_weapon_data
-	reload_timer.start(close_data.swing_duration + 0.1)
+	reload_timer.start(close_data.swing_duration + close_data.afterswing_time)
 	can_shoot = false
 	if !hit_area: push_error("HitArea is null!"); return
 	

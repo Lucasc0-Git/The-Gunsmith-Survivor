@@ -15,6 +15,7 @@ func take_damage(amount: float, dmg_type: DamageTypes.DamageType, weapon_type: S
 		drop_chance = clamp(drop_chance, 0.0, max_drop_chance_per_hit)
 		if weapon_type != "Pickaxe":
 			drop_chance /= 4
+			damage *= 0.8
 		if randf() < drop_chance:
 			drop_items(1, 35)
 	

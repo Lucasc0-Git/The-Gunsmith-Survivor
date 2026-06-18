@@ -22,6 +22,11 @@ func take_damage(amount: float, dmg_type: DamageTypes.DamageType, weapon_type: S
 	if weapon_type == "Axe":
 		if randf() < chance_for_wood_drop:
 			drop_items(1, 40)
+	elif weapon_type == "Pickaxe":
+		damage *= 0.7
+	else:
+		damage *= 0.8
+	
 	health -= damage
 	update_target_color()
 	if health <= 0:
