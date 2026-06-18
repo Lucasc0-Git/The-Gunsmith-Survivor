@@ -263,7 +263,8 @@ Move: W, S, A, D
 Dash: Ctrl
 Inventory: E
 Change hotbar slot: MouseWheel, 1, 2, 3, 4, 5
-[/ul][br]
+Quick save: F2
+[/ul]
 [outline_size=8][outline_color=black][font_size=24][center][b]Gameplay[/b][/center][/font_size][/outline_color][/outline_size]
 You are a human that has only two tasks: [color=red]Survive[/color], and protect [color=cyan]The Core[/color]. Once a day, many enemies will come and when the day comes to an end, they [color=red]attack[/color] [color=cyan]The Core[/color]. [br]Remember: [b][color=red]When The Core dies, you die![/color][/b]"
 

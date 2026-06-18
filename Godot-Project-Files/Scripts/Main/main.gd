@@ -222,6 +222,10 @@ func _input(event: InputEvent) -> void:
 		else:
 			show_menu()
 	
+	if event.is_action_pressed("quick_save"):
+		if GameManager.is_game_loaded:
+			SaveManager.save_game(GameManager.current_save_name)
+	
 	if event.is_action_pressed("DEBUG spawn_enemy"):
 		if !OS.is_debug_build(): return
 		for i in range(20):
