@@ -66,3 +66,8 @@ func _on_fire_place_mouse_entered() -> void:
 	crafting_tooltip.show_tooltip(ItemRegistry.items["fireplace"])
 func _on_fire_place_mouse_exited() -> void:
 	crafting_tooltip.hide_tooltip()
+
+func _on_wooden_pickaxe_mouse_entered() -> void:
+	crafting_tooltip.show_tooltip(ItemRegistry.items["wooden_pickaxe"])
+func _on_wooden_pickaxe_mouse_exited() -> void:
+	crafting_tooltip.hide_tooltip()

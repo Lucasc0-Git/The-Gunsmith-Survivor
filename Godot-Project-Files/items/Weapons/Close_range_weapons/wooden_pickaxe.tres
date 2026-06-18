@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="CloseWeaponData" format=3 uid="uid://b5dgwjccj8im"]
+
+[ext_resource type="Script" uid="uid://dt4s43sp8mh8q" path="res://items/Weapons/close_weapon_data.gd" id="1_0xd63"]
+[ext_resource type="Texture2D" uid="uid://c0lvq3arfbwu4" path="res://Textures/Items/wooden_pickaxe_texture.png" id="1_4ta5a"]
+
+[resource]
+script = ExtResource("1_0xd63")
+dmg_range = 20.0
+knockback = 150.0
+id = "wooden_pickaxe"
+icon = ExtResource("1_4ta5a")
+damage = 30
+fire_rate = 0.5
+recoil = 0.0
+dmg_type = 1
+weapon_type = "Pickaxe"
+metadata/_custom_type_script = "uid://dt4s43sp8mh8q"

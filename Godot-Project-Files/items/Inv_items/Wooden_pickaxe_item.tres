@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="CloseWeaponItemData" format=3 uid="uid://ckevigu3bxq4c"]
+
+[ext_resource type="Resource" uid="uid://b5dgwjccj8im" path="res://items/Weapons/Close_range_weapons/wooden_pickaxe.tres" id="1_hd0qy"]
+[ext_resource type="Script" uid="uid://dgi6p7vrp0imi" path="res://items/ItemData/ItemData.gd" id="2_40lf6"]
+[ext_resource type="Resource" uid="uid://cc0anv7sdlwn4" path="res://items/Inv_items/Wood_item.tres" id="3_2cs3y"]
+[ext_resource type="Texture2D" uid="uid://c0lvq3arfbwu4" path="res://Textures/Items/wooden_pickaxe_texture.png" id="3_40lf6"]
+[ext_resource type="Script" uid="uid://ngdtvmokbgwc" path="res://items/ItemData/CloseWeaponItemData.gd" id="3_iawyf"]
+
+[resource]
+script = ExtResource("3_iawyf")
+close_weapon_data = ExtResource("1_hd0qy")
+id = "wooden_pickaxe"
+icon = ExtResource("3_40lf6")
+display_name = "Wooden Pickaxe"
+score_for_crafting = 5
+description = "A wooden pickaxe. Can be used to mine rocks, or for fighting in Techno style (W reference)."
+crafting_description = "A wooden pickaxe. Rocks fear him. I wonder why."
+crafting_recipe = Dictionary[ExtResource("2_40lf6"), int]({
+ExtResource("3_2cs3y"): 16
+})
+metadata/_custom_type_script = "uid://ngdtvmokbgwc"

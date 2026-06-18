@@ -22,6 +22,7 @@
 [ext_resource type="Texture2D" uid="uid://b8xibgyex24gv" path="res://Textures/SURVIVAL HORROR WEAPONS PACK 16X16/14.png" id="19_0iicw"]
 [ext_resource type="Texture2D" uid="uid://b81agdoybaaqs" path="res://Textures/SURVIVAL HORROR WEAPONS PACK 16X16/21.png" id="19_yidpd"]
 [ext_resource type="Texture2D" uid="uid://lu4v4pqxnb16" path="res://Textures/Items/fireplace_texture_item.png" id="21_ajim5"]
+[ext_resource type="Texture2D" uid="uid://c0lvq3arfbwu4" path="res://Textures/Items/wooden_pickaxe_texture.png" id="21_vxf74"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_36asn"]
 content_margin_left = 10.0
@@ -79,9 +80,6 @@ RichTextLabel/constants/shadow_offset_x = 3
 RichTextLabel/constants/shadow_offset_y = 3
 RichTextLabel/font_sizes/normal_font_size = 16
 RichTextLabel/styles/normal = SubResource("StyleBoxFlat_h8thi")
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1a2va"]
-bg_color = Color(1.92523e-06, 0.6930749, 0.63886756, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ssfue"]
 bg_color = Color(0.9412422, 0.3624725, 0.59544843, 1)
@@ -457,11 +455,16 @@ icon = ExtResource("19_yidpd")
 icon_alignment = 1
 expand_icon = true
 
-[node name="Panel2" type="Panel" parent="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control2/ToolsCraftingContainer2/MarginContainer/ScrollContainer/HBoxContainer" unique_id=1640233120]
+[node name="WoodenPickaxe" type="Button" parent="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control2/ToolsCraftingContainer2/MarginContainer/ScrollContainer/HBoxContainer" unique_id=643392169]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 mouse_filter = 1
-theme_override_styles/panel = SubResource("StyleBoxFlat_1a2va")
+theme = ExtResource("14_ba8gd")
+disabled = true
+action_mode = 0
+icon = ExtResource("21_vxf74")
+icon_alignment = 1
+expand_icon = true
 
 [node name="Panel3" type="Panel" parent="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control2/ToolsCraftingContainer2/MarginContainer/ScrollContainer/HBoxContainer" unique_id=1367610658]
 custom_minimum_size = Vector2(64, 64)
@@ -720,6 +723,9 @@ texture = SubResource("GradientTexture2D_ajim5")
 [connection signal="mouse_entered" from="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control2/ToolsCraftingContainer2/MarginContainer/ScrollContainer/HBoxContainer/WoodenAxe" to="InventoryUI/BasicCrafting/BasicCraftingPanels" method="_on_wooden_axe_mouse_entered"]
 [connection signal="mouse_exited" from="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control2/ToolsCraftingContainer2/MarginContainer/ScrollContainer/HBoxContainer/WoodenAxe" to="InventoryUI/BasicCrafting/BasicCraftingPanels" method="_on_wooden_axe_mouse_exited"]
 [connection signal="pressed" from="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control2/ToolsCraftingContainer2/MarginContainer/ScrollContainer/HBoxContainer/WoodenAxe" to="InventoryUI/BasicCrafting" method="_on_wooden_axe_pressed"]
+[connection signal="mouse_entered" from="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control2/ToolsCraftingContainer2/MarginContainer/ScrollContainer/HBoxContainer/WoodenPickaxe" to="InventoryUI/BasicCrafting/BasicCraftingPanels" method="_on_wooden_pickaxe_mouse_entered"]
+[connection signal="mouse_exited" from="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control2/ToolsCraftingContainer2/MarginContainer/ScrollContainer/HBoxContainer/WoodenPickaxe" to="InventoryUI/BasicCrafting/BasicCraftingPanels" method="_on_wooden_pickaxe_mouse_exited"]
+[connection signal="pressed" from="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control2/ToolsCraftingContainer2/MarginContainer/ScrollContainer/HBoxContainer/WoodenPickaxe" to="InventoryUI/BasicCrafting" method="_on_wooden_pickaxe_pressed"]
 [connection signal="mouse_entered" from="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control3/CraftingStationsCraftingContainer3" to="." method="_on_crafting_stations_crafting_container_3_mouse_entered"]
 [connection signal="mouse_exited" from="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control3/CraftingStationsCraftingContainer3" to="." method="_on_crafting_stations_crafting_container_3_mouse_exited"]
 [connection signal="mouse_entered" from="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control3/CraftingStationsCraftingContainer3/MarginContainer/ScrollContainer/HBoxContainer/BasicStation" to="InventoryUI/BasicCrafting/BasicCraftingPanels" method="_on_basic_station_mouse_entered"]
