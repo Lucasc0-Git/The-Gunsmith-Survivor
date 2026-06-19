@@ -30,7 +30,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("1_gntrk")
 }],
-"loop": true,
+"loop": 1,
 "name": &"IdleDown",
 "speed": 5.0
 }, {
@@ -38,7 +38,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("2_arntx")
 }],
-"loop": true,
+"loop": 1,
 "name": &"IdleDown_tset",
 "speed": 5.0
 }, {
@@ -46,7 +46,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("3_yoq75")
 }],
-"loop": true,
+"loop": 1,
 "name": &"IdleSide",
 "speed": 5.0
 }, {
@@ -54,7 +54,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("4_1e7my")
 }],
-"loop": true,
+"loop": 1,
 "name": &"IdleUp",
 "speed": 5.0
 }, {
@@ -65,7 +65,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("4_o3h8g")
 }],
-"loop": true,
+"loop": 1,
 "name": &"RunDown",
 "speed": 5.0
 }, {
@@ -76,7 +76,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("3_5ixxa")
 }],
-"loop": true,
+"loop": 1,
 "name": &"RunSide",
 "speed": 5.0
 }, {
@@ -84,7 +84,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("8_ulo2v")
 }],
-"loop": true,
+"loop": 1,
 "name": &"RunSide_test",
 "speed": 5.0
 }, {
@@ -95,7 +95,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("8_arntx")
 }],
-"loop": true,
+"loop": 1,
 "name": &"RunUp",
 "speed": 5.0
 }, {
@@ -103,7 +103,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("11_1iu4k")
 }],
-"loop": true,
+"loop": 1,
 "name": &"RunUp_test",
 "speed": 5.0
 }]
