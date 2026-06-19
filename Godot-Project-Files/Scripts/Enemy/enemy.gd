@@ -13,6 +13,7 @@ class_name Enemy
 @export var chase_range: int = 400
 @export var damage_multipliers: Dictionary[DamageTypes.DamageType, float] = DamageTypes.get_default_damage_multipliers()
 @export var score_for_kill: int = 15
+@export var damage_type: DamageTypes.DamageType
 
 var health: float = 10:
 	get():
@@ -92,17 +93,22 @@ func die() -> void:
 	queue_free()
 
 func _on_timer_timeout() -> void:
-	var target := get_target()
-	if target == null: return
-	target.take_damage(damage, DamageTypes.DamageType.MELEE)
+	if (player_in_range or core_in_range) and current_state.name == "Hit":
+		attack()
+		attack_timer.start()
 
 func _on_attack_range_area_body_entered(body: Node2D) -> void:
 	if body is Player:
 		change_state("Hit")
 		player_in_range = true
+		await get_tree().create_timer(0.3).timeout
+		attack()
+		attack_timer.start()
 	if body is TheCore:
 		change_state("Hit")
 		core_in_range = true
+		attack()
+		attack_timer.start()
 
 func _on_attack_range_area_body_exited(body: Node2D) -> void:
 	if body is Player:
@@ -111,6 +117,11 @@ func _on_attack_range_area_body_exited(body: Node2D) -> void:
 	if body is TheCore:
 		change_state("Wonder")
 		core_in_range = false
+
+func attack() -> void:
+	var target := get_target()
+	if !target: return
+	target.take_damage(damage, damage_type)
 
 func save_data() -> Dictionary:
 	return {
