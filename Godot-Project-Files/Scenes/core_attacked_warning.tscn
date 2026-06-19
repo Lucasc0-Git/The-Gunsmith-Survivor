@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://qh5b20drascp"]
+
+[ext_resource type="Script" uid="uid://dvwugvk78uioo" path="res://Scripts/core_attacked_warning.gd" id="1_rox88"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_2a8ad"]
+font_size = 24
+font_color = Color(1, 0, 0, 1)
+outline_size = 5
+outline_color = Color(0.53986263, 1.0348111e-06, 2.8878452e-07, 1)
+
+[node name="CoreAttackedWarning" type="Control" unique_id=1545968583 node_paths=PackedStringArray("decay_timer")]
+custom_minimum_size = Vector2(219, 34)
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_rox88")
+decay_time = 0.5
+decay_timer = NodePath("DecayTimer")
+
+[node name="Label" type="Label" parent="." unique_id=832970209]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Core was attacked!"
+label_settings = SubResource("LabelSettings_2a8ad")
+horizontal_alignment = 1
+
+[node name="DecayTimer" type="Timer" parent="." unique_id=1910256200]
+one_shot = true
+
+[connection signal="timeout" from="DecayTimer" to="." method="_on_decay_timer_timeout"]

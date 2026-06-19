@@ -104,6 +104,7 @@ func _ready() -> void:
 	)
 	hud.hotbar.slot_selected.connect(player._on_hotbar_slot_selected)
 	hud.inv_toggled.connect(player._on_inv_toggled)
+	the_core.core_attacked.connect(hud._on_core_attacked)
 	
 	##Set hud vars
 	hud.player = player

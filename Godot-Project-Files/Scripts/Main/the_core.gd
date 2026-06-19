@@ -9,6 +9,7 @@ class_name TheCore
 signal player_entered_crafting_area()
 signal player_exited_crafting_area()
 signal core_health_changed(health: float)
+signal core_attacked()
 
 var main: Main
 var station_type: GameManager.StationType = GameManager.StationType.BASIC_CRAFTING
@@ -29,6 +30,7 @@ func _ready() -> void:
 func take_damage(amount: float, dmg_type: DamageTypes.DamageType) -> void:
 	var multiplier: float = damage_multipliers.get(dmg_type, 1.0)
 	var damage := amount * multiplier
+	core_attacked.emit()
 	
 	damage *= 0.8
 	health -= damage

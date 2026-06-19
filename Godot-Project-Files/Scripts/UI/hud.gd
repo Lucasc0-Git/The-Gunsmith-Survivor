@@ -10,6 +10,8 @@ class_name Hud
 @onready var tooltip: Tooltip = $Tooltip
 @onready var canvas_modulate: CanvasModulate = $CanvasModulate
 @onready var basic_crafting: BasicCraftingUI = $InventoryUI/BasicCrafting
+@onready var core_attacked_box: VBoxContainer = $CoreAttackedControl/CoreAttackedWarningBox
+@onready var core_attacked_control: Control = $CoreAttackedControl
 
 ## The @onready var declaration
 @onready var hotbar_grid_container: GridContainer = $InventoryUI/Hotbar/PanelContainer/GridContainer
@@ -18,6 +20,7 @@ class_name Hud
 var glock_item : ItemData
 var shotgun_item : ItemData
 var _inv_tween: Tween
+var core_attacked_warning: PackedScene = preload("res://Scenes/core_attacked_warning.tscn")
 
 ## The signals declaration
 signal inv_toggled(visible: bool)
@@ -32,7 +35,11 @@ func give_item(item: ItemData, amount: int = 1) -> void:
 	if leftover > 0:
 		inventory.give_item(item, leftover)
 
-
+func _on_core_attacked() -> void:
+	if core_attacked_box.get_child_count() > 7:
+		return
+	var new_core_attacked: Control = core_attacked_warning.instantiate()
+	core_attacked_box.add_child(new_core_attacked)
 
 # Called when "E" is just pressed
 func toggle_inv() -> void:
