@@ -17,7 +17,7 @@ class_name WeaponData
 
 @export_subgroup("Over-heatable weapons")
 @export var heated: bool = false ##If the gun can be overheated when using too much.
-
+@export var heat_per_shot: float = 10
 
 @export_subgroup("Weapons with more pellets")
 @export var pellets : int = 1 ##The number of shots at the same time.

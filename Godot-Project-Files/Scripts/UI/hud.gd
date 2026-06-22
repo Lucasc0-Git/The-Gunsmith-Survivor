@@ -12,6 +12,8 @@ class_name Hud
 @onready var basic_crafting: BasicCraftingUI = $InventoryUI/BasicCrafting
 @onready var core_attacked_box: VBoxContainer = $CoreAttackedControl/CoreAttackedWarningBox
 @onready var core_attacked_control: Control = $CoreAttackedControl
+@onready var right_click_tooltip: RightClickTooltip = $RightClickTooltip
+
 
 ## The @onready var declaration
 @onready var hotbar_grid_container: GridContainer = $InventoryUI/Hotbar/PanelContainer/GridContainer
@@ -59,6 +61,13 @@ func toggle_inv() -> void:
 		_inv_tween.set_ease(Tween.EASE_OUT)
 		_inv_tween.set_trans(Tween.TRANS_BACK)
 		_inv_tween.tween_property(inventory, "global_position", Vector2(467, 110), 0.35)
+
+func on_inventory_slot_right_clicked(slot: Slot) -> void:
+	right_click_tooltip.show_tooltip(slot, slot.global_position, true)
+	
+
+func on_hotbar_slot_right_clicked(slot: Slot) -> void:
+	right_click_tooltip.show_tooltip(slot, slot.global_position, false)
 
 func tint_hud(new_color: Color, duration: float) -> void:
 	if new_color == canvas_modulate.color: return

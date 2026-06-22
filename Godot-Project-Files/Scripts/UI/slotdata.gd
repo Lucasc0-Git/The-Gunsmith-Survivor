@@ -1,6 +1,8 @@
 extends Resource
 class_name SlotData
 
+signal slot_data_changed()
+
 var item_data: ItemData = null
 var amount: int = 0
 
@@ -14,6 +16,7 @@ func is_full() -> bool:
 func clear() -> void:
 	item_data = null
 	amount = 0
+	slot_data_changed.emit()
 
 func copy() -> SlotData:
 	var new_data: SlotData = SlotData.new()
@@ -49,3 +52,4 @@ func load_data(data: Dictionary) -> void:
 	var id: String = data.get("item_id", "")
 	item_data = ItemRegistry.items.get(id)
 	amount = int(data.get("amount", 0))
+	slot_data_changed.emit()

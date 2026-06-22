@@ -23,6 +23,7 @@
 [ext_resource type="Texture2D" uid="uid://b81agdoybaaqs" path="res://Textures/SURVIVAL HORROR WEAPONS PACK 16X16/21.png" id="19_yidpd"]
 [ext_resource type="Texture2D" uid="uid://lu4v4pqxnb16" path="res://Textures/Items/fireplace_texture_item.png" id="21_ajim5"]
 [ext_resource type="Texture2D" uid="uid://c0lvq3arfbwu4" path="res://Textures/Items/wooden_pickaxe_texture.png" id="21_vxf74"]
+[ext_resource type="Script" uid="uid://bc6dxxlullnp8" path="res://Scripts/UI/right_click_tooltip.gd" id="24_oersf"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_36asn"]
 content_margin_left = 10.0
@@ -89,6 +90,93 @@ colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_ajim5"]
 gradient = SubResource("Gradient_0iicw")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oersf"]
+draw_center = false
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0, 0.6156863, 1, 1)
+border_blend = true
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_484xk"]
+bg_color = Color(0.34569466, 0.20266101, 0.068465285, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.4627451, 0.2784314, 0.105882354, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+corner_detail = 4
+expand_margin_left = 4.0
+expand_margin_top = 4.0
+expand_margin_right = 4.0
+expand_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_grg3l"]
+bg_color = Color(0.46357596, 0.28002703, 0.10570549, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.301003, 0.1749875, 0.054956123, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+corner_detail = 4
+expand_margin_left = 4.0
+expand_margin_top = 4.0
+expand_margin_right = 4.0
+expand_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_frkhe"]
+bg_color = Color(0.6044932, 0.09624442, 0.11973386, 1)
+skew = Vector2(0.1, 0)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(1, 0.1764706, 0.05490196, 1)
+border_blend = true
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+corner_detail = 7
+shadow_size = 3
+shadow_offset = Vector2(5, 5)
+
+[sub_resource type="Theme" id="Theme_lkt4f"]
+Button/colors/font_color = Color(0.8745098, 0.8745098, 0.8745098, 1)
+Button/colors/font_focus_color = Color(0, 0.856228, 0.85622764, 1)
+Button/colors/font_hover_color = Color(0.6507153, 0.90626, 0.99999994, 1)
+Button/colors/font_outline_color = Color(0.17994305, 0.08881388, 0.023755655, 1)
+Button/colors/font_pressed_color = Color(0.5723979, 0, 0.14884555, 1)
+Button/constants/outline_size = 3
+Button/font_sizes/font_size = 20
+Button/styles/focus = SubResource("StyleBoxFlat_oersf")
+Button/styles/hover = SubResource("StyleBoxFlat_484xk")
+Button/styles/normal = SubResource("StyleBoxFlat_grg3l")
+Button/styles/pressed = SubResource("StyleBoxFlat_frkhe")
+ColorPickerButton/constants/h_separation = 4
+ColorPickerButton/constants/icon_max_width = 20
+ColorPickerButton/font_sizes/font_size = 20
+Label/colors/font_color = Color(1, 1, 1, 1)
+Label/colors/font_outline_color = Color(0, 0, 0, 1)
+Label/constants/outline_size = 2
+Label/font_sizes/font_size = 16
+Label/styles/normal = ExtResource("9_1a2va")
+Panel/styles/panel = ExtResource("9_1a2va")
+PanelContainer/styles/panel = ExtResource("9_1a2va")
 
 [node name="Control" type="CanvasLayer" unique_id=1385382916]
 process_mode = 3
@@ -730,6 +818,41 @@ mouse_filter = 2
 theme_override_constants/separation = 4
 alignment = 2
 
+[node name="RightClickTooltip" type="PanelContainer" parent="." unique_id=613036397]
+custom_minimum_size = Vector2(75, 0)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -37.5
+offset_top = -33.0
+offset_right = 37.5
+offset_bottom = 33.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_lkt4f")
+script = ExtResource("24_oersf")
+
+[node name="MarginContainer" type="MarginContainer" parent="RightClickTooltip" unique_id=962492233]
+layout_mode = 2
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="RightClickTooltip/MarginContainer" unique_id=705002392]
+layout_mode = 2
+theme_override_constants/separation = 9
+
+[node name="Drop" type="Button" parent="RightClickTooltip/MarginContainer/VBoxContainer" unique_id=1748484772]
+layout_mode = 2
+text = "Drop"
+
+[node name="Split" type="Button" parent="RightClickTooltip/MarginContainer/VBoxContainer" unique_id=1575950881]
+layout_mode = 2
+text = "Split"
+
 [connection signal="mouse_entered" from="InventoryUI/Hotbar/PanelContainer" to="." method="_on_hotbar_mouse_entered"]
 [connection signal="mouse_exited" from="InventoryUI/Hotbar/PanelContainer" to="." method="_on_hotbar_mouse_exited"]
 [connection signal="mouse_entered" from="InventoryUI/BasicCrafting" to="." method="_on_basic_crafting_mouse_entered"]
@@ -769,3 +892,5 @@ alignment = 2
 [connection signal="mouse_entered" from="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control4/BaseCraftingContainer3/MarginContainer/ScrollContainer/HBoxContainer/FirePlace" to="InventoryUI/BasicCrafting/BasicCraftingPanels" method="_on_fire_place_mouse_entered"]
 [connection signal="mouse_exited" from="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control4/BaseCraftingContainer3/MarginContainer/ScrollContainer/HBoxContainer/FirePlace" to="InventoryUI/BasicCrafting/BasicCraftingPanels" method="_on_fire_place_mouse_exited"]
 [connection signal="pressed" from="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control4/BaseCraftingContainer3/MarginContainer/ScrollContainer/HBoxContainer/FirePlace" to="InventoryUI/BasicCrafting" method="_on_fire_place_pressed"]
+[connection signal="pressed" from="RightClickTooltip/MarginContainer/VBoxContainer/Drop" to="RightClickTooltip" method="_on_drop_pressed"]
+[connection signal="pressed" from="RightClickTooltip/MarginContainer/VBoxContainer/Split" to="RightClickTooltip" method="_on_split_pressed"]

@@ -77,6 +77,9 @@ func _ready() -> void:
 		fill_slot(6, wooden_axe_item, 1)
 
 func _on_slot_right_click(slot: Slot) -> void:
+	hud.on_inventory_slot_right_clicked(slot)
+
+func slot_split(slot: Slot) -> void:
 	var slot_data: SlotData = slot.slot_data.copy()
 	if slot_data == null:
 		slot_data = SlotData.new()

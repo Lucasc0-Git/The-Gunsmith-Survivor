@@ -29,6 +29,7 @@ var _pending_load_data := {}
 @export var dodge_force: int = 400
 @export var build_reach: int = 800
 @export var damage_multipliers: Dictionary[DamageTypes.DamageType, float] = DamageTypes.get_default_damage_multipliers()
+@export var item_drop_offset: int = 50
 
 ## The const declaration.
 const SPEED: int = 200
@@ -95,8 +96,24 @@ func set_hotbar_item(index: int, slot_data: SlotData) -> void:
 	if index == current_hotbar_index:
 		_update_equipped()
 
-func drop_item(index: int) -> void:
-	pass
+func drop_inventory_item(index: int) -> void:
+	if index >= 0 and index < hud.inventory.grid_container.get_child_count():
+		var slot: Slot = hud.inventory.grid_container.get_child(index)
+		var slot_data: SlotData = slot.slot_data
+		for i in range(slot_data.amount):
+			var drop_pos: Vector2 = global_position + (last_dir * item_drop_offset if last_dir != Vector2.ZERO else Vector2(0, item_drop_offset))
+			main.drop_item(slot_data.item_data, drop_pos, 10)
+		slot.clear()
+
+func drop_hotbar_item(index: int) -> void:
+	if index >= 0 and index < hotbar_slots.size():
+		var slot_data: SlotData = hotbar_slots[index]
+		for i in range(slot_data.amount):
+			var drop_pos: Vector2 = global_position + (last_dir * item_drop_offset if last_dir != Vector2.ZERO else Vector2(0, item_drop_offset))
+			main.drop_item(slot_data.item_data, drop_pos, 10)
+		slot_data.clear()
+		if index == current_hotbar_index:
+			_update_equipped()
 
 func on_hotbar_selected_by_ui(index: int) -> void:
 	current_hotbar_index = index

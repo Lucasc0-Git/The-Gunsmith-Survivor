@@ -52,6 +52,9 @@ func sync_from_player() -> void:
 			pass
 
 func _on_slot_right_clicked(slot: Slot) -> void:
+	hud.on_hotbar_slot_right_clicked(slot)
+
+func split_slot(slot: Slot) -> void:
 	var slot_data: SlotData = slot.slot_data.copy()
 	if slot_data == null:
 		slot_data = SlotData.new()

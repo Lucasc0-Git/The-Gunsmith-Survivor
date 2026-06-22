@@ -12,7 +12,11 @@ var slot_data: SlotData = null:
 	get:
 		return _slot_data
 	set(value):
+		if _slot_data:
+			if _slot_data.slot_data_changed.is_connected(_on_slot_data_changed):
+				_slot_data.slot_data_changed.disconnect(_on_slot_data_changed)
 		_slot_data = value
+		value.slot_data_changed.connect(_on_slot_data_changed)
 		_update_visual()
 
 ## The basic var declaration
@@ -33,6 +37,9 @@ func _ready() -> void:
 	_update_visual()
 	mouse_entered.connect(_on_mouse_entered)
 	mouse_exited.connect(_on_mouse_exited)
+
+func _on_slot_data_changed() -> void:
+	_update_visual()
 
 func set_slot_data(data: SlotData) -> void:
 	slot_data = data
