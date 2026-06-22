@@ -5,7 +5,7 @@ class_name DroppedItem
 
 var item_data : ItemData
 
-signal picked_up(item_data: ItemData)
+#signal picked_up(item_data: ItemData)
 
 func _ready() -> void:
 	if not texture:
@@ -16,8 +16,8 @@ func _ready() -> void:
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body is Player:
-		emit_signal("picked_up", item_data)
-		queue_free()
+		if body.try_pick_item(item_data):
+			queue_free()
 
 func save_data() -> Dictionary:
 	return {

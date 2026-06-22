@@ -75,6 +75,7 @@ func _ready() -> void:
 		fill_slot(2, torch_item, 16)
 		fill_slot(3, assault_rifle_item, 1)
 		fill_slot(6, wooden_axe_item, 1)
+		fill_slot(10, wood_item, 32)
 
 func _on_slot_right_click(slot: Slot) -> void:
 	hud.on_inventory_slot_right_clicked(slot)
@@ -151,11 +152,28 @@ func do_have_item(item: ItemData, needed_amount: int = 1) -> bool:
 		return true
 	return false
 
-func give_item(item: ItemData, amount: int = 1) -> void:
+func can_add_item(item: ItemData, amount: int = 1) -> int:
+	var to_add := amount
+	
+	# Existing stacks
+	for slot in grid_container.get_children():
+		if slot.slot_data and not slot.slot_data.is_empty() and slot.slot_data.item_data == item:
+			var space: int = item.max_stack - slot.slot_data.amount
+			to_add -= min(space, to_add)
+			if to_add <= 0:
+				return 0
+	
+	# Empty slots
+	for slot in grid_container.get_children():
+		if slot.slot_data == null or slot.slot_data.is_empty():
+			to_add -= min(item.max_stack, to_add)
+			if to_add <= 0:
+				return 0
+	
+	return to_add
+
+func give_item(item: ItemData, amount: int = 1) -> bool:
 	var amount_to_add: int = amount
-	
-	
-	
 	
 	# First pass — fill existing partial stacks
 	for slot: Slot in grid_container.get_children():
@@ -165,7 +183,7 @@ func give_item(item: ItemData, amount: int = 1) -> void:
 		var adding_amount: int = min(space_left, amount_to_add)
 		slot.add_amount(adding_amount)
 		amount_to_add -= adding_amount
-		if amount_to_add <= 0: return
+		if amount_to_add <= 0: return true
 	
 	# Second pass — fill empty slots with remainder
 	for slot: Slot in grid_container.get_children():
@@ -173,7 +191,9 @@ func give_item(item: ItemData, amount: int = 1) -> void:
 		var adding_amount: int = min(item.max_stack, amount_to_add)
 		slot.set_item(item, adding_amount)
 		amount_to_add -= adding_amount
-		if amount_to_add <= 0: return
+		if amount_to_add <= 0: return true
+	
+	return false
 
 func remove_item(item: ItemData, amount: int = 1) -> void:
 	var amount_to_rm: int = amount

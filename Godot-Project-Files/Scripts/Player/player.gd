@@ -146,37 +146,46 @@ func get_input_dir() -> Vector2:
 func _process(_delta: float) -> void:
 	input_dir = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 
-func pick_item(item: ItemData) -> void:
-	var slot_data: SlotData = SlotData.new()
-	for hotbar_slot in hud.hotbar.grid_container.get_children():
-		if !hotbar_slot.slot_data == null:
-			slot_data = hotbar_slot.slot_data
-		if slot_data.item_data == item and slot_data.amount < item.max_stack:
-			hotbar_slot.add_amount(1)
-			return
-	
-	slot_data = SlotData.new()
-	for inv_slot in hud.inventory.grid_container.get_children():
-		if !inv_slot.slot_data == null:
-			slot_data = inv_slot.slot_data
-		
-		if slot_data.item_data == item and slot_data.amount < item.max_stack:
-			inv_slot.add_amount(1)
-			return
-	
-	slot_data = SlotData.new()
-	for inv_slot in hud.inventory.grid_container.get_children():
-		if !inv_slot.slot_data == null:
-			slot_data = inv_slot.slot_data
-		
-		if slot_data.item_data == item and slot_data.amount < item.max_stack:
-			inv_slot.add_amount(1)
-			return
-		if slot_data.is_empty():
-			inv_slot.set_item(item, 1)
-			return
-		else:
-			pass # I need to reverse the picking process so the item stays on ground.
+func try_pick_item(item: ItemData) -> bool:
+	if not hud.can_accept_item(item):
+		return false
+	hud.give_item(item)
+	return true
+
+func pick_item(item: ItemData) -> bool:
+	if hud.give_item(item, 1):
+		return true
+	return false
+	#var slot_data: SlotData = SlotData.new()
+	#for hotbar_slot in hud.hotbar.grid_container.get_children():
+		#if !hotbar_slot.slot_data == null:
+			#slot_data = hotbar_slot.slot_data
+		#if slot_data.item_data == item and slot_data.amount < item.max_stack:
+			#hotbar_slot.add_amount(1)
+			#return
+	#
+	#slot_data = SlotData.new()
+	#for inv_slot in hud.inventory.grid_container.get_children():
+		#if !inv_slot.slot_data == null:
+			#slot_data = inv_slot.slot_data
+		#
+		#if slot_data.item_data == item and slot_data.amount < item.max_stack:
+			#inv_slot.add_amount(1)
+			#return
+	#
+	#slot_data = SlotData.new()
+	#for inv_slot in hud.inventory.grid_container.get_children():
+		#if !inv_slot.slot_data == null:
+			#slot_data = inv_slot.slot_data
+		#
+		#if slot_data.item_data == item and slot_data.amount < item.max_stack:
+			#inv_slot.add_amount(1)
+			#return
+		#if slot_data.is_empty():
+			#inv_slot.set_item(item, 1)
+			#return
+		#else:
+			#pass # I need to reverse the picking process so the item stays on ground.
 
 func use_selected_item() -> void:
 	var selected_slot: Slot = get_selected_slot()

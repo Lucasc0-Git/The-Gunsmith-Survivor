@@ -79,6 +79,24 @@ func _on_slot_left_clicked(slot: Slot) -> void:
 		try_move_item_to_inventory(slot)
 		return
 
+func can_add_item(item: ItemData, amount: int = 1) -> int:
+	var to_add := amount
+	
+	for slot: Slot in grid_container.get_children():
+		if slot.slot_data and not slot.slot_data.is_empty() and slot.slot_data.item_data == item:
+			var space := slot.slot_data.item_data.max_stack - slot.slot_data.amount
+			var add_here: int = min(space, to_add)
+			to_add -= add_here
+			if to_add <= 0:
+				return 0
+	for slot: Slot in grid_container.get_children():
+		if slot.slot_data == null or slot.slot_data.is_empty():
+			var add_here: int = min(item.max_stack, to_add)
+			to_add -= add_here
+			if to_add <= 0:
+				return 0
+	return to_add
+
 func find_hotbar_item(item: ItemData) -> int:
 	var usable_amount: int = 0
 	for slot: Slot in grid_container.get_children():

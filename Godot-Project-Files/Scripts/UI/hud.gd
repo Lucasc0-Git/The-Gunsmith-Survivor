@@ -32,10 +32,25 @@ func set_vars_debug() -> void:
 	if !player: push_error("HUD: Player is null!")
 	if !weapon: push_error("HUD: Weapon is null!")
 
-func give_item(item: ItemData, amount: int = 1) -> void:
+func give_item(item: ItemData, amount: int = 1) -> bool:
 	var leftover := hotbar.give_hotbar_item(item, amount)
 	if leftover > 0:
-		inventory.give_item(item, leftover)
+		if inventory.give_item(item, leftover):
+			return true
+		else:
+			push_warning("Some of the items were (with 70% certainty) reduced to atoms 'cause we're short on storage.")
+			return false
+	else:
+		return true
+
+func can_accept_item(item: ItemData, amount: int = 1) -> bool:
+	var remaining := amount
+	
+	remaining = hotbar.can_add_item(item, remaining)
+	if remaining <= 0: return true
+	
+	remaining = inventory.can_add_item(item, remaining)
+	return remaining <= 0
 
 func _on_core_attacked() -> void:
 	if core_attacked_box.get_child_count() > 7:

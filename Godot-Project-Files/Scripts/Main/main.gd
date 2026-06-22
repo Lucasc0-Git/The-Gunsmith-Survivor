@@ -255,7 +255,7 @@ func drop_item(item: ItemData, pos: Vector2, random_range: int = 0) -> void:
 	var dropped_item := preload("res://Scenes/dropped_item.tscn").instantiate()
 	dropped_item.item_data = item
 	dropped_item.global_position = pos + Vector2(randi_range(random_range, -random_range), randi_range(random_range, -random_range))
-	dropped_item.picked_up.connect(player.pick_item)
+	#dropped_item.picked_up.connect(player.pick_item)
 	Ysort.call_deferred("add_child", dropped_item)
 
 func spawn_tree(pos: Vector2) -> void:
