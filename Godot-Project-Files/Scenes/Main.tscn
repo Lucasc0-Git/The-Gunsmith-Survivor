@@ -790,15 +790,16 @@ text = "Back"
 
 [node name="BuildTooltip" type="CanvasLayer" parent="." unique_id=1845281441]
 layer = 7
-visible = false
 script = ExtResource("10_4kpch")
 
 [node name="Control" type="Control" parent="BuildTooltip" unique_id=81234873]
 z_index = 6
 layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 mouse_filter = 2
 
 [node name="PanelContainer" type="PanelContainer" parent="BuildTooltip/Control" unique_id=503169070]

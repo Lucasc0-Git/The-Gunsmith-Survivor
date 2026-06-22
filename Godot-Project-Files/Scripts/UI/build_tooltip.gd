@@ -7,6 +7,8 @@ var main: Main = null
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	while !GameManager.is_game_loaded:
+		await get_tree().process_frame
 	main = GameManager.main
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -22,24 +24,45 @@ func _process(delta: float) -> void:
 		control.position = screen_pos + Vector2(10, -10)
 	
 	if not is_instance_valid(tooltip_target):
-		tooltip_target = null
-		visible = false
+		hide_tooltip()
 
+func _input(event: InputEvent) -> void:
+	if !visible:
+		return
+	
+	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+		var global_rect := control.get_global_rect()
+		if not global_rect.has_point(control.get_global_mouse_position()):
+			hide_tooltip()
+			control.accept_event()
+			return
+	if event is InputEventKey and event.pressed and not event.echo:
+		if event.keycode == KEY_E or event.keycode == KEY_ESCAPE:
+			hide_tooltip()
+			return
 
 func _on_pick_up_button_pressed() -> void:
-	if !main: print("main is null"); return
+	if !main: print("BuildTooltip: Main is null!"); return
 	if tooltip_target is BuildScene:
 		if !tooltip_target.get_item_data(): print(null); return
 		print(tooltip_target.get_item_data())
 		main.give_player_item(tooltip_target.get_item_data())
 		if is_instance_valid(tooltip_target):
 			tooltip_target.queue_free()
-		tooltip_target = null
+		hide_tooltip()
 	else:
-		print("tooltip target is not buildscene")
+		print("BuildTooltip target is not a BuildScene!")
 
 func _on_test_button_pressed() -> void:
 	print("Testing...")
 
 func _on_visibility_changed() -> void:
 	pass
+
+func hide_tooltip() -> void:
+	hide()
+	tooltip_target = null
+
+func show_tooltip(target: Node2D) -> void:
+	show()
+	tooltip_target = target

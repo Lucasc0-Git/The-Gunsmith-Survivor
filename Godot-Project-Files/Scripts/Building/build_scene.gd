@@ -60,6 +60,7 @@ func get_item_data() -> ItemData:
 	return ItemRegistry.items.get(_item_id, null)
 
 func _on_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
+	if preview_only: return
 	if event is InputEventMouseButton and event.pressed:
 		if event.button_index == MOUSE_BUTTON_RIGHT:
 			if main:

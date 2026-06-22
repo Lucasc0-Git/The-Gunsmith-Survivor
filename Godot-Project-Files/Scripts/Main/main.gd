@@ -292,12 +292,10 @@ func spawn_the_core(pos: Vector2) -> void:
 	Ysort.add_child(the_core)
 
 func show_build_item_tooltip(target: Node2D) -> void:
-	build_tooltip.tooltip_target = target
-	build_tooltip.visible = true
-	print("imagine showing the tooltip.")
+	build_tooltip.show_tooltip(target)
 
 func give_player_item(item_data: ItemData, amount: int = 1) -> void:
-	if !hud: printerr("Trying to give item to player, but hud is null"); return
+	if !hud: return
 	hud.give_item(item_data, amount)
 
 func show_menu() -> void:
