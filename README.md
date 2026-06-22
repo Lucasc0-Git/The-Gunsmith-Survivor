@@ -54,7 +54,7 @@ F11 — Toggle Fullscreen
 
 Check Input actions in Project Settings for full mapping.
 🛠️ Project Structure
-textGodot-Project-Files/
+Godot-Project-Files/
 ├── Autoload/          # Global singletons
 ├── Scenes/            # All .tscn files
 ├── Scripts/           # GDScript logic
@@ -65,14 +65,14 @@ textGodot-Project-Files/
 └── project.godot
 
 🗺️ Roadmap
- Core movement, shooting, inventory
- Day/night cycle
- Crafting & station system
- Building & The Core defense
- Basic enemy AI
- More weapons, enemies, biomes
- Polish, balancing, audio
- Release on Itch.io + GitHub
+🗹Core movement, shooting, inventory
+🗹Day/night cycle
+🗹Crafting & station system
+🗹Building & The Core defense
+🗹Basic enemy AI
+☐More weapons, enemies, biomes
+☐Polish, balancing, audio
+☐Release on Itch.io + GitHub
 
 🤝 Contributing
 Personal learning project, but issues, feedback, and pull requests are welcome!
