@@ -1,8 +1,8 @@
 extends PanelContainer
 class_name RightClickTooltip
 
-@onready var split_button: Button = $VBoxContainer/Split
-@onready var drop_button: Button = $VBoxContainer/Drop
+@onready var split_button: Button = $MarginContainer/VBoxContainer/SplitVBoxContainer/Split
+@onready var drop_button: Button = $MarginContainer/VBoxContainer/DropVBoxContainer/Drop
 @onready var hud: Hud = get_parent()
 
 var operating_slot: Slot = null
