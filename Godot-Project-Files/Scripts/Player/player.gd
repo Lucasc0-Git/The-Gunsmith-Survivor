@@ -102,7 +102,7 @@ func drop_inventory_item(index: int) -> void:
 		var slot_data: SlotData = slot.slot_data
 		for i in range(slot_data.amount):
 			var drop_pos: Vector2 = global_position + (last_dir * item_drop_offset if last_dir != Vector2.ZERO else Vector2(0, item_drop_offset))
-			main.drop_item(slot_data.item_data, drop_pos, 10)
+			main.drop_item(slot_data.item_data, drop_pos, 9)
 		slot.clear()
 
 func drop_hotbar_item(index: int) -> void:
@@ -110,7 +110,7 @@ func drop_hotbar_item(index: int) -> void:
 		var slot_data: SlotData = hotbar_slots[index]
 		for i in range(slot_data.amount):
 			var drop_pos: Vector2 = global_position + (last_dir * item_drop_offset if last_dir != Vector2.ZERO else Vector2(0, item_drop_offset))
-			main.drop_item(slot_data.item_data, drop_pos, 10)
+			main.drop_item(slot_data.item_data, drop_pos, 9)
 		slot_data.clear()
 		if index == current_hotbar_index:
 			_update_equipped()
