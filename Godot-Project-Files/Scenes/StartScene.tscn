@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://djlib2qfsxxql" path="res://Scenes/Main.tscn" id="2_k8nbv"]
 [ext_resource type="PackedScene" uid="uid://bv3mm8mmj4ot6" path="res://Scenes/OptionsScene.tscn" id="3_ia2xn"]
 [ext_resource type="Texture2D" uid="uid://b2e5u2nkdl7i7" path="res://Textures/Start_scene_bg.png" id="4_u668n"]
+[ext_resource type="Theme" uid="uid://bxy8svxfca53e" path="res://Themes/OptButton.tres" id="6_6nqof"]
 [ext_resource type="Theme" uid="uid://6ytu8ksu8rvq" path="res://Themes/BaseContainer.tres" id="6_28ir6"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bmxlf"]
@@ -197,10 +198,20 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 10
 
-[node name="NewGameButton" type="Button" parent="VBoxContainer" unique_id=1669989295]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=1153607274]
 layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="NewGameButton" type="Button" parent="VBoxContainer/HBoxContainer" unique_id=1669989295]
+layout_mode = 2
+size_flags_horizontal = 3
 theme = ExtResource("1_dgtb2")
 text = "Start New Game"
+
+[node name="DifficultyButton" type="OptionButton" parent="VBoxContainer/HBoxContainer" unique_id=1967471010]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("6_6nqof")
 
 [node name="LoadButton" type="Button" parent="VBoxContainer" unique_id=1827291946]
 layout_mode = 2
@@ -285,7 +296,7 @@ grow_vertical = 2
 theme = ExtResource("1_dgtb2")
 text = "Back"
 
-[connection signal="pressed" from="VBoxContainer/NewGameButton" to="." method="_on_new_game_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/NewGameButton" to="." method="_on_new_game_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/LoadButton" to="." method="_on_saves_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/TutorialButton" to="." method="_on_tutorial_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/OptionsButton" to="." method="_on_options_button_pressed"]
