@@ -7,6 +7,15 @@ enum StationType {
 	#Here more stations
 }
 
+enum Difficulty {
+	EASY = 0,
+	SLIGHTLY_CHALLENGING = 1,
+	NORMAL = 2,
+	CHALLENGING = 3,
+	DIFFICULT = 4,
+	NIGHTMARE = 5
+}
+
 const STATION_NAMES: Dictionary[StationType, String] = {
 	StationType.BASIC_CRAFTING: "Basic station",
 	StationType.BASIC_SMITHING_TABLE: "Basic smithing table"
@@ -34,6 +43,8 @@ var is_game_loaded: bool = false
 var is_loading_save: bool = false
 var pending_save_name: String = ""
 var spawner_activity_mult: float = 1.0
+var selected_difficulty: Difficulty = Difficulty.NORMAL ## Preset chosen by the player
+var difficulty_multiplier: float = 1.0 ## The multiplier of everything based on the chosen preset
 
 var score: int = 0
 var more_stats: Dictionary = {
@@ -125,15 +136,35 @@ func wait_for_node(node: Node, timeout: float = 2.0) -> bool:
 	
 	return true
 
-func start_new_world() -> void:
+func get_multiplier_for_difficulty(diff: Difficulty) -> float:
+	match diff:
+		Difficulty.EASY:
+			return 0.75
+		Difficulty.SLIGHTLY_CHALLENGING:
+			return 0.9
+		Difficulty.NORMAL:
+			return 1.0
+		Difficulty.CHALLENGING:
+			return 1.2
+		Difficulty.DIFFICULT:
+			return 1.35
+		Difficulty.NIGHTMARE:
+			return 1.8
+		_:
+			push_warning("Unknown difficulty preset! Using NORMAL")
+			return 1.0
+
+func start_new_world(difficulty_preset: Difficulty = Difficulty.NORMAL) -> void:
 	is_loading_save = false
 	current_world_seed = randi()
+	difficulty_multiplier = get_multiplier_for_difficulty(difficulty_preset)
 	main = preload("res://Scenes/Main.tscn").instantiate()
 	get_tree().change_scene_to_node(main)
 
-func load_world(save_name: String) -> void:
+func load_world(save_name: String, difficulty_preset: Difficulty = Difficulty.NORMAL) -> void:
 	is_loading_save = true
 	pending_save_name = save_name
 	current_save_name = save_name
+	difficulty_multiplier = get_multiplier_for_difficulty(difficulty_preset)
 	main = preload("res://Scenes/Main.tscn").instantiate()
 	get_tree().change_scene_to_node(main)
