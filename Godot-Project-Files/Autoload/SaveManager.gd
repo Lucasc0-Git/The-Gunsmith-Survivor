@@ -178,7 +178,8 @@ func _serialize_game_manager() -> Dictionary:
 		"current_day": GameManager.current_day,
 		"current_hour": GameManager.current_hour,
 		"score": GameManager.score,
-		"more_stats": GameManager.more_stats as Dictionary
+		"more_stats": GameManager.more_stats as Dictionary,
+		"selected_difficulty": GameManager.selected_difficulty
 	}
 
 func _deserialize_game_manager(data: Dictionary) -> void:
@@ -200,6 +201,7 @@ func _deserialize_game_manager(data: Dictionary) -> void:
 				push_warning("Invalid stat data skipped: " + str(key))
 	else:
 		push_warning("more_stats invalid.")
+	GameManager.selected_difficulty = data.get("selected_difficulty", GameManager.Difficulty.NORMAL) as GameManager.Difficulty
 	#GameManager.more_stats = data.get("more_stats", {"ERR": 84}) as Dictionary[String, int]
 	
 #Enemies

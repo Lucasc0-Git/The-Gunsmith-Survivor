@@ -157,6 +157,7 @@ func get_multiplier_for_difficulty(diff: Difficulty) -> float:
 func start_new_world(difficulty_preset: Difficulty = Difficulty.NORMAL) -> void:
 	is_loading_save = false
 	current_world_seed = randi()
+	current_save_name = "Autosave"
 	difficulty_multiplier = get_multiplier_for_difficulty(difficulty_preset)
 	main = preload("res://Scenes/Main.tscn").instantiate()
 	get_tree().change_scene_to_node(main)

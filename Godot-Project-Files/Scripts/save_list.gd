@@ -2,10 +2,15 @@ extends Control
 
 @onready var v_box_container: VBoxContainer = $VBoxContainer2
 @onready var line_edit: LineEdit = $HBoxContainer/LineEdit
-
+@onready var difficulty_button: OptionButton = $HBoxContainer/DifficultyButton
 
 func _ready() -> void:
 	SaveManager.save_list_changed.connect(populate_save_list)
+	difficulty_button.clear()
+	for i in range(GameManager.Difficulty.size()):
+		var diff_name: String = GameManager.Difficulty.keys()[i]
+		var display_name: String = diff_name.capitalize().replace("_", " ")
+		difficulty_button.add_item(display_name, i)
 	populate_save_list()
 
 func populate_save_list() -> void:
@@ -42,9 +47,11 @@ func _process(_delta: float) -> void:
 		populate_save_list()
 
 func _on_new_save_button_pressed() -> void:
+	AudioManager.play_button_click()
 	var save_name: String = line_edit.text
 	if save_name.is_empty():
 		return
 	GameManager.is_game_loaded = false
+	GameManager.selected_difficulty = difficulty_button.get_selected_id() as GameManager.Difficulty
 	GameManager.current_save_name = save_name
 	GameManager.start_new_world()

@@ -136,7 +136,8 @@ func _ready() -> void:
 	GameManager.is_game_loaded = true
 	print("After generating the game, the seed is: " + str(GameManager.current_world_seed))
 	world_loaded.emit()
-	#SaveManager.save_game(GameManager.current_save_name)
+	if !GameManager.is_loading_save:
+		SaveManager.save_game(GameManager.current_save_name)
 
 func generate(seed_f_g: int = 12) -> void:
 	print("Generating the world...")
