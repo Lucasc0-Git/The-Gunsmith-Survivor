@@ -1,21 +1,45 @@
 [gd_scene format=3 uid="uid://frp6tk870t52"]
 
 [ext_resource type="PackedScene" uid="uid://dpo1uptfyrb7h" path="res://Scenes/station_scene.tscn" id="1_mt6lx"]
+[ext_resource type="Texture2D" uid="uid://6wavg3er2yys" path="res://Textures/basicsmithingtable.png" id="2_gqjj0"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_mt6lx"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_ewial"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_gqjj0")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_walpj"]
 resource_local_to_scene = true
-size = Vector2(14.666667, 18)
+size = Vector2(14, 14)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_gqjj0"]
+radius = 66.336685
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ec566"]
-size = Vector2(16, 34.666664)
+size = Vector2(18, 31.333332)
 
-[node name="BasicSmithingTable" unique_id=1835171183 instance=ExtResource("1_mt6lx")]
+[node name="BasicSmithingTable" unique_id=1835171183 node_paths=PackedStringArray("sprite") instance=ExtResource("1_mt6lx")]
 station_type = 1
+sprite = NodePath("AnimatedSprite2D")
 item_id = "basic_smithing_table"
 
+[node name="AnimatedSprite2D" parent="." index="0" unique_id=1408510289]
+position = Vector2(0, -6)
+sprite_frames = SubResource("SpriteFrames_ewial")
+
 [node name="CollisionShape2D" parent="." index="1" unique_id=2132263509]
-shape = SubResource("RectangleShape2D_mt6lx")
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_walpj")
+
+[node name="CollisionShape2D" parent="CraftingArea" parent_id_path=PackedInt32Array(1112216995) index="0" unique_id=62476723]
+shape = SubResource("CircleShape2D_gqjj0")
 
 [node name="CollisionShape2D" parent="MouseInputMonitor" parent_id_path=PackedInt32Array(1707325614) index="0" unique_id=487905519]
-position = Vector2(0, -7.666667)
+position = Vector2(0, -6.0000014)
 shape = SubResource("RectangleShape2D_ec566")
