@@ -30,14 +30,14 @@ func _on_spawn_timer_timeout() -> void:
 	if GameManager.random_bool():
 		spawn_enemy(false)
 	var base_wait_time: float = spawn_cooldown_time + randf_range(-spawn_time_randomizer, spawn_time_randomizer)
-	spawn_timer.start(clamp(base_wait_time / GameManager.spawner_activity_mult, 20.0, base_wait_time + 30.0))
+	spawn_timer.start(clamp(base_wait_time / (GameManager.spawner_activity_mult * GameManager.difficulty_multiplier), 20.0, base_wait_time + 30.0))
 
 func spawn_enemy(forced: bool = false) -> void:
 	if !spawner_disabled or forced:
 		var enemy: Enemy = main.zombie_scene.instantiate()
-		enemy.max_health += distance_to_core * 0.005
-		enemy.damage += distance_to_core * 0.001
-		enemy.score_for_kill += int(distance_to_core * 0.001)
+		enemy.max_health += distance_to_core * (0.005 * GameManager.difficulty_multiplier)
+		enemy.damage += distance_to_core * (0.001 * GameManager.difficulty_multiplier)
+		enemy.score_for_kill += int(distance_to_core * (0.001 * GameManager.difficulty_multiplier))
 		enemy.global_position = marker.global_position
 		main.Ysort.add_child(enemy)
 

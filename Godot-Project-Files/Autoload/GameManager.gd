@@ -52,7 +52,8 @@ var more_stats: Dictionary = {
 	"Enemies killed": 0,
 	"Items crafted": 0,
 	"Resources mined": 0,
-	"Buildings built": 0
+	"Buildings built": 0,
+	"Difficulty": Difficulty.NORMAL
 }
 
 signal hour_changed(hour: int)
@@ -154,18 +155,18 @@ func get_multiplier_for_difficulty(diff: Difficulty) -> float:
 			push_warning("Unknown difficulty preset! Using NORMAL")
 			return 1.0
 
-func start_new_world(difficulty_preset: Difficulty = Difficulty.NORMAL) -> void:
+func start_new_world(save_name: String = "Autosave") -> void:
 	is_loading_save = false
 	current_world_seed = randi()
-	current_save_name = "Autosave"
-	difficulty_multiplier = get_multiplier_for_difficulty(difficulty_preset)
+	current_save_name = save_name
+	difficulty_multiplier = get_multiplier_for_difficulty(selected_difficulty)
 	main = preload("res://Scenes/Main.tscn").instantiate()
 	get_tree().change_scene_to_node(main)
 
-func load_world(save_name: String, difficulty_preset: Difficulty = Difficulty.NORMAL) -> void:
+func load_world(save_name: String) -> void:
 	is_loading_save = true
 	pending_save_name = save_name
 	current_save_name = save_name
-	difficulty_multiplier = get_multiplier_for_difficulty(difficulty_preset)
+	difficulty_multiplier = get_multiplier_for_difficulty(selected_difficulty)
 	main = preload("res://Scenes/Main.tscn").instantiate()
 	get_tree().change_scene_to_node(main)

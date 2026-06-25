@@ -53,5 +53,5 @@ func _on_new_save_button_pressed() -> void:
 		return
 	GameManager.is_game_loaded = false
 	GameManager.selected_difficulty = difficulty_button.get_selected_id() as GameManager.Difficulty
-	GameManager.current_save_name = save_name
-	GameManager.start_new_world()
+	GameManager.more_stats.set("Difficulty", GameManager.selected_difficulty)
+	GameManager.start_new_world(save_name)
