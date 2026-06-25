@@ -141,14 +141,14 @@ func _ready() -> void:
 func generate(seed_f_g: int = 12) -> void:
 	print("Generating the world...")
 	map.generate_region(Vector2i(0, 0), seed_f_g)
-	map.generate_region(Vector2i(1, 1), seed_f_g)
-	map.generate_region(Vector2i(1, 0), seed_f_g)
-	map.generate_region(Vector2i(0, 1), seed_f_g)
-	map.generate_region(Vector2i(-1, 0), seed_f_g)
-	map.generate_region(Vector2i(-1, 1), seed_f_g)
-	map.generate_region(Vector2i(1, -1), seed_f_g)
-	map.generate_region(Vector2i(0, -1), seed_f_g)
-	map.generate_region(Vector2i(-1, -1), seed_f_g)
+	#map.generate_region(Vector2i(1, 1), seed_f_g)
+	#map.generate_region(Vector2i(1, 0), seed_f_g)
+	#map.generate_region(Vector2i(0, 1), seed_f_g)
+	#map.generate_region(Vector2i(-1, 0), seed_f_g)
+	#map.generate_region(Vector2i(-1, 1), seed_f_g)
+	#map.generate_region(Vector2i(1, -1), seed_f_g)
+	#map.generate_region(Vector2i(0, -1), seed_f_g)
+	#map.generate_region(Vector2i(-1, -1), seed_f_g)
 	spawn_player(Vector2(0, 0))
 	spawn_the_core(player.global_position + Vector2(0, -250))
 	if !OS.is_debug_build():
@@ -181,9 +181,13 @@ func _on_hour_changed(hour: int) -> void:
 	label.text = "Hour: " + str(hour) + ":00"
 	_update_lightning(hour)
 	
-	if hour == 12:
-		for spawner: Spawner in spawners.get_children():
-			spawner.spawn_enemy()
+	#if hour == 12:
+		#for spawner: Spawner in spawners.get_children():
+			#spawner.spawn_enemy()
+	if GameManager.is_night():
+		GameManager.spawner_activity_mult = 1.5
+	else:
+		GameManager.spawner_activity_mult = 1.0
 	
 	if hour >= 18 or hour <= 6:
 		hud.tint_hud(inventory_darken, 25)

@@ -16,10 +16,12 @@ func _ready() -> void:
 			await ItemRegistry.items_loaded
 		notify_property_list_changed()
 	mouse_input.input_event.connect(_on_input_event)
-	if GameManager.main != null:
-		main = GameManager.main
-	else:
-		printerr("The 'main' variable in build_scene.gd is null!")
+	if !Engine.is_editor_hint():
+		
+		if GameManager.main != null:
+			main = GameManager.main
+		else:
+			printerr("The 'main' variable in build_scene.gd is null!")
 
 func _get_property_list() -> Array[Dictionary]:
 	var ids := PackedStringArray()

@@ -33,6 +33,7 @@ var main: Main = null
 var is_game_loaded: bool = false
 var is_loading_save: bool = false
 var pending_save_name: String = ""
+var spawner_activity_mult: float = 1.0
 
 var score: int = 0
 var more_stats: Dictionary = {
@@ -53,6 +54,9 @@ func _process(delta: float) -> void:
 	if !is_game_loaded: return
 	if get_tree().paused: return
 	time += delta
+	
+	
+	
 	
 	var new_hour := int((time / day_length) * 24) % 24
 	if new_hour != current_hour:

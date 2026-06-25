@@ -17,7 +17,6 @@ mouse_input = NodePath("MouseInputMonitor")
 item_id = "apple"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1408510289]
-light_mask = 2
 sprite_frames = SubResource("SpriteFrames_xsqm1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2132263509]

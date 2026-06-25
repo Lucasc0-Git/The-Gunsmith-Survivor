@@ -32,5 +32,9 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DisableArea" unique_id=2045529879]
 shape = SubResource("CircleShape2D_4l55s")
 
+[node name="SpawnTimer" type="Timer" parent="." unique_id=632774133]
+wait_time = 60.0
+
 [connection signal="body_entered" from="DisableArea" to="." method="_on_disable_area_body_entered"]
 [connection signal="body_exited" from="DisableArea" to="." method="_on_disable_area_body_exited"]
+[connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]
