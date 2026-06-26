@@ -14,7 +14,7 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_walpj"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gqjj0"]
 resource_local_to_scene = true
 size = Vector2(14, 14)
 
@@ -35,7 +35,7 @@ sprite_frames = SubResource("SpriteFrames_ewial")
 
 [node name="CollisionShape2D" parent="." index="1" unique_id=2132263509]
 position = Vector2(0, 1)
-shape = SubResource("RectangleShape2D_walpj")
+shape = SubResource("RectangleShape2D_gqjj0")
 
 [node name="CollisionShape2D" parent="CraftingArea" parent_id_path=PackedInt32Array(1112216995) index="0" unique_id=62476723]
 shape = SubResource("CircleShape2D_gqjj0")

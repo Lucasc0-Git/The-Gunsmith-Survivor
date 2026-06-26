@@ -15,7 +15,8 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 [application]
 
 config/name="The Gunsmith Survivor"
-config/version="0.1.1"
+config/description="A 2D shooter from top-down view where your main goal is to protect The Core and survive as long as you can."
+config/version="0.1.0"
 run/main_scene="uid://3jm5jtqlvjfv"
 config/use_custom_user_dir=true
 config/custom_user_dir_name="the-gunsmith-survivor"

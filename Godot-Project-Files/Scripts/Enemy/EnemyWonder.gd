@@ -10,6 +10,7 @@ func _ready() -> void:
 func enter() -> void:
 	if is_inside_tree():
 		wonder_timer.start(1.5)
+	print(enemy.main.enemy_aggro_radius)
 
 func exit() -> void:
 	wonder_timer.stop()
@@ -20,7 +21,7 @@ func physics_update(delta: float) -> void:
 	
 	if enemy.global_position.distance_to(enemy.player.global_position) < enemy.chase_range:
 		enemy.change_state("Chase")
-	if GameManager.is_night() and enemy.global_position.distance_to(enemy.the_core.global_position) < 2000:
+	if GameManager.is_night() and enemy.global_position.distance_to(enemy.the_core.global_position) < enemy.main.enemy_aggro_radius:
 		enemy.change_state("ChaseCore")
 
 func _on_wonder_timer_timeout() -> void:

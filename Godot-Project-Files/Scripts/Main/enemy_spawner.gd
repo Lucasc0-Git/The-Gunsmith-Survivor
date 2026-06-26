@@ -22,7 +22,7 @@ func _ready() -> void:
 	while !GameManager.is_game_loaded:
 		await get_tree().process_frame
 	distance_to_core = marker.global_position.distance_to(GameManager.main.the_core.global_position)
-	await get_tree().create_timer(45).timeout
+	await get_tree().create_timer(15).timeout
 	spawn_timer.wait_time += randf_range(-spawn_time_randomizer, spawn_time_randomizer)
 	spawn_timer.start()
 

@@ -28,7 +28,8 @@ var inventory_tint: CanvasModulate
 var the_core: TheCore
 var player: Player
 
-
+@export var base_enemy_aggro_radius: int = 750
+var enemy_aggro_radius: int = 750
 @export var tree_respawn_time: float = 180.0
 @export var stone_respawn_time: float = 600.0
 
@@ -46,6 +47,7 @@ signal world_loaded()
 func _ready() -> void:
 	GameManager.is_game_loaded = false
 	get_tree().paused = true
+	enemy_aggro_radius = base_enemy_aggro_radius
 	day_colors = {
 		6:  lighting_colors[TimeOfDay.DAWN],
 		7:  lighting_colors[TimeOfDay.SUNRISE],
@@ -195,6 +197,11 @@ func _on_hour_changed(hour: int) -> void:
 	else:
 		hud.tint_hud(Color(1, 1, 1), 25)
 
+func _physics_process(_delta: float) -> void:
+	if !GameManager.is_game_loaded: return
+	var needed_radius: int = int(float(base_enemy_aggro_radius) + ((float(GameManager.score) / 1.5) * GameManager.difficulty_multiplier))
+	if enemy_aggro_radius != needed_radius:
+		enemy_aggro_radius = needed_radius
 func game_over() -> void:
 	var game_over_scene := preload("res://Scenes/GameOver.tscn").instantiate()
 	add_child(game_over_scene)

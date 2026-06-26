@@ -35,6 +35,7 @@ var states := {}
 var delta: float
 var chase_forced: bool = false
 var the_core: TheCore
+var main: Main
 #var chasing_core: bool = false
 
 func _ready() -> void:
@@ -44,6 +45,7 @@ func _ready() -> void:
 	health = max_health
 	player = get_tree().get_first_node_in_group("player")
 	the_core = get_tree().get_first_node_in_group("thecore")
+	main = GameManager.main
 	
 	## State machine
 	for child in states_node.get_children():
