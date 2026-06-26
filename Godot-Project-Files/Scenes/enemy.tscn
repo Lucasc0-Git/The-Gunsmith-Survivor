@@ -86,7 +86,7 @@ pivot_offset = Vector2(20, 3.5)
 theme = SubResource("Theme_afpow")
 show_percentage = false
 
-[node name="Timer" type="Timer" parent="." unique_id=575764799]
+[node name="HitTimer" type="Timer" parent="." unique_id=575764799]
 
 [node name="StateMachine" type="Node" parent="." unique_id=389368828]
 
@@ -110,6 +110,8 @@ script = ExtResource("6_1dp5w")
 [node name="EnemyState" type="Node" parent="StateMachine" unique_id=1569082239]
 script = ExtResource("2_1f0kj")
 
+[node name="DespawnTimer" type="Timer" parent="." unique_id=1352710365]
+
 [connection signal="body_entered" from="AttackRangeArea" to="." method="_on_attack_range_area_body_entered"]
 [connection signal="body_exited" from="AttackRangeArea" to="." method="_on_attack_range_area_body_exited"]
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="HitTimer" to="." method="_on_timer_timeout"]

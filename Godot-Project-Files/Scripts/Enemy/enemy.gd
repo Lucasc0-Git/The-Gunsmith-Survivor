@@ -4,6 +4,7 @@ class_name Enemy
 @onready var attack_timer: Timer = $Timer
 @onready var health_bar: ProgressBar = $HealthBar
 @onready var states_node := $StateMachine
+@onready var despawn_timer: Timer = $DespawnTimer
 
 @export var speed: int = 50
 @export var wonder_speed: int = 20
@@ -14,6 +15,7 @@ class_name Enemy
 @export var damage_multipliers: Dictionary[DamageTypes.DamageType, float] = DamageTypes.get_default_damage_multipliers()
 @export var score_for_kill: int = 15
 @export var damage_type: DamageTypes.DamageType
+@export var despawn_time: float = 60 * 4
 
 var health: float = 10:
 	get():
@@ -39,6 +41,8 @@ var main: Main
 #var chasing_core: bool = false
 
 func _ready() -> void:
+	despawn_timer.timeout.connect(_on_despawn_timer_timeout)
+	despawn_timer.start(despawn_time)
 	health_bar.visible = false
 	health_bar.max_value = max_health
 	health_bar.value = max_health
@@ -68,6 +72,9 @@ func _physics_process(_delta: float) -> void:
 	
 	if current_state:
 		current_state.physics_update(delta)
+
+func _on_despawn_timer_timeout() -> void:
+	queue_free()
 
 func get_target() -> Node2D: ##Returns player, the core, OR null.
 	if player_in_range:
