@@ -18,8 +18,8 @@ score_for_crafting = 20
 description = "An assault rifle. Comes handy in a horde."
 crafting_recipe = Dictionary[ExtResource("1_macn1"), int]({
 ExtResource("2_oh4ko"): 1,
-ExtResource("3_dmslx"): 64,
-ExtResource("4_dmslx"): 32
+ExtResource("3_dmslx"): 32,
+ExtResource("4_dmslx"): 16
 })
 needed_stations = Dictionary[int, int]({
 0: 1,

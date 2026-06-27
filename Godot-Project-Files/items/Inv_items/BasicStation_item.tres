@@ -15,6 +15,6 @@ display_name = "Basic Crafting Station"
 score_for_crafting = 20
 description = "A basic station for crafting. Unlocks the same recipes as The Core."
 crafting_recipe = Dictionary[ExtResource("1_rksjb"), int]({
-ExtResource("3_gmr3f"): 64
+ExtResource("3_gmr3f"): 32
 })
 metadata/_custom_type_script = "uid://bmqu0kgfa7xur"
