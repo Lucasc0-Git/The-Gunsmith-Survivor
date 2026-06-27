@@ -22,7 +22,12 @@ config/use_custom_user_dir=true
 config/custom_user_dir_name="the-gunsmith-survivor"
 config/features=PackedStringArray("4.7", "Mobile")
 run/max_fps=75
-config/icon="res://icon.svg"
+boot_splash/bg_color=Color(0.039215688, 0.02745098, 0.050980393, 1)
+boot_splash/stretch_mode=2
+boot_splash/use_filter=false
+boot_splash/image="uid://dpxc27yfktada"
+config/icon="uid://chqiybjciqr5r"
+boot_splash/minimum_display_time=1000
 
 [autoload]
 
