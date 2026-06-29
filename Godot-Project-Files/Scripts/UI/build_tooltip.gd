@@ -47,6 +47,7 @@ func _on_pick_up_button_pressed() -> void:
 		if !tooltip_target.get_item_data(): return
 		main.give_player_item(tooltip_target.get_item_data())
 		if is_instance_valid(tooltip_target):
+			AudioManager.play_sfx_2d("building_picked_up", tooltip_target.global_position)
 			tooltip_target.queue_free()
 		hide_tooltip()
 	else:

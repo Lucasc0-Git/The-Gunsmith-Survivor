@@ -13,7 +13,9 @@ var sounds: Dictionary = {
 	"machinegun_stop": preload("res://SFX/MachineGunStop.wav"),
 	"typing_sound": preload("res://sounds/TypingSound.mp3"),
 	"falling_tree": preload("res://SFX/FallingTree.wav"),
-	"leaves_rustling": preload("res://SFX/LeavesRustling.wav")
+	"leaves_rustling": preload("res://SFX/LeavesRustling.wav"),
+	"building_built": preload("res://SFX/BuildingBuilt.wav"),
+	"building_picked_up": preload("res://SFX/BuildingPickedUp.wav")
 }
 var last_played := {}
 var min_interval := {

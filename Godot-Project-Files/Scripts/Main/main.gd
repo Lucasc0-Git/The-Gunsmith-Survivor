@@ -301,6 +301,7 @@ func spawn_stone(pos: Vector2) -> void:
 
 func spawn_building(pos: Vector2, build_scene: PackedScene) -> void:
 	var building: BuildScene = build_scene.instantiate()
+	AudioManager.play_sfx_2d("building_built", pos)
 	building.preview_only = false
 	building.global_position = pos
 	Ysort.add_child(building)
