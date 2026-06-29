@@ -204,6 +204,12 @@ func _physics_process(_delta: float) -> void:
 	var needed_radius: int = int(float(base_enemy_aggro_radius) + ((float(GameManager.score) / 1.5) * GameManager.difficulty_multiplier))
 	if enemy_aggro_radius != needed_radius:
 		enemy_aggro_radius = needed_radius
+		
+	if GameManager.cheat_mode_enabled:
+		cheat_mode_label.show()
+	else:
+		cheat_mode_label.hide()
+
 func game_over() -> void:
 	var game_over_scene := preload("res://Scenes/GameOver.tscn").instantiate()
 	add_child(game_over_scene)
@@ -246,6 +252,9 @@ func _input(event: InputEvent) -> void:
 		for i in range(20):
 			var rand_pos: Vector2 = Vector2(randi_range(-200, 200), randi_range(-200, 200))
 			spawn_enemy(zombie_scene, get_global_mouse_position() + rand_pos)
+	
+	if event.is_action_pressed("DEBUG gameover"):
+		game_over()
 
 func _on_region_generated(new_trees: Array, new_spawners: Array, new_stones: Array) -> void:
 	var mods: Array = map.world_mods

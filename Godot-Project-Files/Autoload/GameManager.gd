@@ -45,6 +45,7 @@ var pending_save_name: String = ""
 var spawner_activity_mult: float = 1.0
 var selected_difficulty: Difficulty = Difficulty.NORMAL ## Preset chosen by the player
 var difficulty_multiplier: float = 1.0 ## The multiplier of everything based on the chosen preset
+var cheat_mode_enabled: bool = false
 
 var score: int = 0
 var more_stats: Dictionary = {
@@ -137,6 +138,9 @@ func wait_for_node(node: Node, timeout: float = 2.0) -> bool:
 	
 	return true
 
+func get_difficulty_name(diff: Difficulty) -> String:
+	return Difficulty.keys()[diff]
+
 func get_multiplier_for_difficulty(diff: Difficulty) -> float:
 	match diff:
 		Difficulty.EASY:
@@ -159,6 +163,7 @@ func start_new_world(save_name: String = "Autosave") -> void:
 	is_loading_save = false
 	current_world_seed = randi()
 	current_save_name = save_name
+	more_stats.set("Difficulty", get_difficulty_name(selected_difficulty).capitalize().replace("_", " "))
 	difficulty_multiplier = get_multiplier_for_difficulty(selected_difficulty)
 	main = preload("res://Scenes/Main.tscn").instantiate()
 	get_tree().change_scene_to_node(main)
@@ -167,6 +172,6 @@ func load_world(save_name: String) -> void:
 	is_loading_save = true
 	pending_save_name = save_name
 	current_save_name = save_name
-	difficulty_multiplier = get_multiplier_for_difficulty(selected_difficulty)
+	more_stats.set("Difficulty", get_difficulty_name(selected_difficulty).capitalize().replace("_", " "))
 	main = preload("res://Scenes/Main.tscn").instantiate()
 	get_tree().change_scene_to_node(main)

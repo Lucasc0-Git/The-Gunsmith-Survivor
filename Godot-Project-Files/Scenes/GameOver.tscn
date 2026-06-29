@@ -96,6 +96,14 @@ Label/font_sizes/font_size = 60
 Label/styles/normal = ExtResource("2_ktc4i")
 Panel/styles/panel = ExtResource("2_ktc4i")
 
+[sub_resource type="Theme" id="Theme_2a8ad"]
+PanelContainer/styles/panel = ExtResource("2_ktc4i")
+
+[sub_resource type="LabelSettings" id="LabelSettings_2a8ad"]
+font_size = 28
+outline_size = 3
+outline_color = Color(0, 0, 0, 1)
+
 [node name="CanvasLayer" type="CanvasLayer" unique_id=359845920]
 process_mode = 3
 layer = 200
@@ -169,18 +177,33 @@ tooltip_text = "
 theme = ExtResource("3_ktc4i")
 text = "RageQuit"
 
-[node name="RichTextLabel" type="RichTextLabel" parent="." unique_id=852974095]
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=99954374]
+z_index = 2
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
 offset_left = 75.0
-offset_top = -250.0
+offset_top = -200.0
 offset_right = 375.0
-offset_bottom = 250.0
+offset_bottom = 200.0
 grow_vertical = 2
-focus_mode = 2
+theme = SubResource("Theme_2a8ad")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer" unique_id=9534348]
+custom_minimum_size = Vector2(300, 400)
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer" unique_id=1832529780]
+layout_mode = 2
+text = "Stats"
+label_settings = SubResource("LabelSettings_2a8ad")
+horizontal_alignment = 1
+
+[node name="StatsLabel" type="RichTextLabel" parent="PanelContainer/VBoxContainer" unique_id=1648249477]
+layout_mode = 2
+size_flags_vertical = 3
 bbcode_enabled = true
-selection_enabled = true
 
 [connection signal="pressed" from="PauseMenu/VBoxContainer/PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="PauseMenu/VBoxContainer/MenuButton" to="." method="_on_menu_button_pressed"]
