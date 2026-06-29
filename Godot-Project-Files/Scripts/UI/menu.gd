@@ -31,6 +31,7 @@ func _on_load_game_button_pressed() -> void:
 
 func _on_menu_button_pressed() -> void:
 	AudioManager.play("button_click")
+	AudioManager.stop_background_music()
 	if get_tree().paused: get_tree().paused = false
 	get_tree().change_scene_to_file("res://Scenes/StartScene.tscn")
 

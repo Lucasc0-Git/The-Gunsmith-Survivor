@@ -136,7 +136,7 @@ func _ready() -> void:
 	map.player = player
 	inventory_tint = hud.canvas_modulate
 	
-	
+	AudioManager.start_background_music()
 	get_tree().paused = false
 	GameManager.is_game_loaded = true
 	world_loaded.emit()

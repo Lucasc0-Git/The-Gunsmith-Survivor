@@ -98,19 +98,6 @@ Button/styles/hover = SubResource("StyleBoxFlat_1p5hy")
 Button/styles/normal = SubResource("StyleBoxFlat_h1m7h")
 Button/styles/pressed = SubResource("StyleBoxFlat_erwvk")
 
-[sub_resource type="Theme" id="Theme_jw32o"]
-Button/colors/font_color = Color(0.8745098, 0.8745098, 0.8745098, 1)
-Button/colors/font_focus_color = Color(0, 0.856228, 0.85622764, 1)
-Button/colors/font_hover_color = Color(0.6507153, 0.90626, 0.99999994, 1)
-Button/colors/font_outline_color = Color(0.17994305, 0.08881388, 0.023755655, 1)
-Button/colors/font_pressed_color = Color(0.5723979, 0, 0.14884555, 1)
-Button/constants/outline_size = 3
-Button/font_sizes/font_size = 26
-Button/styles/focus = SubResource("StyleBoxFlat_vy5pj")
-Button/styles/hover = SubResource("StyleBoxFlat_1p5hy")
-Button/styles/normal = SubResource("StyleBoxFlat_h1m7h")
-Button/styles/pressed = SubResource("StyleBoxFlat_erwvk")
-
 [sub_resource type="LabelSettings" id="LabelSettings_4kpch"]
 font_size = 30
 outline_size = 3
@@ -412,11 +399,6 @@ text = "Load"
 layout_mode = 2
 theme = ExtResource("5_pbw6q")
 text = "Menu"
-
-[node name="OptionsButton" type="Button" parent="Menu/PauseMenu/VBoxContainer" unique_id=112866397]
-layout_mode = 2
-theme = SubResource("Theme_jw32o")
-text = "Options"
 
 [node name="QuitButton" type="Button" parent="Menu/PauseMenu/VBoxContainer" unique_id=116100010]
 layout_mode = 2
@@ -848,7 +830,6 @@ environment = SubResource("Environment_kx0co")
 [connection signal="pressed" from="Menu/PauseMenu/VBoxContainer/SaveGameButton" to="Menu" method="_on_save_game_button_pressed"]
 [connection signal="pressed" from="Menu/PauseMenu/VBoxContainer/LoadGameButton" to="Menu" method="_on_load_game_button_pressed"]
 [connection signal="pressed" from="Menu/PauseMenu/VBoxContainer/MenuButton" to="Menu" method="_on_menu_button_pressed"]
-[connection signal="pressed" from="Menu/PauseMenu/VBoxContainer/OptionsButton" to="Menu" method="_on_options_button_pressed"]
 [connection signal="pressed" from="Menu/PauseMenu/VBoxContainer/QuitButton" to="Menu" method="_on_quit_button_pressed"]
 [connection signal="pressed" from="Menu/SaveQuestion/HBoxContainer/YesButton" to="Menu/SaveQuestion" method="_on_yes_button_pressed"]
 [connection signal="pressed" from="Menu/SaveQuestion/HBoxContainer/NoButton" to="Menu/SaveQuestion" method="_on_no_button_pressed"]

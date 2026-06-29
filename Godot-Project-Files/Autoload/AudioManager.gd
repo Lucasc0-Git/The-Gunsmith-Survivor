@@ -2,6 +2,17 @@ extends Node
 ## Handle global sound; autoload
 
 var machine_gun_player: AudioStreamPlayer
+
+var music_tracks: Array[AudioStream] = [
+	preload("res://Music/BackgroundMusic1.ogg"),
+	preload("res://Music/BackgroundMusic2.ogg"),
+	preload("res://Music/BackgroundMusic3.ogg"),
+	preload("res://Music/BackgroundMusic4.ogg")
+]
+var current_music_player: AudioStreamPlayer
+var music_playing: bool = false
+var rng := RandomNumberGenerator.new()
+var last_track: AudioStream
 var sounds: Dictionary = {
 	"button_click": preload("res://sounds/ButtonClick.mp3"),
 	"game_over": preload("res://sounds/GameOverSound.mp3"),
@@ -78,6 +89,55 @@ func play_sfx_2d(sound: String, pos: Vector2, added_volume: float = 0) -> void:
 	last_played[sound] = now
 	_play_sound_2d(sounds[sound], pos, added_volume, "SFX")
 
-func play_music(sound: String, added_volume: float = 0) -> void:
-	if sounds.has(sound):
-		_play_sound(sounds[sound], added_volume, "Music")
+##------------------------------------- BG MUSIC ------------------------------------------------------
+
+func start_background_music() -> void:
+	if music_playing or music_tracks.is_empty():
+		return
+	music_playing = true
+	rng.randomize()
+	_play_next_track()
+
+func _play_next_track() -> void:
+	if !music_playing:
+		return
+	
+	var track: AudioStream
+	var attempts := 0
+	const MAX_ATTEMPTS := 10
+	
+	while attempts < MAX_ATTEMPTS:
+		track = music_tracks[rng.randi_range(0, music_tracks.size() - 1,)]
+		if music_tracks.size() == 1 or track != last_track:
+			break	
+		attempts += 1
+	
+	if track == null:
+		track = music_tracks[1]
+	
+	last_track = track
+	
+	if current_music_player:
+		current_music_player.queue_free()
+	
+	current_music_player = AudioStreamPlayer.new()
+	add_child(current_music_player)
+	current_music_player.bus = "Music"
+	current_music_player.stream = track
+	current_music_player.volume_db = -10.0
+	current_music_player.finished.connect(_on_music_finished)
+	current_music_player.play()
+
+func _on_music_finished() -> void:
+	if !music_playing:
+		return
+	
+	var break_time := rng.randf_range(3.0, 15.0)
+	await get_tree().create_timer(break_time).timeout
+	_play_next_track()
+
+func stop_background_music() -> void:
+	music_playing = false
+	if current_music_player:
+		current_music_player.stop()
+		current_music_player.queue_free()
