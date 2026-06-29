@@ -10,7 +10,6 @@ func _ready() -> void:
 func enter() -> void:
 	if is_inside_tree():
 		wonder_timer.start(1.5)
-	print(enemy.main.enemy_aggro_radius)
 
 func exit() -> void:
 	wonder_timer.stop()

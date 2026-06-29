@@ -68,7 +68,6 @@ func set_noise_and_seed() -> void:
 	stone_noise.frequency = stone_frequency
 
 func generate_region(region_pos: Vector2i, seed_f_g: int = 12) -> void:
-	print("Generating region: " + str(region_pos) + " with this seed: " + str(GameManager.current_world_seed))
 	world_seed = seed_f_g
 	set_noise_and_seed()
 	

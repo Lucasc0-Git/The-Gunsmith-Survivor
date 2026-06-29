@@ -83,7 +83,7 @@ func _ready() -> void:
 		print("Loading the world from save " + GameManager.current_save_name)
 		SaveManager.load_save(GameManager.current_save_name)
 	else:
-		print("Generating the world without load.")
+		print("Generating the world without save.")
 		generate(GameManager.current_world_seed)
 	
 	
@@ -139,7 +139,6 @@ func _ready() -> void:
 	
 	get_tree().paused = false
 	GameManager.is_game_loaded = true
-	print("After generating the game, the seed is: " + str(GameManager.current_world_seed))
 	world_loaded.emit()
 	if !GameManager.is_loading_save:
 		SaveManager.save_game(GameManager.current_save_name)

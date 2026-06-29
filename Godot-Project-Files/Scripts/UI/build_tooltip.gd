@@ -44,17 +44,13 @@ func _input(event: InputEvent) -> void:
 func _on_pick_up_button_pressed() -> void:
 	if !main: print("BuildTooltip: Main is null!"); return
 	if tooltip_target is BuildScene:
-		if !tooltip_target.get_item_data(): print(null); return
-		print(tooltip_target.get_item_data())
+		if !tooltip_target.get_item_data(): return
 		main.give_player_item(tooltip_target.get_item_data())
 		if is_instance_valid(tooltip_target):
 			tooltip_target.queue_free()
 		hide_tooltip()
 	else:
 		print("BuildTooltip target is not a BuildScene!")
-
-func _on_test_button_pressed() -> void:
-	print("Testing...")
 
 func _on_visibility_changed() -> void:
 	pass

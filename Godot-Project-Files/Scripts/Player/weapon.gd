@@ -174,9 +174,6 @@ func _swing_weapon() -> void:
 	swing_tween.tween_property(self, "rotation_degrees", original_rotation + (close_data.close_spread/2), close_data.swing_duration)
 	await swing_tween.finished
 	hit_area.monitoring = false
-	
-	
-	print("Swinging ", equipped_item.item_data.id)
 
 func _on_hit_area_body_entered(body: Node2D) -> void:
 	if body.has_method("take_damage"):

@@ -184,7 +184,6 @@ func _serialize_game_manager() -> Dictionary:
 
 func _deserialize_game_manager(data: Dictionary) -> void:
 	GameManager.current_world_seed = data.get("current_world_seed", 12)
-	print("Setting current_world_seed via loading the game: " + str(GameManager.current_world_seed))
 	GameManager.time = data.get("time", 0.0)
 	GameManager.set_day(data.get("current_day", 0))
 	GameManager.set_hour(data.get("current_hour", 0))
@@ -272,14 +271,14 @@ func _serialize_hotbar() -> Array:
 	if GameManager.main.hud.hotbar:
 		return GameManager.main.hud.hotbar.save_data()
 	else:
-		print("serialize: hotbar null")
+		pass
 	return []
 
 func _deserialize_hotbar(data_array: Array) -> void:
 	if GameManager.main.hud.hotbar:
 		GameManager.main.hud.hotbar.load_data(data_array)
 	else:
-		print("deserialize: hotbar null")
+		pass
 
 #Dropped items
 

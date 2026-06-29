@@ -26,15 +26,12 @@ func _on_back_pressed() -> void:
 
 func _on_fullscreen_toggled(toggled_on: bool) -> void:
 	AudioManager.play_button_click()
-	print("Checkbox: Fullscreen was toggled to:", toggled_on)
 	Settings.apply_fullscreen(toggled_on)
 
 func _on_vsync_toggled(toggled_on: bool) -> void:
 	AudioManager.play_button_click()
-	print("Checkbox: Vsync was toggled to: ", toggled_on)
 	Settings.apply_vsync(toggled_on)
 
 func _on_global_sounds_toggled(toggled_on: bool) -> void:
 	AudioManager.play_button_click()
-	print("Checkbox: Global Sounds was toggled to: ", toggled_on)
 	Settings.apply_sounds(toggled_on)

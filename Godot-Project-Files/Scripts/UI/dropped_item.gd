@@ -30,6 +30,5 @@ func load_data(data: Dictionary) -> void:
 	if ItemRegistry.items:
 		item_data = ItemRegistry.items.get(data.get("item_id", ""))
 	else:
-		print("waiting for ItemRegistry")
 		await  ItemRegistry.items_loaded
 		item_data = ItemRegistry.items.get(data.get("item_id", ""))
