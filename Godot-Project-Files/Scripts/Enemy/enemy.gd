@@ -1,7 +1,7 @@
 extends CharacterBody2D
 class_name Enemy
 
-@onready var attack_timer: Timer = $Timer
+@onready var attack_timer: Timer = $HitTimer
 @onready var health_bar: ProgressBar = $HealthBar
 @onready var states_node := $StateMachine
 @onready var despawn_timer: Timer = $DespawnTimer

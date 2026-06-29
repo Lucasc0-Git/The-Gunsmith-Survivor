@@ -140,17 +140,17 @@ func wait_for_node(node: Node, timeout: float = 2.0) -> bool:
 func get_multiplier_for_difficulty(diff: Difficulty) -> float:
 	match diff:
 		Difficulty.EASY:
-			return 0.75
+			return 0.65
 		Difficulty.SLIGHTLY_CHALLENGING:
-			return 0.9
+			return 0.8
 		Difficulty.NORMAL:
-			return 1.0
+			return 0.95
 		Difficulty.CHALLENGING:
 			return 1.2
 		Difficulty.DIFFICULT:
-			return 1.35
+			return 1.3
 		Difficulty.NIGHTMARE:
-			return 1.8
+			return 1.65
 		_:
 			push_warning("Unknown difficulty preset! Using NORMAL")
 			return 1.0

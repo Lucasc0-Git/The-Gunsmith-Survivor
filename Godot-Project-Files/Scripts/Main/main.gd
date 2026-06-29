@@ -130,6 +130,9 @@ func _ready() -> void:
 	##Check if everything is ok.
 	player.set_vars_debug()
 	
+	if GameManager.difficulty_multiplier >= 1.0:
+		the_core.max_health *= GameManager.difficulty_multiplier
+	
 	map.player = player
 	inventory_tint = hud.canvas_modulate
 	
