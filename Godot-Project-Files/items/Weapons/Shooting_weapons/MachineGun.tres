@@ -12,6 +12,7 @@ damage = 4
 use_sound = "machinegun_shot"
 fire_rate = 0.025
 bullet_scene = ExtResource("1_o6s5b")
+bullet_speed_multiplier = 1.25
 bullet_shrinking = 0.981
 bullet_scale = Vector2(0.6, 0.4)
 recoil = 15.0

@@ -15,6 +15,7 @@ class_name BasicBullet
 @onready var destroy_light: PointLight2D = $DestroyLight
 
 ## The basic var declaration
+var bullet_speed_multiplier: float = 1.0
 var direction := Vector2.ZERO
 var bullet_damage : int
 var has_hit: bool = false
@@ -30,7 +31,7 @@ func _physics_process(delta: float) -> void:
 	if has_hit: return
 	## Move the bullet
 	if direction != Vector2.ZERO:
-		position += direction.normalized() * bullet_speed * delta
+		position += direction.normalized() * bullet_speed * delta * bullet_speed_multiplier
 		bullet_speed = max(0, bullet_speed * (1.0 - damping * delta))
 	scale = scale * shrinking_rate
 	if scale <= Vector2(0.0001, 0.0001):

@@ -12,6 +12,7 @@ class_name WeaponData
 @export_group("Long-ranged weapons")
 @export var fire_rate : float = 0.25 ##How much time flows in between of two shots (in seconds).
 @export var bullet_scene : PackedScene ##The scene of the bullet.
+@export var bullet_speed_multiplier: float = 1.0
 @export var bullet_shrinking: float = 0.98 ##How much each bullet shrinks over time. 1.0 means no shrinking, everything lower than 0.975 is useless.
 @export var muzzle_offset : Vector2 = Vector2(10, 10) ##How much pixels is the weapon far from the player (both numbers the same).
 @export var bullet_scale : Vector2 = Vector2(1.0, 1.0) ##The scale of the bullet for each weapon.

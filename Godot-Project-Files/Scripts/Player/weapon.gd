@@ -260,6 +260,7 @@ func _spawn_bullet(i : int) -> void:
 	var bullet := weapon_data.bullet_scene.instantiate()
 	bullet.shrinking_rate = weapon_data.bullet_shrinking
 	bullet.scale = weapon_data.bullet_scale * bullet.scale
+	bullet.bullet_speed_multiplier = weapon_data.bullet_speed_multiplier
 	bullet.dmg_type = equipped_item.item_data.weapon_data.dmg_type
 	bullet.weapon_type = equipped_item.item_data.weapon_data.weapon_type
 	bullet_damage = weapon_data.damage
