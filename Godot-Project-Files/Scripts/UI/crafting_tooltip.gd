@@ -18,39 +18,67 @@ func show_tooltip(item_data: ItemData) -> void:
 	if item_data == null: return
 	var bb : String = ""
 	
-	bb += "[b][i]" + "         " + "Craft:" + "[/i][/b]\n"
+	# Header
+	#bb += "[b][i] Craft:" + "[/i][/b]\n"
 	bb += "[b]" + str(item_data.display_name) + "[/b]\n"
+	# Description
 	if item_data.crafting_description == "":
 		bb += str(item_data.description) + "\n"
 	else:
 		bb += str(item_data.crafting_description) + "\n"
 	
+	# Weapon stats
 	if item_data is WeaponItemData:
-		bb += "-Damage: " + str(item_data.weapon_data.damage) + "\n"
+		bb += "[ul]\n"
+		bb += "Damage: " + str(item_data.weapon_data.damage) + "\n"
+		if item_data.weapon_data.heated:
+			bb += "Heated weapon\n"
+		bb += "[/ul]\n"
+	
+	# Heal stats
 	elif item_data is HealItemData:
-		bb += "-HealPowah: " + str(item_data.heal_data.heal) + " "
+		bb += "[ul]\n"
+		bb += "[*]HealPower: " + str(item_data.heal_data.heal)
 		if item_data.heal_data.over_time_heal:
-			bb += "over " + str(item_data.heal_data.time_healing) + "\n"
-		else:
-			bb += "\n"
+			bb += " over " + str(item_data.heal_data.time_healing) + "s"
+		bb += "\n"
+		bb += "[/ul]\n"
+	
+	# just...
 	elif item_data is JustItemData:
 		pass #Does nothing
 	
 	bb += "\n"
+	
+	# Crafting requirements
 	bb += "[b]" + "Crafting requirements:" + "[/b]\n"
 	var crafting_recipe: Dictionary[ItemData, int] = item_data.crafting_recipe
-	for ingredient: ItemData in crafting_recipe:
-		var needed := crafting_recipe[ingredient]
-		var color_prefix := text_color(has_enough(ingredient, needed))
-		bb += color_prefix + str(needed) + "x " + ingredient.display_name + "[color=Color(0.702, 0.431, 0.141)]\n"
 	
+	if not crafting_recipe.is_empty():
+		bb += "[ul]\n"
+		for ingredient: ItemData in crafting_recipe:
+			var needed := crafting_recipe[ingredient]
+			var color_prefix := text_color(has_enough(ingredient, needed))
+			bb += color_prefix + str(needed) + "x " + ingredient.display_name
+			if color_prefix != "":
+				bb += "[/color]"
+			bb += "\n"
+		bb += "[/ul]\n"
+	
+	# Needed stations
 	bb += "[b]" + "Needed crafting stations:" + "[/b]\n"
 	var needed_stations: Dictionary[GameManager.StationType, int] = item_data.needed_stations
-	for station_type: GameManager.StationType in needed_stations.keys():
-		var station_name := GameManager.get_station_name(station_type)
-		var color_prefix := text_color(has_station(station_type))
-		bb += color_prefix + station_name + "[color=Color(0.702, 0.431, 0.141)]\n"
 	
+	if not needed_stations.is_empty():
+		bb += "[ul]\n"
+		for station_type: GameManager.StationType in needed_stations.keys():
+			var station_name := GameManager.get_station_name(station_type)
+			var color_prefix := text_color(has_station(station_type))
+			bb += color_prefix + station_name
+			if color_prefix != "":
+				bb += "[/color]"
+			bb += "\n"
+		bb += "[/ul]\n"
 	visible = true
 	self.bbcode_text = bb
 	
