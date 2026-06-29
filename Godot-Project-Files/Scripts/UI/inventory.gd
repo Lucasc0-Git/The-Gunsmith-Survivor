@@ -78,7 +78,7 @@ func _ready() -> void:
 		fill_slot(3, assault_rifle_item, 1)
 		fill_slot(4, machine_gun_item, 1)
 		fill_slot(6, wooden_axe_item, 1)
-		fill_slot(10, wood_item, 32)
+		fill_slot(10, shotgun_item, 1)
 
 func _on_slot_right_click(slot: Slot) -> void:
 	hud.on_inventory_slot_right_clicked(slot)

@@ -80,3 +80,8 @@ Personal learning project, but issues, feedback, and pull requests are welcome!
 📜 License
 © 2026 Lucasc0. All rights reserved.
 View/share only via the official GitHub repo. No redistribution without permission.
+
+
+📜 Credits
+
+Some Music by Ievgen Poltavskyi from Pixabay

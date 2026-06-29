@@ -21,17 +21,17 @@ func _on_sounds_changed(enabled:bool) -> void:
 	global_sounds_cb.set_pressed_no_signal(enabled)
 
 func _on_back_pressed() -> void:
-	AudioManager.play_button_click()
+	AudioManager.play("button_click")
 	get_tree().change_scene_to_file("res://Scenes/StartScene.tscn")
 
 func _on_fullscreen_toggled(toggled_on: bool) -> void:
-	AudioManager.play_button_click()
+	AudioManager.play("button_click")
 	Settings.apply_fullscreen(toggled_on)
 
 func _on_vsync_toggled(toggled_on: bool) -> void:
-	AudioManager.play_button_click()
+	AudioManager.play("button_click")
 	Settings.apply_vsync(toggled_on)
 
 func _on_global_sounds_toggled(toggled_on: bool) -> void:
-	AudioManager.play_button_click()
+	AudioManager.play("button_click")
 	Settings.apply_sounds(toggled_on)

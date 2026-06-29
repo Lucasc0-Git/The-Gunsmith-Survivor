@@ -23,7 +23,7 @@ func populate_save_list() -> void:
 		btn.text = "%s - %s" % [save_info.name, Time.get_date_string_from_unix_time(save_info.timestamp)]
 		btn.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		btn.pressed.connect(
-			func() -> void: AudioManager.play_button_click(); GameManager.is_game_loaded = false; GameManager.load_world(save_info.name)
+			func() -> void: AudioManager.play("button_click"); GameManager.is_game_loaded = false; GameManager.load_world(save_info.name)
 		)
 		var delete: Button = Button.new()
 		delete.icon = preload("res://Textures/TrashCan.png") as Texture2D
@@ -31,7 +31,7 @@ func populate_save_list() -> void:
 		delete.expand_icon = true
 		delete.custom_minimum_size = Vector2(50, 0)
 		delete.pressed.connect(
-			func() -> void: AudioManager.play_button_click(); SaveManager.delete_save(save_info.name); populate_save_list()
+			func() -> void: AudioManager.play("button_click"); SaveManager.delete_save(save_info.name); populate_save_list()
 		)
 		h_box.add_child(btn)
 		h_box.add_child(delete)

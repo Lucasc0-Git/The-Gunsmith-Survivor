@@ -19,6 +19,8 @@
 [ext_resource type="Texture2D" uid="uid://bc3tg3k1kd6wx" path="res://Textures/bullet.png" id="10_miouo"]
 [ext_resource type="Texture2D" uid="uid://cbjsnlupl5vow" path="res://Textures/player/blbllblblblblbl zezadu.png" id="11_1iu4k"]
 [ext_resource type="Script" uid="uid://dum4t15xgh5x0" path="res://Scripts/Player/PlayerDodge.gd" id="17_1iu4k"]
+[ext_resource type="AudioStream" uid="uid://cali71wg808rl" path="res://SFX/WeaponOverheated.wav" id="20_5v66d"]
+[ext_resource type="AudioStream" uid="uid://dijqgib3kcyo2" path="res://SFX/Steps.wav" id="20_m0x7a"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_52ee3"]
 radius = 3.6666667
@@ -207,6 +209,11 @@ shadow_color = Color(0, 0, 0, 0.3372549)
 shadow_filter = 1
 texture = SubResource("GradientTexture2D_m0x7a")
 
+[node name="WeaponOverheatedHissing" type="AudioStreamPlayer" parent="Weapon" unique_id=1507058060]
+stream = ExtResource("20_5v66d")
+volume_db = -7.5
+bus = &"SFX"
+
 [node name="ReloadTimer" type="Timer" parent="Weapon" unique_id=588880394]
 
 [node name="OverheatTimer" type="Timer" parent="Weapon" unique_id=813589677]
@@ -229,6 +236,10 @@ texture = SubResource("PlaceholderTexture2D_1iu4k")
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Weapon" unique_id=1849397695]
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1188595411]
+
+[node name="StepsStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=2043816419]
+stream = ExtResource("20_m0x7a")
+bus = &"SFX"
 
 [connection signal="timeout" from="Weapon/ReloadTimer" to="Weapon" method="_on_reload_timer_timeout"]
 [connection signal="body_entered" from="Weapon/HitArea" to="Weapon" method="_on_hit_area_body_entered"]

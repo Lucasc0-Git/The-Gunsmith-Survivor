@@ -254,7 +254,13 @@ func _input(event: InputEvent) -> void:
 			spawn_enemy(zombie_scene, get_global_mouse_position() + rand_pos)
 	
 	if event.is_action_pressed("DEBUG gameover"):
+		if !OS.is_debug_build(): return
 		game_over()
+	
+	if event.is_action_pressed("DEBUG turn night"):
+		if !OS.is_debug_build(): return
+		GameManager.set_hour(21)
+		hud.tint_hud(inventory_darken, 1)
 
 func _on_region_generated(new_trees: Array, new_spawners: Array, new_stones: Array) -> void:
 	var mods: Array = map.world_mods

@@ -12,6 +12,7 @@ class_name BasicBullet
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
 @onready var point_light: PointLight2D = $PointLight2D
+@onready var destroy_light: PointLight2D = $DestroyLight
 
 ## The basic var declaration
 var direction := Vector2.ZERO
@@ -26,6 +27,7 @@ func _ready() -> void:
 	pass
 
 func _physics_process(delta: float) -> void:
+	if has_hit: return
 	## Move the bullet
 	if direction != Vector2.ZERO:
 		position += direction.normalized() * bullet_speed * delta
@@ -40,6 +42,7 @@ func _on_despawn_timer_timeout() -> void:
 
 ## Called when bullet hits something (can recognise the group of the object)
 func _on_body_entered(body: Node2D) -> void:
+	if has_hit: return
 	if body.is_in_group("object"):
 		if has_hit:
 			return
@@ -51,6 +54,7 @@ func _on_body_entered(body: Node2D) -> void:
 		bullet_despawn()
 
 func _on_area_entered(area: Area2D) -> void:
+	if has_hit: return
 	if area.is_in_group("enemy_hitbox"):
 		if has_hit: return
 		area.get_parent().take_damage(bullet_damage, dmg_type, weapon_type)
@@ -62,5 +66,12 @@ func bullet_despawn() -> void:
 	has_hit = true
 	sprite.visible = false
 	collision_shape.set_deferred("disabled", true)
+	AudioManager.play_sfx_2d("bullet_landing", global_position, -1)
+	flash_light()
 	await hit_explosion.finished
 	queue_free()
+
+func flash_light() -> void:
+	destroy_light.enabled = true
+	await get_tree().create_timer(0.075).timeout
+	destroy_light.enabled = false

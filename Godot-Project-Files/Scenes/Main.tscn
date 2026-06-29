@@ -714,6 +714,7 @@ size_flags_horizontal = 3
 theme = SubResource("Theme_h1m7h")
 placeholder_text = "Your save name"
 alignment = 1
+max_length = 25
 virtual_keyboard_enabled = false
 caret_blink = true
 
@@ -843,6 +844,7 @@ text = "Test"
 [connection signal="pressed" from="Menu/SaveQuestion/BoxContainer/BackButton" to="Menu/SaveQuestion" method="_on_back_button_pressed"]
 [connection signal="pressed" from="Menu/OptMenu/VBoxContainer2/BackButton" to="Menu/OptMenu" method="_on_back_button_pressed"]
 [connection signal="pressed" from="Menu/LoadList/BackButton" to="Menu" method="_on_load_list_back_button_pressed"]
+[connection signal="text_change_rejected" from="Menu/SaveList/HBoxContainer/LineEdit" to="Menu/SaveList" method="_on_line_edit_text_change_rejected"]
 [connection signal="pressed" from="Menu/SaveList/HBoxContainer/SaveButton" to="Menu/SaveList" method="_on_save_button_pressed"]
 [connection signal="pressed" from="Menu/SaveList/BackButton" to="Menu" method="_on_save_list_back_button_pressed"]
 [connection signal="visibility_changed" from="BuildTooltip" to="BuildTooltip" method="_on_visibility_changed"]

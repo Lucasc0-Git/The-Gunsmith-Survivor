@@ -39,6 +39,7 @@ size_flags_horizontal = 3
 theme = SubResource("Theme_7qfpw")
 placeholder_text = "Your save name"
 alignment = 1
+max_length = 25
 virtual_keyboard_enabled = false
 caret_blink = true
 
@@ -110,4 +111,5 @@ icon = ExtResource("4_t73lp")
 icon_alignment = 1
 expand_icon = true
 
+[connection signal="text_change_rejected" from="HBoxContainer/LineEdit" to="." method="_on_line_edit_text_change_rejected"]
 [connection signal="pressed" from="HBoxContainer/NewSaveButton" to="." method="_on_new_save_button_pressed"]

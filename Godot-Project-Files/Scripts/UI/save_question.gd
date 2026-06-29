@@ -20,5 +20,5 @@ func _on_no_button_pressed() -> void:
 
 func _on_back_button_pressed() -> void:
 	if visible:
-		AudioManager.play_button_click()
+		AudioManager.play("button_click")
 		menu.hide_save_question()

@@ -15,10 +15,19 @@ fill = 1
 fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0.8632479, 0.1965812)
 
+[sub_resource type="Gradient" id="Gradient_qvus8"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_2a8ad"]
+gradient = SubResource("Gradient_qvus8")
+width = 80
+height = 80
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.82905984, 0.102564104)
+
 [node name="Area2D" type="Area2D" unique_id=882397831]
 process_mode = 1
-z_index = -1
-z_as_relative = false
 y_sort_enabled = true
 scale = Vector2(0.5, 0.5)
 collision_layer = 32
@@ -61,9 +70,12 @@ hue_variation_min = -0.5
 hue_variation_max = 0.5
 
 [node name="PointLight2D" type="PointLight2D" parent="." unique_id=1875844923]
-range_z_min = 0
-range_z_max = 0
 texture = SubResource("GradientTexture2D_qvus8")
+
+[node name="DestroyLight" type="PointLight2D" parent="." unique_id=1620046052]
+enabled = false
+energy = 1.5
+texture = SubResource("GradientTexture2D_2a8ad")
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

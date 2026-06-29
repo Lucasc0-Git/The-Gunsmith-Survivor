@@ -6,6 +6,8 @@ class_name WeaponData
 @export var icon : Texture2D ##The texture for the weapon, which the player holds (NOT texture in inventory).
 @export var damage : int = 10 ##How much damage the weapon does.
 @export var rotatable: bool = true ##If the weapon can be rotated around the player.
+@export var use_sound: String = ""
+@export var sound_added_volume: float = 0
 
 @export_group("Long-ranged weapons")
 @export var fire_rate : float = 0.25 ##How much time flows in between of two shots (in seconds).
@@ -14,6 +16,7 @@ class_name WeaponData
 @export var muzzle_offset : Vector2 = Vector2(10, 10) ##How much pixels is the weapon far from the player (both numbers the same).
 @export var bullet_scale : Vector2 = Vector2(1.0, 1.0) ##The scale of the bullet for each weapon.
 @export var recoil : float = 50 ##How much do player go backwards after shooting.
+@export var is_machine_gun: bool = false
 
 @export_subgroup("Over-heatable weapons")
 @export var heated: bool = false ##If the gun can be overheated when using too much.

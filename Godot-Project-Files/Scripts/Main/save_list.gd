@@ -24,7 +24,7 @@ func populate_save_list() -> void:
 		btn.text = "%s - %s" % [save_info.name, Time.get_date_string_from_unix_time(save_info.timestamp)]
 		btn.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		btn.pressed.connect(
-			func() -> void: AudioManager.play_button_click() ; SaveManager.save_game(save_info.name); populate_save_list(); menu.hide_save_list()
+			func() -> void: AudioManager.play("button_click") ; SaveManager.save_game(save_info.name); populate_save_list(); menu.hide_save_list()
 		)
 		var delete: Button = Button.new()
 		delete.icon = preload("res://Textures/TrashCan.png") as Texture2D
@@ -32,7 +32,7 @@ func populate_save_list() -> void:
 		delete.expand_icon = true
 		delete.custom_minimum_size = Vector2(50, 0)
 		delete.pressed.connect(
-			func() -> void: AudioManager.play_button_click(); SaveManager.delete_save(save_info.name); populate_save_list()
+			func() -> void: AudioManager.play("button_click"); SaveManager.delete_save(save_info.name); populate_save_list()
 		)
 		h_box.add_child(btn)
 		h_box.add_child(delete)
@@ -49,3 +49,6 @@ func _on_save_button_pressed() -> void:
 	SaveManager.save_game(save_name)
 	populate_save_list()
 	menu.hide_save_list()
+
+func _on_line_edit_text_change_rejected(_rejected_substring: String) -> void:
+	AudioManager.play("typing_sound")

@@ -1,8 +1,15 @@
 extends State
 ## The run state (player moves)
 
+func exit() -> void:
+	if player.steps_player.playing:
+		player.steps_player.stop()
+
 ## Called every physics frame
 func physics_update(_delta: float) -> void:
+	if !player.steps_player.playing:
+		player.steps_player.play()
+	
 	var dir : Vector2 = player.get_input_dir()
 	match dir:
 		Vector2.LEFT:

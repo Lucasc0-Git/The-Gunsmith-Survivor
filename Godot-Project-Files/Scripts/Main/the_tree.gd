@@ -50,12 +50,14 @@ func take_damage(amount: float, dmg_type: DamageTypes.DamageType, weapon_type: S
 	#target_color = low_health_modulate.lerp(full_health_modulate, health_ratio)
 #
 func play_shake(intensity: float = 1.0) -> void:
+	AudioManager.play_sfx_2d("leaves_rustling", global_position, -10)
 	shake_player.stop()
 	shake_player.speed_scale = intensity
 	shake_player.play("shake_on_hit")
 
 func destroy() -> void:
 	GameManager.score += score_for_destroy
+	AudioManager.play_sfx_2d("falling_tree", global_position, 1.5)
 	GameManager.more_stats["Resources mined"] += 1
 	collision.set_deferred("disabled", true)
 	drop_items(1, 20)

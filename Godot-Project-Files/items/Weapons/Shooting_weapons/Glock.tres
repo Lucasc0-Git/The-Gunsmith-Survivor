@@ -8,6 +8,8 @@
 script = ExtResource("3_f3u31")
 id = "glock"
 icon = ExtResource("2_1ahel")
+use_sound = "small_gun_shot"
+sound_added_volume = -3.0
 bullet_scene = ExtResource("1_vx4tw")
 bullet_shrinking = 0.99
 muzzle_offset = Vector2(9, 9)

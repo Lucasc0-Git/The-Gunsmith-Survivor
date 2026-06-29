@@ -11,6 +11,7 @@ class_name Weapon
 @onready var hit_area: Area2D = $HitArea
 @onready var hit_area_collision_shape: CollisionShape2D = $HitArea/CollisionShape2D
 @onready var overheat_timer: Timer = $OverheatTimer
+@onready var overheated_hissing: AudioStreamPlayer = $WeaponOverheatedHissing
 
 ## The signal declaration
 signal has_shot(rotation: float, recoil: float)
@@ -121,6 +122,8 @@ func unequip() -> void:
 		w.current_heat = current_heat
 		w.last_cooled_time = Time.get_unix_time_from_system()
 	
+	if overheated_hissing.playing:
+		overheated_hissing.stop()
 	equipped_item = null
 	weapon_data = null
 	sprite.texture = null
@@ -207,6 +210,8 @@ func _on_hit_area_body_entered(body: Node2D) -> void:
 		)
 		var data: CloseWeaponItemData = equipped_item.item_data as CloseWeaponItemData
 		
+		AudioManager.play_sfx_2d("bullet_landing", body.global_position)
+		
 		if body is CharacterBody2D:
 			var dir := (body.global_position - player.global_position).normalized()
 			body.velocity += dir * (data.close_weapon_data.knockback)
@@ -215,11 +220,15 @@ func _shoot_weapon() -> void:
 	if !can_shoot or is_overheated:
 		return
 	
+	AudioManager.play_sfx(weapon_data.use_sound, weapon_data.sound_added_volume)
+	
 	if weapon_data.heated:
 		current_heat += weapon_data.heat_per_shot
 		if current_heat >= weapon_data.max_heat:
 			current_heat = weapon_data.max_heat
 			is_overheated = true
+			if !overheated_hissing.playing:
+				overheated_hissing.play()
 			#reload_timer.start(weapon_data.overheat_cooldown)
 			#Visual: particles etc
 			return
@@ -235,6 +244,10 @@ func _shoot_weapon() -> void:
 	bang_light.enabled = true
 	await get_tree().create_timer(0.05).timeout
 	bang_light.enabled = false
+	
+	if weapon_data.weapon_type == "Shotgun":
+		await get_tree().create_timer(0.2).timeout
+		AudioManager.play("shotgun_reload")
 
 func _use_heal_item() -> void:
 	var heal_item := equipped_item.item_data as HealItemData
@@ -276,6 +289,7 @@ func _on_reload_timer_timeout() -> void:
 	can_shoot = true
 	if is_overheated and current_heat <= weapon_data.max_heat / 2:
 		is_overheated = false
+		overheated_hissing.stop()
 
 func inv_toggled(inv_visible: bool) -> void:
 	if inv_visible == true:
@@ -326,6 +340,13 @@ func _process(delta: float) -> void:
 	
 	if weapon_data:
 		if weapon_data.heated and current_heat > 0:
+			if current_heat >= weapon_data.max_heat:
+				if !overheated_hissing.playing:
+					overheated_hissing.play()
+			else:
+				if current_heat < weapon_data.max_heat / 1.75:
+					overheated_hissing.stop()
+			
 			if !shooting:
 				current_heat -= weapon_data.heat_conductivity * delta
 			else:

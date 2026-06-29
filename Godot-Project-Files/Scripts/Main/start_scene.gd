@@ -22,7 +22,7 @@ func _process(_delta: float) -> void:
 		GameManager.is_game_loaded = false
 
 func _on_new_game_button_pressed() -> void:
-	AudioManager.play_button_click()
+	AudioManager.play("button_click")
 	#get_tree().change_scene_to_packed(MainScene)
 	if Settings.novice_mode:
 		tutorial_panel.visible = true
@@ -33,16 +33,16 @@ func _on_new_game_button_pressed() -> void:
 		GameManager.start_new_world()
 
 func _on_tutorial_button_pressed() -> void:
-	AudioManager.play_button_click()
+	AudioManager.play("button_click")
 	tutorial_panel.visible = true
 	Settings.set_novice_mode(false)
 
 func _on_saves_button_pressed() -> void:
-	AudioManager.play_button_click()
+	AudioManager.play("button_click")
 	get_tree().change_scene_to_file("res://Scenes/SavesScene.tscn")
 
 func _on_options_button_pressed() -> void:
-	AudioManager.play_button_click()
+	AudioManager.play("button_click")
 	get_tree().change_scene_to_packed(OptScene)
 
 func _on_quit_button_pressed() -> void:
@@ -50,5 +50,5 @@ func _on_quit_button_pressed() -> void:
 	get_tree().quit()
 
 func _on_back_button_pressed() -> void:
-	AudioManager.play_button_click()
+	AudioManager.play("button_click")
 	tutorial_panel.visible = false

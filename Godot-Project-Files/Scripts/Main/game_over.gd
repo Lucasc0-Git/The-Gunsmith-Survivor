@@ -22,7 +22,7 @@ func _ready() -> void:
 func _on_menu_button_pressed() -> void:
 	GameManager.cheat_mode_enabled = false
 	get_tree().paused = false
-	AudioManager.play_button_click()
+	AudioManager.play("button_click")
 	get_tree().change_scene_to_file("res://Scenes/StartScene.tscn")
 
 func _on_quit_button_pressed() -> void:
@@ -30,6 +30,7 @@ func _on_quit_button_pressed() -> void:
 
 func _on_play_button_pressed() -> void:
 	GameManager.cheat_mode_enabled = true
+	AudioManager.play("button_click")
 	get_tree().paused = false
 	get_parent().the_core.health = get_parent().the_core.max_health
 	queue_free()

@@ -18,28 +18,28 @@ func _ready() -> void:
 	hide_save_list()
 
 func _on_resume_button_pressed() -> void:
-	AudioManager.play_button_click()
+	AudioManager.play("button_click")
 	main.hide_menu()
 
 func _on_save_game_button_pressed() -> void:
-	AudioManager.play_button_click()
+	AudioManager.play("button_click")
 	show_save_list()
 
 func _on_load_game_button_pressed() -> void:
-	AudioManager.play_button_click()
+	AudioManager.play("button_click")
 	show_load_list()
 
 func _on_menu_button_pressed() -> void:
-	AudioManager.play_button_click()
+	AudioManager.play("button_click")
 	if get_tree().paused: get_tree().paused = false
 	get_tree().change_scene_to_file("res://Scenes/StartScene.tscn")
 
 func _on_options_button_pressed() -> void:
-	AudioManager.play_button_click()
+	AudioManager.play("button_click")
 	show_opt()
 
 func _on_quit_button_pressed() -> void:
-	AudioManager.play_button_click()
+	AudioManager.play("button_click")
 	show_save_question()
 	#get_tree().quit()
 
