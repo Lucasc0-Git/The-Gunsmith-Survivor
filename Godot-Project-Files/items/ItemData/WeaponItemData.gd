@@ -5,6 +5,7 @@ class_name WeaponItemData
 
 var current_heat: float = 0.0
 var last_cooled_time: float = 0.0
+var is_hissing_intact: bool = false
 
 func is_rotatable() -> bool:
 	return weapon_data.rotatable

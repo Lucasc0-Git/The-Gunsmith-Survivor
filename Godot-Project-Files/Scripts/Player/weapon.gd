@@ -76,6 +76,8 @@ func equip_item(slot_data: SlotData) -> void:
 				heat_material = ShaderMaterial.new()
 				heat_material.shader = preload("res://Shaders/weapon_heat.gdshader")
 			sprite.material = heat_material
+			if (equipped_item.item_data as WeaponItemData).is_hissing_intact and w.current_heat >= weapon_data.max_heat / 1.75:
+				overheated_hissing.play()
 	
 	elif item is HealItemData:
 		var h := item as HealItemData
@@ -121,6 +123,8 @@ func unequip() -> void:
 		var w := equipped_item.item_data as WeaponItemData
 		w.current_heat = current_heat
 		w.last_cooled_time = Time.get_unix_time_from_system()
+		w.is_hissing_intact = overheated_hissing.playing
+		sprite.material = null
 	
 	if overheated_hissing.playing:
 		overheated_hissing.stop()
