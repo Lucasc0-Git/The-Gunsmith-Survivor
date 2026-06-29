@@ -31,6 +31,7 @@ var assault_rifle_item: ItemData
 var basic_smithing_table_item: ItemData
 var fireplace_item: ItemData
 var wooden_pickaxe_item: ItemData
+var machine_gun_item: ItemData
 
 var _tween: Tween
 var player: Player
@@ -54,6 +55,7 @@ func _ready() -> void:
 	basic_smithing_table_item = ItemRegistry.items.get("basic_smithing_table")
 	fireplace_item = ItemRegistry.items.get("fireplace")
 	wooden_pickaxe_item = ItemRegistry.items.get("wooden_pickaxe")
+	machine_gun_item = ItemRegistry.items.get("machine_gun")
 	
 	for i in range(grid_container.get_child_count()):
 		var crafting_slot: Button = grid_container.get_child(i)
@@ -163,6 +165,14 @@ func _on_assault_rifle_pressed() -> void:
 		inventory.rm_items_by_recipe(assault_rifle_item.crafting_recipe)
 		GameManager.more_stats["Items crafted"] += 1
 		GameManager.score += assault_rifle_item.score_for_crafting
+
+func _on_machine_gun_pressed() -> void:
+	if inventory == null: return
+	if inventory.can_craft(machine_gun_item.crafting_recipe):
+		hud.give_item(machine_gun_item)
+		inventory.rm_items_by_recipe(machine_gun_item.crafting_recipe)
+		GameManager.more_stats["Items crafted"] += 1
+		GameManager.score += machine_gun_item.score_for_crafting
 
 ##The Tools crafting recipes.
 

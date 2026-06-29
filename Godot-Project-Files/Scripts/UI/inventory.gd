@@ -19,6 +19,7 @@ var wooden_axe_item: ItemData
 var assault_rifle_item: ItemData
 var basic_station_item: ItemData
 var fireplace_item: ItemData
+var machine_gun_item: ItemData
 
 var basic_crafting: BasicCraftingUI
 var inv_slot : Slot
@@ -49,6 +50,7 @@ func _ready() -> void:
 	wooden_axe_item = ItemRegistry.items.get("wooden_axe")
 	assault_rifle_item = ItemRegistry.items.get("assault_rifle")
 	fireplace_item = ItemRegistry.items.get("fireplace")
+	machine_gun_item = ItemRegistry.items.get("machine_gun")
 	visible = false
 	## Give the inventory some slots
 	for i in range(20): #The range is how much slots will the inventory have
@@ -74,6 +76,7 @@ func _ready() -> void:
 		fill_slot(5, wood_item, 32)
 		fill_slot(2, torch_item, 16)
 		fill_slot(3, assault_rifle_item, 1)
+		fill_slot(4, machine_gun_item, 1)
 		fill_slot(6, wooden_axe_item, 1)
 		fill_slot(10, wood_item, 32)
 

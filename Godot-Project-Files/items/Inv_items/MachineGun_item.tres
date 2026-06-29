@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="WeaponItemData" format=3 uid="uid://heu2agyjxvh8"]
+
+[ext_resource type="Script" uid="uid://dgi6p7vrp0imi" path="res://items/ItemData/ItemData.gd" id="1_13y6b"]
+[ext_resource type="Script" uid="uid://duhl153idv7v8" path="res://items/ItemData/WeaponItemData.gd" id="2_na5fo"]
+[ext_resource type="Resource" uid="uid://4bpscjhtcwh6" path="res://items/Inv_items/Stone_item.tres" id="2_p61xx"]
+[ext_resource type="Resource" uid="uid://cc0anv7sdlwn4" path="res://items/Inv_items/Wood_item.tres" id="3_5qql7"]
+[ext_resource type="Resource" uid="uid://dptc6ptdk44tx" path="res://items/Inv_items/AssaultRifle_item.tres" id="4_msncb"]
+[ext_resource type="Texture2D" uid="uid://b464uoeg5qymj" path="res://Textures/SURVIVAL HORROR WEAPONS PACK 16X16/6.png" id="5_mdk3y"]
+[ext_resource type="Resource" uid="uid://d05pxtyvljkyh" path="res://items/Weapons/Shooting_weapons/MachineGun.tres" id="7_gufg5"]
+
+[resource]
+script = ExtResource("2_na5fo")
+weapon_data = ExtResource("7_gufg5")
+id = "machine_gun"
+icon = ExtResource("5_mdk3y")
+display_name = "Machine Gun"
+score_for_crafting = 50
+description = "LEEEET'S GET READY TO RUMBLEEEEEE"
+crafting_recipe = Dictionary[ExtResource("1_13y6b"), int]({
+ExtResource("2_p61xx"): 16,
+ExtResource("3_5qql7"): 16,
+ExtResource("4_msncb"): 1
+})
+needed_stations = Dictionary[int, int]({
+0: 1,
+1: 1
+})
+metadata/_custom_type_script = "uid://duhl153idv7v8"

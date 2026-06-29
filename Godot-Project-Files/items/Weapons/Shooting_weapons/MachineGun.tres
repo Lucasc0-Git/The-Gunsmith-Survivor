@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="WeaponData" format=3 uid="uid://d05pxtyvljkyh"]
+
+[ext_resource type="PackedScene" uid="uid://cbw45347x42n7" path="res://Scenes/Bullet.tscn" id="1_o6s5b"]
+[ext_resource type="Script" uid="uid://d4hnrbyx1okcs" path="res://items/Weapons/weapon_data.gd" id="1_tq0wd"]
+[ext_resource type="Texture2D" uid="uid://b464uoeg5qymj" path="res://Textures/SURVIVAL HORROR WEAPONS PACK 16X16/6.png" id="2_yf5fg"]
+
+[resource]
+script = ExtResource("1_tq0wd")
+id = "machine_gun"
+icon = ExtResource("2_yf5fg")
+damage = 4
+fire_rate = 0.025
+bullet_scene = ExtResource("1_o6s5b")
+bullet_shrinking = 0.981
+bullet_scale = Vector2(0.5, 0.5)
+recoil = 15.0
+heated = true
+heat_per_shot = 0.5
+heat_conductivity = 8.0
+spread = 0.05
+dmg_type = 2
+weapon_type = "Rifle"
+metadata/_custom_type_script = "uid://d4hnrbyx1okcs"
