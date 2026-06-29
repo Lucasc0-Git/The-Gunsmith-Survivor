@@ -293,6 +293,14 @@ Button/styles/pressed = SubResource("StyleBoxFlat_dgtb2")
 LineEdit/styles/focus = ExtResource("10_frkhe")
 LineEdit/styles/normal = ExtResource("10_frkhe")
 
+[sub_resource type="Environment" id="Environment_kx0co"]
+background_mode = 1
+ambient_light_source = 2
+glow_enabled = true
+glow_intensity = 5.0
+glow_strength = 1.5
+glow_bloom = 0.5
+
 [node name="Main" type="Node2D" unique_id=211418808 node_paths=PackedStringArray("build_tooltip")]
 process_mode = 3
 script = ExtResource("1_rgh2o")
@@ -831,6 +839,9 @@ theme_override_font_sizes/font_size = 18
 text = "Test"
 
 [node name="RespawnTimers" type="Node2D" parent="." unique_id=617156280]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=631711425]
+environment = SubResource("Environment_kx0co")
 
 [connection signal="world_loaded" from="." to="HUD" method="_on_main_world_loaded"]
 [connection signal="pressed" from="Menu/PauseMenu/VBoxContainer/ResumeButton" to="Menu" method="_on_resume_button_pressed"]

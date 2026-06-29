@@ -8,7 +8,7 @@ class_name BasicBullet
 
 ## The @onready var declaration
 @onready var despawn_timer: Timer = $DespawnTimer
-@onready var hit_explosion: CPUParticles2D = $HitParticles
+@onready var hit_explosion: GPUParticles2D = $HitParticles
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
 @onready var point_light: PointLight2D = $PointLight2D

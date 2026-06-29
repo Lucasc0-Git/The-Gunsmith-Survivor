@@ -6,6 +6,16 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_14k46"]
 radius = 15.0
 
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_14k46"]
+lifetime_randomness = 0.37
+direction = Vector3(0, 1, 0)
+spread = 90.0
+initial_velocity_min = 136.72
+initial_velocity_max = 199.22
+gravity = Vector3(0, 980, 0)
+scale_min = 0.099999994
+scale_max = 0.39999998
+
 [sub_resource type="Gradient" id="Gradient_14k46"]
 colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
 
@@ -28,6 +38,8 @@ fill_to = Vector2(0.82905984, 0.102564104)
 
 [node name="Area2D" type="Area2D" unique_id=882397831]
 process_mode = 1
+z_index = -1
+z_as_relative = false
 y_sort_enabled = true
 scale = Vector2(0.5, 0.5)
 collision_layer = 32
@@ -45,7 +57,7 @@ texture = ExtResource("1_vlxeq")
 [node name="DespawnTimer" type="Timer" parent="." unique_id=147144398]
 autostart = true
 
-[node name="HitParticles" type="CPUParticles2D" parent="." unique_id=397815156]
+[node name="HitParticles" type="GPUParticles2D" parent="." unique_id=535341922]
 z_index = 2
 scale = Vector2(0.7, 0.7)
 emitting = false
@@ -55,19 +67,8 @@ lifetime = 0.4
 one_shot = true
 explosiveness = 1.0
 randomness = 1.0
-lifetime_randomness = 0.3
-spread = 180.0
-gravity = Vector2(0, 900)
-initial_velocity_min = 100.0
-initial_velocity_max = 400.0
-angular_velocity_min = 2.0
-angular_velocity_max = 20.0
-damping_min = 5.0
-damping_max = 30.0
-scale_amount_min = 0.05
-scale_amount_max = 0.25
-hue_variation_min = -0.5
-hue_variation_max = 0.5
+visibility_rect = Rect2(-200, -200, 400, 400)
+process_material = SubResource("ParticleProcessMaterial_14k46")
 
 [node name="PointLight2D" type="PointLight2D" parent="." unique_id=1875844923]
 texture = SubResource("GradientTexture2D_qvus8")
