@@ -1,0 +1,54 @@
+[gd_scene format=3 uid="uid://caaire4e7ufgm"]
+
+[ext_resource type="Texture2D" uid="uid://c0lvq3arfbwu4" path="res://Textures/Items/wooden_pickaxe_texture.png" id="1_st612"]
+[ext_resource type="Script" uid="uid://xiwij8o4cs7a" path="res://Scripts/RegionWall/needed_item_diplay.gd" id="1_tunod"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_2a8ad"]
+font_size = 20
+font_color = Color(0.9953589, 0.8592245, 0.73420995, 1)
+outline_size = 4
+outline_color = Color(0.36874205, 0.21478471, 0.024977453, 1)
+
+[node name="NeededItemDiplay" type="Control" unique_id=2057724164]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_tunod")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=459897330]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 0
+offset_right = 64.0
+offset_bottom = 64.0
+color = Color(1, 0, 0, 0.36862746)
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=973432491]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 32.0
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_st612")
+
+[node name="Label" type="Label" parent="." unique_id=1908683443]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -64.0
+offset_top = -23.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "16"
+label_settings = SubResource("LabelSettings_2a8ad")
+horizontal_alignment = 2
+vertical_alignment = 1

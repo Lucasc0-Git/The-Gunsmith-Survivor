@@ -14,6 +14,7 @@ var inv_toggled: bool = false
 var main: Main
 var nearby_stations: Dictionary[GameManager.StationType, int] = {}
 var _pending_load_data := {}
+var regions_unlocked: Array = []
 
 ## The @onready vars declaration
 @onready var anim_player: AnimatedSprite2D = $AnimatedSprite2D

@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://p5g16mx5oviw"]
+
+[ext_resource type="Script" uid="uid://c0qxwechhnhps" path="res://Scripts/RegionWall/region_wall.gd" id="1_w2nm0"]
+[ext_resource type="Script" uid="uid://kgr8v3oeqeer" path="res://Scripts/RegionWall/item_display.gd" id="2_tsfee"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2a8ad"]
+size = Vector2(1300, 900)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_2a8ad"]
+size = Vector2(1297, 899)
+
+[node name="RegionWall" type="StaticBody2D" unique_id=58586280]
+collision_layer = 8
+collision_mask = 2
+script = ExtResource("1_w2nm0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=582120116]
+shape = SubResource("RectangleShape2D_2a8ad")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1814069979]
+texture = SubResource("PlaceholderTexture2D_2a8ad")
+
+[node name="ItemDisplay" type="Control" parent="." unique_id=401224867]
+custom_minimum_size = Vector2(400, 50)
+layout_mode = 3
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -200.0
+offset_right = 200.0
+offset_bottom = 50.0
+grow_horizontal = 2
+script = ExtResource("2_tsfee")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ItemDisplay" unique_id=13703277]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -200.0
+offset_right = 200.0
+offset_bottom = 44.0
+grow_horizontal = 2
+theme_override_constants/separation = 8

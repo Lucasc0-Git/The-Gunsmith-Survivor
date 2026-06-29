@@ -9,6 +9,7 @@ var player: Player
 var world_seed: int
 
 signal region_generated(new_tree_positions: Array, new_spawner_positions: Array, new_stones_position: Array)
+signal region_unlocked(region_pos: Vector2i)
 
 @export var world_frequency := 0.05
 @export var grass_frequency := 0.4
@@ -46,6 +47,9 @@ var tiles := {
 var tree_positions := []
 var spawner_positions := []
 var stone_positions := []
+
+var unlocked_regions: Dictionary = {Vector2i(0, 0): true}
+var region_difficulty: int = 0
 
 func _ready() -> void:
 	world_seed = GameManager.current_world_seed
@@ -109,6 +113,12 @@ func generate_region(region_pos: Vector2i, seed_f_g: int = 12) -> void:
 			
 			map.set_cell(Vector2i(world_x, world_y), 2, tile_coords)
 	emit_signal("region_generated", new_trees, new_spawners, new_stones)
+
+func generate_region_if_unlocked(region_pos: Vector2i) -> void:
+	if unlocked_regions.get(region_pos, false):
+		generate_region(region_pos, GameManager.current_world_seed)
+	else:
+		pass #Need to generate some barrier. maybe mesh
 
 func be_grass(grass_value: float) -> Vector2i:
 	if grass_value < -0.05:
