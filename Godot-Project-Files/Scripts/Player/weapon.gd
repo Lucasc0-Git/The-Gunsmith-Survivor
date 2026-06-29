@@ -10,6 +10,7 @@ class_name Weapon
 @onready var bang_light: PointLight2D = $Muzzle/PointLight2D
 @onready var hit_area: Area2D = $HitArea
 @onready var hit_area_collision_shape: CollisionShape2D = $HitArea/CollisionShape2D
+@onready var overheat_timer: Timer = $OverheatTimer
 
 ## The signal declaration
 signal has_shot(rotation: float, recoil: float)
@@ -26,6 +27,9 @@ var hovering: bool = false
 var holding_build: bool = false
 var build_preview: BuildScene
 var can_place: bool = false
+var current_heat: float = 0.0
+var is_overheated: bool = false
+var heat_material: ShaderMaterial
 
 func _ready() -> void:
 	while  !GameManager.is_game_loaded:
@@ -49,6 +53,7 @@ func equip_item(slot_data: SlotData) -> void:
 	equipped_item = slot_data
 	var item: ItemData = equipped_item.item_data
 	sprite.visible = true
+	
 	if build_preview:
 		build_preview.collision_shape.set_deferred("disabled", true)
 		build_preview.visible = false
@@ -58,18 +63,29 @@ func equip_item(slot_data: SlotData) -> void:
 	
 	if item is WeaponItemData:
 		var w := item as WeaponItemData
+		w.update_heat()
 		weapon_data = w.weapon_data
+		current_heat = w.current_heat
+		
 		sprite.texture = weapon_data.icon
 		muzzle.position = weapon_data.muzzle_offset
 		can_shoot = reload_timer.time_left <= 0
+		if weapon_data.heated:
+			if !heat_material:
+				heat_material = ShaderMaterial.new()
+				heat_material.shader = preload("res://Shaders/weapon_heat.gdshader")
+			sprite.material = heat_material
+	
 	elif item is HealItemData:
 		var h := item as HealItemData
 		sprite.texture = h.heal_data.icon
 		can_shoot = true
+	
 	elif item is JustItemData:
 		var j := item as JustItemData
 		sprite.texture = j.just_data.icon
 		can_shoot = true
+	
 	elif item is BuildItemData:
 		var b := item as BuildItemData
 		sprite.texture = b.build_data.icon
@@ -80,6 +96,7 @@ func equip_item(slot_data: SlotData) -> void:
 		player.main.call_deferred("add_child", build_preview)
 		holding_build = true
 		can_shoot = true
+	
 	elif item is CloseWeaponItemData:
 		var c := item as CloseWeaponItemData
 		sprite.texture = c.close_weapon_data.icon
@@ -87,8 +104,6 @@ func equip_item(slot_data: SlotData) -> void:
 		weapon_data = c.close_weapon_data
 		
 		can_shoot = reload_timer.time_left <= 0
-		
-	
 	
 	else:
 		var i := item as ItemData
@@ -101,6 +116,11 @@ func is_holding_usable_item() -> bool:
 
 ## Unequip the item
 func unequip() -> void:
+	if equipped_item and equipped_item.item_data is WeaponItemData:
+		var w := equipped_item.item_data as WeaponItemData
+		w.current_heat = current_heat
+		w.last_cooled_time = Time.get_unix_time_from_system()
+	
 	equipped_item = null
 	weapon_data = null
 	sprite.texture = null
@@ -116,6 +136,8 @@ func unequip() -> void:
 		build_preview.visible = false
 		build_preview.collision_shape.set_deferred("disabled", true)
 		build_preview.queue_free()
+	current_heat = 0.0
+	is_overheated = false
 
 func use_item(slot_data: SlotData) -> void:
 	equipped_item = slot_data
@@ -190,6 +212,20 @@ func _on_hit_area_body_entered(body: Node2D) -> void:
 			body.velocity += dir * (data.close_weapon_data.knockback)
 
 func _shoot_weapon() -> void:
+	if !can_shoot or is_overheated:
+		return
+	
+	if weapon_data.heated:
+		current_heat += weapon_data.heat_per_shot
+		if current_heat >= weapon_data.max_heat:
+			current_heat = weapon_data.max_heat
+			is_overheated = true
+			#reload_timer.start(weapon_data.overheat_cooldown)
+			#Visual: particles etc
+			return
+		if equipped_item and equipped_item.item_data is WeaponItemData:
+			(equipped_item.item_data as WeaponItemData).current_heat = current_heat
+	
 	bang_particles.emitting = true ##One shot emit.
 	can_shoot = false
 	for i in weapon_data.pellets:
@@ -238,6 +274,8 @@ func _spawn_bullet(i : int) -> void:
 
 func _on_reload_timer_timeout() -> void:
 	can_shoot = true
+	if is_overheated and current_heat <= weapon_data.max_heat / 2:
+		is_overheated = false
 
 func inv_toggled(inv_visible: bool) -> void:
 	if inv_visible == true:
@@ -257,7 +295,7 @@ func is_placement_valid() -> bool:
 	var results := space_state.intersect_shape(shape_query)
 	return results.is_empty()
 
-func _process(_delta: float) -> void:
+func _process(delta: float) -> void:
 	if !GameManager.is_game_loaded: return
 	if equipped_item == null or equipped_item.is_empty():
 		return
@@ -285,6 +323,22 @@ func _process(_delta: float) -> void:
 			pass
 		else:
 			pass
+	
+	if weapon_data:
+		if weapon_data.heated and current_heat > 0:
+			if !shooting:
+				current_heat -= weapon_data.heat_conductivity * delta
+			else:
+				current_heat -= weapon_data.heat_conductivity * delta * 0.8
+			
+			current_heat = max(current_heat, 0.0)
+			
+			if is_overheated and current_heat <= weapon_data.max_heat / 2:
+				is_overheated = false
+				can_shoot = true
+	
+		if sprite.material is ShaderMaterial:
+			sprite.material.set_shader_parameter("heat_amount", current_heat / weapon_data.max_heat)
 	
 	if holding_build:
 		var mouse_pos := get_global_mouse_position()

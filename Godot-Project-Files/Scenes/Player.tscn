@@ -209,6 +209,8 @@ texture = SubResource("GradientTexture2D_m0x7a")
 
 [node name="ReloadTimer" type="Timer" parent="Weapon" unique_id=588880394]
 
+[node name="OverheatTimer" type="Timer" parent="Weapon" unique_id=813589677]
+
 [node name="HitArea" type="Area2D" parent="Weapon" unique_id=1540411679 groups=["melee_hit"]]
 collision_layer = 0
 collision_mask = 12
