@@ -222,13 +222,11 @@ func _update_lightning(hour: int) -> void:
 	var tween := create_tween()
 	tween.tween_property(canvas_modulate, "color", target_color, 25)
 	
-	var target_vignette: float
+	var target_vignette: float = 0.95
 	if hour >= 20 or hour < 6:
-		target_vignette = 0.8
+		target_vignette = 0.65
 	elif hour == 6 or hour == 19:
-		target_vignette = 0.9
-	else:
-		target_vignette = 0.95
+		target_vignette = 0.85
 	map.set_vignette_strength(target_vignette, 25)
 
 func spawn_enemy(scene: PackedScene, pos: Vector2) -> void:
