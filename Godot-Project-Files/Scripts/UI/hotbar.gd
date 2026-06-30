@@ -8,6 +8,7 @@ class_name Hotbar
 @export var slot_count := 5
 @export var slot_scene : PackedScene
 @export var hud : Hud
+@export var tooltip: Tooltip
 
 ## The basic var declaration
 var slots: Array[Slot] = []
@@ -24,7 +25,7 @@ func _ready() -> void:
 	
 	for i in range(slot_count): ##Add slots to hotbar
 		var index := i
-		var slot := slot_scene.instantiate()
+		var slot: Slot = slot_scene.instantiate()
 		## Connect signals
 		slot.item_changed.connect(
 			func(slot_data: SlotData, idx := index) -> void:
@@ -32,7 +33,8 @@ func _ready() -> void:
 		)
 		slot.slot_left_clicked.connect(_on_slot_left_clicked)
 		slot.slot_right_clicked.connect(_on_slot_right_clicked)
-		
+		slot.mouse_entered_slot.connect(_on_slot_mouse_entered)
+		slot.mouse_exited_slot.connect(_on_slot_mouse_exited)
 		slot.slot_data = SlotData.new()
 		## Add slot to hotbar
 		grid_container.add_child(slot)
@@ -50,6 +52,12 @@ func sync_from_player() -> void:
 		for i in range(slots.size()): #here is the issue
 			slots[i].set_slot_data(hud.player.hotbar_slots[i])
 			pass
+
+func _on_slot_mouse_entered(slot_data: SlotData) -> void:
+	tooltip.show_tooltip(slot_data)
+
+func _on_slot_mouse_exited() -> void:
+	tooltip.hide_tooltip()
 
 func _on_slot_right_clicked(slot: Slot) -> void:
 	hud.on_hotbar_slot_right_clicked(slot)
