@@ -66,6 +66,34 @@ corner_detail = 7
 shadow_size = 3
 shadow_offset = Vector2(5, 5)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3g5c1"]
+bg_color = Color(0.62153226, 0.3828588, 0.16096014, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.3019608, 0.1764706, 0.05490196, 0)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+expand_margin_left = 4.0
+expand_margin_top = 4.0
+expand_margin_right = 4.0
+expand_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j663m"]
+bg_color = Color(0.4627451, 0.2784314, 0.105882354, 1)
+border_color = Color(0.3019608, 0.1764706, 0.05490196, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+expand_margin_left = 4.0
+expand_margin_top = 4.0
+expand_margin_right = 4.0
+expand_margin_bottom = 4.0
+
 [resource]
 Button/colors/font_color = Color(0.8745098, 0.8745098, 0.8745098, 1)
 Button/colors/font_focus_color = Color(0, 0.856228, 0.85622764, 1)
@@ -81,6 +109,8 @@ Button/styles/pressed = SubResource("StyleBoxFlat_frkhe")
 ColorPickerButton/constants/h_separation = 4
 ColorPickerButton/constants/icon_max_width = 20
 ColorPickerButton/font_sizes/font_size = 20
+HSlider/styles/grabber_area = SubResource("StyleBoxFlat_3g5c1")
+HSlider/styles/slider = SubResource("StyleBoxFlat_j663m")
 Label/colors/font_color = Color(1, 1, 1, 1)
 Label/colors/font_outline_color = Color(0, 0, 0, 1)
 Label/constants/outline_size = 2

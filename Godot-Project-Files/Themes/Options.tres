@@ -20,6 +20,54 @@ expand_margin_bottom = 4.0
 shadow_size = 1
 shadow_offset = Vector2(2, 2)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mml5s"]
+bg_color = Color(0.71354526, 0.44588572, 0.19930452, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.3019608, 0.1764706, 0.05490196, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+expand_margin_left = 4.0
+expand_margin_top = 4.0
+expand_margin_right = 4.0
+expand_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7k4vb"]
+bg_color = Color(0.44435763, 0.2664896, 0.0999011, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.3019608, 0.1764706, 0.05490196, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+expand_margin_left = 4.0
+expand_margin_top = 4.0
+expand_margin_right = 4.0
+expand_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xeqim"]
+bg_color = Color(0.4627451, 0.2784314, 0.105882354, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.3019608, 0.1764706, 0.05490196, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+expand_margin_left = 4.0
+expand_margin_top = 4.0
+expand_margin_right = 4.0
+expand_margin_bottom = 4.0
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_it8x4"]
 bg_color = Color(0.4627451, 0.2784314, 0.105882354, 1)
 border_width_left = 4
@@ -31,6 +79,8 @@ corner_radius_top_left = 20
 corner_radius_top_right = 20
 corner_radius_bottom_right = 20
 corner_radius_bottom_left = 20
+shadow_size = 1
+shadow_offset = Vector2(2, 2)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x2peb"]
 bg_color = Color(0.3019608, 0.1764706, 0.05490196, 1)
@@ -59,6 +109,9 @@ CheckButton/styles/hover = SubResource("StyleBoxFlat_6byys")
 CheckButton/styles/hover_pressed = SubResource("StyleBoxFlat_6byys")
 CheckButton/styles/normal = SubResource("StyleBoxFlat_6byys")
 CheckButton/styles/pressed = SubResource("StyleBoxFlat_6byys")
+HSlider/styles/grabber_area = SubResource("StyleBoxFlat_mml5s")
+HSlider/styles/grabber_area_highlight = SubResource("StyleBoxFlat_7k4vb")
+HSlider/styles/slider = SubResource("StyleBoxFlat_xeqim")
 OptionButton/colors/font_color = Color(0.875, 0.875, 0.875, 1)
 OptionButton/colors/font_hover_color = Color(0.95, 0.95, 0.95, 1)
 OptionButton/colors/font_outline_color = Color(0.13799316, 0.07073415, 0.013516962, 1)

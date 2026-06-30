@@ -4,6 +4,28 @@
 [ext_resource type="Theme" uid="uid://cvrriksqai0xa" path="res://Themes/Options.tres" id="2_1hmx5"]
 [ext_resource type="Texture2D" uid="uid://cgvn2rp4tyj7h" path="res://Textures/Start_scene_bg_1.png" id="2_4k2k5"]
 
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_4k2k5"]
+color = Color(0.3019608, 0.1764706, 0.05490196, 1)
+grow_begin = -40.0
+grow_end = -40.0
+thickness = 6
+
+[sub_resource type="Theme" id="Theme_2a8ad"]
+HSeparator/constants/separation = 8
+HSeparator/styles/separator = SubResource("StyleBoxLine_4k2k5")
+
+[sub_resource type="LabelSettings" id="LabelSettings_2a8ad"]
+font_size = 25
+font_color = Color(0.8745098, 0.8745098, 0.8745098, 1)
+outline_size = 5
+outline_color = Color(0.2509804, 0.14117648, 0.039215688, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_4k2k5"]
+font_size = 20
+font_color = Color(0.8745098, 0.8745098, 0.8745098, 1)
+outline_size = 5
+outline_color = Color(0.2509804, 0.14117648, 0.039215688, 1)
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kp3y5"]
 draw_center = false
 border_width_left = 5
@@ -140,6 +162,82 @@ text = "Vsync"
 layout_mode = 2
 text = "Global sounds"
 
+[node name="HSeparator" type="HSeparator" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=666897231]
+layout_mode = 2
+theme = SubResource("Theme_2a8ad")
+
+[node name="MasterBusContainer" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1228877676]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/MasterBusContainer" unique_id=1320680631]
+layout_mode = 2
+theme_override_constants/margin_left = 6
+theme_override_constants/margin_top = 3
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/MasterBusContainer/MarginContainer" unique_id=743355557]
+layout_mode = 2
+
+[node name="Master" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/MasterBusContainer/MarginContainer/VBoxContainer" unique_id=1123513492]
+layout_mode = 2
+text = "Master"
+label_settings = SubResource("LabelSettings_2a8ad")
+
+[node name="MasterSoundSlider" type="HSlider" parent="PanelContainer/MarginContainer/VBoxContainer/MasterBusContainer/MarginContainer/VBoxContainer" unique_id=1008646840]
+layout_mode = 2
+max_value = 1.0
+step = 0.01
+value = 1.0
+
+[node name="SFXBusContainer" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=2115169170]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/SFXBusContainer" unique_id=1992197220]
+layout_mode = 2
+theme_override_constants/margin_left = 6
+theme_override_constants/margin_top = 3
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/SFXBusContainer/MarginContainer" unique_id=504991777]
+layout_mode = 2
+
+[node name="SFX" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/SFXBusContainer/MarginContainer/VBoxContainer" unique_id=765272347]
+layout_mode = 2
+text = "SFX"
+label_settings = SubResource("LabelSettings_4k2k5")
+
+[node name="SFXSoundSlider" type="HSlider" parent="PanelContainer/MarginContainer/VBoxContainer/SFXBusContainer/MarginContainer/VBoxContainer" unique_id=462418671]
+layout_mode = 2
+max_value = 1.0
+step = 0.01
+value = 1.0
+
+[node name="MusicBusContainer" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=7993678]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/MusicBusContainer" unique_id=657766980]
+layout_mode = 2
+theme_override_constants/margin_left = 6
+theme_override_constants/margin_top = 3
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/MusicBusContainer/MarginContainer" unique_id=744117978]
+layout_mode = 2
+
+[node name="Music" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/MusicBusContainer/MarginContainer/VBoxContainer" unique_id=1958595323]
+layout_mode = 2
+text = "Music"
+label_settings = SubResource("LabelSettings_4k2k5")
+
+[node name="MusicSoundSlider" type="HSlider" parent="PanelContainer/MarginContainer/VBoxContainer/MusicBusContainer/MarginContainer/VBoxContainer" unique_id=785271290]
+layout_mode = 2
+max_value = 1.0
+step = 0.01
+value = 1.0
+
 [node name="VBoxContainer2" type="VBoxContainer" parent="." unique_id=96857309]
 custom_minimum_size = Vector2(200, 50)
 layout_mode = 1
@@ -160,4 +258,7 @@ text = "Back"
 [connection signal="toggled" from="PanelContainer/MarginContainer/VBoxContainer/Fullscreen" to="." method="_on_fullscreen_toggled"]
 [connection signal="toggled" from="PanelContainer/MarginContainer/VBoxContainer/Vsync" to="." method="_on_vsync_toggled"]
 [connection signal="toggled" from="PanelContainer/MarginContainer/VBoxContainer/GlobalSounds" to="." method="_on_global_sounds_toggled"]
+[connection signal="value_changed" from="PanelContainer/MarginContainer/VBoxContainer/MasterBusContainer/MarginContainer/VBoxContainer/MasterSoundSlider" to="." method="_on_master_sound_slider_value_changed"]
+[connection signal="value_changed" from="PanelContainer/MarginContainer/VBoxContainer/SFXBusContainer/MarginContainer/VBoxContainer/SFXSoundSlider" to="." method="_on_sfx_sound_slider_value_changed"]
+[connection signal="value_changed" from="PanelContainer/MarginContainer/VBoxContainer/MusicBusContainer/MarginContainer/VBoxContainer/MusicSoundSlider" to="." method="_on_music_sound_slider_value_changed"]
 [connection signal="pressed" from="VBoxContainer2/Back" to="." method="_on_back_pressed"]

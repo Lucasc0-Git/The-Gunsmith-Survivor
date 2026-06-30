@@ -141,3 +141,23 @@ func stop_background_music() -> void:
 	if current_music_player:
 		current_music_player.stop()
 		current_music_player.queue_free()
+
+##------------------------------------------------ SETTINGS ---------------------------------
+
+func set_music_volume_db(db: float) -> void:
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Music"), db)
+
+func get_music_volume_db() -> float:
+	return AudioServer.get_bus_volume_db(AudioServer.get_bus_index("Music"))
+
+func set_sfx_volume_db(db: float) -> void:
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("SFX"), db)
+
+func get_sfx_volume_db() -> float:
+	return AudioServer.get_bus_volume_db(AudioServer.get_bus_index("SFX"))
+
+func set_master_volume_db(db: float) -> void:
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), db)
+
+func get_master_volume_db() -> float:
+	return AudioServer.get_bus_volume_db(AudioServer.get_bus_index("Master"))
