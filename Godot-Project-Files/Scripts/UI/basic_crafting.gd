@@ -84,7 +84,9 @@ func _ready() -> void:
 	crafting_buttons[basic_smithing_table_button] = basic_smithing_table_item
 	crafting_buttons[fire_place_button] = fireplace_item
 	crafting_buttons[wooden_pickaxe_button] = wooden_pickaxe_item
-
+	
+	for button: Button in crafting_buttons:
+		button.pressed.connect(_on_button_pressed)
 
 func hide_crafting() -> void:
 	if _tween: _tween.kill()
@@ -112,6 +114,7 @@ func show_crafting() -> void:
 	_tween.tween_property(self, "global_position", Vector2(10.0, 122.0), 0.5)
 
 func _on_button_toggled(toggled_on: bool, index: int) -> void:
+	_on_button_pressed()
 	if index == 0:
 		basic_craftings.toggle_weapons_crafting(toggled_on)
 	elif index == 1:
@@ -227,3 +230,6 @@ func _on_fire_place_pressed() -> void:
 		inventory.rm_items_by_recipe(fireplace_item.crafting_recipe)
 		GameManager.more_stats["Items crafted"] += 1
 		GameManager.score += fireplace_item.score_for_crafting
+
+func _on_button_pressed() -> void:
+	AudioManager.play_sfx("crafting_sound")
