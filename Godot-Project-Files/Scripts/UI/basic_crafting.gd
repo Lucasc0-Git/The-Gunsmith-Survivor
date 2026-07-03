@@ -16,6 +16,7 @@ class_name BasicCraftingUI
 @onready var basic_smithing_table_button: Button = $BasicCraftingPanels/VBoxContainer/Control3/CraftingStationsCraftingContainer3/MarginContainer/ScrollContainer/HBoxContainer/BasicSmithingTable
 @onready var fire_place_button: Button = $BasicCraftingPanels/VBoxContainer/Control4/BaseCraftingContainer3/MarginContainer/ScrollContainer/HBoxContainer/FirePlace
 @onready var wooden_pickaxe_button: Button = $BasicCraftingPanels/VBoxContainer/Control2/ToolsCraftingContainer2/MarginContainer/ScrollContainer/HBoxContainer/WoodenPickaxe
+@onready var machine_gun_button: Button = $BasicCraftingPanels/VBoxContainer/Control/WeaponsCraftingContainer/MarginContainer/ScrollContainer/HBoxContainer/MachineGun
 
 
 var crafting_buttons: Dictionary[Button, ItemData] = {} # Button -> ItemData
@@ -84,6 +85,7 @@ func _ready() -> void:
 	crafting_buttons[basic_smithing_table_button] = basic_smithing_table_item
 	crafting_buttons[fire_place_button] = fireplace_item
 	crafting_buttons[wooden_pickaxe_button] = wooden_pickaxe_item
+	crafting_buttons[machine_gun_button] = machine_gun_item
 	
 	for button: Button in crafting_buttons:
 		button.pressed.connect(_on_button_pressed)
