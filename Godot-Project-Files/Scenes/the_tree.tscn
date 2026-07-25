@@ -141,6 +141,7 @@ type = "tree"
 
 [node name="Sprite2D" parent="." index="0" unique_id=142450422]
 texture = ExtResource("4_81toh")
+flip_h = true
 
 [node name="ShakeAnimationPlayer" type="AnimationPlayer" parent="Sprite2D" index="0" unique_id=995789306]
 process_mode = 1
