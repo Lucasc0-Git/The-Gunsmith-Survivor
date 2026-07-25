@@ -2,12 +2,45 @@
 
 [ext_resource type="Theme" uid="uid://8e2o6m6hejp5" path="res://Themes/the_core_health_bar.tres" id="1_ardag"]
 [ext_resource type="Script" uid="uid://d3h86ubploo74" path="res://Scripts/Main/the_core.gd" id="1_nfbfl"]
+[ext_resource type="Texture2D" uid="uid://dbe16nrtn2stw" path="res://Textures/TheCore/thecore1.png" id="2_wtmoa"]
+[ext_resource type="Texture2D" uid="uid://dtk6abmb4xsgx" path="res://Textures/TheCore/thecore2.png" id="3_4vufs"]
+[ext_resource type="Texture2D" uid="uid://2ijfrdxfk46i" path="res://Textures/TheCore/thecore3.png" id="4_j5xuo"]
+[ext_resource type="Texture2D" uid="uid://dvyd3mta2l8ur" path="res://Textures/TheCore/thecore4.png" id="5_mdqdi"]
+[ext_resource type="Texture2D" uid="uid://bhbcn8jl1v1pg" path="res://Textures/TheCore/thecore5.png" id="6_difuf"]
+[ext_resource type="Texture2D" uid="uid://c72c0xbsj7nhp" path="res://Textures/TheCore/thecore6.png" id="7_fadqh"]
+[ext_resource type="Texture2D" uid="uid://18bemerty4bm" path="res://Textures/TheCore/thecore7.png" id="8_dtd0x"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lfeib"]
-size = Vector2(32, 32)
+size = Vector2(32, 22)
 
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_lfeib"]
-size = Vector2(32, 32)
+[sub_resource type="SpriteFrames" id="SpriteFrames_2a8ad"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_wtmoa")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_4vufs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_j5xuo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_mdqdi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_difuf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_fadqh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_dtd0x")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 10.0
+}]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ardag"]
 radius = 26.0
@@ -26,14 +59,19 @@ damage_multipliers = Dictionary[int, float]({
 1: 0.9,
 2: 0.8
 })
+full_health_modulate = Color(1, 1, 1, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=393810766]
+position = Vector2(0, 4.5)
 shape = SubResource("RectangleShape2D_lfeib")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2086574311]
-texture = SubResource("PlaceholderTexture2D_lfeib")
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=6655238]
+sprite_frames = SubResource("SpriteFrames_2a8ad")
+autoplay = "default"
+frame_progress = 0.2704403
 
 [node name="Area2D" type="Area2D" parent="." unique_id=2392371]
+visible = false
 collision_layer = 128
 collision_mask = 4
 
@@ -41,6 +79,7 @@ collision_mask = 4
 shape = SubResource("CircleShape2D_ardag")
 
 [node name="CraftingArea" type="Area2D" parent="." unique_id=1741043043]
+visible = false
 collision_layer = 128
 collision_mask = 2
 
@@ -49,38 +88,23 @@ shape = SubResource("CircleShape2D_nfbfl")
 debug_color = Color(0.6635992, 0.4172203, 0.77571464, 0.41960785)
 
 [node name="HealthBar" type="ProgressBar" parent="." unique_id=1835404684]
-custom_minimum_size = Vector2(32, 7)
+visible = false
+custom_minimum_size = Vector2(32, 5)
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -16.0
-offset_top = 7.0
+offset_top = 16.0
 offset_right = 16.0
-offset_bottom = 14.0
+offset_bottom = 21.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(16, 3.5)
 theme = ExtResource("1_ardag")
 value = 50.0
 show_percentage = false
-
-[node name="Label" type="Label" parent="." unique_id=729959056]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -12.666666
-offset_top = 8.999999
-offset_right = 73.333336
-offset_bottom = 37.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(0.3, 0.3)
-theme_override_font_sizes/font_size = 20
-text = "The Core"
 
 [connection signal="body_entered" from="CraftingArea" to="." method="_on_crafting_area_body_entered"]
 [connection signal="body_exited" from="CraftingArea" to="." method="_on_crafting_area_body_exited"]

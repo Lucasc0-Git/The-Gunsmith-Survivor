@@ -213,7 +213,6 @@ func _physics_process(_delta: float) -> void:
 func game_over() -> void:
 	var game_over_scene := preload("res://Scenes/GameOver.tscn").instantiate()
 	add_child(game_over_scene)
-	AudioManager.play_game_over()
 	get_tree().paused = true
 
 func _update_lightning(hour: int) -> void:

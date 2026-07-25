@@ -2,15 +2,19 @@ extends StaticBody2D
 class_name TheCore
 
 @onready var progress_bar: ProgressBar = $HealthBar
+@onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 
 @export var max_health: float = 1500
 @export var damage_multipliers: Dictionary[DamageTypes.DamageType, float] = DamageTypes.get_default_damage_multipliers()
+@export var full_health_modulate: Color
+@export var low_health_modulate: Color
 
 signal player_entered_crafting_area()
 signal player_exited_crafting_area()
 signal core_health_changed(health: float)
 signal core_attacked()
 
+var target_color: Color = Color(1, 1, 1)
 var main: Main
 var station_type: GameManager.StationType = GameManager.StationType.BASIC_CRAFTING
 
@@ -34,6 +38,11 @@ func take_damage(amount: float, dmg_type: DamageTypes.DamageType) -> void:
 	
 	damage *= 0.8
 	health -= damage
+	update_target_color()
+
+func update_target_color() -> void:
+	var health_ratio := health / max_health
+	target_color = low_health_modulate.lerp(full_health_modulate, health_ratio)
 
 func _on_crafting_area_body_entered(body: Node2D) -> void:
 	if body is Player:
@@ -49,3 +58,6 @@ func _on_crafting_area_body_exited(body: Node2D) -> void:
 			body.nearby_stations[station_type] -= 1
 			if body.nearby_stations[station_type] <= 0:
 				body.nearby_stations.erase(station_type)
+
+func _process(delta: float) -> void:
+	sprite.modulate = sprite.modulate.lerp(target_color, 1.0 * delta)
