@@ -1,25 +1,13 @@
 [gd_resource type="Theme" format=3 uid="uid://8e2o6m6hejp5"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_us162"]
-bg_color = Color(0.43459055, 0.47314364, 0.49836087, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
+bg_color = Color(0, 0, 0, 1)
 border_color = Color(0, 0, 0, 1)
 border_blend = true
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vk0q1"]
 bg_color = Color(0.9402874, 0, 0.0202617, 1)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
 border_color = Color(0.7194535, 2.5509298e-06, 5.7756904e-07, 1)
-corner_radius_top_left = 1
-corner_radius_top_right = 1
-corner_radius_bottom_right = 1
-corner_radius_bottom_left = 1
 
 [resource]
 ProgressBar/styles/background = SubResource("StyleBoxFlat_us162")
