@@ -28,6 +28,7 @@ func take_damage(amount: float, dmg_type: DamageTypes.DamageType, weapon_type: S
 		damage *= 0.8
 	
 	health -= damage
+	sprite.modulate = Color(1.5, 1.5, 1.5)
 	update_target_color()
 	if health <= 0:
 		destroy()

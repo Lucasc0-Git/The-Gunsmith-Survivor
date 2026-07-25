@@ -38,6 +38,7 @@ func take_damage(amount: float, dmg_type: DamageTypes.DamageType) -> void:
 	
 	damage *= 0.8
 	health -= damage
+	sprite.modulate = Color(2, 2, 2)
 	update_target_color()
 
 func update_target_color() -> void:
@@ -60,4 +61,4 @@ func _on_crafting_area_body_exited(body: Node2D) -> void:
 				body.nearby_stations.erase(station_type)
 
 func _process(delta: float) -> void:
-	sprite.modulate = sprite.modulate.lerp(target_color, 1.0 * delta)
+	sprite.modulate = sprite.modulate.lerp(target_color, 8.0 * delta)

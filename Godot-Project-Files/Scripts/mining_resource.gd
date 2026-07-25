@@ -38,6 +38,7 @@ func take_damage(amount: float, dmg_type: DamageTypes.DamageType) -> void:
 	var damage := amount * multiplier
 	health -= damage
 	update_target_color()
+	sprite.modulate = Color(1.5, 1.5, 1.5)
 	if health <= 0:
 		destroy()
 	#else:
@@ -50,7 +51,7 @@ func _process(delta: float) -> void:
 		update_target_color()
 	else:
 		health = max_health
-	sprite.modulate = sprite.modulate.lerp(target_color, 3.0 * delta)
+	sprite.modulate = sprite.modulate.lerp(target_color, 8.0 * delta)
 
 func update_target_color() -> void:
 	var health_ratio := health / max_health
