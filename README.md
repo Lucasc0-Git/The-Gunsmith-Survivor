@@ -28,7 +28,9 @@ Protect *The Core* while scavenging, crafting weapons, building defenses, and su
 
 ## 🚀 How to Play / Download
 
-**Recommended**: Download a pre-built version from the [Releases tab on GitHub](https://github.com/Lucasc0-Git/The-Gunsmith-Survivor/releases) or from [Itch.io](https://your-itch-page.itch.io/the-gunsmith-survivor) (Windows & Linux builds).
+The official site of this project: [https://lucasc0.itch.io/the-gunsmith-survivor]
+
+**Recommended**: Download a pre-built version from the [Releases tab on GitHub](https://github.com/Lucasc0-Git/The-Gunsmith-Survivor/releases) or from [Itch.io]([(https://lucasc0.itch.io/the-gunsmith-survivor)]) (Windows & Linux builds).
 
 Alternatively:
 1. Clone the repository:
