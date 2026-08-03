@@ -6,22 +6,13 @@
 [ext_resource type="Resource" uid="uid://cc0anv7sdlwn4" path="res://items/Inv_items/Wood_item.tres" id="4_3yjiv"]
 [ext_resource type="Resource" uid="uid://4bpscjhtcwh6" path="res://items/Inv_items/Stone_item.tres" id="5_avpdi"]
 [ext_resource type="Script" uid="uid://bmqu0kgfa7xur" path="res://items/ItemData/BuildItemData.gd" id="5_n81kn"]
-
-[sub_resource type="Gradient" id="Gradient_2ncgn"]
-offsets = PackedFloat32Array(0.1861702, 1)
-colors = PackedColorArray(0, 0, 0, 1, 1, 0, 0, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_jqdo3"]
-gradient = SubResource("Gradient_2ncgn")
-width = 16
-height = 16
-fill_to = Vector2(1, 1)
+[ext_resource type="Texture2D" uid="uid://6wavg3er2yys" path="res://Textures/basicsmithingtable.png" id="6_wrttk"]
 
 [resource]
 script = ExtResource("5_n81kn")
 build_data = ExtResource("1_skm77")
 id = "basic_smithing_table"
-icon = SubResource("GradientTexture2D_jqdo3")
+icon = ExtResource("6_wrttk")
 display_name = "Basic smithing table"
 score_for_crafting = 20
 description = "A basic smithing table. You can craft weapons on this."

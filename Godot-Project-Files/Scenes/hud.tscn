@@ -16,15 +16,18 @@
 [ext_resource type="Script" uid="uid://do5m5a13h1vqj" path="res://Scripts/UI/basic_crafting.gd" id="10_piegi"]
 [ext_resource type="Script" uid="uid://bftatnjf1boxh" path="res://Scripts/UI/basic_crafting_panels.gd" id="12_i2avg"]
 [ext_resource type="Theme" uid="uid://c31ap8kbywywe" path="res://Themes/CraftingButton.tres" id="14_ba8gd"]
-[ext_resource type="Texture2D" uid="uid://dgcfntfkmo1bg" path="res://Textures/SURVIVAL HORROR WEAPONS PACK 16X16/2.png" id="15_36s6t"]
-[ext_resource type="Texture2D" uid="uid://3pajlj58aaib" path="res://Textures/SURVIVAL HORROR WEAPONS PACK 16X16/4.png" id="16_36s6t"]
+[ext_resource type="Texture2D" uid="uid://c8mcf46l4fjrm" path="res://Textures/SURVIVAL HORROR WEAPONS PACK 16X16/2.png" id="15_36s6t"]
+[ext_resource type="Texture2D" uid="uid://c0p2t6ihuh23p" path="res://Textures/SURVIVAL HORROR WEAPONS PACK 16X16/4.png" id="16_36s6t"]
+[ext_resource type="Texture2D" uid="uid://dtrvf7qf271aa" path="res://Textures/BasicCraftingStation.png" id="16_lkt4f"]
 [ext_resource type="Script" uid="uid://carukckvk4cbf" path="res://Scripts/UI/crafting_tooltip.gd" id="17_pbtju"]
-[ext_resource type="Texture2D" uid="uid://b8xibgyex24gv" path="res://Textures/SURVIVAL HORROR WEAPONS PACK 16X16/14.png" id="19_0iicw"]
-[ext_resource type="Texture2D" uid="uid://b81agdoybaaqs" path="res://Textures/SURVIVAL HORROR WEAPONS PACK 16X16/21.png" id="19_yidpd"]
-[ext_resource type="Texture2D" uid="uid://b464uoeg5qymj" path="res://Textures/SURVIVAL HORROR WEAPONS PACK 16X16/6.png" id="20_484xk"]
+[ext_resource type="Texture2D" uid="uid://bjv182kjlv8uh" path="res://Textures/SURVIVAL HORROR WEAPONS PACK 16X16/14.png" id="19_0iicw"]
+[ext_resource type="Texture2D" uid="uid://b0qop0rj6gka1" path="res://Textures/SURVIVAL HORROR WEAPONS PACK 16X16/21.png" id="19_yidpd"]
+[ext_resource type="Texture2D" uid="uid://cqtsxsa0nu8bi" path="res://Textures/SURVIVAL HORROR WEAPONS PACK 16X16/6.png" id="20_484xk"]
 [ext_resource type="Texture2D" uid="uid://lu4v4pqxnb16" path="res://Textures/Items/fireplace_texture_item.png" id="21_ajim5"]
 [ext_resource type="Texture2D" uid="uid://c0lvq3arfbwu4" path="res://Textures/Items/wooden_pickaxe_texture.png" id="21_vxf74"]
 [ext_resource type="Script" uid="uid://bc6dxxlullnp8" path="res://Scripts/UI/right_click_tooltip.gd" id="24_oersf"]
+[ext_resource type="Texture2D" uid="uid://6wavg3er2yys" path="res://Textures/basicsmithingtable.png" id="25_s17ah"]
+[ext_resource type="Texture2D" uid="uid://hatbh5uwgwse" path="res://Textures/Items/torch_texture.png" id="26_jnyvx"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_36asn"]
 content_margin_left = 10.0
@@ -349,35 +352,36 @@ theme_override_constants/v_separation = 2
 [node name="CraftingButton" parent="InventoryUI/BasicCrafting/PanelContainer/GridContainer" unique_id=2118062267 instance=ExtResource("10_4f5kr")]
 layout_mode = 2
 mouse_filter = 1
-text = "weapons"
 
 [node name="CraftingButton2" parent="InventoryUI/BasicCrafting/PanelContainer/GridContainer" unique_id=1462332838 instance=ExtResource("10_4f5kr")]
 layout_mode = 2
 mouse_filter = 1
-text = "tools"
+icon = ExtResource("19_yidpd")
 
 [node name="CraftingButton3" parent="InventoryUI/BasicCrafting/PanelContainer/GridContainer" unique_id=1175637690 instance=ExtResource("10_4f5kr")]
 layout_mode = 2
 mouse_filter = 1
-text = "crafting
-stations"
+icon = ExtResource("16_lkt4f")
 
 [node name="CraftingButton4" parent="InventoryUI/BasicCrafting/PanelContainer/GridContainer" unique_id=235883468 instance=ExtResource("10_4f5kr")]
 layout_mode = 2
 mouse_filter = 1
-text = "Base"
+icon = ExtResource("21_ajim5")
 
 [node name="CraftingButton5" parent="InventoryUI/BasicCrafting/PanelContainer/GridContainer" unique_id=272632742 instance=ExtResource("10_4f5kr")]
 layout_mode = 2
 mouse_filter = 1
+icon = null
 
 [node name="CraftingButton6" parent="InventoryUI/BasicCrafting/PanelContainer/GridContainer" unique_id=767208017 instance=ExtResource("10_4f5kr")]
 layout_mode = 2
 mouse_filter = 1
+icon = null
 
 [node name="CraftingButton7" parent="InventoryUI/BasicCrafting/PanelContainer/GridContainer" unique_id=2008464431 instance=ExtResource("10_4f5kr")]
 layout_mode = 2
 mouse_filter = 1
+icon = null
 
 [node name="BasicCraftingPanels" type="Control" parent="InventoryUI/BasicCrafting" unique_id=453566887 node_paths=PackedStringArray("crafting_tooltip")]
 custom_minimum_size = Vector2(350, 476)
@@ -604,8 +608,7 @@ layout_mode = 2
 mouse_filter = 1
 theme = ExtResource("14_ba8gd")
 disabled = true
-text = "Basic
-station"
+icon = ExtResource("16_lkt4f")
 icon_alignment = 1
 expand_icon = true
 
@@ -615,8 +618,7 @@ layout_mode = 2
 mouse_filter = 1
 theme = ExtResource("14_ba8gd")
 disabled = true
-text = "Basic
-Smith."
+icon = ExtResource("25_s17ah")
 icon_alignment = 1
 expand_icon = true
 
@@ -680,7 +682,9 @@ custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 mouse_filter = 1
 theme = ExtResource("14_ba8gd")
-text = "torch"
+icon = ExtResource("26_jnyvx")
+icon_alignment = 1
+expand_icon = true
 
 [node name="FirePlace" type="Button" parent="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control4/BaseCraftingContainer3/MarginContainer/ScrollContainer/HBoxContainer" unique_id=26334344]
 custom_minimum_size = Vector2(64, 64)

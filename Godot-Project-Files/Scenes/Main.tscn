@@ -800,10 +800,10 @@ grow_vertical = 2
 mouse_filter = 2
 
 [node name="PanelContainer" type="PanelContainer" parent="BuildTooltip/Control" unique_id=503169070]
-custom_minimum_size = Vector2(125, 100)
+custom_minimum_size = Vector2(125, 20)
 layout_mode = 0
 offset_right = 125.0
-offset_bottom = 100.0
+offset_bottom = 42.0
 mouse_filter = 2
 theme = ExtResource("11_grg3l")
 
@@ -817,13 +817,6 @@ mouse_default_cursor_shape = 2
 theme = ExtResource("5_pbw6q")
 theme_override_font_sizes/font_size = 18
 text = "Pick up"
-
-[node name="TestButton" type="Button" parent="BuildTooltip/Control/PanelContainer/VBoxContainer" unique_id=852486425]
-layout_mode = 2
-mouse_default_cursor_shape = 2
-theme = ExtResource("5_pbw6q")
-theme_override_font_sizes/font_size = 18
-text = "Test"
 
 [node name="RespawnTimers" type="Node2D" parent="." unique_id=617156280]
 
@@ -846,4 +839,3 @@ environment = SubResource("Environment_2a8ad")
 [connection signal="pressed" from="Menu/SaveList/BackButton" to="Menu" method="_on_save_list_back_button_pressed"]
 [connection signal="visibility_changed" from="BuildTooltip" to="BuildTooltip" method="_on_visibility_changed"]
 [connection signal="pressed" from="BuildTooltip/Control/PanelContainer/VBoxContainer/PickUpButton" to="BuildTooltip" method="_on_pick_up_button_pressed"]
-[connection signal="pressed" from="BuildTooltip/Control/PanelContainer/VBoxContainer/TestButton" to="BuildTooltip" method="_on_test_button_pressed"]
