@@ -8,6 +8,7 @@ func _ready() -> void:
 	var bb: String = ""
 	
 	bb += "[ul]"
+	bb += "Days Survived: " + str(GameManager.current_day) + "\n"
 	for stat: String in GameManager.more_stats:
 		var display_name: String = stat.capitalize().replace("_", " ")
 		var value: Variant = GameManager.more_stats[stat]
