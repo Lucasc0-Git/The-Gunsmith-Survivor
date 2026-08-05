@@ -20,10 +20,10 @@ signal region_unlocked(region_pos: Vector2i)
 @export var map_height: int = 100
 @export var safe_spawn_area_radius: int = 8
 
-@warning_ignore("integer_division")
-var half_w := map_width / 2
-@warning_ignore("integer_division")
-var half_h := map_height /2
+#@warning_ignore("integer_division")
+#var half_w := map_width / 2
+#@warning_ignore("integer_division")
+#var half_h := map_height /2
 
 var world_noise := FastNoiseLite.new()
 var grass_noise := FastNoiseLite.new()
@@ -70,6 +70,9 @@ func set_noise_and_seed() -> void:
 func generate_region(region_pos: Vector2i, seed_f_g: int = 12) -> void:
 	world_seed = seed_f_g
 	set_noise_and_seed()
+	
+	var half_w := int(float(map_width) / 2.0)
+	var half_h := int(float(map_height) / 2.0)
 	
 	var offset_x := region_pos.x * map_width
 	var offset_y := region_pos.y * map_height

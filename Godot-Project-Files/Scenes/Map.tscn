@@ -216,8 +216,7 @@ y_sort_enabled = true
 scale = Vector2(3, 3)
 script = ExtResource("1_qumfl")
 world_frequency = 0.035
-map_width = 101
-map_height = 101
+safe_spawn_area_radius = 12
 
 [node name="Map" type="TileMapLayer" parent="." unique_id=113042322]
 tile_set = SubResource("TileSet_5nsto")
