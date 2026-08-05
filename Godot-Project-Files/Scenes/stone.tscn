@@ -100,9 +100,6 @@ size = Vector2(26, 11)
 
 [node name="Stone" unique_id=1660284462 node_paths=PackedStringArray("collision", "shake_player") instance=ExtResource("1_nqvck")]
 script = ExtResource("2_uu3e6")
-base_drop_chance = 0.05
-damage_scaling = 0.01
-max_drop_chance_per_hit = 0.8
 collision = NodePath("CollisionShape2D")
 shake_player = NodePath("AnimatedSprite2D/Sprite2D#AnimationPlayer")
 damage_mulitpliers = Dictionary[int, float]({

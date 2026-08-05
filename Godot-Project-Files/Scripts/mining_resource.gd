@@ -68,11 +68,6 @@ func destroy() -> void:
 	collision.set_deferred("disabled", true)
 	drop_items(1, 20)
 	call_resource_destroyed()
-	#if GameManager.random_bool():
-		#shake_player.play("fall_right")
-	#else:
-		#shake_player.play("fall_left")
-	#await shake_player.animation_finished
 	queue_free()
 
 func call_resource_destroyed() -> void:

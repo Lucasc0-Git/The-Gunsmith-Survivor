@@ -171,20 +171,11 @@ func _on_mining_resource_destroyed(type: String, pos: Vector2) -> void:
 		apple_respawn_timer.start(tree_respawn_time)
 		await apple_respawn_timer.timeout
 		spawn_apple_tree(pos, TheAppleTree.Stages.SAPLING)
-	#if type == "stone":
-		#var stone_respawn_timer := Timer.new()
-		#respawn_timers.add_child(stone_respawn_timer)
-		#stone_respawn_timer.start(stone_respawn_time)
-		#await stone_respawn_timer.timeout
-		#spawn_stone(pos)
 
 func _on_hour_changed(hour: int) -> void:
 	label.text = "Hour: " + str(hour) + ":00"
 	_update_lightning(hour)
 	
-	#if hour == 12:
-		#for spawner: Spawner in spawners.get_children():
-			#spawner.spawn_enemy()
 	if GameManager.is_night():
 		GameManager.spawner_activity_mult = 1.5
 	else:
