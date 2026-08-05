@@ -5,6 +5,17 @@
 [ext_resource type="Resource" uid="uid://cc0anv7sdlwn4" path="res://items/Inv_items/Wood_item.tres" id="3_20cs3"]
 [ext_resource type="Texture2D" uid="uid://dyk5ihx7hbhg0" path="res://Textures/Treee.png" id="4_81toh"]
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_lqchn"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_81toh")
+}],
+"loop": 0,
+"name": &"default",
+"speed": 0.0
+}]
+
 [sub_resource type="Animation" id="Animation_fpmds"]
 length = 0.001
 tracks/0/type = "value"
@@ -128,7 +139,7 @@ _data = {
 script = ExtResource("1_fpmds")
 chance_for_wood_drop = 0.2
 collision = NodePath("CollisionShape2D")
-shake_player = NodePath("Sprite2D/ShakeAnimationPlayer")
+shake_player = NodePath("AnimatedSprite2D/ShakeAnimationPlayer")
 damage_mulitpliers = Dictionary[int, float]({
 1: 1.5,
 2: 0.4
@@ -139,10 +150,10 @@ health = 50.0
 item_data = ExtResource("3_20cs3")
 type = "tree"
 
-[node name="Sprite2D" parent="." index="0" unique_id=142450422]
-texture = ExtResource("4_81toh")
+[node name="AnimatedSprite2D" parent="." index="0" unique_id=1877883017]
+sprite_frames = SubResource("SpriteFrames_lqchn")
 flip_h = true
 
-[node name="ShakeAnimationPlayer" type="AnimationPlayer" parent="Sprite2D" index="0" unique_id=995789306]
+[node name="ShakeAnimationPlayer" type="AnimationPlayer" parent="AnimatedSprite2D" index="0" unique_id=995789306]
 process_mode = 1
 libraries/ = SubResource("AnimationLibrary_20cs3")

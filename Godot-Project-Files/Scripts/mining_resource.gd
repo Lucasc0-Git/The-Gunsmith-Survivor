@@ -1,7 +1,7 @@
 extends CharacterBody2D
 class_name MiningResource
 
-@onready var sprite: Sprite2D = $Sprite2D
+@onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var ysort_node := get_parent()
 @onready var main: Main = get_parent().get_parent()
 

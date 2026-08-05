@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://bs1w1y6c3dfbl"]
+
+[ext_resource type="PackedScene" uid="uid://dmrlknuxtapub" path="res://Scenes/the_tree.tscn" id="1_73llu"]
+
+[node name="TheAppleTREE" unique_id=1660284462 instance=ExtResource("1_73llu")]
