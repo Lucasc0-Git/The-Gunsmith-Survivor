@@ -2,7 +2,7 @@ extends Node2D
 class_name Spawner
 
 @export var spawn_time_randomizer: float = 40
-@export var spawn_cooldown_time: float = 130
+@export var spawn_cooldown_time: float = 150
 
 @onready var marker: Marker2D = $Marker2D
 @onready var disable_area: Area2D = $DisableArea ##A circle, when there is player in this circle, the spawner will be deactivated.
@@ -39,7 +39,7 @@ func _on_spawn_timer_timeout() -> void:
 	if !GameManager.is_night(): return
 	spawn_enemy(false)
 	var base_wait_time: float = spawn_cooldown_time + randf_range(-spawn_time_randomizer, spawn_time_randomizer)
-	spawn_timer.start(clamp(base_wait_time / (GameManager.spawner_activity_mult * GameManager.difficulty_multiplier), 20.0, base_wait_time + 30.0))
+	spawn_timer.start(clamp(base_wait_time / GameManager.difficulty_multiplier, 20.0, base_wait_time + 30.0))
 
 func spawn_enemy(forced: bool = false) -> void:
 	if (!spawner_disabled and can_spawn()) or forced:

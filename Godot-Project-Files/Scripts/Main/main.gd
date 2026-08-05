@@ -22,8 +22,17 @@ enum TimeOfDay {DAWN, SUNRISE, DAY, SUNSET, DUSK, NIGHT}
 	Color(0.4, 0.4, 0.6),  # DUSK
 	Color(0.1, 0.1, 0.2),  # NIGHT
 ]
+@export var nightmare_lightning_colors: Array[Color] = [
+	Color(0.6, 0.4, 0.6),  
+	Color(0.85, 0.6, 0.5),  
+	Color(1, 0.9, 0.9),         
+	Color(0.85, 0.5, 0.4),  
+	Color(0.8, 0.3, 0.5),  
+	Color(0.25, 0.05, 0.1),  
+]
 
 var day_colors := {}
+var nightmare_day_colors := {}
 var inventory_tint: CanvasModulate
 var the_core: TheCore
 var player: Player
@@ -55,6 +64,14 @@ func _ready() -> void:
 		18: lighting_colors[TimeOfDay.SUNSET],
 		19: lighting_colors[TimeOfDay.DUSK],
 		20: lighting_colors[TimeOfDay.NIGHT],
+	}
+	nightmare_day_colors = {
+		6: nightmare_lightning_colors[TimeOfDay.DAWN],
+		7: nightmare_lightning_colors[TimeOfDay.SUNRISE],
+		8: nightmare_lightning_colors[TimeOfDay.DAY],
+		18: nightmare_lightning_colors[TimeOfDay.SUNSET],
+		19: nightmare_lightning_colors[TimeOfDay.DUSK],
+		20: nightmare_lightning_colors[TimeOfDay.NIGHT]
 	}
 	##GameManager
 	GameManager.hour_changed.connect(_on_hour_changed)
@@ -132,6 +149,8 @@ func _ready() -> void:
 	
 	if GameManager.difficulty_multiplier >= 1.0:
 		the_core.max_health *= GameManager.difficulty_multiplier
+		
+	
 	
 	map.player = player
 	inventory_tint = hud.canvas_modulate
@@ -174,7 +193,10 @@ func _on_mining_resource_destroyed(type: String, pos: Vector2) -> void:
 
 func _on_hour_changed(hour: int) -> void:
 	label.text = "Hour: " + str(hour) + ":00"
-	_update_lightning(hour)
+	if GameManager.selected_difficulty >= GameManager.Difficulty.DIFFICULT:
+		_update_nightmare_lightning(hour)
+	else:
+		_update_lightning(hour)
 	
 	if GameManager.is_night():
 		GameManager.spawner_activity_mult = 1.5
@@ -215,6 +237,19 @@ func _update_lightning(hour: int) -> void:
 		target_vignette = 0.65
 	elif hour == 6 or hour == 19:
 		target_vignette = 0.85
+	map.set_vignette_strength(target_vignette, 25)
+
+func _update_nightmare_lightning(hour: int) -> void:
+	if !nightmare_day_colors.has(hour): return
+	var target_color: Color = nightmare_day_colors[hour]
+	var tween := create_tween()
+	tween.tween_property(canvas_modulate, "color", target_color, 25)
+	
+	var target_vignette: float = 0.8
+	if hour >= 20 or hour < 6:
+		target_vignette = 0.45
+	elif hour == 6 or hour == 19:
+		target_vignette = 0.55
 	map.set_vignette_strength(target_vignette, 25)
 
 func spawn_enemy(scene: PackedScene, pos: Vector2) -> void:

@@ -7,7 +7,7 @@ func take_damage(_amount: float, dmg_type: DamageTypes.DamageType, weapon_type: 
 	
 	if dmg_type == DamageTypes.DamageType.MELEE:
 		if weapon_type == "Pickaxe":
-			if randf() > 0.4:
+			if randf() > (0.4 / GameManager.difficulty_multiplier):
 				drop_items(1, 50)
 	sprite.modulate = Color(2, 2, 2)
 
