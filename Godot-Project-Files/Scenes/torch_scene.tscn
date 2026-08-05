@@ -9,7 +9,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("2_nwv1x")
 }],
-"loop": true,
+"loop": 1,
 "name": &"default",
 "speed": 5.0
 }]
@@ -94,6 +94,9 @@ _data = {
 &"light_base": SubResource("Animation_xt2a8")
 }
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_2a8ad"]
+radius = 67.66995
+
 [node name="TorchScene" unique_id=1835171183 node_paths=PackedStringArray("sprite") instance=ExtResource("1_1fo8t")]
 sprite = NodePath("AnimatedSprite2D")
 item_id = "torch"
@@ -121,3 +124,8 @@ debug_color = Color(0.08235294, 0.5254902, 1, 0.20392157)
 [node name="LightAnimPlayer" type="AnimationPlayer" parent="." index="4" unique_id=5198187]
 libraries/ = SubResource("AnimationLibrary_ero28")
 autoplay = &"light_base"
+
+[node name="LightArea" type="Area2D" parent="." index="5" unique_id=1548416069 groups=["light_sources"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LightArea" index="0" unique_id=370283846]
+shape = SubResource("CircleShape2D_2a8ad")

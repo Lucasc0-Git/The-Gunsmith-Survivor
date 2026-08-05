@@ -5,6 +5,9 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_4l55s"]
 radius = 352.00143
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2a8ad"]
+size = Vector2(40, 40)
+
 [node name="Enemy_spawner" type="Node2D" unique_id=1040846501]
 script = ExtResource("1_ewhtn")
 
@@ -34,6 +37,11 @@ shape = SubResource("CircleShape2D_4l55s")
 
 [node name="SpawnTimer" type="Timer" parent="." unique_id=632774133]
 wait_time = 60.0
+
+[node name="LightDetectionArea" type="Area2D" parent="." unique_id=1048351708]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LightDetectionArea" unique_id=919525915]
+shape = SubResource("RectangleShape2D_2a8ad")
 
 [connection signal="body_entered" from="DisableArea" to="." method="_on_disable_area_body_entered"]
 [connection signal="body_exited" from="DisableArea" to="." method="_on_disable_area_body_exited"]

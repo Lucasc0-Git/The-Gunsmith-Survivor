@@ -81,6 +81,7 @@ thecore=""
 melee_hit=""
 built=""
 dropped_item=""
+light_sources="All the Area2Ds that disable enemy spawners."
 
 [input]
 

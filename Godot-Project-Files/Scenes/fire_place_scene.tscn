@@ -29,7 +29,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_s5e30")
 }],
-"loop": true,
+"loop": 1,
 "name": &"default",
 "speed": 2.0
 }]
@@ -114,6 +114,9 @@ _data = {
 &"light_base": SubResource("Animation_xt2a8")
 }
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_2a8ad"]
+radius = 107.01869
+
 [node name="FirePlace" unique_id=1835171183 node_paths=PackedStringArray("sprite") instance=ExtResource("1_gke7a")]
 script = ExtResource("2_hmnt5")
 sprite = NodePath("AnimatedSprite2D")
@@ -163,3 +166,8 @@ angle_min = -10.0
 angle_max = 10.0
 scale_amount_min = 2.0
 scale_amount_max = 3.0
+
+[node name="LightArea" type="Area2D" parent="." index="6" unique_id=1474828229]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LightArea" index="0" unique_id=1667808067]
+shape = SubResource("CircleShape2D_2a8ad")

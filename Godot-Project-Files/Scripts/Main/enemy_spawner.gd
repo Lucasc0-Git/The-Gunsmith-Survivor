@@ -7,6 +7,7 @@ class_name Spawner
 @onready var marker: Marker2D = $Marker2D
 @onready var disable_area: Area2D = $DisableArea ##A circle, when there is player in this circle, the spawner will be deactivated.
 @onready var spawn_timer: Timer = $SpawnTimer
+@onready var detection_area: Area2D = $LightDetectionArea
 
 var distance_to_core: float = 0
 var main: Main
@@ -26,6 +27,14 @@ func _ready() -> void:
 	spawn_timer.wait_time += randf_range(-spawn_time_randomizer, spawn_time_randomizer)
 	spawn_timer.start()
 
+func can_spawn() -> bool:
+	var overlapping_areas := detection_area.get_overlapping_areas()
+	
+	for area in overlapping_areas:
+		if area.is_in_group("light_sources"):
+			return false
+	return true
+
 func _on_spawn_timer_timeout() -> void:
 	if GameManager.random_bool():
 		spawn_enemy(false)
@@ -33,7 +42,7 @@ func _on_spawn_timer_timeout() -> void:
 	spawn_timer.start(clamp(base_wait_time / (GameManager.spawner_activity_mult * GameManager.difficulty_multiplier), 20.0, base_wait_time + 30.0))
 
 func spawn_enemy(forced: bool = false) -> void:
-	if !spawner_disabled or forced:
+	if (!spawner_disabled and can_spawn()) or forced:
 		var enemy: Enemy = main.zombie_scene.instantiate()
 		enemy.max_health += distance_to_core * (0.005 * GameManager.difficulty_multiplier)
 		enemy.damage += distance_to_core * (0.001 * GameManager.difficulty_multiplier)
