@@ -8,8 +8,7 @@ class_name Map
 var player: Player
 var world_seed: int
 
-signal region_generated(new_tree_positions: Array, new_spawner_positions: Array, new_stones_position: Array)
-signal region_unlocked(region_pos: Vector2i)
+signal region_generated(new_tree_positions: Array, new_spawner_positions: Array, new_stones_position: Array, new_apple_trees_positions: Array)
 
 @export var world_frequency := 0.05
 @export var grass_frequency := 0.4
@@ -19,11 +18,6 @@ signal region_unlocked(region_pos: Vector2i)
 @export var map_width: int = 100
 @export var map_height: int = 100
 @export var safe_spawn_area_radius: int = 8
-
-#@warning_ignore("integer_division")
-#var half_w := map_width / 2
-#@warning_ignore("integer_division")
-#var half_h := map_height /2
 
 var world_noise := FastNoiseLite.new()
 var grass_noise := FastNoiseLite.new()
@@ -47,9 +41,6 @@ var tiles := {
 var tree_positions := []
 var spawner_positions := []
 var stone_positions := []
-
-var unlocked_regions: Dictionary = {Vector2i(0, 0): true}
-var region_difficulty: int = 0
 
 func _ready() -> void:
 	world_seed = GameManager.current_world_seed
@@ -80,6 +71,7 @@ func generate_region(region_pos: Vector2i, seed_f_g: int = 12) -> void:
 	var new_trees: Array = []
 	var new_spawners: Array = []
 	var new_stones: Array = []
+	var new_apple_trees: Array = []
 	
 	for x in range(-half_w, half_w + 1):
 		for y in range(-half_h, half_h + 1):
@@ -103,24 +95,25 @@ func generate_region(region_pos: Vector2i, seed_f_g: int = 12) -> void:
 			var global_pos := map.to_global(local_pos)
 			if world_value < -0.1: ## Forest
 				tile_coords = Vector2i(5, 0) ## Forest podzol
-				if tree_value < -0.1: ## Tree
-					new_trees.append(global_pos)
-					#objects.set_cell(Vector2i(x, y), 2, Vector2i(0, 0))
+				
+				if world_value >= -0.18 and world_value < -0.1:
+					if tree_value < -0.2:
+						new_apple_trees.append(global_pos)
+				else:
+					if tree_value < -0.08: ## Tree
+						new_trees.append(global_pos)
+				
 			else: ##Plains
+				tile_coords = be_grass(grass_value) ## Grass
+				
 				if enemy_value < -0.5: ## Spawner
 					new_spawners.append(global_pos)
-				tile_coords = be_grass(grass_value) ## Grass
+				
 			if stone_value > 0.65: ## Stones
 				new_stones.append(global_pos)
 			
 			map.set_cell(Vector2i(world_x, world_y), 2, tile_coords)
-	emit_signal("region_generated", new_trees, new_spawners, new_stones)
-
-func generate_region_if_unlocked(region_pos: Vector2i) -> void:
-	if unlocked_regions.get(region_pos, false):
-		generate_region(region_pos, GameManager.current_world_seed)
-	else:
-		pass #Need to generate some barrier. maybe mesh
+	emit_signal("region_generated", new_trees, new_spawners, new_stones, new_apple_trees)
 
 func be_grass(grass_value: float) -> Vector2i:
 	if grass_value < -0.05:

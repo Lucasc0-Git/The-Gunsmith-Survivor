@@ -146,7 +146,6 @@ func _ready() -> void:
 func generate(seed_f_g: int = 12) -> void:
 	print("Generating the world...")
 	map.generate_region(Vector2i(0, 0), seed_f_g)
-	spawn_apple_tree(Vector2(100, 0), TheAppleTree.Stages.SMALL_TREE)
 	spawn_player(Vector2(0, 0))
 	spawn_the_core(player.global_position + Vector2(0, -250))
 	if !OS.is_debug_build():
@@ -171,9 +170,6 @@ func _on_mining_resource_destroyed(type: String, pos: Vector2) -> void:
 		#stone_respawn_timer.start(stone_respawn_time)
 		#await stone_respawn_timer.timeout
 		#spawn_stone(pos)
-
-func _on_tree_respawn_timer_timeout() -> void:
-	pass
 
 func _on_hour_changed(hour: int) -> void:
 	label.text = "Hour: " + str(hour) + ":00"
@@ -252,7 +248,7 @@ func _input(event: InputEvent) -> void:
 		GameManager.set_hour(21)
 		hud.tint_hud(inventory_darken, 1)
 
-func _on_region_generated(new_trees: Array, new_spawners: Array, new_stones: Array) -> void:
+func _on_region_generated(new_trees: Array, new_spawners: Array, new_stones: Array, new_apple_trees: Array) -> void:
 	var mods: Array = map.world_mods
 	var pos_broke: Array = []
 	for mod: Dictionary in mods:
@@ -269,6 +265,10 @@ func _on_region_generated(new_trees: Array, new_spawners: Array, new_stones: Arr
 		if pos in pos_broke:
 			continue
 		spawn_stone(pos)
+	for pos: Vector2 in new_apple_trees:
+		if pos in pos_broke:
+			continue
+		spawn_apple_tree(pos, TheAppleTree.Stages.SMALL_TREE)
 
 func drop_item(item: ItemData, pos: Vector2, random_range: int = 0) -> void:
 	var dropped_item := preload("res://Scenes/dropped_item.tscn").instantiate()
