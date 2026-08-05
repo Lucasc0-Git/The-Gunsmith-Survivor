@@ -56,3 +56,10 @@ func show_tooltip(slot: Slot, pos: Vector2, from_inventory: bool) -> void:
 	show()
 	operating_slot = slot
 	is_slot_in_inventory = from_inventory
+
+func _on_dismantle_pressed() -> void:
+	if !operating_slot: return
+	if !operating_slot.slot_data.item_data: return
+	hud.dismantle_item(operating_slot.slot_data.item_data, operating_slot.slot_data.amount)
+	operating_slot.clear()
+	hide_tooltip()

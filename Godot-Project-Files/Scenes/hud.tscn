@@ -811,6 +811,10 @@ text = "Drop"
 layout_mode = 2
 text = "Split"
 
+[node name="Dismantle" type="Button" parent="RightClickTooltip/MarginContainer/VBoxContainer" unique_id=286619934]
+layout_mode = 2
+text = "Dismantle"
+
 [node name="EncyclopedyControl" type="Control" parent="." unique_id=2138338416]
 layout_mode = 3
 anchors_preset = 15
@@ -904,4 +908,5 @@ size_flags_vertical = 3
 [connection signal="pressed" from="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control4/BaseCraftingContainer3/MarginContainer/ScrollContainer/HBoxContainer/FirePlace" to="InventoryUI/BasicCrafting" method="_on_fire_place_pressed"]
 [connection signal="pressed" from="RightClickTooltip/MarginContainer/VBoxContainer/Drop" to="RightClickTooltip" method="_on_drop_pressed"]
 [connection signal="pressed" from="RightClickTooltip/MarginContainer/VBoxContainer/Split" to="RightClickTooltip" method="_on_split_pressed"]
+[connection signal="pressed" from="RightClickTooltip/MarginContainer/VBoxContainer/Dismantle" to="RightClickTooltip" method="_on_dismantle_pressed"]
 [connection signal="toggled" from="EncyclopedyControl/Button" to="EncyclopedyControl" method="_on_button_toggled"]

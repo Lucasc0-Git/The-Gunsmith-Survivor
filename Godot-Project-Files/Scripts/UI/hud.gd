@@ -59,6 +59,34 @@ func _on_core_attacked() -> void:
 	var new_core_attacked: Control = core_attacked_warning.instantiate()
 	core_attacked_box.add_child(new_core_attacked)
 
+func dismantle_item(item_data: ItemData, amount: int = 1) -> void:
+	var output_items: Dictionary[ItemData, int] = {} # {item_data: amount, item_data: amount}
+	
+	
+	for i in range(amount):
+		for ingredient: ItemData in item_data.crafting_recipe:
+			for x in range(item_data.crafting_recipe[ingredient]):
+				
+				if randf() > 0.55: continue
+				if !ingredient in output_items:
+					output_items[ingredient] = 1
+				else:
+					output_items[ingredient] += 1
+	
+	for item in output_items:
+		var leftover: int = hotbar.give_hotbar_item(item, output_items[item])
+		if leftover > 0:
+			var leftover_amount: int = inventory.can_add_item(item, leftover)
+			if leftover_amount <= 0:
+				inventory.give_item(item, leftover)
+			else:
+				var to_drop: int = leftover_amount
+				var to_give: int = leftover - leftover_amount
+				inventory.give_item(item, to_give)
+				for i in range(to_drop):
+					GameManager.main.drop_item(item, player.global_position, 40)
+			
+
 # Called when "E" is just pressed
 func toggle_inv() -> void:
 	if _inv_tween: _inv_tween.kill()
