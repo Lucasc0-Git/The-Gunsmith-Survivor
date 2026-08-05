@@ -15,7 +15,7 @@ class_name MiningResource
 @export var low_health_modulate: Color = Color(0.256, 0.256, 0.256, 1.0)
 @export var score_for_destroy: int = 1
 @export var item_data: ItemData
-@export_enum("stone", "tree") var type: String
+@export_enum("stone", "tree", "apple_tree") var type: String
 
 signal resource_destroyed(type: String, pos: Vector2)
 

@@ -157,13 +157,20 @@ func _on_mining_resource_destroyed(type: String, pos: Vector2) -> void:
 		"mod_type": "destroyed",
 		"object_type": type
 	})
-	#if type == "tree":
-		#var tree_respawn_timer := Timer.new()
-		##tree_respawn_timer.timeout.connect(_on_tree_respawn_timer_timeout)
-		#respawn_timers.add_child(tree_respawn_timer)
-		#tree_respawn_timer.start(tree_respawn_time)
-		#await tree_respawn_timer.timeout
-		#spawn_tree(pos)
+	if type == "tree":
+		var tree_respawn_timer := Timer.new()
+		tree_respawn_timer.one_shot = true
+		respawn_timers.add_child(tree_respawn_timer)
+		tree_respawn_timer.start(tree_respawn_time)
+		await tree_respawn_timer.timeout
+		spawn_tree(pos)
+	elif type == "apple_tree":
+		var apple_respawn_timer := Timer.new()
+		apple_respawn_timer.one_shot = true
+		respawn_timers.add_child(apple_respawn_timer)
+		apple_respawn_timer.start(tree_respawn_time)
+		await apple_respawn_timer.timeout
+		spawn_apple_tree(pos, TheAppleTree.Stages.SAPLING)
 	#if type == "stone":
 		#var stone_respawn_timer := Timer.new()
 		#respawn_timers.add_child(stone_respawn_timer)
