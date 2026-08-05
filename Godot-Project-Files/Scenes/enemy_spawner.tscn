@@ -9,6 +9,7 @@ radius = 352.00143
 size = Vector2(40, 40)
 
 [node name="Enemy_spawner" type="Node2D" unique_id=1040846501]
+process_mode = 1
 script = ExtResource("1_ewhtn")
 
 [node name="Marker2D" type="Marker2D" parent="." unique_id=1934579825]

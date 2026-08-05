@@ -188,14 +188,16 @@ func _on_hour_changed(hour: int) -> void:
 
 func _physics_process(_delta: float) -> void:
 	if !GameManager.is_game_loaded: return
-	var needed_radius: int = int(float(base_enemy_aggro_radius) + ((float(GameManager.score) / 1.5) * GameManager.difficulty_multiplier))
+	var needed_radius: int = int(float(base_enemy_aggro_radius) + ((float(GameManager.score) * 1) * GameManager.difficulty_multiplier))
 	if enemy_aggro_radius != needed_radius:
 		enemy_aggro_radius = needed_radius
 		
 	if GameManager.cheat_mode_enabled:
-		cheat_mode_label.show()
+		if cheat_mode_label.visible == false:
+			cheat_mode_label.show()
 	else:
-		cheat_mode_label.hide()
+		if cheat_mode_label.visible == true:
+			cheat_mode_label.hide()
 
 func game_over() -> void:
 	var game_over_scene := preload("res://Scenes/GameOver.tscn").instantiate()

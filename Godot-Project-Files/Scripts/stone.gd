@@ -9,7 +9,8 @@ func take_damage(_amount: float, dmg_type: DamageTypes.DamageType, weapon_type: 
 		if weapon_type == "Pickaxe":
 			if randf() > 0.4:
 				drop_items(1, 50)
-	
+	sprite.modulate = Color(2, 2, 2)
+
 	play_shake(0.7 if dmg_type == DamageTypes.DamageType.LONG_RANGE else 1.0)
 
 func play_shake(intensity: float = 1.0) -> void:

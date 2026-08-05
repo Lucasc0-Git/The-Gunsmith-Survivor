@@ -38,7 +38,7 @@ func take_damage(amount: float, dmg_type: DamageTypes.DamageType) -> void:
 	var damage := amount * multiplier
 	health -= damage
 	update_target_color()
-	sprite.modulate = Color(1.5, 1.5, 1.5)
+	sprite.modulate = Color(2, 2, 2)
 	if health <= 0:
 		destroy()
 	#else:
