@@ -146,6 +146,7 @@ func _ready() -> void:
 func generate(seed_f_g: int = 12) -> void:
 	print("Generating the world...")
 	map.generate_region(Vector2i(0, 0), seed_f_g)
+	spawn_apple_tree(Vector2(100, 0), TheAppleTree.Stages.SMALL_TREE)
 	#map.generate_region(Vector2i(1, 1), seed_f_g)
 	#map.generate_region(Vector2i(1, 0), seed_f_g)
 	#map.generate_region(Vector2i(0, 1), seed_f_g)
@@ -289,6 +290,14 @@ func spawn_tree(pos: Vector2) -> void:
 	tree.resource_destroyed.connect(_on_mining_resource_destroyed)
 	tree.global_position = pos
 	Ysort.add_child(tree)
+
+func spawn_apple_tree(pos: Vector2, starting_stage: TheAppleTree.Stages) -> void:
+	var apple_tree := preload("res://Scenes/the_apple_tree.tscn").instantiate()
+	apple_tree.resource_destroyed.connect(_on_mining_resource_destroyed)
+	apple_tree.global_position = pos
+	apple_tree.growing = true
+	apple_tree.starting_stage = starting_stage
+	Ysort.add_child(apple_tree)
 
 func spawn_stone(pos: Vector2) -> void:
 	var stone := preload("res://Scenes/stone.tscn").instantiate()
