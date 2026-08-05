@@ -28,6 +28,9 @@
 [ext_resource type="Script" uid="uid://bc6dxxlullnp8" path="res://Scripts/UI/right_click_tooltip.gd" id="24_oersf"]
 [ext_resource type="Texture2D" uid="uid://6wavg3er2yys" path="res://Textures/basicsmithingtable.png" id="25_s17ah"]
 [ext_resource type="Texture2D" uid="uid://hatbh5uwgwse" path="res://Textures/Items/torch_texture.png" id="26_jnyvx"]
+[ext_resource type="Script" uid="uid://nyvw66pl61sn" path="res://Scripts/encyclopedy.gd" id="29_q562m"]
+[ext_resource type="Theme" uid="uid://bjx8aflrkpmog" path="res://Themes/StartSceneButton.tres" id="29_qtyhc"]
+[ext_resource type="Texture2D" uid="uid://ntdpc6nqg2sm" path="res://Textures/encyclopedia-icon.png" id="30_q562m"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_36asn"]
 content_margin_left = 10.0
@@ -178,6 +181,14 @@ Label/font_sizes/font_size = 16
 Label/styles/normal = ExtResource("9_1a2va")
 Panel/styles/panel = ExtResource("9_1a2va")
 PanelContainer/styles/panel = ExtResource("9_1a2va")
+
+[sub_resource type="Theme" id="Theme_q562m"]
+AcceptDialog/colors/title_color = Color(1, 1, 1, 1)
+AcceptDialog/constants/title_height = 31
+AcceptDialog/constants/title_outline_size = 5
+AcceptDialog/styles/embedded_border = ExtResource("9_1a2va")
+AcceptDialog/styles/embedded_unfocused_border = ExtResource("9_1a2va")
+AcceptDialog/styles/panel = ExtResource("9_1a2va")
 
 [node name="Control" type="CanvasLayer" unique_id=1385382916]
 process_mode = 3
@@ -800,6 +811,42 @@ text = "Drop"
 layout_mode = 2
 text = "Split"
 
+[node name="EncyclopedyControl" type="Control" parent="." unique_id=2138338416]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("29_q562m")
+visible_button_position = Vector2(1196, 122)
+hidden_button_position = Vector2(1300, 122)
+trigger_dist = 300.0
+
+[node name="Button" type="Button" parent="EncyclopedyControl" unique_id=1819953394]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -84.0
+offset_top = 122.0
+offset_right = -20.0
+offset_bottom = 186.0
+grow_horizontal = 0
+theme = ExtResource("29_qtyhc")
+toggle_mode = true
+icon = ExtResource("30_q562m")
+icon_alignment = 1
+expand_icon = true
+
+[node name="AcceptDialog" type="AcceptDialog" parent="EncyclopedyControl" unique_id=1527730234]
+title = "Notice"
+theme = SubResource("Theme_q562m")
+ok_button_text = "Alright"
+dialog_text = "Encyclopedia is not implemented yet."
+
 [connection signal="mouse_entered" from="InventoryUI/Hotbar/PanelContainer" to="." method="_on_hotbar_mouse_entered"]
 [connection signal="mouse_exited" from="InventoryUI/Hotbar/PanelContainer" to="." method="_on_hotbar_mouse_exited"]
 [connection signal="mouse_entered" from="InventoryUI/BasicCrafting" to="." method="_on_basic_crafting_mouse_entered"]
@@ -844,3 +891,4 @@ text = "Split"
 [connection signal="pressed" from="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control4/BaseCraftingContainer3/MarginContainer/ScrollContainer/HBoxContainer/FirePlace" to="InventoryUI/BasicCrafting" method="_on_fire_place_pressed"]
 [connection signal="pressed" from="RightClickTooltip/MarginContainer/VBoxContainer/Drop" to="RightClickTooltip" method="_on_drop_pressed"]
 [connection signal="pressed" from="RightClickTooltip/MarginContainer/VBoxContainer/Split" to="RightClickTooltip" method="_on_split_pressed"]
+[connection signal="toggled" from="EncyclopedyControl/Button" to="EncyclopedyControl" method="_on_button_toggled"]
