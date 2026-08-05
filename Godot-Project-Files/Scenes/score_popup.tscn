@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://dcw16u8cqq64s"]
+
+[ext_resource type="Script" uid="uid://hu7aklpciqrl" path="res://Scripts/score_popup.gd" id="1_6333m"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_2a8ad"]
+font_size = 20
+
+[node name="ScorePopup" type="Control" unique_id=342435640]
+custom_minimum_size = Vector2(200, 40)
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_6333m")
+
+[node name="Label" type="Label" parent="." unique_id=1462468606]
+layout_mode = 0
+offset_right = 264.0
+offset_bottom = 23.0
+label_settings = SubResource("LabelSettings_2a8ad")

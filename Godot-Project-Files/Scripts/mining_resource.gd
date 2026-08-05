@@ -64,6 +64,7 @@ func update_target_color() -> void:
 
 func destroy() -> void:
 	GameManager.score += score_for_destroy
+	GameManager.show_score_popup("Resource Destroyed: +%s" % [score_for_destroy], Color.WHITE)
 	GameManager.more_stats["Resources mined"] += 1
 	collision.set_deferred("disabled", true)
 	drop_items(1, 20)

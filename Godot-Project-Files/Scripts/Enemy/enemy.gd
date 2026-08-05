@@ -98,6 +98,7 @@ func take_damage(amount: float, dmg_type: DamageTypes.DamageType, _weapon_type: 
 
 func die() -> void:
 	GameManager.score += score_for_kill
+	GameManager.show_score_popup("Zombie Killed: Score +%s" % [score_for_kill])
 	GameManager.more_stats["Enemies killed"] += 1
 	queue_free()
 

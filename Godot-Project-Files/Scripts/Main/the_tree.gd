@@ -58,6 +58,7 @@ func play_shake(intensity: float = 1.0) -> void:
 
 func destroy() -> void:
 	GameManager.score += score_for_destroy
+	GameManager.show_score_popup("Tree destroyed: Score +%s" % [score_for_destroy], Color.WHITE)
 	AudioManager.play_sfx_2d("falling_tree", global_position, 1.5)
 	GameManager.more_stats["Resources mined"] += 1
 	collision.set_deferred("disabled", true)

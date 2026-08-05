@@ -153,6 +153,7 @@ func _on_glock_pressed() -> void:
 		hud.give_item(glock_item)
 		inventory.rm_items_by_recipe(glock_item.crafting_recipe)
 		GameManager.more_stats["Items crafted"] += 1
+		GameManager.show_score_popup("Item Crafted: Score +%s" % [glock_item.score_for_crafting])
 		GameManager.score += glock_item.score_for_crafting
 
 func _on_shotgun_pressed() -> void:
@@ -161,6 +162,7 @@ func _on_shotgun_pressed() -> void:
 		hud.give_item(shotgun_item)
 		inventory.rm_items_by_recipe(shotgun_item.crafting_recipe)
 		GameManager.more_stats["Items crafted"] += 1
+		GameManager.show_score_popup("Item Crafted: Score +%s" % [shotgun_item.score_for_crafting])
 		GameManager.score += shotgun_item.score_for_crafting
 
 func _on_assault_rifle_pressed() -> void:
@@ -169,6 +171,7 @@ func _on_assault_rifle_pressed() -> void:
 		hud.give_item(assault_rifle_item)
 		inventory.rm_items_by_recipe(assault_rifle_item.crafting_recipe)
 		GameManager.more_stats["Items crafted"] += 1
+		GameManager.show_score_popup("Item Crafted: Score +%s" % [assault_rifle_item.score_for_crafting])
 		GameManager.score += assault_rifle_item.score_for_crafting
 
 func _on_machine_gun_pressed() -> void:
@@ -177,6 +180,7 @@ func _on_machine_gun_pressed() -> void:
 		hud.give_item(machine_gun_item)
 		inventory.rm_items_by_recipe(machine_gun_item.crafting_recipe)
 		GameManager.more_stats["Items crafted"] += 1
+		GameManager.show_score_popup("Item Crafted: Score +%s" % [machine_gun_item.score_for_crafting])
 		GameManager.score += machine_gun_item.score_for_crafting
 
 ##The Tools crafting recipes.
@@ -187,6 +191,7 @@ func _on_wooden_axe_pressed() -> void:
 		hud.give_item(wooden_axe_item)
 		inventory.rm_items_by_recipe(wooden_axe_item.crafting_recipe)
 		GameManager.more_stats["Items crafted"] += 1
+		GameManager.show_score_popup("Item Crafted: Score +%s" % [wooden_axe_item.score_for_crafting])
 		GameManager.score += wooden_axe_item.score_for_crafting
 
 func _on_wooden_pickaxe_pressed() -> void:
@@ -195,6 +200,7 @@ func _on_wooden_pickaxe_pressed() -> void:
 		hud.give_item(wooden_pickaxe_item)
 		inventory.rm_items_by_recipe(wooden_pickaxe_item.crafting_recipe)
 		GameManager.more_stats["Items crafted"] += 1
+		GameManager.show_score_popup("Item Crafted: Score +%s" % [wooden_pickaxe_item.score_for_crafting])
 		GameManager.score += wooden_pickaxe_item.score_for_crafting
 
 ##The Stations crafting recipes.
@@ -205,6 +211,7 @@ func _on_basic_station_pressed() -> void:
 		hud.give_item(basic_station_item)
 		inventory.rm_items_by_recipe(basic_station_item.crafting_recipe)
 		GameManager.more_stats["Items crafted"] += 1
+		GameManager.show_score_popup("Item Crafted: Score +%s" % [basic_station_item.score_for_crafting])
 		GameManager.score += basic_station_item.score_for_crafting
 
 func _on_basic_smithing_table_pressed() -> void:
@@ -213,6 +220,7 @@ func _on_basic_smithing_table_pressed() -> void:
 		hud.give_item(basic_smithing_table_item)
 		inventory.rm_items_by_recipe(basic_smithing_table_item.crafting_recipe)
 		GameManager.more_stats["Items crafted"] += 1
+		GameManager.show_score_popup("Item Crafted: Score +%s" % [basic_smithing_table_item.score_for_crafting])
 		GameManager.score += basic_smithing_table_item.score_for_crafting
 
 ##The Base crafting recipes.
@@ -223,6 +231,7 @@ func _on_torch_pressed() -> void:
 		hud.give_item(torch_item)
 		inventory.rm_items_by_recipe(torch_item.crafting_recipe)
 		GameManager.more_stats["Items crafted"] += 1
+		GameManager.show_score_popup("Item Crafted: Score +%s" % [torch_item.score_for_crafting])
 		GameManager.score += torch_item.score_for_crafting
 
 func _on_fire_place_pressed() -> void:
@@ -231,6 +240,7 @@ func _on_fire_place_pressed() -> void:
 		hud.give_item(fireplace_item)
 		inventory.rm_items_by_recipe(fireplace_item.crafting_recipe)
 		GameManager.more_stats["Items crafted"] += 1
+		GameManager.show_score_popup("Item Crafted: Score +%s" % [fireplace_item.score_for_crafting])
 		GameManager.score += fireplace_item.score_for_crafting
 
 func _on_button_pressed() -> void:

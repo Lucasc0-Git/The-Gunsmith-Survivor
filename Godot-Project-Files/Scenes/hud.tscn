@@ -847,6 +847,19 @@ theme = SubResource("Theme_q562m")
 ok_button_text = "Alright"
 dialog_text = "Encyclopedia is not implemented yet."
 
+[node name="ScorePopupControl" type="VBoxContainer" parent="." unique_id=1078962099]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -300.0
+offset_top = -150.0
+grow_horizontal = 0
+grow_vertical = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
 [connection signal="mouse_entered" from="InventoryUI/Hotbar/PanelContainer" to="." method="_on_hotbar_mouse_entered"]
 [connection signal="mouse_exited" from="InventoryUI/Hotbar/PanelContainer" to="." method="_on_hotbar_mouse_exited"]
 [connection signal="mouse_entered" from="InventoryUI/BasicCrafting" to="." method="_on_basic_crafting_mouse_entered"]

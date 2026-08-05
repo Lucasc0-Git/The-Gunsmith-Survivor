@@ -159,6 +159,10 @@ func get_multiplier_for_difficulty(diff: Difficulty) -> float:
 			push_warning("Unknown difficulty preset! Using NORMAL")
 			return 1.0
 
+func show_score_popup(text: String, color: Color = Color.WHITE) -> void:
+	if is_game_loaded and main != null:
+		main.hud.show_score_popup(text, color)
+
 func start_new_world(save_name: String = "Autosave") -> void:
 	is_loading_save = false
 	current_world_seed = randi()

@@ -225,6 +225,7 @@ func _physics_process(delta: float) -> void:
 func respawn() -> void:
 	
 	GameManager.score -= 50
+	GameManager.show_score_popup("Player Died: Score -50", Color.DARK_RED)
 	GameManager.more_stats["Deaths"] += 1
 	
 	global_position = spawn_pos

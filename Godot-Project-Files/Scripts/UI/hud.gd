@@ -13,7 +13,7 @@ class_name Hud
 @onready var core_attacked_box: VBoxContainer = $CoreAttackedControl/CoreAttackedWarningBox
 @onready var core_attacked_control: Control = $CoreAttackedControl
 @onready var right_click_tooltip: RightClickTooltip = $RightClickTooltip
-
+@onready var popup_container: VBoxContainer = $ScorePopupControl
 
 ## The @onready var declaration
 @onready var hotbar_grid_container: GridContainer = $InventoryUI/Hotbar/PanelContainer/GridContainer
@@ -23,6 +23,7 @@ var glock_item : ItemData
 var shotgun_item : ItemData
 var _inv_tween: Tween
 var core_attacked_warning: PackedScene = preload("res://Scenes/core_attacked_warning.tscn")
+var popup_scene := preload("res://Scenes/score_popup.tscn")
 
 ## The signals declaration
 signal inv_toggled(visible: bool)
@@ -93,6 +94,12 @@ func _input(event: InputEvent) -> void:
 	## Calls toggle_inv() on "E" pressed
 	if event.is_action_pressed("toggle_inventory"):
 		toggle_inv()
+
+func show_score_popup(text: String, color: Color = Color.WHITE) -> void:
+	var popup := popup_scene.instantiate() as ScorePopup
+	popup_container.add_child(popup)
+	popup.position = Vector2(randf_range(-20, 20), randf_range(-10, 10))
+	popup.setup(text, color)
 
 func _on_hotbar_mouse_entered() -> void:
 	toggle_hovering(true)
