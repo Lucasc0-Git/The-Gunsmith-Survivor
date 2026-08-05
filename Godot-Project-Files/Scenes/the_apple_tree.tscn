@@ -1,5 +1,54 @@
 [gd_scene format=3 uid="uid://bs1w1y6c3dfbl"]
 
 [ext_resource type="PackedScene" uid="uid://dmrlknuxtapub" path="res://Scenes/the_tree.tscn" id="1_73llu"]
+[ext_resource type="Texture2D" uid="uid://bvlfpohoopadb" path="res://Textures/AppleTree.png" id="2_m6x1l"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m6x1l"]
+atlas = ExtResource("2_m6x1l")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_53emk"]
+atlas = ExtResource("2_m6x1l")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aqj7c"]
+atlas = ExtResource("2_m6x1l")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cmgh1"]
+atlas = ExtResource("2_m6x1l")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_elynb"]
+atlas = ExtResource("2_m6x1l")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5luai"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m6x1l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_53emk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aqj7c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cmgh1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_elynb")
+}],
+"loop": 0,
+"name": &"default",
+"speed": 0.0
+}]
 
 [node name="TheAppleTREE" unique_id=1660284462 instance=ExtResource("1_73llu")]
+
+[node name="AnimatedSprite2D" parent="." index="0" unique_id=1877883017]
+sprite_frames = SubResource("SpriteFrames_5luai")
+frame = 3
+flip_h = false

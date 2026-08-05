@@ -151,6 +151,7 @@ item_data = ExtResource("3_20cs3")
 type = "tree"
 
 [node name="AnimatedSprite2D" parent="." index="0" unique_id=1877883017]
+position = Vector2(0, 0)
 sprite_frames = SubResource("SpriteFrames_lqchn")
 flip_h = true
 
