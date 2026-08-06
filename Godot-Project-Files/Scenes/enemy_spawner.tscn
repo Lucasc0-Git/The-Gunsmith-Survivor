@@ -11,6 +11,8 @@ size = Vector2(40, 40)
 [node name="Enemy_spawner" type="Node2D" unique_id=1040846501]
 process_mode = 1
 script = ExtResource("1_ewhtn")
+spawn_time_randomizer = 60.0
+spawn_cooldown_time = 120.0
 
 [node name="Marker2D" type="Marker2D" parent="." unique_id=1934579825]
 

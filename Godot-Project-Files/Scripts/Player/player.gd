@@ -35,7 +35,7 @@ var regions_unlocked: Array = []
 
 ## The const declaration.
 const SPEED: int = 200
-const ACCEL: float = 600
+const ACCEL: float = 700
 
 ## The signals declaration
 signal health_update(current: float, maximum: float)
