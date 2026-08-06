@@ -23,14 +23,25 @@
 [ext_resource type="Texture2D" uid="uid://b8xibgyex24gv" path="res://Textures/SURVIVAL HORROR WEAPONS PACK 16X16/14.png" id="19_0iicw"]
 [ext_resource type="Texture2D" uid="uid://b81agdoybaaqs" path="res://Textures/SURVIVAL HORROR WEAPONS PACK 16X16/21.png" id="19_yidpd"]
 [ext_resource type="Texture2D" uid="uid://b464uoeg5qymj" path="res://Textures/SURVIVAL HORROR WEAPONS PACK 16X16/6.png" id="20_484xk"]
+[ext_resource type="Script" uid="uid://def44bo4agrv4" path="res://Scripts/UI/item_craft_button.gd" id="20_q562m"]
 [ext_resource type="Texture2D" uid="uid://lu4v4pqxnb16" path="res://Textures/Items/fireplace_texture_item.png" id="21_ajim5"]
 [ext_resource type="Texture2D" uid="uid://c0lvq3arfbwu4" path="res://Textures/Items/wooden_pickaxe_texture.png" id="21_vxf74"]
+[ext_resource type="Resource" uid="uid://dmcom6xx0kjas" path="res://items/Inv_items/Glock_item.tres" id="22_l8r83"]
+[ext_resource type="Resource" uid="uid://c814ko2kbbn3p" path="res://items/Inv_items/Shotgun_item.tres" id="24_5fqfc"]
 [ext_resource type="Script" uid="uid://bc6dxxlullnp8" path="res://Scripts/UI/right_click_tooltip.gd" id="24_oersf"]
 [ext_resource type="Texture2D" uid="uid://6wavg3er2yys" path="res://Textures/basicsmithingtable.png" id="25_s17ah"]
 [ext_resource type="Texture2D" uid="uid://hatbh5uwgwse" path="res://Textures/Items/torch_texture.png" id="26_jnyvx"]
+[ext_resource type="Resource" uid="uid://dptc6ptdk44tx" path="res://items/Inv_items/AssaultRifle_item.tres" id="26_xbkfx"]
+[ext_resource type="Resource" uid="uid://heu2agyjxvh8" path="res://items/Inv_items/MachineGun_item.tres" id="28_dn45h"]
+[ext_resource type="Resource" uid="uid://1k1aht8itx4c" path="res://items/Inv_items/WoodenAxe_item.tres" id="29_7jysg"]
 [ext_resource type="Script" uid="uid://nyvw66pl61sn" path="res://Scripts/encyclopedy.gd" id="29_q562m"]
 [ext_resource type="Theme" uid="uid://bjx8aflrkpmog" path="res://Themes/StartSceneButton.tres" id="29_qtyhc"]
 [ext_resource type="Texture2D" uid="uid://ntdpc6nqg2sm" path="res://Textures/encyclopedia-icon.png" id="30_q562m"]
+[ext_resource type="Resource" uid="uid://ckevigu3bxq4c" path="res://items/Inv_items/Wooden_pickaxe_item.tres" id="31_jmo6y"]
+[ext_resource type="Resource" uid="uid://bgrrw3rasvjj2" path="res://items/Inv_items/BasicStation_item.tres" id="32_te3lg"]
+[ext_resource type="Resource" uid="uid://bykwtjaftb02t" path="res://items/Inv_items/BasicSmithingTable_item.tres" id="34_7c2aa"]
+[ext_resource type="Resource" uid="uid://b0725nycjx8ul" path="res://items/Inv_items/Torch_item.tres" id="36_yfo6n"]
+[ext_resource type="Resource" uid="uid://c8nuioxkkips2" path="res://items/Inv_items/FirePlace_item.tres" id="37_eqxyv"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_36asn"]
 content_margin_left = 10.0
@@ -450,46 +461,59 @@ layout_mode = 2
 custom_minimum_size = Vector2(346, 64)
 layout_mode = 2
 
-[node name="Glock" type="Button" parent="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control/WeaponsCraftingContainer/MarginContainer/ScrollContainer/HBoxContainer" unique_id=2078825733]
+[node name="ItemCraftingButton" type="Button" parent="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control/WeaponsCraftingContainer/MarginContainer/ScrollContainer/HBoxContainer" unique_id=2046426405]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
-mouse_filter = 1
 theme = ExtResource("14_ba8gd")
 disabled = true
 action_mode = 0
 icon = ExtResource("15_36s6t")
 icon_alignment = 1
 expand_icon = true
+script = ExtResource("20_q562m")
+item_data = ExtResource("22_l8r83")
+metadata/_custom_type_script = "uid://def44bo4agrv4"
 
-[node name="Shotgun" type="Button" parent="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control/WeaponsCraftingContainer/MarginContainer/ScrollContainer/HBoxContainer" unique_id=1609418427]
+[node name="ItemCraftingButton2" type="Button" parent="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control/WeaponsCraftingContainer/MarginContainer/ScrollContainer/HBoxContainer" unique_id=1572633006]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
-mouse_filter = 1
 theme = ExtResource("14_ba8gd")
 disabled = true
+action_mode = 0
 icon = ExtResource("16_36s6t")
 icon_alignment = 1
 expand_icon = true
+script = ExtResource("20_q562m")
+item_data = ExtResource("24_5fqfc")
+metadata/_custom_type_script = "uid://def44bo4agrv4"
 
-[node name="AssaultRifle" type="Button" parent="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control/WeaponsCraftingContainer/MarginContainer/ScrollContainer/HBoxContainer" unique_id=278809535]
+[node name="AssaultRifle" type="Button" parent="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control/WeaponsCraftingContainer/MarginContainer/ScrollContainer/HBoxContainer" unique_id=812227159]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 mouse_filter = 1
 theme = ExtResource("14_ba8gd")
 disabled = true
+action_mode = 0
 icon = ExtResource("19_0iicw")
 icon_alignment = 1
 expand_icon = true
+script = ExtResource("20_q562m")
+item_data = ExtResource("26_xbkfx")
+metadata/_custom_type_script = "uid://def44bo4agrv4"
 
-[node name="MachineGun" type="Button" parent="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control/WeaponsCraftingContainer/MarginContainer/ScrollContainer/HBoxContainer" unique_id=249965525]
+[node name="MachineGun" type="Button" parent="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control/WeaponsCraftingContainer/MarginContainer/ScrollContainer/HBoxContainer" unique_id=1445524723]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 mouse_filter = 1
 theme = ExtResource("14_ba8gd")
 disabled = true
+action_mode = 0
 icon = ExtResource("20_484xk")
 icon_alignment = 1
 expand_icon = true
+script = ExtResource("20_q562m")
+item_data = ExtResource("28_dn45h")
+metadata/_custom_type_script = "uid://def44bo4agrv4"
 
 [node name="Panel5" type="Panel" parent="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control/WeaponsCraftingContainer/MarginContainer/ScrollContainer/HBoxContainer" unique_id=1671633110]
 custom_minimum_size = Vector2(64, 64)
@@ -536,7 +560,7 @@ layout_mode = 2
 custom_minimum_size = Vector2(346, 64)
 layout_mode = 2
 
-[node name="WoodenAxe" type="Button" parent="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control2/ToolsCraftingContainer2/MarginContainer/ScrollContainer/HBoxContainer" unique_id=1451926303]
+[node name="WoodenAxe" type="Button" parent="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control2/ToolsCraftingContainer2/MarginContainer/ScrollContainer/HBoxContainer" unique_id=1052805503]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 mouse_filter = 1
@@ -546,8 +570,11 @@ action_mode = 0
 icon = ExtResource("19_yidpd")
 icon_alignment = 1
 expand_icon = true
+script = ExtResource("20_q562m")
+item_data = ExtResource("29_7jysg")
+metadata/_custom_type_script = "uid://def44bo4agrv4"
 
-[node name="WoodenPickaxe" type="Button" parent="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control2/ToolsCraftingContainer2/MarginContainer/ScrollContainer/HBoxContainer" unique_id=643392169]
+[node name="WoodenPickaxe" type="Button" parent="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control2/ToolsCraftingContainer2/MarginContainer/ScrollContainer/HBoxContainer" unique_id=550513623]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 mouse_filter = 1
@@ -557,6 +584,9 @@ action_mode = 0
 icon = ExtResource("21_vxf74")
 icon_alignment = 1
 expand_icon = true
+script = ExtResource("20_q562m")
+item_data = ExtResource("31_jmo6y")
+metadata/_custom_type_script = "uid://def44bo4agrv4"
 
 [node name="Panel3" type="Panel" parent="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control2/ToolsCraftingContainer2/MarginContainer/ScrollContainer/HBoxContainer" unique_id=1367610658]
 custom_minimum_size = Vector2(64, 64)
@@ -613,25 +643,33 @@ layout_mode = 2
 custom_minimum_size = Vector2(346, 64)
 layout_mode = 2
 
-[node name="BasicStation" type="Button" parent="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control3/CraftingStationsCraftingContainer3/MarginContainer/ScrollContainer/HBoxContainer" unique_id=2010442272]
+[node name="BasicStation" type="Button" parent="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control3/CraftingStationsCraftingContainer3/MarginContainer/ScrollContainer/HBoxContainer" unique_id=334838899]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 mouse_filter = 1
 theme = ExtResource("14_ba8gd")
 disabled = true
+action_mode = 0
 icon = ExtResource("16_lkt4f")
 icon_alignment = 1
 expand_icon = true
+script = ExtResource("20_q562m")
+item_data = ExtResource("32_te3lg")
+metadata/_custom_type_script = "uid://def44bo4agrv4"
 
-[node name="BasicSmithingTable" type="Button" parent="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control3/CraftingStationsCraftingContainer3/MarginContainer/ScrollContainer/HBoxContainer" unique_id=1351642476]
+[node name="BasicSmithingTable" type="Button" parent="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control3/CraftingStationsCraftingContainer3/MarginContainer/ScrollContainer/HBoxContainer" unique_id=448663778]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 mouse_filter = 1
 theme = ExtResource("14_ba8gd")
 disabled = true
+action_mode = 0
 icon = ExtResource("25_s17ah")
 icon_alignment = 1
 expand_icon = true
+script = ExtResource("20_q562m")
+item_data = ExtResource("34_7c2aa")
+metadata/_custom_type_script = "uid://def44bo4agrv4"
 
 [node name="Panel4" type="Panel" parent="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control3/CraftingStationsCraftingContainer3/MarginContainer/ScrollContainer/HBoxContainer" unique_id=970044713]
 custom_minimum_size = Vector2(64, 64)
@@ -688,24 +726,33 @@ layout_mode = 2
 custom_minimum_size = Vector2(346, 64)
 layout_mode = 2
 
-[node name="Torch" type="Button" parent="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control4/BaseCraftingContainer3/MarginContainer/ScrollContainer/HBoxContainer" unique_id=1154186695]
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 2
-mouse_filter = 1
-theme = ExtResource("14_ba8gd")
-icon = ExtResource("26_jnyvx")
-icon_alignment = 1
-expand_icon = true
-
-[node name="FirePlace" type="Button" parent="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control4/BaseCraftingContainer3/MarginContainer/ScrollContainer/HBoxContainer" unique_id=26334344]
+[node name="Torch" type="Button" parent="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control4/BaseCraftingContainer3/MarginContainer/ScrollContainer/HBoxContainer" unique_id=1031517470]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 mouse_filter = 1
 theme = ExtResource("14_ba8gd")
 disabled = true
+action_mode = 0
+icon = ExtResource("26_jnyvx")
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("20_q562m")
+item_data = ExtResource("36_yfo6n")
+metadata/_custom_type_script = "uid://def44bo4agrv4"
+
+[node name="FirePlace" type="Button" parent="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control4/BaseCraftingContainer3/MarginContainer/ScrollContainer/HBoxContainer" unique_id=1031219178]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+mouse_filter = 1
+theme = ExtResource("14_ba8gd")
+disabled = true
+action_mode = 0
 icon = ExtResource("21_ajim5")
 icon_alignment = 1
 expand_icon = true
+script = ExtResource("20_q562m")
+item_data = ExtResource("37_eqxyv")
+metadata/_custom_type_script = "uid://def44bo4agrv4"
 
 [node name="Panel3" type="Panel" parent="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control4/BaseCraftingContainer3/MarginContainer/ScrollContainer/HBoxContainer" unique_id=648026212]
 custom_minimum_size = Vector2(64, 64)
@@ -870,42 +917,12 @@ size_flags_vertical = 3
 [connection signal="mouse_exited" from="InventoryUI/BasicCrafting" to="." method="_on_basic_crafting_mouse_exited"]
 [connection signal="mouse_entered" from="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control/WeaponsCraftingContainer" to="." method="_on_weapons_crafting_container_mouse_entered"]
 [connection signal="mouse_exited" from="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control/WeaponsCraftingContainer" to="." method="_on_weapons_crafting_container_mouse_exited"]
-[connection signal="mouse_entered" from="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control/WeaponsCraftingContainer/MarginContainer/ScrollContainer/HBoxContainer/Glock" to="InventoryUI/BasicCrafting/BasicCraftingPanels" method="_on_glock_mouse_entered"]
-[connection signal="mouse_exited" from="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control/WeaponsCraftingContainer/MarginContainer/ScrollContainer/HBoxContainer/Glock" to="InventoryUI/BasicCrafting/BasicCraftingPanels" method="_on_glock_mouse_exited"]
-[connection signal="pressed" from="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control/WeaponsCraftingContainer/MarginContainer/ScrollContainer/HBoxContainer/Glock" to="InventoryUI/BasicCrafting" method="_on_glock_pressed"]
-[connection signal="mouse_entered" from="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control/WeaponsCraftingContainer/MarginContainer/ScrollContainer/HBoxContainer/Shotgun" to="InventoryUI/BasicCrafting/BasicCraftingPanels" method="_on_shotgun_mouse_entered"]
-[connection signal="mouse_exited" from="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control/WeaponsCraftingContainer/MarginContainer/ScrollContainer/HBoxContainer/Shotgun" to="InventoryUI/BasicCrafting/BasicCraftingPanels" method="_on_shotgun_mouse_exited"]
-[connection signal="pressed" from="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control/WeaponsCraftingContainer/MarginContainer/ScrollContainer/HBoxContainer/Shotgun" to="InventoryUI/BasicCrafting" method="_on_shotgun_pressed"]
-[connection signal="mouse_entered" from="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control/WeaponsCraftingContainer/MarginContainer/ScrollContainer/HBoxContainer/AssaultRifle" to="InventoryUI/BasicCrafting/BasicCraftingPanels" method="_on_assault_rifle_mouse_entered"]
-[connection signal="mouse_exited" from="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control/WeaponsCraftingContainer/MarginContainer/ScrollContainer/HBoxContainer/AssaultRifle" to="InventoryUI/BasicCrafting/BasicCraftingPanels" method="_on_assault_rifle_mouse_exited"]
-[connection signal="pressed" from="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control/WeaponsCraftingContainer/MarginContainer/ScrollContainer/HBoxContainer/AssaultRifle" to="InventoryUI/BasicCrafting" method="_on_assault_rifle_pressed"]
-[connection signal="mouse_entered" from="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control/WeaponsCraftingContainer/MarginContainer/ScrollContainer/HBoxContainer/MachineGun" to="InventoryUI/BasicCrafting/BasicCraftingPanels" method="_on_machine_gun_mouse_entered"]
-[connection signal="mouse_exited" from="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control/WeaponsCraftingContainer/MarginContainer/ScrollContainer/HBoxContainer/MachineGun" to="InventoryUI/BasicCrafting/BasicCraftingPanels" method="_on_machine_gun_mouse_exited"]
-[connection signal="pressed" from="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control/WeaponsCraftingContainer/MarginContainer/ScrollContainer/HBoxContainer/MachineGun" to="InventoryUI/BasicCrafting" method="_on_machine_gun_pressed"]
 [connection signal="mouse_entered" from="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control2/ToolsCraftingContainer2" to="." method="_on_tools_crafting_container_2_mouse_entered"]
 [connection signal="mouse_exited" from="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control2/ToolsCraftingContainer2" to="." method="_on_tools_crafting_container_2_mouse_exited"]
-[connection signal="mouse_entered" from="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control2/ToolsCraftingContainer2/MarginContainer/ScrollContainer/HBoxContainer/WoodenAxe" to="InventoryUI/BasicCrafting/BasicCraftingPanels" method="_on_wooden_axe_mouse_entered"]
-[connection signal="mouse_exited" from="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control2/ToolsCraftingContainer2/MarginContainer/ScrollContainer/HBoxContainer/WoodenAxe" to="InventoryUI/BasicCrafting/BasicCraftingPanels" method="_on_wooden_axe_mouse_exited"]
-[connection signal="pressed" from="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control2/ToolsCraftingContainer2/MarginContainer/ScrollContainer/HBoxContainer/WoodenAxe" to="InventoryUI/BasicCrafting" method="_on_wooden_axe_pressed"]
-[connection signal="mouse_entered" from="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control2/ToolsCraftingContainer2/MarginContainer/ScrollContainer/HBoxContainer/WoodenPickaxe" to="InventoryUI/BasicCrafting/BasicCraftingPanels" method="_on_wooden_pickaxe_mouse_entered"]
-[connection signal="mouse_exited" from="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control2/ToolsCraftingContainer2/MarginContainer/ScrollContainer/HBoxContainer/WoodenPickaxe" to="InventoryUI/BasicCrafting/BasicCraftingPanels" method="_on_wooden_pickaxe_mouse_exited"]
-[connection signal="pressed" from="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control2/ToolsCraftingContainer2/MarginContainer/ScrollContainer/HBoxContainer/WoodenPickaxe" to="InventoryUI/BasicCrafting" method="_on_wooden_pickaxe_pressed"]
 [connection signal="mouse_entered" from="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control3/CraftingStationsCraftingContainer3" to="." method="_on_crafting_stations_crafting_container_3_mouse_entered"]
 [connection signal="mouse_exited" from="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control3/CraftingStationsCraftingContainer3" to="." method="_on_crafting_stations_crafting_container_3_mouse_exited"]
-[connection signal="mouse_entered" from="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control3/CraftingStationsCraftingContainer3/MarginContainer/ScrollContainer/HBoxContainer/BasicStation" to="InventoryUI/BasicCrafting/BasicCraftingPanels" method="_on_basic_station_mouse_entered"]
-[connection signal="mouse_exited" from="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control3/CraftingStationsCraftingContainer3/MarginContainer/ScrollContainer/HBoxContainer/BasicStation" to="InventoryUI/BasicCrafting/BasicCraftingPanels" method="_on_basic_station_mouse_exited"]
-[connection signal="pressed" from="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control3/CraftingStationsCraftingContainer3/MarginContainer/ScrollContainer/HBoxContainer/BasicStation" to="InventoryUI/BasicCrafting" method="_on_basic_station_pressed"]
-[connection signal="mouse_entered" from="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control3/CraftingStationsCraftingContainer3/MarginContainer/ScrollContainer/HBoxContainer/BasicSmithingTable" to="InventoryUI/BasicCrafting/BasicCraftingPanels" method="_on_basic_smithing_table_mouse_entered"]
-[connection signal="mouse_exited" from="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control3/CraftingStationsCraftingContainer3/MarginContainer/ScrollContainer/HBoxContainer/BasicSmithingTable" to="InventoryUI/BasicCrafting/BasicCraftingPanels" method="_on_basic_smithing_table_mouse_exited"]
-[connection signal="pressed" from="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control3/CraftingStationsCraftingContainer3/MarginContainer/ScrollContainer/HBoxContainer/BasicSmithingTable" to="InventoryUI/BasicCrafting" method="_on_basic_smithing_table_pressed"]
 [connection signal="mouse_entered" from="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control4/BaseCraftingContainer3" to="." method="_on_base_crafting_container_3_mouse_entered"]
 [connection signal="mouse_exited" from="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control4/BaseCraftingContainer3" to="." method="_on_base_crafting_container_3_mouse_exited"]
-[connection signal="mouse_entered" from="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control4/BaseCraftingContainer3/MarginContainer/ScrollContainer/HBoxContainer/Torch" to="InventoryUI/BasicCrafting/BasicCraftingPanels" method="_on_torch_mouse_entered"]
-[connection signal="mouse_exited" from="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control4/BaseCraftingContainer3/MarginContainer/ScrollContainer/HBoxContainer/Torch" to="InventoryUI/BasicCrafting/BasicCraftingPanels" method="_on_torch_mouse_exited"]
-[connection signal="pressed" from="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control4/BaseCraftingContainer3/MarginContainer/ScrollContainer/HBoxContainer/Torch" to="InventoryUI/BasicCrafting" method="_on_torch_pressed"]
-[connection signal="mouse_entered" from="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control4/BaseCraftingContainer3/MarginContainer/ScrollContainer/HBoxContainer/FirePlace" to="InventoryUI/BasicCrafting/BasicCraftingPanels" method="_on_fire_place_mouse_entered"]
-[connection signal="mouse_exited" from="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control4/BaseCraftingContainer3/MarginContainer/ScrollContainer/HBoxContainer/FirePlace" to="InventoryUI/BasicCrafting/BasicCraftingPanels" method="_on_fire_place_mouse_exited"]
-[connection signal="pressed" from="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control4/BaseCraftingContainer3/MarginContainer/ScrollContainer/HBoxContainer/FirePlace" to="InventoryUI/BasicCrafting" method="_on_fire_place_pressed"]
 [connection signal="pressed" from="RightClickTooltip/MarginContainer/VBoxContainer/Drop" to="RightClickTooltip" method="_on_drop_pressed"]
 [connection signal="pressed" from="RightClickTooltip/MarginContainer/VBoxContainer/Split" to="RightClickTooltip" method="_on_split_pressed"]
 [connection signal="pressed" from="RightClickTooltip/MarginContainer/VBoxContainer/Dismantle" to="RightClickTooltip" method="_on_dismantle_pressed"]

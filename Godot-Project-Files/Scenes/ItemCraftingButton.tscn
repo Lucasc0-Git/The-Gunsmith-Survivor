@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://cyxe7bjn66a00"]
+
+[ext_resource type="Theme" uid="uid://c31ap8kbywywe" path="res://Themes/CraftingButton.tres" id="1_1ay4m"]
+[ext_resource type="Script" uid="uid://def44bo4agrv4" path="res://Scripts/UI/item_craft_button.gd" id="1_akjv2"]
+
+[node name="ItemCraftingButton" type="Button" unique_id=670605874]
+custom_minimum_size = Vector2(64, 64)
+theme = ExtResource("1_1ay4m")
+disabled = true
+action_mode = 0
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("1_akjv2")

@@ -7,32 +7,8 @@ class_name BasicCraftingUI
 @onready var hud: Hud
 @onready var basic_craftings: BasicCraftingUIPanel = $BasicCraftingPanels
 
-@onready var glock_button: Button = $BasicCraftingPanels/VBoxContainer/Control/WeaponsCraftingContainer/MarginContainer/ScrollContainer/HBoxContainer/Glock
-@onready var shotgun_button: Button = $BasicCraftingPanels/VBoxContainer/Control/WeaponsCraftingContainer/MarginContainer/ScrollContainer/HBoxContainer/Shotgun
-@onready var basic_station_button: Button = $BasicCraftingPanels/VBoxContainer/Control3/CraftingStationsCraftingContainer3/MarginContainer/ScrollContainer/HBoxContainer/BasicStation
-@onready var torch_button: Button = $BasicCraftingPanels/VBoxContainer/Control4/BaseCraftingContainer3/MarginContainer/ScrollContainer/HBoxContainer/Torch
-@onready var wooden_axe_button: Button = $BasicCraftingPanels/VBoxContainer/Control2/ToolsCraftingContainer2/MarginContainer/ScrollContainer/HBoxContainer/WoodenAxe
-@onready var assault_rifle_button: Button = $BasicCraftingPanels/VBoxContainer/Control/WeaponsCraftingContainer/MarginContainer/ScrollContainer/HBoxContainer/AssaultRifle
-@onready var basic_smithing_table_button: Button = $BasicCraftingPanels/VBoxContainer/Control3/CraftingStationsCraftingContainer3/MarginContainer/ScrollContainer/HBoxContainer/BasicSmithingTable
-@onready var fire_place_button: Button = $BasicCraftingPanels/VBoxContainer/Control4/BaseCraftingContainer3/MarginContainer/ScrollContainer/HBoxContainer/FirePlace
-@onready var wooden_pickaxe_button: Button = $BasicCraftingPanels/VBoxContainer/Control2/ToolsCraftingContainer2/MarginContainer/ScrollContainer/HBoxContainer/WoodenPickaxe
-@onready var machine_gun_button: Button = $BasicCraftingPanels/VBoxContainer/Control/WeaponsCraftingContainer/MarginContainer/ScrollContainer/HBoxContainer/MachineGun
-
-
-var crafting_buttons: Dictionary[Button, ItemData] = {} # Button -> ItemData
-
-var glock_item: ItemData
-var wood_item: ItemData
-var shotgun_item: ItemData
-var torch_item: ItemData
-var apple_item: ItemData
-var basic_station_item: ItemData
-var wooden_axe_item: ItemData
-var assault_rifle_item: ItemData
-var basic_smithing_table_item: ItemData
-var fireplace_item: ItemData
-var wooden_pickaxe_item: ItemData
-var machine_gun_item: ItemData
+var crafting_buttons: Dictionary[ItemCraftingButton, ItemData] = {} # Button -> ItemData
+var crafting_items: Dictionary[String, ItemData] = {} #ItemData.id -> ItemData
 
 var _tween: Tween
 var player: Player
@@ -45,24 +21,20 @@ func _ready() -> void:
 	while !GameManager.is_game_loaded:
 		await get_tree().process_frame
 	
-	glock_item = ItemRegistry.items.get("glock")
-	shotgun_item = ItemRegistry.items.get("shotgun")
-	apple_item = ItemRegistry.items.get("apple")
-	wood_item = ItemRegistry.items.get("wood")
-	torch_item = ItemRegistry.items.get("torch")
-	basic_station_item = ItemRegistry.items.get("basic_station")
-	wooden_axe_item = ItemRegistry.items.get("wooden_axe")
-	assault_rifle_item = ItemRegistry.items.get("assault_rifle")
-	basic_smithing_table_item = ItemRegistry.items.get("basic_smithing_table")
-	fireplace_item = ItemRegistry.items.get("fireplace")
-	wooden_pickaxe_item = ItemRegistry.items.get("wooden_pickaxe")
-	machine_gun_item = ItemRegistry.items.get("machine_gun")
-	
 	for i in range(grid_container.get_child_count()):
 		var crafting_slot: Button = grid_container.get_child(i)
 		crafting_slot.toggled.connect(
 			func(toggled_on: bool, idx: int = i) -> void: _on_button_toggled(toggled_on, idx)
 		)
+	for child in get_all_children(basic_craftings):
+		if child is ItemCraftingButton:
+			if !child.item_data: continue
+			print(str(child))
+			crafting_buttons[child as ItemCraftingButton] = child.item_data
+			child.crafting_button_pressed.connect(_on_item_craft_button_pressed)
+			crafting_items[child.item_data.id] = child.item_data
+			child.mouse_entered.connect(func () -> void: basic_craftings._on_item_button_mouse_entered(child.item_data))
+			child.mouse_exited.connect(basic_craftings._on_item_button_mouse_exited)
 	
 	main = GameManager.main
 	the_core = main.the_core
@@ -74,21 +46,13 @@ func _ready() -> void:
 	if !player: push_error("BasicCrafting: Player is null!")
 	if !hud: push_error("BasicCrafting: HUD is null!")
 	
-	
-	## When adding more craftable items, need to add here.
-	crafting_buttons[glock_button] = glock_item
-	crafting_buttons[shotgun_button] = shotgun_item
-	crafting_buttons[basic_station_button] = basic_station_item
-	crafting_buttons[torch_button] = torch_item
-	crafting_buttons[wooden_axe_button] = wooden_axe_item
-	crafting_buttons[assault_rifle_button] = assault_rifle_item
-	crafting_buttons[basic_smithing_table_button] = basic_smithing_table_item
-	crafting_buttons[fire_place_button] = fireplace_item
-	crafting_buttons[wooden_pickaxe_button] = wooden_pickaxe_item
-	crafting_buttons[machine_gun_button] = machine_gun_item
-	
-	for button: Button in crafting_buttons:
-		button.pressed.connect(_on_button_pressed)
+
+func get_all_children(node: Node) -> Array[Node]:
+	var nodes: Array[Node] = []
+	for child in node.get_children():
+		nodes.append(child)
+		nodes.append_array(get_all_children(child))
+	return nodes
 
 func hide_crafting() -> void:
 	if _tween: _tween.kill()
@@ -116,7 +80,7 @@ func show_crafting() -> void:
 	_tween.tween_property(self, "global_position", Vector2(10.0, 122.0), 0.5)
 
 func _on_button_toggled(toggled_on: bool, index: int) -> void:
-	_on_button_pressed()
+	AudioManager.play_sfx("crafting_sound")
 	if index == 0:
 		basic_craftings.toggle_weapons_crafting(toggled_on)
 	elif index == 1:
@@ -129,7 +93,7 @@ func _on_button_toggled(toggled_on: bool, index: int) -> void:
 func _process(_delta: float) -> void:
 	if !GameManager.is_game_loaded: return
 	if visible:
-		for button: Button in crafting_buttons.keys():
+		for button: ItemCraftingButton in crafting_buttons.keys():
 			var item: ItemData = crafting_buttons[button]
 			if item:
 				var can_craft := inventory.can_craft(item.crafting_recipe)
@@ -145,103 +109,12 @@ func _process(_delta: float) -> void:
 		if player.nearby_stations.is_empty():
 			hide_crafting()
 
-##The Weapons crafting recipes.
-
-func _on_glock_pressed() -> void:
-	if inventory == null: return
-	if inventory.can_craft(glock_item.crafting_recipe):
-		hud.give_item(glock_item)
-		inventory.rm_items_by_recipe(glock_item.crafting_recipe)
-		GameManager.more_stats["Items crafted"] += 1
-		GameManager.show_score_popup("Item Crafted: Score +%s" % [glock_item.score_for_crafting])
-		GameManager.score += glock_item.score_for_crafting
-
-func _on_shotgun_pressed() -> void:
-	if inventory == null: return
-	if inventory.can_craft(shotgun_item.crafting_recipe):
-		hud.give_item(shotgun_item)
-		inventory.rm_items_by_recipe(shotgun_item.crafting_recipe)
-		GameManager.more_stats["Items crafted"] += 1
-		GameManager.show_score_popup("Item Crafted: Score +%s" % [shotgun_item.score_for_crafting])
-		GameManager.score += shotgun_item.score_for_crafting
-
-func _on_assault_rifle_pressed() -> void:
-	if inventory == null: return
-	if inventory.can_craft(assault_rifle_item.crafting_recipe):
-		hud.give_item(assault_rifle_item)
-		inventory.rm_items_by_recipe(assault_rifle_item.crafting_recipe)
-		GameManager.more_stats["Items crafted"] += 1
-		GameManager.show_score_popup("Item Crafted: Score +%s" % [assault_rifle_item.score_for_crafting])
-		GameManager.score += assault_rifle_item.score_for_crafting
-
-func _on_machine_gun_pressed() -> void:
-	if inventory == null: return
-	if inventory.can_craft(machine_gun_item.crafting_recipe):
-		hud.give_item(machine_gun_item)
-		inventory.rm_items_by_recipe(machine_gun_item.crafting_recipe)
-		GameManager.more_stats["Items crafted"] += 1
-		GameManager.show_score_popup("Item Crafted: Score +%s" % [machine_gun_item.score_for_crafting])
-		GameManager.score += machine_gun_item.score_for_crafting
-
-##The Tools crafting recipes.
-
-func _on_wooden_axe_pressed() -> void:
-	if !inventory: return
-	if inventory.can_craft(wooden_axe_item.crafting_recipe):
-		hud.give_item(wooden_axe_item)
-		inventory.rm_items_by_recipe(wooden_axe_item.crafting_recipe)
-		GameManager.more_stats["Items crafted"] += 1
-		GameManager.show_score_popup("Item Crafted: Score +%s" % [wooden_axe_item.score_for_crafting])
-		GameManager.score += wooden_axe_item.score_for_crafting
-
-func _on_wooden_pickaxe_pressed() -> void:
-	if !inventory: return
-	if inventory.can_craft(wooden_pickaxe_item.crafting_recipe):
-		hud.give_item(wooden_pickaxe_item)
-		inventory.rm_items_by_recipe(wooden_pickaxe_item.crafting_recipe)
-		GameManager.more_stats["Items crafted"] += 1
-		GameManager.show_score_popup("Item Crafted: Score +%s" % [wooden_pickaxe_item.score_for_crafting])
-		GameManager.score += wooden_pickaxe_item.score_for_crafting
-
-##The Stations crafting recipes.
-
-func _on_basic_station_pressed() -> void:
-	if inventory == null: return
-	if inventory.can_craft(basic_station_item.crafting_recipe):
-		hud.give_item(basic_station_item)
-		inventory.rm_items_by_recipe(basic_station_item.crafting_recipe)
-		GameManager.more_stats["Items crafted"] += 1
-		GameManager.show_score_popup("Item Crafted: Score +%s" % [basic_station_item.score_for_crafting])
-		GameManager.score += basic_station_item.score_for_crafting
-
-func _on_basic_smithing_table_pressed() -> void:
-	if inventory == null: return
-	if inventory.can_craft(basic_smithing_table_item.crafting_recipe):
-		hud.give_item(basic_smithing_table_item)
-		inventory.rm_items_by_recipe(basic_smithing_table_item.crafting_recipe)
-		GameManager.more_stats["Items crafted"] += 1
-		GameManager.show_score_popup("Item Crafted: Score +%s" % [basic_smithing_table_item.score_for_crafting])
-		GameManager.score += basic_smithing_table_item.score_for_crafting
-
-##The Base crafting recipes.
-
-func _on_torch_pressed() -> void:
-	if inventory == null: return
-	if inventory.can_craft(torch_item.crafting_recipe):
-		hud.give_item(torch_item)
-		inventory.rm_items_by_recipe(torch_item.crafting_recipe)
-		GameManager.more_stats["Items crafted"] += 1
-		GameManager.show_score_popup("Item Crafted: Score +%s" % [torch_item.score_for_crafting])
-		GameManager.score += torch_item.score_for_crafting
-
-func _on_fire_place_pressed() -> void:
-	if inventory == null: return
-	if inventory.can_craft(fireplace_item.crafting_recipe):
-		hud.give_item(fireplace_item)
-		inventory.rm_items_by_recipe(fireplace_item.crafting_recipe)
-		GameManager.more_stats["Items crafted"] += 1
-		GameManager.show_score_popup("Item Crafted: Score +%s" % [fireplace_item.score_for_crafting])
-		GameManager.score += fireplace_item.score_for_crafting
-
-func _on_button_pressed() -> void:
+func _on_item_craft_button_pressed(item_data: ItemData) -> void:
 	AudioManager.play_sfx("crafting_sound")
+	if inventory == null: return
+	if inventory.can_craft(item_data.crafting_recipe):
+		hud.give_item(item_data)
+		inventory.rm_items_by_recipe(item_data.crafting_recipe)
+		GameManager.more_stats["Items crafted"] += 1
+		GameManager.show_score_popup("Item Crafted: Score +%s" % [item_data.score_for_crafting])
+		GameManager.score += item_data.score_for_crafting
