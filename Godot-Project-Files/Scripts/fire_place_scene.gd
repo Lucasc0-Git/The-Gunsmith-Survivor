@@ -14,3 +14,15 @@ func _process(_delta: float) -> void:
 		$MouseInputMonitor.monitoring = true
 		$CPUParticles2D.emitting = true
 		
+	var mouse_pos: Vector2 = get_global_mouse_position()
+	if preview_only: return
+	if mouse_pos.distance_to(global_position) <= cursor_proximity_dist:
+		if anim_player.is_playing():
+			return
+		if !health_bar.visible:
+			anim_player.play("show_bar")
+	else:
+		if anim_player.is_playing():
+			return
+		if health_bar.visible:
+			anim_player.play("hide_bar")

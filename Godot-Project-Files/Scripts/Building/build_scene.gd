@@ -5,7 +5,20 @@ class_name BuildScene
 @export var collision_shape: CollisionShape2D
 @export var sprite: AnimatedSprite2D
 @export var mouse_input: Area2D
+@export var health_bar: ProgressBar
+@export var anim_player: AnimationPlayer
+@export var max_health: float = 100
+@export var cursor_proximity_dist: int = 40
 
+var health: float = 100:
+	get():
+		return _health
+	set(value):
+		value = clamp(value, 0, max_health)
+		_health = value
+		health_bar.value = value
+
+var _health: float = 100
 var _item_id: String = ""
 var main: Main
 var preview_only: bool = true
@@ -22,6 +35,11 @@ func _ready() -> void:
 			main = GameManager.main
 		else:
 			printerr("The 'main' variable in build_scene.gd is null!")
+		
+		health_bar.value = max_health
+		health_bar.max_value = max_health
+		health = max_health
+		health_bar.visible = false
 
 func _get_property_list() -> Array[Dictionary]:
 	var ids := PackedStringArray()
@@ -61,6 +79,19 @@ func get_item_data() -> ItemData:
 		return null
 	return ItemRegistry.items.get(_item_id, null)
 
+func take_damage(amount: float, _dmg_type: DamageTypes.DamageType = DamageTypes.DamageType.BASIC) -> void:
+	AudioManager.play_sfx_2d("building_built", global_position)
+	health -= amount * 0.4
+	
+	
+	if health <= 0:
+		destroy()
+
+func destroy() -> void:
+	
+	main.drop_item(get_item_data(), global_position, 40)
+	queue_free()
+
 func _on_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if preview_only: return
 	if event is InputEventMouseButton and event.pressed:
@@ -76,6 +107,20 @@ func _process(_delta: float) -> void:
 		$MouseInputMonitor.monitoring = false
 	else:
 		$MouseInputMonitor.monitoring = true
+	
+	var mouse_pos: Vector2 = get_global_mouse_position()
+	
+	if preview_only: return
+	if mouse_pos.distance_to(global_position) <= cursor_proximity_dist:
+		if anim_player.is_playing():
+			return
+		if !health_bar.visible:
+			anim_player.play("show_bar")
+	else:
+		if anim_player.is_playing():
+			return
+		if health_bar.visible:
+			anim_player.play("hide_bar")
 
 func save_data() -> Dictionary:
 	return {

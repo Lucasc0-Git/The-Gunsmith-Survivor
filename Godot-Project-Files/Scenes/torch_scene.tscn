@@ -97,8 +97,11 @@ _data = {
 [sub_resource type="CircleShape2D" id="CircleShape2D_2a8ad"]
 radius = 67.66995
 
-[node name="TorchScene" unique_id=1835171183 node_paths=PackedStringArray("sprite") instance=ExtResource("1_1fo8t")]
+[node name="TorchScene" unique_id=1835171183 node_paths=PackedStringArray("sprite", "anim_player") instance=ExtResource("1_1fo8t")]
 sprite = NodePath("AnimatedSprite2D")
+anim_player = NodePath("Control/AnimationPlayer")
+max_health = 60.0
+cursor_proximity_dist = 40
 item_id = "torch"
 
 [node name="AnimatedSprite2D" parent="." index="0" unique_id=1408510289]
@@ -129,3 +132,10 @@ autoplay = &"light_base"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LightArea" index="0" unique_id=370283846]
 shape = SubResource("CircleShape2D_2a8ad")
+
+[node name="HealthBar" parent="Control" parent_id_path=PackedInt32Array(1101643606) index="0" unique_id=1745487548]
+custom_minimum_size = Vector2(50, 4)
+offset_left = -25.0
+offset_top = 11.0
+offset_right = 25.0
+offset_bottom = 14.0

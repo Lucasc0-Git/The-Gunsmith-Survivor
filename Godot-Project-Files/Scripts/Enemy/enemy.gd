@@ -28,9 +28,11 @@ var health: float = 10:
 			if value < max_health:
 				health_bar.visible = true
 
+var near_building: BuildScene = null
 var _health: float
 var player_in_range: bool = false
 var core_in_range: bool = false
+var building_in_range: bool = false
 var player: Player = null
 var current_state: EnemyState
 var states := {}
@@ -81,6 +83,8 @@ func get_target() -> Node2D: ##Returns player, the core, OR null.
 		return player
 	elif core_in_range:
 		return the_core
+	elif building_in_range:
+		return near_building
 	return null
 
 func stop_moving() -> void:
@@ -103,7 +107,7 @@ func die() -> void:
 	queue_free()
 
 func _on_timer_timeout() -> void:
-	if (player_in_range or core_in_range) and current_state.name == "Hit":
+	if (player_in_range or core_in_range or building_in_range) and current_state.name == "Hit":
 		attack()
 		attack_timer.start()
 
@@ -119,6 +123,12 @@ func _on_attack_range_area_body_entered(body: Node2D) -> void:
 		core_in_range = true
 		attack()
 		attack_timer.start()
+	if body is BuildScene:
+		change_state("Hit")
+		building_in_range = true
+		near_building = body as BuildScene
+		attack()
+		attack_timer.start()
 
 func _on_attack_range_area_body_exited(body: Node2D) -> void:
 	if body is Player:
@@ -127,6 +137,10 @@ func _on_attack_range_area_body_exited(body: Node2D) -> void:
 	if body is TheCore:
 		change_state("Wonder")
 		core_in_range = false
+	if body is BuildScene:
+		change_state("Wonder")
+		building_in_range = false
+		near_building = null
 
 func attack() -> void:
 	var target := get_target()

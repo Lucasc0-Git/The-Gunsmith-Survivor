@@ -117,9 +117,12 @@ _data = {
 [sub_resource type="CircleShape2D" id="CircleShape2D_2a8ad"]
 radius = 107.01869
 
-[node name="FirePlace" unique_id=1835171183 node_paths=PackedStringArray("sprite") instance=ExtResource("1_gke7a")]
+[node name="FirePlace" unique_id=1835171183 node_paths=PackedStringArray("sprite", "anim_player") instance=ExtResource("1_gke7a")]
 script = ExtResource("2_hmnt5")
 sprite = NodePath("AnimatedSprite2D")
+anim_player = NodePath("Control/AnimationPlayer")
+max_health = 120.0
+cursor_proximity_dist = 60
 item_id = "fireplace"
 
 [node name="AnimatedSprite2D" parent="." index="0" unique_id=1408510289]
@@ -171,3 +174,10 @@ scale_amount_max = 3.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LightArea" index="0" unique_id=1667808067]
 shape = SubResource("CircleShape2D_2a8ad")
+
+[node name="HealthBar" parent="Control" parent_id_path=PackedInt32Array(1101643606) index="0" unique_id=1745487548]
+custom_minimum_size = Vector2(50, 4)
+offset_left = -25.0
+offset_top = 24.0
+offset_right = 25.0
+offset_bottom = 27.0

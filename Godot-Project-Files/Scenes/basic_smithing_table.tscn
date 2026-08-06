@@ -24,9 +24,12 @@ radius = 66.336685
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ec566"]
 size = Vector2(18, 31.333332)
 
-[node name="BasicSmithingTable" unique_id=1835171183 node_paths=PackedStringArray("sprite") instance=ExtResource("1_mt6lx")]
+[node name="BasicSmithingTable" unique_id=1835171183 node_paths=PackedStringArray("sprite", "anim_player") instance=ExtResource("1_mt6lx")]
 station_type = 1
 sprite = NodePath("AnimatedSprite2D")
+anim_player = NodePath("Control/AnimationPlayer")
+max_health = 250.0
+cursor_proximity_dist = 40
 item_id = "basic_smithing_table"
 
 [node name="AnimatedSprite2D" parent="." index="0" unique_id=1408510289]
@@ -43,3 +46,8 @@ shape = SubResource("CircleShape2D_gqjj0")
 [node name="CollisionShape2D" parent="MouseInputMonitor" parent_id_path=PackedInt32Array(1707325614) index="0" unique_id=487905519]
 position = Vector2(0, -6.0000014)
 shape = SubResource("RectangleShape2D_ec566")
+
+[node name="HealthBar" parent="Control" parent_id_path=PackedInt32Array(1101643606) index="0" unique_id=1745487548]
+custom_minimum_size = Vector2(70, 4)
+offset_top = 32.0
+offset_bottom = 36.0
