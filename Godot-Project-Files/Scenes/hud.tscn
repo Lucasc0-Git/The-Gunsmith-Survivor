@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://cgk6sjrudbc6" path="res://Scenes/inventory_slot.tscn" id="2_8jye8"]
 [ext_resource type="Theme" uid="uid://biiybeb1k7q2y" path="res://Themes/healthbar.tres" id="2_36asn"]
 [ext_resource type="Script" uid="uid://fv6k6mu114ib" path="res://Scripts/UI/uibars.gd" id="3_7gr8i"]
+[ext_resource type="Texture2D" uid="uid://b4a04ed4ogqxa" path="res://Textures/ClockUI.png" id="4_7jysg"]
 [ext_resource type="Theme" uid="uid://xe4871ovy5le" path="res://Themes/hotbar.tres" id="4_t1xeu"]
 [ext_resource type="Script" uid="uid://dbkif3t6rn5sb" path="res://Scripts/UI/inventory.gd" id="5_5ep0j"]
 [ext_resource type="Theme" uid="uid://cplvcielekxaa" path="res://Themes/inventory.tres" id="6_36asn"]
@@ -235,6 +236,24 @@ mouse_filter = 2
 theme = ExtResource("2_36asn")
 value = 100.0
 show_percentage = false
+
+[node name="ClockUI" type="Control" parent="UI" unique_id=1428709815]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="UI/ClockUI" unique_id=2020589403]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -240.0
+offset_bottom = 80.0
+grow_horizontal = 0
+texture = ExtResource("4_7jysg")
 
 [node name="InventoryUI" type="Control" parent="." unique_id=1051386906]
 layout_mode = 3

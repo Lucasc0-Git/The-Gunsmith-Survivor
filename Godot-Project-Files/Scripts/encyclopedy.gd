@@ -39,7 +39,7 @@ func show_open_button() -> void:
 	_open_tween = create_tween()
 	_open_tween.set_trans(Tween.TRANS_EXPO)
 	_open_tween.set_ease(Tween.EASE_OUT)
-	_open_tween.tween_property(open_button, "position", visible_button_position, 0.7)
+	_open_tween.tween_property(open_button, "position", visible_button_position, 1)
 
 func hide_open_button() -> void:
 	if open_button.global_position == hidden_button_position:
@@ -48,7 +48,7 @@ func hide_open_button() -> void:
 	_open_tween = create_tween()
 	_open_tween.set_trans(Tween.TRANS_EXPO)
 	_open_tween.set_ease(Tween.EASE_OUT)
-	_open_tween.tween_property(open_button, "position", hidden_button_position, 0.7)
+	_open_tween.tween_property(open_button, "position", hidden_button_position, 1)
 
 func _process(_delta: float) -> void:
 	
