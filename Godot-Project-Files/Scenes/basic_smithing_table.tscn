@@ -29,7 +29,7 @@ station_type = 1
 sprite = NodePath("AnimatedSprite2D")
 anim_player = NodePath("Control/AnimationPlayer")
 max_health = 250.0
-cursor_proximity_dist = 40
+cursor_proximity_dist = 90
 item_id = "basic_smithing_table"
 
 [node name="AnimatedSprite2D" parent="." index="0" unique_id=1408510289]

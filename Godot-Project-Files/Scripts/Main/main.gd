@@ -303,7 +303,8 @@ func _on_region_generated(new_trees: Array, new_spawners: Array, new_stones: Arr
 	for pos: Vector2 in new_apple_trees:
 		if pos in pos_broke:
 			continue
-		spawn_apple_tree(pos, TheAppleTree.Stages.SMALL_TREE)
+		var random_stage: int = randi_range(1, 3)
+		spawn_apple_tree(pos, random_stage)
 
 func drop_item(item: ItemData, pos: Vector2, random_range: int = 0) -> void:
 	var dropped_item := preload("res://Scenes/dropped_item.tscn").instantiate()

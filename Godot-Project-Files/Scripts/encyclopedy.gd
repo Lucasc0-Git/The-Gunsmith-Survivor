@@ -20,7 +20,7 @@ func _ready() -> void:
 		func () -> void: hud.toggle_hovering(false)
 	)
 	not_implemented_dialog.confirmed.connect(
-		func () -> void: open_button.button_pressed = false
+		func () -> void: open_button.button_pressed = false; AudioManager.play("button_click")
 	)
 	not_implemented_dialog.canceled.connect(
 		func () -> void: open_button.button_pressed = false
@@ -62,6 +62,7 @@ func _process(_delta: float) -> void:
 
 func _on_button_toggled(toggled_on: bool) -> void:
 	is_open_button_toggled = toggled_on
+	AudioManager.play("button_click")
 	if toggled_on:
 		not_implemented_dialog.popup_centered()
 	else:

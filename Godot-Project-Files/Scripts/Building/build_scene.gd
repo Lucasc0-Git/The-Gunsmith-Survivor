@@ -79,7 +79,7 @@ func get_item_data() -> ItemData:
 		return null
 	return ItemRegistry.items.get(_item_id, null)
 
-func take_damage(amount: float, _dmg_type: DamageTypes.DamageType = DamageTypes.DamageType.BASIC) -> void:
+func take_damage(amount: float, _dmg_type: DamageTypes.DamageType = DamageTypes.DamageType.BASIC, _weapon_type: String = "Basic") -> void:
 	AudioManager.play_sfx_2d("building_built", global_position)
 	health -= amount * 0.4
 	
