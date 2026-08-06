@@ -29,7 +29,6 @@ func _ready() -> void:
 	for child in get_all_children(basic_craftings):
 		if child is ItemCraftingButton:
 			if !child.item_data: continue
-			print(str(child))
 			crafting_buttons[child as ItemCraftingButton] = child.item_data
 			child.crafting_button_pressed.connect(_on_item_craft_button_pressed)
 			crafting_items[child.item_data.id] = child.item_data
