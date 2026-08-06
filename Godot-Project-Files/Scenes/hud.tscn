@@ -43,6 +43,7 @@
 [ext_resource type="Resource" uid="uid://bykwtjaftb02t" path="res://items/Inv_items/BasicSmithingTable_item.tres" id="34_7c2aa"]
 [ext_resource type="Resource" uid="uid://b0725nycjx8ul" path="res://items/Inv_items/Torch_item.tres" id="36_yfo6n"]
 [ext_resource type="Resource" uid="uid://c8nuioxkkips2" path="res://items/Inv_items/FirePlace_item.tres" id="37_eqxyv"]
+[ext_resource type="PackedScene" uid="uid://tppkv2hqbl7y" path="res://Scenes/CoreLowHealthBar.tscn" id="44_jmo6y"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_36asn"]
 content_margin_left = 10.0
@@ -931,6 +932,8 @@ grow_horizontal = 0
 grow_vertical = 0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+
+[node name="CoreLowHealthBar" parent="." unique_id=1635765706 instance=ExtResource("44_jmo6y")]
 
 [connection signal="mouse_entered" from="InventoryUI/Hotbar/PanelContainer" to="." method="_on_hotbar_mouse_entered"]
 [connection signal="mouse_exited" from="InventoryUI/Hotbar/PanelContainer" to="." method="_on_hotbar_mouse_exited"]
