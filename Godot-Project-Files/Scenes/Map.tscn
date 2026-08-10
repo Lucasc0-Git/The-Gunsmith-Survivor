@@ -220,6 +220,9 @@ safe_spawn_area_radius = 12
 
 [node name="Map" type="TileMapLayer" parent="." unique_id=113042322]
 tile_set = SubResource("TileSet_5nsto")
+rendering_quadrant_size = 32
+collision_enabled = false
+navigation_enabled = false
 
 [node name="Map2" type="TileMapLayer" parent="." unique_id=989491454]
 tile_set = SubResource("TileSet_5nsto")
