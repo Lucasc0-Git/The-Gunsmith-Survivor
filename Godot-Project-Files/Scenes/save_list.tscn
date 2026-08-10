@@ -10,6 +10,185 @@
 LineEdit/styles/focus = ExtResource("2_48oe6")
 LineEdit/styles/normal = ExtResource("2_48oe6")
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_48oe6"]
+bg_color = Color(0.4627451, 0.2784314, 0.105882354, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.3019608, 0.1764706, 0.05490196, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+expand_margin_left = 4.0
+expand_margin_top = 4.0
+expand_margin_right = 4.0
+expand_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b4ter"]
+bg_color = Color(0.4627451, 0.2784314, 0.105882354, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.3019608, 0.1764706, 0.05490196, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+expand_margin_left = 4.0
+expand_margin_top = 4.0
+expand_margin_right = 4.0
+expand_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t73lp"]
+bg_color = Color(0.4627451, 0.2784314, 0.105882354, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.3019608, 0.1764706, 0.05490196, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+expand_margin_left = 4.0
+expand_margin_top = 4.0
+expand_margin_right = 4.0
+expand_margin_bottom = 4.0
+
+[sub_resource type="Theme" id="Theme_1kteo"]
+AcceptDialog/colors/title_color = Color(1, 1, 1, 1)
+AcceptDialog/constants/title_height = 31
+AcceptDialog/constants/title_outline_size = 5
+AcceptDialog/styles/embedded_border = SubResource("StyleBoxFlat_48oe6")
+AcceptDialog/styles/embedded_unfocused_border = SubResource("StyleBoxFlat_b4ter")
+AcceptDialog/styles/panel = SubResource("StyleBoxFlat_t73lp")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_b4ter"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_t73lp"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7qfpw"]
+
+[sub_resource type="Theme" id="Theme_48oe6"]
+LineEdit/styles/focus = SubResource("StyleBoxEmpty_b4ter")
+LineEdit/styles/normal = SubResource("StyleBoxEmpty_t73lp")
+LineEdit/styles/read_only = SubResource("StyleBoxEmpty_7qfpw")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7qfpw"]
+bg_color = Color(0.4627451, 0.2784314, 0.105882354, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.3019608, 0.1764706, 0.05490196, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+expand_margin_left = 4.0
+expand_margin_top = 4.0
+expand_margin_right = 4.0
+expand_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1kteo"]
+bg_color = Color(0.4627451, 0.2784314, 0.105882354, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.3019608, 0.1764706, 0.05490196, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+expand_margin_left = 4.0
+expand_margin_top = 4.0
+expand_margin_right = 4.0
+expand_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tt3ff"]
+bg_color = Color(0.4627451, 0.2784314, 0.105882354, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.3019608, 0.1764706, 0.05490196, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+expand_margin_left = 4.0
+expand_margin_top = 4.0
+expand_margin_right = 4.0
+expand_margin_bottom = 4.0
+
+[sub_resource type="Theme" id="Theme_5fjcv"]
+AcceptDialog/colors/title_color = Color(1, 1, 1, 1)
+AcceptDialog/constants/title_height = 31
+AcceptDialog/constants/title_outline_size = 5
+AcceptDialog/styles/embedded_border = SubResource("StyleBoxFlat_7qfpw")
+AcceptDialog/styles/embedded_unfocused_border = SubResource("StyleBoxFlat_1kteo")
+AcceptDialog/styles/panel = SubResource("StyleBoxFlat_tt3ff")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5fjcv"]
+bg_color = Color(0.4627451, 0.2784314, 0.105882354, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.3019608, 0.1764706, 0.05490196, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+expand_margin_left = 4.0
+expand_margin_top = 4.0
+expand_margin_right = 4.0
+expand_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bhxfg"]
+bg_color = Color(0.4627451, 0.2784314, 0.105882354, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.3019608, 0.1764706, 0.05490196, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+expand_margin_left = 4.0
+expand_margin_top = 4.0
+expand_margin_right = 4.0
+expand_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b6bw2"]
+bg_color = Color(0.4627451, 0.2784314, 0.105882354, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.3019608, 0.1764706, 0.05490196, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+expand_margin_left = 4.0
+expand_margin_top = 4.0
+expand_margin_right = 4.0
+expand_margin_bottom = 4.0
+
+[sub_resource type="Theme" id="Theme_mk82i"]
+AcceptDialog/colors/title_color = Color(1, 1, 1, 1)
+AcceptDialog/constants/title_height = 31
+AcceptDialog/constants/title_outline_size = 5
+AcceptDialog/styles/embedded_border = SubResource("StyleBoxFlat_5fjcv")
+AcceptDialog/styles/embedded_unfocused_border = SubResource("StyleBoxFlat_bhxfg")
+AcceptDialog/styles/panel = SubResource("StyleBoxFlat_b6bw2")
+
 [node name="SaveList" type="Control" unique_id=714396198]
 layout_mode = 3
 anchors_preset = 15
@@ -110,6 +289,35 @@ layout_mode = 2
 icon = ExtResource("4_t73lp")
 icon_alignment = 1
 expand_icon = true
+
+[node name="RenameDialog" type="AcceptDialog" parent="." unique_id=1552680122]
+oversampling_override = 1.0
+title = "Rename Save"
+position = Vector2i(0, 31)
+size = Vector2i(500, 100)
+theme = SubResource("Theme_1kteo")
+ok_button_text = "Rename"
+
+[node name="LineEdit" type="LineEdit" parent="RenameDialog" unique_id=1060866777]
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 496.0
+offset_bottom = 55.0
+theme = SubResource("Theme_48oe6")
+placeholder_text = "Your new save name"
+alignment = 1
+max_length = 25
+
+[node name="SaveFailedNotice" type="AcceptDialog" parent="." unique_id=114807198]
+theme = SubResource("Theme_5fjcv")
+dialog_text = "Renaming the save failed!"
+
+[node name="OverwriteConfirmationDialog" type="ConfirmationDialog" parent="." unique_id=81826949]
+theme = SubResource("Theme_mk82i")
+ok_button_text = "Yes"
+dialog_text = "Overwrite existing save?"
+dialog_close_on_escape = false
+cancel_button_text = "No"
 
 [connection signal="text_change_rejected" from="HBoxContainer/LineEdit" to="." method="_on_line_edit_text_change_rejected"]
 [connection signal="pressed" from="HBoxContainer/NewSaveButton" to="." method="_on_new_save_button_pressed"]

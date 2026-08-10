@@ -3,6 +3,9 @@ extends Control
 @onready var v_box_container: VBoxContainer = $VBoxContainer2
 @onready var line_edit: LineEdit = $HBoxContainer/LineEdit
 @onready var menu: CanvasLayer = get_parent()
+@onready var rename_popup: AcceptDialog = $RenameDialog
+@onready var save_failed_notice: AcceptDialog = $SaveFailedNotice
+@onready var overwrite_confirmation_dialog: AcceptDialog = $OverwriteConfirmationDialog
 
 func _ready() -> void:
 	SaveManager.save_list_changed.connect(populate_save_list)
@@ -26,6 +29,15 @@ func populate_save_list() -> void:
 		btn.pressed.connect(
 			func() -> void: AudioManager.play("button_click") ; SaveManager.save_game(save_info.name); populate_save_list(); menu.hide_save_list()
 		)
+		var rename: Button = Button.new()
+		rename.icon = preload("res://Textures/RenamePencil.png") as Texture2D
+		rename.icon_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		rename.expand_icon = true
+		rename.custom_minimum_size = Vector2(50, 0)
+		rename.pressed.connect(
+			func () -> void: AudioManager.play_sfx("button_click"); _on_rename_save(save_info.name)
+		)
+		
 		var delete: Button = Button.new()
 		delete.icon = preload("res://Textures/TrashCan.png") as Texture2D
 		delete.icon_alignment = HORIZONTAL_ALIGNMENT_CENTER
@@ -35,6 +47,7 @@ func populate_save_list() -> void:
 			func() -> void: AudioManager.play("button_click"); SaveManager.delete_save(save_info.name); populate_save_list()
 		)
 		h_box.add_child(btn)
+		h_box.add_child(rename)
 		h_box.add_child(delete)
 
 func _process(_delta: float) -> void:
@@ -46,9 +59,74 @@ func _on_save_button_pressed() -> void:
 	var save_name: String = line_edit.text
 	if save_name.is_empty():
 		return
+	var save_names: Array = []
+	for save in SaveManager.get_all_saves():
+		save_names.append(save.name)
+	if save_name in save_names:
+		if await _overwrite_popup():
+			pass
+		else:
+			return
+	
+	
 	SaveManager.save_game(save_name)
+	line_edit.clear()
 	populate_save_list()
 	menu.hide_save_list()
 
 func _on_line_edit_text_change_rejected(_rejected_substring: String) -> void:
 	AudioManager.play("typing_sound")
+
+func _on_rename_save(save_name: String) -> void:
+	if !save_name: return
+	rename_popup.popup_centered()
+	rename_popup.add_cancel_button("Cancel")
+	rename_popup.confirmed.connect(
+		func () -> void:
+			AudioManager.play_sfx("button_click")
+			var rename_line_edit: LineEdit = $RenameDialog/LineEdit
+			var new_name: String = rename_line_edit.text
+			if !new_name or new_name.is_empty(): rename_line_edit.clear(); return
+			var saves: Array = SaveManager.get_all_saves()
+			var save_names: Array = []
+			for save: Dictionary in saves:
+				save_names.append(save.name)
+			if new_name in save_names: 
+				rename_line_edit.clear()
+				if await _overwrite_popup(): SaveManager.delete_save(new_name)
+				else: return
+			if SaveManager.rename_save(save_name, new_name):
+				rename_line_edit.clear(); return
+			else:
+				save_failed_notice.popup_centered()
+	)
+
+func _overwrite_popup() -> bool:
+	overwrite_confirmation_dialog.popup_centered()
+	
+	var choice := await _wait_for_dialog_response(overwrite_confirmation_dialog)
+	return choice
+
+func _wait_for_dialog_response(dialog: AcceptDialog) -> bool:
+	var state := [false, false] # [responded, is_confirmed]
+	
+	var on_confirmed := func() -> void:
+		AudioManager.play_sfx("button_click")
+		if not state[0]:
+			state[0] = true
+			state[1] = true
+			
+	var on_canceled := func() -> void:
+		AudioManager.play_sfx("button_click")
+		if not state[0]:
+			state[0] = true
+			state[1] = false
+			
+	dialog.confirmed.connect(on_confirmed, CONNECT_ONE_SHOT)
+	dialog.canceled.connect(on_canceled, CONNECT_ONE_SHOT)
+	dialog.close_requested.connect(on_canceled, CONNECT_ONE_SHOT) # covers window 'X' close
+	
+	while not state[0]:
+		await Engine.get_main_loop().process_frame
+		
+	return state[1]

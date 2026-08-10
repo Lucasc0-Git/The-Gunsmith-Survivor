@@ -120,6 +120,35 @@ func delete_save(save_name: String) -> bool:
 		return true
 	return false
 
+func rename_save(old_name: String, new_name: String) -> bool:
+	if old_name.is_empty() or new_name.is_empty():
+		push_error("Save names cannot be empty")
+		return false
+	
+	var old_path := SAVE_DIR + old_name + ".json"
+	var new_path := SAVE_DIR + new_name + ".json"
+	
+	if not FileAccess.file_exists(old_path):
+		push_error("Source save file not found.")
+		return false
+	if FileAccess.file_exists(new_path):
+		push_error("A save with the name '", new_name, "' already exists.")
+		# The 'Do you want to overwrite this save?' will be handled in save_list.gd etc.
+		return false
+	
+	var err := DirAccess.rename_absolute(old_path, new_path)
+	if err == OK:
+		print("Successfully renamed save '%s' to '%s'." % [old_name, new_name])
+		if current_save_name == new_name:
+			current_save_name = new_name
+			GameManager.current_save_name = new_name
+		
+		save_list_changed.emit()
+		return true
+	
+	push_error("Failed to rename save. Error code: ", err)
+	return false
+
 # ========================= TYPE CONVERSION HELPERS ============================================
 
 func vec2_to_dict(v: Vector2) -> Dictionary:

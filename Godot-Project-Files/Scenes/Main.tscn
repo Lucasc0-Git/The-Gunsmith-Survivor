@@ -276,6 +276,185 @@ Button/styles/hover = SubResource("StyleBoxFlat_kk5q7")
 Button/styles/normal = SubResource("StyleBoxFlat_gcwlc")
 Button/styles/pressed = SubResource("StyleBoxFlat_dgtb2")
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_48oe6"]
+bg_color = Color(0.4627451, 0.2784314, 0.105882354, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.3019608, 0.1764706, 0.05490196, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+expand_margin_left = 4.0
+expand_margin_top = 4.0
+expand_margin_right = 4.0
+expand_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b4ter"]
+bg_color = Color(0.4627451, 0.2784314, 0.105882354, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.3019608, 0.1764706, 0.05490196, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+expand_margin_left = 4.0
+expand_margin_top = 4.0
+expand_margin_right = 4.0
+expand_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t73lp"]
+bg_color = Color(0.4627451, 0.2784314, 0.105882354, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.3019608, 0.1764706, 0.05490196, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+expand_margin_left = 4.0
+expand_margin_top = 4.0
+expand_margin_right = 4.0
+expand_margin_bottom = 4.0
+
+[sub_resource type="Theme" id="Theme_erwvk"]
+AcceptDialog/colors/title_color = Color(1, 1, 1, 1)
+AcceptDialog/constants/title_height = 31
+AcceptDialog/constants/title_outline_size = 5
+AcceptDialog/styles/embedded_border = SubResource("StyleBoxFlat_48oe6")
+AcceptDialog/styles/embedded_unfocused_border = SubResource("StyleBoxFlat_b4ter")
+AcceptDialog/styles/panel = SubResource("StyleBoxFlat_t73lp")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_b4ter"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_t73lp"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7qfpw"]
+
+[sub_resource type="Theme" id="Theme_2w5on"]
+LineEdit/styles/focus = SubResource("StyleBoxEmpty_b4ter")
+LineEdit/styles/normal = SubResource("StyleBoxEmpty_t73lp")
+LineEdit/styles/read_only = SubResource("StyleBoxEmpty_7qfpw")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7qfpw"]
+bg_color = Color(0.4627451, 0.2784314, 0.105882354, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.3019608, 0.1764706, 0.05490196, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+expand_margin_left = 4.0
+expand_margin_top = 4.0
+expand_margin_right = 4.0
+expand_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1kteo"]
+bg_color = Color(0.4627451, 0.2784314, 0.105882354, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.3019608, 0.1764706, 0.05490196, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+expand_margin_left = 4.0
+expand_margin_top = 4.0
+expand_margin_right = 4.0
+expand_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tt3ff"]
+bg_color = Color(0.4627451, 0.2784314, 0.105882354, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.3019608, 0.1764706, 0.05490196, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+expand_margin_left = 4.0
+expand_margin_top = 4.0
+expand_margin_right = 4.0
+expand_margin_bottom = 4.0
+
+[sub_resource type="Theme" id="Theme_346fj"]
+AcceptDialog/colors/title_color = Color(1, 1, 1, 1)
+AcceptDialog/constants/title_height = 31
+AcceptDialog/constants/title_outline_size = 5
+AcceptDialog/styles/embedded_border = SubResource("StyleBoxFlat_7qfpw")
+AcceptDialog/styles/embedded_unfocused_border = SubResource("StyleBoxFlat_1kteo")
+AcceptDialog/styles/panel = SubResource("StyleBoxFlat_tt3ff")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5fjcv"]
+bg_color = Color(0.4627451, 0.2784314, 0.105882354, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.3019608, 0.1764706, 0.05490196, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+expand_margin_left = 4.0
+expand_margin_top = 4.0
+expand_margin_right = 4.0
+expand_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bhxfg"]
+bg_color = Color(0.4627451, 0.2784314, 0.105882354, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.3019608, 0.1764706, 0.05490196, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+expand_margin_left = 4.0
+expand_margin_top = 4.0
+expand_margin_right = 4.0
+expand_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b6bw2"]
+bg_color = Color(0.4627451, 0.2784314, 0.105882354, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.3019608, 0.1764706, 0.05490196, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+expand_margin_left = 4.0
+expand_margin_top = 4.0
+expand_margin_right = 4.0
+expand_margin_bottom = 4.0
+
+[sub_resource type="Theme" id="Theme_0sclb"]
+AcceptDialog/colors/title_color = Color(1, 1, 1, 1)
+AcceptDialog/constants/title_height = 31
+AcceptDialog/constants/title_outline_size = 5
+AcceptDialog/styles/embedded_border = SubResource("StyleBoxFlat_5fjcv")
+AcceptDialog/styles/embedded_unfocused_border = SubResource("StyleBoxFlat_bhxfg")
+AcceptDialog/styles/panel = SubResource("StyleBoxFlat_b6bw2")
+
 [sub_resource type="Theme" id="Theme_h1m7h"]
 LineEdit/styles/focus = ExtResource("10_frkhe")
 LineEdit/styles/normal = ExtResource("10_frkhe")
@@ -679,6 +858,35 @@ grow_vertical = 0
 theme = ExtResource("5_pbw6q")
 text = "Back"
 
+[node name="RenameDialog" type="AcceptDialog" parent="Menu/LoadList" unique_id=935499991]
+oversampling_override = 1.0
+title = "Rename Save"
+position = Vector2i(0, 31)
+size = Vector2i(500, 100)
+theme = SubResource("Theme_erwvk")
+ok_button_text = "Rename"
+
+[node name="LineEdit" type="LineEdit" parent="Menu/LoadList/RenameDialog" unique_id=1652611461]
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 496.0
+offset_bottom = 55.0
+theme = SubResource("Theme_2w5on")
+placeholder_text = "Your new save name"
+alignment = 1
+max_length = 25
+
+[node name="SaveFailedNotice" type="AcceptDialog" parent="Menu/LoadList" unique_id=1433613968]
+theme = SubResource("Theme_346fj")
+dialog_text = "Renaming the save failed!"
+
+[node name="OverwriteConfirmationDialog" type="ConfirmationDialog" parent="Menu/LoadList" unique_id=391267834]
+theme = SubResource("Theme_0sclb")
+ok_button_text = "Yes"
+dialog_text = "Overwrite existing save?"
+dialog_close_on_escape = false
+cancel_button_text = "No"
+
 [node name="SaveList" type="Control" parent="Menu" unique_id=569947710]
 visible = false
 z_index = 1
@@ -785,6 +993,35 @@ offset_bottom = -126.0
 grow_vertical = 0
 theme = ExtResource("5_pbw6q")
 text = "Back"
+
+[node name="RenameDialog" type="AcceptDialog" parent="Menu/SaveList" unique_id=296646842]
+oversampling_override = 1.0
+title = "Rename Save"
+position = Vector2i(0, 31)
+size = Vector2i(500, 100)
+theme = SubResource("Theme_erwvk")
+ok_button_text = "Rename"
+
+[node name="LineEdit" type="LineEdit" parent="Menu/SaveList/RenameDialog" unique_id=2100054439]
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 496.0
+offset_bottom = 55.0
+theme = SubResource("Theme_2w5on")
+placeholder_text = "Your new save name"
+alignment = 1
+max_length = 25
+
+[node name="SaveFailedNotice" type="AcceptDialog" parent="Menu/SaveList" unique_id=1187432312]
+theme = SubResource("Theme_346fj")
+dialog_text = "Renaming the save failed!"
+
+[node name="OverwriteConfirmationDialog" type="ConfirmationDialog" parent="Menu/SaveList" unique_id=673031134]
+theme = SubResource("Theme_0sclb")
+ok_button_text = "Yes"
+dialog_text = "Overwrite existing save?"
+dialog_close_on_escape = false
+cancel_button_text = "No"
 
 [node name="BuildTooltip" type="CanvasLayer" parent="." unique_id=1845281441]
 layer = 7
