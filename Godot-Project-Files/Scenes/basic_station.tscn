@@ -9,20 +9,23 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("2_jrigy")
 }],
-"loop": true,
+"loop": 1,
 "name": &"default",
 "speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_7co3m"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nlev2"]
 resource_local_to_scene = true
 size = Vector2(16, 16)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jrigy"]
 size = Vector2(18.666668, 32)
 
-[node name="BasicStation" unique_id=1835171183 node_paths=PackedStringArray("sprite") instance=ExtResource("1_wuyca")]
+[node name="BasicStation" unique_id=1835171183 node_paths=PackedStringArray("sprite", "anim_player") instance=ExtResource("1_wuyca")]
 sprite = NodePath("AnimatedSprite2D")
+anim_player = NodePath("Control/AnimationPlayer")
+max_health = 250.0
+cursor_proximity_dist = 90
 item_id = "basic_station"
 
 [node name="AnimatedSprite2D" parent="." index="0" unique_id=1408510289]
@@ -30,9 +33,14 @@ sprite_frames = SubResource("SpriteFrames_nlev2")
 
 [node name="CollisionShape2D" parent="." index="1" unique_id=2132263509]
 position = Vector2(0, 7)
-shape = SubResource("RectangleShape2D_7co3m")
+shape = SubResource("RectangleShape2D_nlev2")
 
 [node name="CollisionShape2D" parent="MouseInputMonitor" parent_id_path=PackedInt32Array(1707325614) index="0" unique_id=487905519]
 position = Vector2(-0.33333367, 0)
 shape = SubResource("RectangleShape2D_jrigy")
 debug_color = Color(0.9607843, 0.1764706, 0.25490198, 0.21568628)
+
+[node name="HealthBar" parent="Control" parent_id_path=PackedInt32Array(1101643606) index="0" unique_id=1745487548]
+custom_minimum_size = Vector2(70, 4)
+offset_top = 50.0
+offset_bottom = 54.0

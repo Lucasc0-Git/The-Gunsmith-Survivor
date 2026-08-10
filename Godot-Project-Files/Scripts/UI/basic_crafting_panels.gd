@@ -27,53 +27,7 @@ func toggle_base_crafting(_visible: bool) -> void:
 	base_crafting_container.visible = _visible
 
 
-func _on_glock_mouse_entered() -> void:
-	crafting_tooltip.show_tooltip(ItemRegistry.items["glock"])
-func _on_glock_mouse_exited() -> void:
-	crafting_tooltip.hide_tooltip()
-
-func _on_shotgun_mouse_entered() -> void:
-	crafting_tooltip.show_tooltip(ItemRegistry.items["shotgun"])
-func _on_shotgun_mouse_exited() -> void:
-	crafting_tooltip.hide_tooltip()
-
-func _on_basic_station_mouse_entered() -> void:
-	crafting_tooltip.show_tooltip(ItemRegistry.items["basic_station"])
-func _on_basic_station_mouse_exited() -> void:
-	crafting_tooltip.hide_tooltip()
-
-func _on_torch_mouse_entered() -> void:
-	crafting_tooltip.show_tooltip(ItemRegistry.items["torch"])
-func _on_torch_mouse_exited() -> void:
-	crafting_tooltip.hide_tooltip()
-
-func _on_wooden_axe_mouse_entered() -> void:
-	crafting_tooltip.show_tooltip(ItemRegistry.items["wooden_axe"])
-func _on_wooden_axe_mouse_exited() -> void:
-	crafting_tooltip.hide_tooltip()
-
-func _on_assault_rifle_mouse_entered() -> void:
-	crafting_tooltip.show_tooltip(ItemRegistry.items["assault_rifle"])
-func _on_assault_rifle_mouse_exited() -> void:
-	crafting_tooltip.hide_tooltip()
-
-func _on_basic_smithing_table_mouse_entered() -> void:
-	crafting_tooltip.show_tooltip(ItemRegistry.items["basic_smithing_table"])
-func _on_basic_smithing_table_mouse_exited() -> void:
-	crafting_tooltip.hide_tooltip()
-
-func _on_fire_place_mouse_entered() -> void:
-	crafting_tooltip.show_tooltip(ItemRegistry.items["fireplace"])
-func _on_fire_place_mouse_exited() -> void:
-	crafting_tooltip.hide_tooltip()
-
-func _on_wooden_pickaxe_mouse_entered() -> void:
-	crafting_tooltip.show_tooltip(ItemRegistry.items["wooden_pickaxe"])
-func _on_wooden_pickaxe_mouse_exited() -> void:
-	crafting_tooltip.hide_tooltip()
-
-
-func _on_machine_gun_mouse_entered() -> void:
-	crafting_tooltip.show_tooltip(ItemRegistry.items["machine_gun"])
-func _on_machine_gun_mouse_exited() -> void:
+func _on_item_button_mouse_entered(item_data: ItemData) -> void:
+	crafting_tooltip.show_tooltip(item_data)
+func _on_item_button_mouse_exited() -> void:
 	crafting_tooltip.hide_tooltip()

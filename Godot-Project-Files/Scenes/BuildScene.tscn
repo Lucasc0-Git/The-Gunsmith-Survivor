@@ -7,13 +7,135 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a3tq2"]
 resource_local_to_scene = true
 
-[node name="BuildScene" type="StaticBody2D" unique_id=1835171183 node_paths=PackedStringArray("collision_shape", "mouse_input") groups=["built", "object"]]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xsqm1"]
+bg_color = Color(0.32172796, 0.32172796, 0.32172787, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.08078333, 0.08078336, 0.080783255, 1)
+border_blend = true
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fxw7y"]
+bg_color = Color(0.94509804, 0.08627451, 0, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.46205693, 0.11518439, 0, 1)
+border_blend = true
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 1
+
+[sub_resource type="Theme" id="Theme_kx0co"]
+ProgressBar/styles/background = SubResource("StyleBoxFlat_xsqm1")
+ProgressBar/styles/fill = SubResource("StyleBoxFlat_fxw7y")
+
+[sub_resource type="Animation" id="Animation_xsqm1"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HealthBar:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HealthBar:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_fxw7y"]
+resource_name = "hide_bar"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HealthBar:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HealthBar:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.9780533), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_k6gf0"]
+resource_name = "show_bar"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HealthBar:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HealthBar:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6elan"]
+_data = {
+&"RESET": SubResource("Animation_xsqm1"),
+&"hide_bar": SubResource("Animation_fxw7y"),
+&"show_bar": SubResource("Animation_k6gf0")
+}
+
+[node name="BuildScene" type="StaticBody2D" unique_id=1835171183 node_paths=PackedStringArray("collision_shape", "mouse_input", "health_bar") groups=["built", "object"]]
 scale = Vector2(3, 3)
 collision_layer = 8
 collision_mask = 0
 script = ExtResource("1_xsqm1")
 collision_shape = NodePath("CollisionShape2D")
 mouse_input = NodePath("MouseInputMonitor")
+health_bar = NodePath("Control/HealthBar")
+cursor_proximity_dist = null
 item_id = "apple"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1408510289]
@@ -26,3 +148,35 @@ shape = SubResource("RectangleShape2D_a3tq2")
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MouseInputMonitor" unique_id=487905519]
+
+[node name="Control" type="Control" parent="." unique_id=1101643606]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.33, 0.33)
+
+[node name="HealthBar" type="ProgressBar" parent="Control" unique_id=1745487548]
+custom_minimum_size = Vector2(70, 3)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -35.0
+offset_top = 30.0
+offset_right = 35.0
+offset_bottom = 34.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_kx0co")
+value = 50.0
+show_percentage = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Control" unique_id=1456092213]
+libraries/ = SubResource("AnimationLibrary_6elan")

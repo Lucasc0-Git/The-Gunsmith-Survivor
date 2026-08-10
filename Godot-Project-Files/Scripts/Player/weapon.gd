@@ -249,6 +249,7 @@ func _shoot_weapon() -> void:
 	await get_tree().create_timer(0.05).timeout
 	bang_light.enabled = false
 	
+	if !weapon_data: return
 	if weapon_data.weapon_type == "Shotgun":
 		await get_tree().create_timer(0.2).timeout
 		AudioManager.play("shotgun_reload")

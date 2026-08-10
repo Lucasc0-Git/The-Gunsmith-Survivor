@@ -1,0 +1,211 @@
+[gd_scene format=3 uid="uid://tppkv2hqbl7y"]
+
+[ext_resource type="Script" uid="uid://of5t81in6xy3" path="res://Scripts/UI/core_low_health_bar.gd" id="1_xechl"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kx0co"]
+bg_color = Color(0.4627451, 0.2784314, 0.105882354, 1)
+border_width_top = 3
+border_color = Color(0.3019608, 0.1764706, 0.05490196, 1)
+
+[sub_resource type="Theme" id="Theme_2a8ad"]
+Panel/styles/panel = SubResource("StyleBoxFlat_kx0co")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dykli"]
+bg_color = Color(0.4627451, 0.2784314, 0.105882354, 1)
+border_width_top = 3
+border_color = Color(0.3019608, 0.1764706, 0.05490196, 1)
+corner_radius_top_right = 125
+corner_detail = 1
+anti_aliasing = false
+
+[sub_resource type="Theme" id="Theme_jpb5x"]
+Panel/styles/panel = SubResource("StyleBoxFlat_dykli")
+
+[sub_resource type="LabelSettings" id="LabelSettings_2a8ad"]
+font_size = 22
+outline_size = 3
+outline_color = Color(0.072842635, 0.072842635, 0.072842635, 1)
+
+[sub_resource type="Animation" id="Animation_xechl"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BackgroundControl/Label:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HealthBar:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_c4q88"]
+resource_name = "pulse"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BackgroundControl/Label:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0.99999624, 0.30034858, 0.23412591, 1), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HealthBar:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0.99999374, 0.3354426, 0.2703286, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_h2t56"]
+_data = {
+&"RESET": SubResource("Animation_xechl"),
+&"pulse": SubResource("Animation_c4q88")
+}
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xechl"]
+bg_color = Color(0.32172796, 0.32172796, 0.32172787, 1)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(0.08078333, 0.08078336, 0.080783255, 1)
+border_blend = true
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+corner_detail = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c4q88"]
+bg_color = Color(0.94509804, 0.08627451, 0, 1)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(0.46205693, 0.11518439, 0, 1)
+border_blend = true
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+corner_detail = 4
+
+[sub_resource type="Theme" id="Theme_h2t56"]
+ProgressBar/styles/background = SubResource("StyleBoxFlat_xechl")
+ProgressBar/styles/fill = SubResource("StyleBoxFlat_c4q88")
+
+[node name="CoreLowHealthBar" type="Control" unique_id=1635765706 node_paths=PackedStringArray("health_bar", "anim_player")]
+custom_minimum_size = Vector2(480, 80)
+layout_mode = 3
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -240.0
+offset_top = 5.0
+offset_right = 240.0
+offset_bottom = 85.0
+grow_horizontal = 2
+grow_vertical = 0
+script = ExtResource("1_xechl")
+hidden_pos = Vector2(400, 725)
+visible_pos = Vector2(400, 635)
+health_bar = NodePath("HealthBar")
+anim_player = NodePath("AnimationPlayer")
+
+[node name="BackgroundControl" type="Control" parent="." unique_id=1096548180]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+grow_horizontal = 2
+
+[node name="Panel" type="Panel" parent="BackgroundControl" unique_id=1274400877]
+z_index = -1
+custom_minimum_size = Vector2(345, 100)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 40.0
+grow_horizontal = 2
+theme = SubResource("Theme_2a8ad")
+
+[node name="Panel2" type="Panel" parent="BackgroundControl" unique_id=178416279]
+z_index = -1
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 0
+offset_left = 172.0
+offset_right = 299.0
+offset_bottom = 179.0
+theme = SubResource("Theme_jpb5x")
+
+[node name="Panel4" type="Panel" parent="BackgroundControl" unique_id=960670856]
+z_index = -1
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 0
+offset_left = -172.0
+offset_right = -45.0
+offset_bottom = 179.0
+scale = Vector2(-1, 1)
+theme = SubResource("Theme_jpb5x")
+
+[node name="Label" type="Label" parent="BackgroundControl" unique_id=1314107829]
+z_index = -1
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -68.0
+offset_right = 68.0
+offset_bottom = 23.0
+grow_horizontal = 2
+text = "The Core's Health"
+label_settings = SubResource("LabelSettings_2a8ad")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=130553530]
+libraries/ = SubResource("AnimationLibrary_h2t56")
+
+[node name="HealthBar" type="ProgressBar" parent="." unique_id=1161616968]
+z_index = -1
+custom_minimum_size = Vector2(380, 32)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -190.0
+offset_top = 33.0
+offset_right = 190.0
+offset_bottom = 65.0
+grow_horizontal = 2
+theme = SubResource("Theme_h2t56")
+value = 50.0
+show_percentage = false
