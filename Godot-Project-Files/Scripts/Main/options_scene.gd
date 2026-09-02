@@ -1,11 +1,11 @@
 extends Control
 
-@onready var fullscreen_checkbox := $PanelContainer/MarginContainer/VBoxContainer/Fullscreen
-@onready var vsync_checkbox : CheckButton = $PanelContainer/MarginContainer/VBoxContainer/Vsync
-@onready var global_sounds_cb: CheckButton = $PanelContainer/MarginContainer/VBoxContainer/GlobalSounds
-@onready var master_sound_slider: HSlider = $PanelContainer/MarginContainer/VBoxContainer/MasterBusContainer/MarginContainer/VBoxContainer/MasterSoundSlider
-@onready var sfx_sound_slider: HSlider = $PanelContainer/MarginContainer/VBoxContainer/SFXBusContainer/MarginContainer/VBoxContainer/SFXSoundSlider
-@onready var music_sound_slider: HSlider = $PanelContainer/MarginContainer/VBoxContainer/MusicBusContainer/MarginContainer/VBoxContainer/MusicSoundSlider
+@onready var fullscreen_checkbox := %Fullscreen
+@onready var vsync_checkbox : CheckButton = %Vsync
+@onready var global_sounds_cb: CheckButton = %GlobalSounds
+@onready var master_sound_slider: HSlider = %MasterSoundSlider
+@onready var sfx_sound_slider: HSlider = %SFXSoundSlider
+@onready var music_sound_slider: HSlider = %MusicSoundSlider
 
 var _save_timer: Timer
 

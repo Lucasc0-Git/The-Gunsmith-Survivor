@@ -37,6 +37,7 @@ var inventory_tint: CanvasModulate
 var the_core: TheCore
 var player: Player
 
+
 @export var base_enemy_aggro_radius: int = 750
 var enemy_aggro_radius: int = 750
 @export var tree_respawn_time: float = 180.0

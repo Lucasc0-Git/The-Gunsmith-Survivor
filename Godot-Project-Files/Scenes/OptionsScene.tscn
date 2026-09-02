@@ -4,15 +4,58 @@
 [ext_resource type="Theme" uid="uid://cvrriksqai0xa" path="res://Themes/Options.tres" id="2_1hmx5"]
 [ext_resource type="Texture2D" uid="uid://cgvn2rp4tyj7h" path="res://Textures/Start_scene_bg_1.png" id="2_4k2k5"]
 
-[sub_resource type="StyleBoxLine" id="StyleBoxLine_4k2k5"]
-color = Color(0.3019608, 0.1764706, 0.05490196, 1)
-grow_begin = -40.0
-grow_end = -40.0
-thickness = 6
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4obyk"]
+bg_color = Color(0.4627451, 0.2784314, 0.105882354, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.3019608, 0.1764706, 0.05490196, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+expand_margin_left = 4.0
+expand_margin_top = 4.0
+expand_margin_right = 4.0
+expand_margin_bottom = 4.0
 
-[sub_resource type="Theme" id="Theme_2a8ad"]
-HSeparator/constants/separation = 8
-HSeparator/styles/separator = SubResource("StyleBoxLine_4k2k5")
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4k2k5"]
+bg_color = Color(0.4627451, 0.2784314, 0.105882354, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.3019608, 0.1764706, 0.05490196, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+expand_margin_left = 4.0
+expand_margin_top = 4.0
+expand_margin_right = 4.0
+expand_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8c6yk"]
+bg_color = Color(0.4627451, 0.2784314, 0.105882354, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.3019608, 0.1764706, 0.05490196, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+expand_margin_left = 4.0
+expand_margin_top = 4.0
+expand_margin_right = 4.0
+expand_margin_bottom = 4.0
+
+[sub_resource type="Theme" id="Theme_kx0co"]
+TabContainer/styles/tab_hovered = SubResource("StyleBoxFlat_4obyk")
+TabContainer/styles/tab_selected = SubResource("StyleBoxFlat_4k2k5")
+TabContainer/styles/tab_unselected = SubResource("StyleBoxFlat_8c6yk")
 
 [sub_resource type="LabelSettings" id="LabelSettings_2a8ad"]
 font_size = 25
@@ -121,122 +164,174 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_4k2k5")
 
-[node name="PanelContainer" type="PanelContainer" parent="." unique_id=2055530194]
-custom_minimum_size = Vector2(500, 550)
+[node name="TabContainer" type="TabContainer" parent="." unique_id=240975687]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -225.0
-offset_top = -250.0
-offset_right = 225.0
-offset_bottom = 250.0
+offset_left = -254.0
+offset_top = -294.5
+offset_right = 254.0
+offset_bottom = 294.5
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("2_1hmx5")
+theme = SubResource("Theme_kx0co")
+current_tab = 0
+tab_0/title = "Gameplay"
+tab_1/title = "Sound"
+tab_2/title = "Keyboard & Mouse"
 
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer" unique_id=253842804]
+[node name="GamePlayContainer" type="PanelContainer" parent="TabContainer" unique_id=2055530194]
+custom_minimum_size = Vector2(500, 550)
+layout_mode = 2
+theme = ExtResource("2_1hmx5")
+metadata/_tab_index = 0
+metadata/_tab_name = "Gameplay"
+
+[node name="MarginContainer" type="MarginContainer" parent="TabContainer/GamePlayContainer" unique_id=253842804]
 layout_mode = 2
 theme_override_constants/margin_left = 25
 theme_override_constants/margin_top = 25
 theme_override_constants/margin_right = 25
 theme_override_constants/margin_bottom = 25
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer" unique_id=2063363582]
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/GamePlayContainer/MarginContainer" unique_id=2063363582]
 custom_minimum_size = Vector2(450, 500)
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="Fullscreen" type="CheckButton" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=778429721]
+[node name="Fullscreen" type="CheckButton" parent="TabContainer/GamePlayContainer/MarginContainer/VBoxContainer" unique_id=778429721]
+unique_name_in_owner = true
 layout_mode = 2
 theme = ExtResource("2_1hmx5")
 text = "Fullscreen"
 
-[node name="Vsync" type="CheckButton" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=791878158]
+[node name="Vsync" type="CheckButton" parent="TabContainer/GamePlayContainer/MarginContainer/VBoxContainer" unique_id=791878158]
+unique_name_in_owner = true
 layout_mode = 2
 text = "Vsync"
 
-[node name="GlobalSounds" type="CheckButton" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1312562256]
+[node name="SoundsContainer" type="PanelContainer" parent="TabContainer" unique_id=45214093]
+visible = false
+custom_minimum_size = Vector2(500, 550)
+layout_mode = 2
+theme = ExtResource("2_1hmx5")
+metadata/_tab_index = 1
+metadata/_tab_name = "Sound"
+
+[node name="MarginContainer" type="MarginContainer" parent="TabContainer/SoundsContainer" unique_id=960342266]
+layout_mode = 2
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 25
+theme_override_constants/margin_right = 25
+theme_override_constants/margin_bottom = 25
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/SoundsContainer/MarginContainer" unique_id=2118406995]
+custom_minimum_size = Vector2(450, 500)
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="GlobalSounds" type="CheckButton" parent="TabContainer/SoundsContainer/MarginContainer/VBoxContainer" unique_id=730689968]
+unique_name_in_owner = true
 layout_mode = 2
 text = "Global sounds"
 
-[node name="HSeparator" type="HSeparator" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=666897231]
-layout_mode = 2
-theme = SubResource("Theme_2a8ad")
-
-[node name="MasterBusContainer" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1228877676]
+[node name="MasterBusContainer" type="PanelContainer" parent="TabContainer/SoundsContainer/MarginContainer/VBoxContainer" unique_id=1076355721]
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/MasterBusContainer" unique_id=1320680631]
+[node name="MarginContainer" type="MarginContainer" parent="TabContainer/SoundsContainer/MarginContainer/VBoxContainer/MasterBusContainer" unique_id=2111392898]
 layout_mode = 2
 theme_override_constants/margin_left = 6
 theme_override_constants/margin_top = 3
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/MasterBusContainer/MarginContainer" unique_id=743355557]
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/SoundsContainer/MarginContainer/VBoxContainer/MasterBusContainer/MarginContainer" unique_id=2134656366]
 layout_mode = 2
 
-[node name="Master" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/MasterBusContainer/MarginContainer/VBoxContainer" unique_id=1123513492]
+[node name="Master" type="Label" parent="TabContainer/SoundsContainer/MarginContainer/VBoxContainer/MasterBusContainer/MarginContainer/VBoxContainer" unique_id=379655150]
 layout_mode = 2
 text = "Master"
 label_settings = SubResource("LabelSettings_2a8ad")
 
-[node name="MasterSoundSlider" type="HSlider" parent="PanelContainer/MarginContainer/VBoxContainer/MasterBusContainer/MarginContainer/VBoxContainer" unique_id=1008646840]
+[node name="MasterSoundSlider" type="HSlider" parent="TabContainer/SoundsContainer/MarginContainer/VBoxContainer/MasterBusContainer/MarginContainer/VBoxContainer" unique_id=1012351222]
+unique_name_in_owner = true
 layout_mode = 2
 max_value = 1.0
 step = 0.01
 value = 1.0
 
-[node name="SFXBusContainer" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=2115169170]
+[node name="SFXBusContainer" type="PanelContainer" parent="TabContainer/SoundsContainer/MarginContainer/VBoxContainer" unique_id=1888808297]
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/SFXBusContainer" unique_id=1992197220]
+[node name="MarginContainer" type="MarginContainer" parent="TabContainer/SoundsContainer/MarginContainer/VBoxContainer/SFXBusContainer" unique_id=1591228557]
 layout_mode = 2
 theme_override_constants/margin_left = 6
 theme_override_constants/margin_top = 3
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/SFXBusContainer/MarginContainer" unique_id=504991777]
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/SoundsContainer/MarginContainer/VBoxContainer/SFXBusContainer/MarginContainer" unique_id=2060647525]
 layout_mode = 2
 
-[node name="SFX" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/SFXBusContainer/MarginContainer/VBoxContainer" unique_id=765272347]
+[node name="SFX" type="Label" parent="TabContainer/SoundsContainer/MarginContainer/VBoxContainer/SFXBusContainer/MarginContainer/VBoxContainer" unique_id=1168593370]
 layout_mode = 2
 text = "SFX"
 label_settings = SubResource("LabelSettings_4k2k5")
 
-[node name="SFXSoundSlider" type="HSlider" parent="PanelContainer/MarginContainer/VBoxContainer/SFXBusContainer/MarginContainer/VBoxContainer" unique_id=462418671]
+[node name="SFXSoundSlider" type="HSlider" parent="TabContainer/SoundsContainer/MarginContainer/VBoxContainer/SFXBusContainer/MarginContainer/VBoxContainer" unique_id=1593146634]
+unique_name_in_owner = true
 layout_mode = 2
 max_value = 1.0
 step = 0.01
 value = 1.0
 
-[node name="MusicBusContainer" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=7993678]
+[node name="MusicBusContainer" type="PanelContainer" parent="TabContainer/SoundsContainer/MarginContainer/VBoxContainer" unique_id=989487989]
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/MusicBusContainer" unique_id=657766980]
+[node name="MarginContainer" type="MarginContainer" parent="TabContainer/SoundsContainer/MarginContainer/VBoxContainer/MusicBusContainer" unique_id=1910234517]
 layout_mode = 2
 theme_override_constants/margin_left = 6
 theme_override_constants/margin_top = 3
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/MusicBusContainer/MarginContainer" unique_id=744117978]
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/SoundsContainer/MarginContainer/VBoxContainer/MusicBusContainer/MarginContainer" unique_id=320055377]
 layout_mode = 2
 
-[node name="Music" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/MusicBusContainer/MarginContainer/VBoxContainer" unique_id=1958595323]
+[node name="Music" type="Label" parent="TabContainer/SoundsContainer/MarginContainer/VBoxContainer/MusicBusContainer/MarginContainer/VBoxContainer" unique_id=203198661]
 layout_mode = 2
 text = "Music"
 label_settings = SubResource("LabelSettings_4k2k5")
 
-[node name="MusicSoundSlider" type="HSlider" parent="PanelContainer/MarginContainer/VBoxContainer/MusicBusContainer/MarginContainer/VBoxContainer" unique_id=785271290]
+[node name="MusicSoundSlider" type="HSlider" parent="TabContainer/SoundsContainer/MarginContainer/VBoxContainer/MusicBusContainer/MarginContainer/VBoxContainer" unique_id=1888811025]
+unique_name_in_owner = true
 layout_mode = 2
 max_value = 1.0
 step = 0.01
 value = 1.0
+
+[node name="KeyboardControl" type="PanelContainer" parent="TabContainer" unique_id=1425871549]
+visible = false
+custom_minimum_size = Vector2(500, 550)
+layout_mode = 2
+theme = ExtResource("2_1hmx5")
+metadata/_tab_index = 2
+metadata/_tab_name = "Keyboard & Mouse"
+
+[node name="MarginContainer" type="MarginContainer" parent="TabContainer/KeyboardControl" unique_id=1948486515]
+layout_mode = 2
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 25
+theme_override_constants/margin_right = 25
+theme_override_constants/margin_bottom = 25
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/KeyboardControl/MarginContainer" unique_id=1102475697]
+custom_minimum_size = Vector2(450, 500)
+layout_mode = 2
+theme_override_constants/separation = 10
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="." unique_id=96857309]
 custom_minimum_size = Vector2(200, 50)
@@ -255,10 +350,10 @@ layout_mode = 2
 theme = SubResource("Theme_1hmx5")
 text = "Back"
 
-[connection signal="toggled" from="PanelContainer/MarginContainer/VBoxContainer/Fullscreen" to="." method="_on_fullscreen_toggled"]
-[connection signal="toggled" from="PanelContainer/MarginContainer/VBoxContainer/Vsync" to="." method="_on_vsync_toggled"]
-[connection signal="toggled" from="PanelContainer/MarginContainer/VBoxContainer/GlobalSounds" to="." method="_on_global_sounds_toggled"]
-[connection signal="value_changed" from="PanelContainer/MarginContainer/VBoxContainer/MasterBusContainer/MarginContainer/VBoxContainer/MasterSoundSlider" to="." method="_on_master_sound_slider_value_changed"]
-[connection signal="value_changed" from="PanelContainer/MarginContainer/VBoxContainer/SFXBusContainer/MarginContainer/VBoxContainer/SFXSoundSlider" to="." method="_on_sfx_sound_slider_value_changed"]
-[connection signal="value_changed" from="PanelContainer/MarginContainer/VBoxContainer/MusicBusContainer/MarginContainer/VBoxContainer/MusicSoundSlider" to="." method="_on_music_sound_slider_value_changed"]
+[connection signal="toggled" from="TabContainer/GamePlayContainer/MarginContainer/VBoxContainer/Fullscreen" to="." method="_on_fullscreen_toggled"]
+[connection signal="toggled" from="TabContainer/GamePlayContainer/MarginContainer/VBoxContainer/Vsync" to="." method="_on_vsync_toggled"]
+[connection signal="toggled" from="TabContainer/SoundsContainer/MarginContainer/VBoxContainer/GlobalSounds" to="." method="_on_global_sounds_toggled"]
+[connection signal="value_changed" from="TabContainer/SoundsContainer/MarginContainer/VBoxContainer/MasterBusContainer/MarginContainer/VBoxContainer/MasterSoundSlider" to="." method="_on_master_sound_slider_value_changed"]
+[connection signal="value_changed" from="TabContainer/SoundsContainer/MarginContainer/VBoxContainer/SFXBusContainer/MarginContainer/VBoxContainer/SFXSoundSlider" to="." method="_on_sfx_sound_slider_value_changed"]
+[connection signal="value_changed" from="TabContainer/SoundsContainer/MarginContainer/VBoxContainer/MusicBusContainer/MarginContainer/VBoxContainer/MusicSoundSlider" to="." method="_on_music_sound_slider_value_changed"]
 [connection signal="pressed" from="VBoxContainer2/Back" to="." method="_on_back_pressed"]
