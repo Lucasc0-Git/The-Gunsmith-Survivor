@@ -55,6 +55,7 @@ func _play_sound_2d(stream: AudioStream, pos: Vector2, added_volume: float = 0, 
 	player.bus = bus
 	player.attenuation = 5
 	player.volume_db = added_volume
+	player.attenuation = 7
 	player.stream = stream
 	player.global_position = pos
 	player.finished.connect(player.queue_free)

@@ -2,7 +2,7 @@ extends CanvasLayer
 class_name GameOver
 
 @onready var color_rect: ColorRect = $ColorRect
-@onready var stats_label: RichTextLabel = $PanelContainer/VBoxContainer/StatsLabel
+@onready var stats_label: RichTextLabel = $PanelContainer/MarginContainer/VBoxContainer/StatsLabel
 
 func _ready() -> void:
 	var bb: String = ""
@@ -35,3 +35,16 @@ func _on_play_button_pressed() -> void:
 	get_tree().paused = false
 	get_parent().the_core.health = get_parent().the_core.max_health
 	queue_free()
+
+func _on_copy_button_pressed() -> void:
+	var stats: String = ""
+	stats += "Stats of save: " + SaveManager.current_save_name + " from The Gunsmith Survivor.\n\n"
+	stats += "- Days Survived: " + str(GameManager.current_day) + "\n"
+	for stat: String in GameManager.more_stats:
+		var display_name: String = stat.capitalize().replace("_", " ")
+		var value: Variant = GameManager.more_stats[stat]
+		stats += "- " + display_name + ": " + str(value) + "\n"
+	stats += "\nTotal score: " + str(GameManager.score)
+	
+	print("Copied stats to clipboard.")
+	DisplayServer.clipboard_set(stats)

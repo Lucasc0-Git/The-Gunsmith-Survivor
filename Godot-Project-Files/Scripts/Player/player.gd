@@ -14,7 +14,6 @@ var inv_toggled: bool = false
 var main: Main
 var nearby_stations: Dictionary[GameManager.StationType, int] = {}
 var _pending_load_data := {}
-var regions_unlocked: Array = []
 
 ## The @onready vars declaration
 @onready var anim_player: AnimatedSprite2D = $AnimatedSprite2D
@@ -158,36 +157,6 @@ func pick_item(item: ItemData) -> bool:
 	if hud.give_item(item, 1):
 		return true
 	return false
-	#var slot_data: SlotData = SlotData.new()
-	#for hotbar_slot in hud.hotbar.grid_container.get_children():
-		#if !hotbar_slot.slot_data == null:
-			#slot_data = hotbar_slot.slot_data
-		#if slot_data.item_data == item and slot_data.amount < item.max_stack:
-			#hotbar_slot.add_amount(1)
-			#return
-	#
-	#slot_data = SlotData.new()
-	#for inv_slot in hud.inventory.grid_container.get_children():
-		#if !inv_slot.slot_data == null:
-			#slot_data = inv_slot.slot_data
-		#
-		#if slot_data.item_data == item and slot_data.amount < item.max_stack:
-			#inv_slot.add_amount(1)
-			#return
-	#
-	#slot_data = SlotData.new()
-	#for inv_slot in hud.inventory.grid_container.get_children():
-		#if !inv_slot.slot_data == null:
-			#slot_data = inv_slot.slot_data
-		#
-		#if slot_data.item_data == item and slot_data.amount < item.max_stack:
-			#inv_slot.add_amount(1)
-			#return
-		#if slot_data.is_empty():
-			#inv_slot.set_item(item, 1)
-			#return
-		#else:
-			#pass # I need to reverse the picking process so the item stays on ground.
 
 func use_selected_item() -> void:
 	var selected_slot: Slot = get_selected_slot()
