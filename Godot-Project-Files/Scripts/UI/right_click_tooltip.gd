@@ -56,6 +56,20 @@ func show_tooltip(slot: Slot, pos: Vector2, from_inventory: bool) -> void:
 	show()
 	operating_slot = slot
 	is_slot_in_inventory = from_inventory
+	
+	size = get_minimum_size()
+	
+	var mouse_pos := get_viewport().get_mouse_position()
+	var tooltip_size : Vector2 = size
+	var viewport_size : Vector2 = get_viewport().get_visible_rect().size
+	
+	var x := mouse_pos.x + 10
+	var y := mouse_pos.y + 10
+	if x + tooltip_size.x > viewport_size.x:
+		x = viewport_size.x - tooltip_size.x - 50
+	if y + tooltip_size.y > viewport_size.y:
+		y = viewport_size.y - tooltip_size.y - 50
+	global_position = Vector2(x, y)
 
 func _on_dismantle_pressed() -> void:
 	if !operating_slot: return
