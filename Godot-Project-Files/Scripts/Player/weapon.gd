@@ -31,6 +31,7 @@ var can_place: bool = false
 var current_heat: float = 0.0
 var is_overheated: bool = false
 var heat_material: ShaderMaterial
+var right_click_tooltip_shown: bool = false
 
 func _ready() -> void:
 	while  !GameManager.is_game_loaded:
@@ -390,5 +391,5 @@ func _process(delta: float) -> void:
 			#set build scene preview visible = false
 		
 	## Shoot if its supposed to shoot
-	if shooting and can_shoot and shoot_on and !hovering:
+	if shooting and can_shoot and shoot_on and !hovering and !right_click_tooltip_shown:
 		player.use_selected_item()

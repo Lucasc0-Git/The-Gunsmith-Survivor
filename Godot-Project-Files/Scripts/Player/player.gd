@@ -286,3 +286,23 @@ func _apply_loaded_data() -> void:
 		_nearby_stations[key] = d[key]
 	nearby_stations = _nearby_stations
 	_pending_load_data = {}
+
+func get_needed_upgrade_materials(item_data: ItemData, lvl: int) -> Dictionary:
+	if not item_data: return {}
+	if lvl < 1: return {}
+	
+	var items: Dictionary = {}
+	var base_items: Dictionary = item_data.crafting_recipe
+	
+	for item: ItemData in base_items:
+		if item is WeaponItemData or item is CloseWeaponItemData:
+			continue
+		items[item] = ceil(base_items[item] * (0.5 + 0.05 * pow(lvl, 1.5)))
+	
+	return items
+
+static func get_damage_multiplier(lvl: int) -> float:
+	return 1 + 0.05 * pow(lvl, 1.3)
+
+static func get_fire_rate_multiplier(lvl: int) -> float:
+	return pow(0.95, float(lvl) / 4)

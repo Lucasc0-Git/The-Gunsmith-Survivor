@@ -43,6 +43,7 @@
 [ext_resource type="Resource" uid="uid://bykwtjaftb02t" path="res://items/Inv_items/BasicSmithingTable_item.tres" id="34_7c2aa"]
 [ext_resource type="Resource" uid="uid://b0725nycjx8ul" path="res://items/Inv_items/Torch_item.tres" id="36_yfo6n"]
 [ext_resource type="Resource" uid="uid://c8nuioxkkips2" path="res://items/Inv_items/FirePlace_item.tres" id="37_eqxyv"]
+[ext_resource type="Script" uid="uid://kip6x331bpa4" path="res://Scripts/UI/upgrade_tooltip.gd" id="40_te3lg"]
 [ext_resource type="PackedScene" uid="uid://tppkv2hqbl7y" path="res://Scenes/CoreLowHealthBar.tscn" id="44_jmo6y"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_36asn"]
@@ -845,6 +846,20 @@ mouse_filter = 2
 theme_override_constants/separation = 4
 alignment = 2
 
+[node name="UpgradeTooltip" type="RichTextLabel" parent="." unique_id=600773709]
+unique_name_in_owner = true
+z_index = 8
+custom_minimum_size = Vector2(250, 30)
+offset_right = 40.0
+offset_bottom = 40.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("8_43w4t")
+bbcode_enabled = true
+fit_content = true
+scroll_active = false
+script = ExtResource("40_te3lg")
+
 [node name="RightClickTooltip" type="PanelContainer" parent="." unique_id=613036397]
 custom_minimum_size = Vector2(75, 0)
 anchors_preset = 8
@@ -874,15 +889,23 @@ theme_override_constants/separation = 9
 
 [node name="Drop" type="Button" parent="RightClickTooltip/MarginContainer/VBoxContainer" unique_id=1748484772]
 layout_mode = 2
+action_mode = 0
 text = "Drop"
 
 [node name="Split" type="Button" parent="RightClickTooltip/MarginContainer/VBoxContainer" unique_id=1575950881]
 layout_mode = 2
+action_mode = 0
 text = "Split"
 
 [node name="Dismantle" type="Button" parent="RightClickTooltip/MarginContainer/VBoxContainer" unique_id=286619934]
 layout_mode = 2
+action_mode = 0
 text = "Dismantle"
+
+[node name="UpgradeButton" type="Button" parent="RightClickTooltip/MarginContainer/VBoxContainer" unique_id=9602602]
+layout_mode = 2
+action_mode = 0
+text = "Upgrade"
 
 [node name="EncyclopedyControl" type="Control" parent="." unique_id=2138338416]
 layout_mode = 3
@@ -950,4 +973,7 @@ size_flags_vertical = 3
 [connection signal="pressed" from="RightClickTooltip/MarginContainer/VBoxContainer/Drop" to="RightClickTooltip" method="_on_drop_pressed"]
 [connection signal="pressed" from="RightClickTooltip/MarginContainer/VBoxContainer/Split" to="RightClickTooltip" method="_on_split_pressed"]
 [connection signal="pressed" from="RightClickTooltip/MarginContainer/VBoxContainer/Dismantle" to="RightClickTooltip" method="_on_dismantle_pressed"]
+[connection signal="mouse_entered" from="RightClickTooltip/MarginContainer/VBoxContainer/UpgradeButton" to="RightClickTooltip" method="_on_upgrade_button_mouse_entered"]
+[connection signal="mouse_exited" from="RightClickTooltip/MarginContainer/VBoxContainer/UpgradeButton" to="RightClickTooltip" method="_on_upgrade_button_mouse_exited"]
+[connection signal="pressed" from="RightClickTooltip/MarginContainer/VBoxContainer/UpgradeButton" to="RightClickTooltip" method="_on_upgrade_button_pressed"]
 [connection signal="toggled" from="EncyclopedyControl/Button" to="EncyclopedyControl" method="_on_button_toggled"]

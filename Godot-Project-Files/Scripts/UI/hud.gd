@@ -44,6 +44,18 @@ func give_item(item: ItemData, amount: int = 1) -> bool:
 	else:
 		return true
 
+func can_upgrade(slot_data: SlotData) -> bool:
+	if not slot_data: return false
+	if slot_data.is_empty(): return false
+	if not slot_data.item_data: return false
+	
+	if slot_data.level < 1: slot_data.level = 1
+	
+	var needed_materials: Dictionary = player.get_needed_upgrade_materials(slot_data.item_data, slot_data.level)
+	var has_enough: bool = inventory.can_craft(needed_materials, 1)
+	
+	return has_enough
+
 func can_accept_item(item: ItemData, amount: int = 1) -> bool:
 	var remaining := amount
 	

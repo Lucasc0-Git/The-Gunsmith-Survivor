@@ -5,6 +5,7 @@ signal slot_data_changed()
 
 var item_data: ItemData = null
 var amount: int = 0
+var level: int = 1 ## Only for WeaponData
 
 func is_empty() -> bool:
 	return item_data == null or amount <= 0
@@ -16,18 +17,20 @@ func is_full() -> bool:
 func clear() -> void:
 	item_data = null
 	amount = 0
+	level = 1
 	slot_data_changed.emit()
 
 func copy() -> SlotData:
 	var new_data: SlotData = SlotData.new()
 	new_data.item_data = item_data
 	new_data.amount = amount
+	new_data.level = level
 	pass # On more vars in SlotData, add it here.
 	return new_data
 
 func equals(other: SlotData) -> bool:
 	if other == null: return false
-	return item_data == other.item_data and amount == other.amount
+	return item_data == other.item_data and amount == other.amount and level == other.level
 
 func is_same_item(other: SlotData) -> bool:
 	if other == null or item_data == null or other.item_data == null: return false
@@ -40,7 +43,8 @@ func save_data() -> Dictionary:
 	return {
 		"empty": false,
 		"item_id": item_data.id if item_data else "",
-		"amount": amount
+		"amount": amount,
+		"level": level
 	}
 
 func load_data(data: Dictionary) -> void:
@@ -52,4 +56,5 @@ func load_data(data: Dictionary) -> void:
 	var id: String = data.get("item_id", "")
 	item_data = ItemRegistry.items.get(id)
 	amount = int(data.get("amount", 0))
+	level = int(data.get("level", 1))
 	slot_data_changed.emit()
