@@ -241,6 +241,7 @@ func _apply_loaded_data() -> void:
 			var slot_data := SlotData.new()
 			slot_data.load_data(data_array[i])
 			slot.set_slot_data(slot_data)
+			_on_slot_item_changed(i, slot_data)
 			slot_item_changed.emit(i, slot_data)
 		else:
 			slot.set_slot_data(SlotData.new())

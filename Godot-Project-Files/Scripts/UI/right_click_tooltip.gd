@@ -92,9 +92,18 @@ func _on_dismantle_pressed() -> void:
 	hide_tooltip()
 
 func _on_upgrade_button_pressed() -> void:
+	if !operating_slot: return
+	if operating_slot.slot_data.is_empty(): return
 	AudioManager.play("button_click", -3)
-	pass # Replace with function body.
-	hide_tooltip()
+	
+	if hud.can_upgrade(operating_slot.slot_data):
+		var needed_materials: Dictionary[ItemData, int] = {}
+		needed_materials.assign(Player.get_needed_upgrade_materials(operating_slot.slot_data.item_data.crafting_recipe, operating_slot.slot_data.level))
+		hud.inventory.rm_items_by_recipe(needed_materials)
+		operating_slot.slot_data.level += 1
+	
+	upgrade_tooltip.hide_tooltip()
+	upgrade_tooltip.show_tooltip(operating_slot.slot_data)
 
 func _on_upgrade_button_mouse_entered() -> void:
 	upgrade_tooltip.show_tooltip(operating_slot.slot_data if operating_slot else null)

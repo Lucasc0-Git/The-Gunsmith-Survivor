@@ -14,6 +14,7 @@ var inv_toggled: bool = false
 var main: Main
 var nearby_stations: Dictionary[GameManager.StationType, int] = {}
 var _pending_load_data := {}
+var player_ready: bool = false
 
 ## The @onready vars declaration
 @onready var anim_player: AnimatedSprite2D = $AnimatedSprite2D
@@ -35,6 +36,20 @@ var _pending_load_data := {}
 ## The const declaration.
 const SPEED: int = 200
 const ACCEL: float = 700
+
+## Leveling up constants
+const MAX_LEVEL: int = 10
+
+const DMG_LINEAR: float = 0.09
+const DMG_QUAD: float   = 0.007
+
+const RATE_STEP_EVERY: int = 3
+const RATE_STEP: float     = 0.91
+const RATE_FLOOR: float    = 0.75
+
+const COST_BASE_FACTOR: float = 0.75
+const COST_GROWTH: float = 0.07
+const COST_EXPONENT: float = 1.4
 
 ## The signals declaration
 signal health_update(current: float, maximum: float)
@@ -66,6 +81,7 @@ func _ready() -> void:
 			child.player = self
 	change_state("Idle")
 	_apply_loaded_data()
+	player_ready = true
 
 ## Set the player var by Main.gd script
 func set_vars_debug() -> void:
@@ -87,12 +103,14 @@ func _on_hotbar_slot_selected(index: int) -> void:
 
 ## In hotbar, set [item] on [index]
 func set_hotbar_item(index: int, slot_data: SlotData) -> void:
+	while !player_ready:
+		await get_tree().process_frame
 	if index < 0:
 		return
 	if index >= hotbar_slots.size():
+		print(hotbar_slots.size())
 		return
 	hotbar_slots[index] = slot_data
-	
 	## Update current weapon
 	if index == current_hotbar_index:
 		_update_equipped()
@@ -287,22 +305,31 @@ func _apply_loaded_data() -> void:
 	nearby_stations = _nearby_stations
 	_pending_load_data = {}
 
-func get_needed_upgrade_materials(item_data: ItemData, lvl: int) -> Dictionary:
-	if not item_data: return {}
-	if lvl < 1: return {}
-	
+static func get_needed_upgrade_materials(base_items: Dictionary, lvl: int) -> Dictionary:
+	if lvl >= MAX_LEVEL:
+		return {}
 	var items: Dictionary = {}
-	var base_items: Dictionary = item_data.crafting_recipe
-	
 	for item: ItemData in base_items:
 		if item is WeaponItemData or item is CloseWeaponItemData:
 			continue
-		items[item] = ceil(base_items[item] * (0.5 + 0.05 * pow(lvl, 1.5)))
-	
+		var rarity: float = 1.0
+		if item is JustItemData:
+			rarity = maxf(item.just_data.rarity, 0.1)
+		var growth: float = (COST_GROWTH / rarity) * pow(float(lvl), COST_EXPONENT)
+		items[item] = ceili(float(base_items[item]) * (COST_BASE_FACTOR + growth))
 	return items
 
-static func get_damage_multiplier(lvl: int) -> float:
-	return 1 + 0.05 * pow(lvl, 1.3)
+static func get_damage_multiplier(lvl: int, dmg_scale: float = 1.0) -> float:
+	if lvl <= 0:
+		return 1.0
+	var l: float = float(mini(lvl, MAX_LEVEL))
+	var m: float = 1.0 + DMG_LINEAR * l + DMG_QUAD * l * l
+	return 1.0 + (m - 1.0) * dmg_scale
 
-static func get_fire_rate_multiplier(lvl: int) -> float:
-	return pow(0.95, float(lvl) / 4)
+static func get_fire_rate_multiplier(lvl: int, firerate_scale: float = 1.0) -> float:
+	if lvl <= 0:
+		return 1.0
+	@warning_ignore("integer_division")
+	var steps: int = mini(lvl, MAX_LEVEL) / RATE_STEP_EVERY
+	var m: float = maxf(pow(RATE_STEP, float(steps)), RATE_FLOOR)
+	return maxf(1.0 + (m - 1.0) * firerate_scale, 0.2)

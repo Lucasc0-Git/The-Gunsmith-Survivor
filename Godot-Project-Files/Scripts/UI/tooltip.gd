@@ -23,12 +23,12 @@ func show_tooltip(slot_data: SlotData) -> void:
 	var bb : String = ""
 	bb += "[b]" + slot_data.item_data.display_name + "[/b]"
 	if slot_data.item_data is WeaponItemData:
-		bb += "[b] - [color=cyan]Lvl: " + str(slot_data.level) + "[/color][/b]"
+		bb += "[b] - [color=cyan]Lvl: " + str(slot_data.level) + "/10[/color][/b]"
 	bb += "\n"
 	bb += slot_data.item_data.description + "\n\n"
 	if slot_data.item_data is WeaponItemData:
-		bb += "Damage: " + str(slot_data.item_data.weapon_data.damage) + " hp" + "\n"
-		bb += "Fire rate: " + str(slot_data.item_data.weapon_data.fire_rate) + "\n"
+		bb += "Damage: %d" % [slot_data.item_data.weapon_data.damage * Player.get_damage_multiplier(slot_data.level)] + "\n"
+		bb += "Fire rate: %.2f" % [slot_data.item_data.weapon_data.fire_rate * Player.get_fire_rate_multiplier(slot_data.level)] + "\n"
 	elif slot_data.item_data is HealItemData:
 		bb += "Heal: " + str(slot_data.item_data.heal_data.heal) + " hp" + "\n"
 	elif slot_data.item_data is JustItemData:

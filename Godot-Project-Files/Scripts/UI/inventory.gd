@@ -81,6 +81,8 @@ func _ready() -> void:
 		fill_slot(4, machine_gun_item, 1)
 		fill_slot(6, wooden_axe_item, 1)
 		fill_slot(10, shotgun_item, 1)
+		fill_slot(12, ItemRegistry.items.get("stone"), 50000)
+		fill_slot(13, ItemRegistry.items.get("wood"), 50000)
 
 func _on_slot_right_click(slot: Slot) -> void:
 	hud.on_inventory_slot_right_clicked(slot)
@@ -241,17 +243,15 @@ func move_item_to_hotbar(slot: Slot) -> void:
 		if player.hotbar_slots[i].is_empty():
 			slot.clear()
 			_hide_tooltip()
-			var mv_item_data: SlotData = SlotData.new()
-			mv_item_data.item_data = slot_data.item_data
-			mv_item_data.amount = amount_to_mv
+			var mv_item_data: SlotData = null
+			mv_item_data = slot_data.copy()
 			player.set_hotbar_item(i, mv_item_data)
 			hotbar.set_item(i, mv_item_data)
 			return
 
 func fill_slot(slot: int, item: ItemData, amount: int) -> void:
 	if amount > item.max_stack:
-		push_error("Func fill_slot() has the wrong amount!")
-		return
+		push_warning("Func fill_slot() has the wrong amount!")
 	inv_slot = grid_container.get_child(slot)
 	var data: SlotData = SlotData.new()
 	data.item_data = item

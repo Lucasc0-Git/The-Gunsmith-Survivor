@@ -50,8 +50,10 @@ func can_upgrade(slot_data: SlotData) -> bool:
 	if not slot_data.item_data: return false
 	
 	if slot_data.level < 1: slot_data.level = 1
+	if slot_data.level >= Player.MAX_LEVEL: return false
 	
-	var needed_materials: Dictionary = player.get_needed_upgrade_materials(slot_data.item_data, slot_data.level)
+	var needed_materials: Dictionary[ItemData, int] = {}
+	needed_materials.assign(player.get_needed_upgrade_materials(slot_data.item_data.crafting_recipe, slot_data.level))
 	var has_enough: bool = inventory.can_craft(needed_materials, 1)
 	
 	return has_enough

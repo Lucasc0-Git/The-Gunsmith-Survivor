@@ -17,8 +17,8 @@ display_name = "Machine Gun"
 score_for_crafting = 50
 description = "LEEEET'S GET READY TO RUMBLEEEEEE"
 crafting_recipe = Dictionary[ExtResource("1_13y6b"), int]({
-ExtResource("2_p61xx"): 16,
-ExtResource("3_5qql7"): 16,
+ExtResource("3_5qql7"): 32,
+ExtResource("2_p61xx"): 32,
 ExtResource("4_msncb"): 1
 })
 needed_stations = Dictionary[int, int]({

@@ -32,6 +32,7 @@ var current_heat: float = 0.0
 var is_overheated: bool = false
 var heat_material: ShaderMaterial
 var right_click_tooltip_shown: bool = false
+var weapon_level: int = -1
 
 func _ready() -> void:
 	while  !GameManager.is_game_loaded:
@@ -65,6 +66,7 @@ func equip_item(slot_data: SlotData) -> void:
 	
 	if item is WeaponItemData:
 		var w := item as WeaponItemData
+		weapon_level = slot_data.level if slot_data.level > 0 else -1
 		w.update_heat()
 		weapon_data = w.weapon_data
 		current_heat = w.current_heat
@@ -103,6 +105,7 @@ func equip_item(slot_data: SlotData) -> void:
 	
 	elif item is CloseWeaponItemData:
 		var c := item as CloseWeaponItemData
+		weapon_level = slot_data.level if slot_data.level > 0 else -1
 		sprite.texture = c.close_weapon_data.icon
 		
 		weapon_data = c.close_weapon_data
@@ -130,6 +133,7 @@ func unequip() -> void:
 	if overheated_hissing.playing:
 		overheated_hissing.stop()
 	equipped_item = null
+	weapon_level = -1
 	weapon_data = null
 	sprite.texture = null
 	sprite.visible = false
@@ -209,7 +213,7 @@ func _on_hit_area_body_entered(body: Node2D) -> void:
 	if body.has_method("take_damage"):
 		if !equipped_item.item_data is CloseWeaponItemData: return
 		body.take_damage(
-			equipped_item.item_data.close_weapon_data.damage, 
+			equipped_item.item_data.close_weapon_data.damage * Player.get_damage_multiplier(weapon_level), 
 			equipped_item.item_data.close_weapon_data.dmg_type, 
 			equipped_item.item_data.close_weapon_data.weapon_type
 		)
@@ -245,7 +249,7 @@ func _shoot_weapon() -> void:
 	for i in weapon_data.pellets:
 		_spawn_bullet(i)
 	has_shot.emit(rotation, weapon_data.recoil)
-	reload_timer.start(weapon_data.fire_rate)
+	reload_timer.start(weapon_data.get_cooldown_at(weapon_level))
 	bang_light.enabled = true
 	await get_tree().create_timer(0.05).timeout
 	bang_light.enabled = false
@@ -269,7 +273,7 @@ func _spawn_bullet(i : int) -> void:
 	bullet.bullet_speed_multiplier = weapon_data.bullet_speed_multiplier
 	bullet.dmg_type = equipped_item.item_data.weapon_data.dmg_type
 	bullet.weapon_type = equipped_item.item_data.weapon_data.weapon_type
-	bullet_damage = weapon_data.damage
+	bullet_damage = weapon_data.get_damage_at(weapon_level)
 	get_tree().current_scene.add_child(bullet)
 	## Position of the bullet
 	bullet.global_position = muzzle.global_position

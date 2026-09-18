@@ -8,6 +8,8 @@ class_name WeaponData
 @export var rotatable: bool = true ##If the weapon can be rotated around the player.
 @export var use_sound: String = ""
 @export var sound_added_volume: float = 0
+@export_range(0.0, 2.0, 0.05) var damage_growth_scale: float = 1.0
+@export_range(0.0, 2.0, 0.05) var fire_rate_growth_scale: float = 1.0
 
 @export_group("Long-ranged weapons")
 @export var fire_rate : float = 0.25 ##How much time flows in between of two shots (in seconds).
@@ -33,3 +35,9 @@ class_name WeaponData
 @export_group("Weapon types")
 @export var dmg_type: DamageTypes.DamageType = DamageTypes.DamageType.BASIC
 @export_enum("Basic", "Pickaxe", "Axe", "Pistol", "Rifle", "Shotgun") var weapon_type: String
+
+func get_damage_at(lvl: int) -> float:
+	return damage * Player.get_damage_multiplier(lvl, damage_growth_scale)
+
+func get_cooldown_at(lvl: int) -> float:
+	return fire_rate * Player.get_fire_rate_multiplier(lvl, fire_rate_growth_scale)

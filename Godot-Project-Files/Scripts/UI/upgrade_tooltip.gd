@@ -17,32 +17,33 @@ func show_tooltip(slot_data: SlotData) -> void:
 	
 	var bb: String = ""
 	var level: int = slot_data.level
-	var base_dmg: float = weapon_data.damage
-	var base_fire_rate: float = weapon_data.fire_rate
 	
-	var old_dmg: float = base_dmg * Player.get_damage_multiplier(level)
-	var new_dmg: float = base_dmg * Player.get_damage_multiplier(level + 1)
+	var old_dmg: float = weapon_data.get_damage_at(level)
+	var new_dmg: float = weapon_data.get_damage_at(level + 1)
 	
-	var old_fire_rate: float = max(base_fire_rate * Player.get_fire_rate_multiplier(level), base_fire_rate * 0.3)
-	var new_fire_rate: float = max(base_fire_rate * Player.get_fire_rate_multiplier(level + 1), base_fire_rate * 0.3)
+	var old_fire_rate: float = weapon_data.get_cooldown_at(level)
+	var new_fire_rate: float = weapon_data.get_cooldown_at(level + 1)
 	
 	
 	bb += "[b]Upgrading: " + slot_data.item_data.display_name + "[/b]\n"
-	bb += "Level: %d → [color=green]%d[/color]\n\n" % [level, level + 1]
+	if level >= Player.MAX_LEVEL:
+		bb += "Level: %s /10\n\n" % [level]
+	else:
+		bb += "Level: %d → [color=green]%d[/color] /10\n\n" % [level, level + 1]
 	
 	if old_dmg != new_dmg:
 		bb += "Damage: %.0f → [color=green]%.0f[/color]\n" % [old_dmg, new_dmg]
 	else:
-		bb += "Damage: %.0f" % [old_dmg]
+		bb += "Damage: %.0f\n" % [old_dmg]
 	
 	if old_fire_rate != new_fire_rate:
 		bb += "Fire Rate: %.2f → [color=green]%.2f[/color]\n" % [old_fire_rate, new_fire_rate]
 	else:
-		bb += "Fire Rate: %.2f" % [old_fire_rate]
+		bb += "Fire Rate: %.2f\n" % [old_fire_rate]
 	
 	bb += "\n"
 	bb += "[b]Needed items:[/b]\n"
-	var needed_items: Dictionary = hud.player.get_needed_upgrade_materials(slot_data.item_data, level)
+	var needed_items: Dictionary = hud.player.get_needed_upgrade_materials(slot_data.item_data.crafting_recipe, level)
 	for item: ItemData in needed_items:
 		var player_has_item: bool = true if hud.inventory.find_item(item) >= needed_items[item] else false
 		bb += "%s%s%s - " % [has_enough(player_has_item), item.display_name, "[/color]"] + str(needed_items[item]) + "\n"

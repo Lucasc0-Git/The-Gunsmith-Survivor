@@ -162,6 +162,12 @@ func _ready() -> void:
 	world_loaded.emit()
 	if !GameManager.is_loading_save:
 		SaveManager.save_game(GameManager.current_save_name)
+	
+	var spawner_count: int = 0
+	for spawner in $Spawners.get_children():
+		if spawner is Spawner:
+			spawner_count += 1
+	print(spawner_count)
 
 func generate(seed_f_g: int = 12) -> void:
 	print("Generating the world...")

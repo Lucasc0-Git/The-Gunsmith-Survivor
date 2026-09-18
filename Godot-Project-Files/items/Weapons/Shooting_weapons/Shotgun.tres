@@ -8,9 +8,11 @@
 script = ExtResource("1_whwom")
 id = "shotgun"
 icon = ExtResource("2_7d6s2")
-damage = 4
+damage = 3
 use_sound = "small_gun_shot"
 sound_added_volume = 6.0
+damage_growth_scale = 1.2
+fire_rate_growth_scale = 0.5
 fire_rate = 1.0
 bullet_scene = ExtResource("1_6s2c0")
 muzzle_offset = Vector2(7, 7)
