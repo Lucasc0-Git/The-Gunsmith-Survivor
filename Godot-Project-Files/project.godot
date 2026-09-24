@@ -32,6 +32,7 @@ boot_splash/minimum_display_time=1000
 [autoload]
 
 GameManager="*res://Autoload/GameManager.gd"
+MouseTracker="*uid://jb34d4rl4d82"
 AudioManager="*res://Autoload/AudioManager.gd"
 ItemRegistry="*res://Autoload/ItemRegistry.gd"
 Settings="*uid://2dc6q8qil2cg"

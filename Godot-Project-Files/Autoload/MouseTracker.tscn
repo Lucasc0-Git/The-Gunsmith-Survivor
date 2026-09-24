@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://jb34d4rl4d82"]
+
+[ext_resource type="Script" uid="uid://bnlyc0twiucxx" path="res://Autoload/MouseTracker.gd" id="1_xkhas"]
+[ext_resource type="Texture2D" uid="uid://bc3tg3k1kd6wx" path="res://Textures/bullet.png" id="2_8it4a"]
+
+[node name="MouseTracker" type="CanvasLayer" unique_id=182603687]
+layer = 500
+script = ExtResource("1_xkhas")
+mouse_right_click_icon_offset = Vector2(5, 5)
+
+[node name="MouseRightClickIcon" type="TextureRect" parent="." unique_id=1021162470]
+unique_name_in_owner = true
+offset_right = 15.0
+offset_bottom = 15.0
+texture = ExtResource("2_8it4a")
+expand_mode = 1
