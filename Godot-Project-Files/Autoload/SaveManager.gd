@@ -1,7 +1,7 @@
 extends Node
 
 const SAVE_DIR = "user://saves/"
-const CURRENT_VERSION = 1
+const CURRENT_VERSION = 2
 
 signal save_list_changed()
 
@@ -23,7 +23,7 @@ func save_game(save_name: String = "") -> bool:
 		"version": CURRENT_VERSION, 
 		"timestamp": Time.get_unix_time_from_system(),
 		"game_manager": _serialize_game_manager(),
-		"world_mods": GameManager.main.map.world_mods,
+		"world_data": GameManager.main.map.world_data,
 		"player": GameManager.main.player.save_data() if GameManager.main and GameManager.main.player else {},
 		"enemies": _serialize_enemies(),
 		"built_objects": _serialize_built_objects(),
@@ -63,8 +63,11 @@ func load_save(save_name: String = "") -> bool:
 	var raw_data: Dictionary = json.data
 	var save_data: Dictionary = deserialize_value(raw_data)
 	
-	if save_data.get("version", -1) != GameManager.CURRENT_GAME_VERSION:
-		push_warning("Save version mismatch for " + path + ". Continuing...")
+	if save_data.get("version", -1) != CURRENT_VERSION:
+		push_warning("Save version mismatch for " + path + ". Migrating if possible...")
+		if save_data.get("version", -1) < 2:
+			_migrate_v1_to_v2(save_data)
+		
 	
 	#GameManager.current_save_name = current_save_name
 	#GameManager.is_loading_save = true
@@ -73,7 +76,10 @@ func load_save(save_name: String = "") -> bool:
 	
 	_deserialize_game_manager(save_data.get("game_manager", {}))
 	
-	GameManager.main.map.world_mods = save_data.get("world_mods")
+	var untyped_d: Dictionary = save_data.get("world_data", {})
+	var world_data: Dictionary[Vector2i, Dictionary] = {}
+	world_data.assign(untyped_d)
+	GameManager.main.map.world_data = world_data
 	var game_manager_data: Dictionary = save_data.get("game_manager", {})
 	GameManager.main.generate(int(game_manager_data.get("current_world_seed", 12)))
 	
@@ -328,3 +334,45 @@ func _deserialize_dropped_items(data_array: Array) -> void:
 		var item: ItemData = ItemRegistry.items.get(d.get("item_id"))
 		var pos: Vector2 = d.get("pos")
 		GameManager.main.drop_item(item, pos)
+
+# =========================================== MIGRATING =========================================
+
+func _migrate_v1_to_v2(data: Dictionary) -> Dictionary:
+	var old_mods: Array = data.get("world_mods", [])
+	var new_world_data: Dictionary = {}
+	
+	for entry: Variant in old_mods:
+		if not entry is Dictionary:
+			continue
+		
+		var tile_pos: Vector2i = _v1_pos_to_tile(entry.get("pos"))
+		var chunk_coords: Vector2i = GridUtils.tile_to_chunk(tile_pos)
+		var local_pos: Vector2i = GridUtils.tile_to_local(tile_pos)
+		
+		var chunk_data: Dictionary = new_world_data.get_or_add(chunk_coords, {})
+		var chunk_mods: Dictionary = chunk_data.get_or_add("chunk_mods", {})
+		chunk_mods[local_pos] = {
+			"mod_type": _v1_mod_type(entry.get("mod_type")),
+			"object_type": str(entry.get("object_type", "")),
+		}
+	data.erase("world_mods")
+	data["world_data"] = new_world_data
+	return data
+
+func _v1_pos_to_tile(raw: Variant) -> Vector2i:
+	# Adjust this to whatever v1 actually stored in "pos".
+	if raw is Vector2i:
+		return raw
+	if raw is Vector2:
+		return GridUtils.global_to_tile(raw)
+	push_warning("Unexpected v1 pos: %s" % [raw])
+	return Vector2i.ZERO
+
+func _v1_mod_type(raw: Variant) -> Map.ModType:
+	if raw is String:
+		var key: String = raw.strip_edges().to_upper()
+		if Map.ModType.has(key):
+			return Map.ModType[key]
+		push_warning("Unknown v1 mod type: '%s'" % raw)
+		return Map.ModType.DESTROYED
+	return int(raw) as Map.ModType 

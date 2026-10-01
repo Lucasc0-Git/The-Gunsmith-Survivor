@@ -91,7 +91,7 @@ func _ready() -> void:
 	
 	##Connect signals
 	await  GameManager.wait_for_node(map)
-	map.region_generated.connect(_on_region_generated)
+	map.chunk_generated.connect(_on_chunk_generated)
 	player.health_update.connect(hud.ui.health_changed)
 	
 	##Generate or load the world.
@@ -171,18 +171,17 @@ func _ready() -> void:
 
 func generate(seed_f_g: int = 12) -> void:
 	print("Generating the world...")
-	map.generate_region(Vector2i(0, 0), seed_f_g)
+	map.generate_grid(32, seed_f_g)
 	spawn_player(Vector2(0, 0))
 	spawn_the_core(player.global_position + Vector2(0, -250))
 	if !OS.is_debug_build():
 		drop_item(ItemRegistry.items.get("wooden_axe"), Vector2(0, -150))
 
 func _on_mining_resource_destroyed(type: String, pos: Vector2) -> void:
-	map.world_mods.append({
-		"pos": pos,
-		"mod_type": "destroyed",
-		"object_type": type
-	})
+	var chunk_coords: Vector2i = GridUtils.get_chunk_coords(pos)
+	var tile_pos: Vector2i = GridUtils.global_pos_to_local_tile(pos)
+	map.set_chunk_mod(chunk_coords, tile_pos, Map.ModType.DESTROYED, type)
+	
 	if type == "tree":
 		var tree_respawn_timer := Timer.new()
 		tree_respawn_timer.one_shot = true
@@ -190,6 +189,7 @@ func _on_mining_resource_destroyed(type: String, pos: Vector2) -> void:
 		tree_respawn_timer.start(tree_respawn_time)
 		await tree_respawn_timer.timeout
 		spawn_tree(pos)
+		
 	elif type == "apple_tree":
 		var apple_respawn_timer := Timer.new()
 		apple_respawn_timer.one_shot = true
@@ -290,12 +290,8 @@ func _input(event: InputEvent) -> void:
 		GameManager.set_hour(21)
 		hud.tint_hud(inventory_darken, 1)
 
-func _on_region_generated(new_trees: Array, new_spawners: Array, new_stones: Array, new_apple_trees: Array) -> void:
-	var mods: Array = map.world_mods
-	var pos_broke: Array = []
-	for mod: Dictionary in mods:
-		if mod.get("mod_type") == "destroyed":
-			pos_broke.append(mod.get("pos", Vector2.ZERO))
+func _on_chunk_generated(chunk_coords: Vector2i, new_trees: Array, new_spawners: Array, new_stones: Array, new_apple_trees: Array) -> void:
+	var pos_broke: Array = map.get_broke_positions(chunk_coords)
 	
 	for pos: Vector2 in new_trees:
 		if pos in pos_broke:

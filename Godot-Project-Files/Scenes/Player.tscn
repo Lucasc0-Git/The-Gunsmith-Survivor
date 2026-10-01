@@ -237,6 +237,7 @@ texture = SubResource("PlaceholderTexture2D_1iu4k")
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Weapon" unique_id=1849397695]
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1188595411]
+zoom = Vector2(0.1, 0.1)
 
 [node name="StepsStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=2043816419]
 stream = ExtResource("20_m0x7a")

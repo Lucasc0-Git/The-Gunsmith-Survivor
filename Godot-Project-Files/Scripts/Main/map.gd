@@ -8,15 +8,18 @@ class_name Map
 var player: Player
 var world_seed: int
 
-signal region_generated(new_tree_positions: Array, new_spawner_positions: Array, new_stones_position: Array, new_apple_trees_positions: Array)
+signal chunk_generated(new_tree_positions: Array, new_spawner_positions: Array, new_stones_position: Array, new_apple_trees_positions: Array)
 
 @export var world_frequency := 0.05
 @export var grass_frequency := 0.4
 @export var tree_frequency := 0.85
 @export var enemy_spawner_frequency := 1
 @export var stone_frequency := 0.9
+
 @export var map_width: int = 100
 @export var map_height: int = 100
+@export var chunk_size := 16
+
 @export var safe_spawn_area_radius: int = 8
 
 var world_noise := FastNoiseLite.new()
@@ -25,10 +28,12 @@ var tree_noise := FastNoiseLite.new()
 var spawner_noise := FastNoiseLite.new()
 var stone_noise := FastNoiseLite.new()
 
-var chunk_size := 32
 var render_distance := 4
 var loaded_chunks := {}
+
 var world_mods: Array = [] # [{"pos":..., "type of mod":..., "type of object":..., }, {}]
+var world_data: Dictionary[Vector2i, Dictionary] = {} # {Vector2i:{"chunk_mods": {tile_coords:{"type_of_modification":..., "object_type":..., ...}, {}}, {}}
+
 var tiles := { 
 	"grass" = Vector2i(1, 0),
 	"grass1" = Vector2i(1, 1),
@@ -42,9 +47,16 @@ var tree_positions := []
 var spawner_positions := []
 var stone_positions := []
 
+enum ModType {
+	DESTROYED,
+	
+}
+
 func _ready() -> void:
 	world_seed = GameManager.current_world_seed
 	set_noise_and_seed()
+	assert(map.tile_set.tile_size == GridUtils.TILE_SIZE, "GridUtils.TILE_SIZE out of sync with TileSet")
+	assert(chunk_size == GridUtils.CHUNK_SIZE, "GridUtils.CHUNK_SIZE out of sync with TileSet")
 
 func set_noise_and_seed() -> void:
 	world_noise.seed = world_seed
@@ -58,15 +70,25 @@ func set_noise_and_seed() -> void:
 	stone_noise.seed = world_seed + 4
 	stone_noise.frequency = stone_frequency
 
-func generate_region(region_pos: Vector2i, seed_f_g: int = 12) -> void:
+func generate_grid(length: int, seed_f_g: int = 12, chunk_offset: Vector2i = Vector2i(0, 0)) -> void:
+	@warning_ignore("integer_division")
+	var half_length: int = length / 2
+	
+	for x in range(-half_length, half_length + (length % 2)):
+		for y in range(-half_length, half_length + (length % 2)):
+			
+			var chunk_coords: Vector2i = Vector2i(x, y) + chunk_offset
+			generate_chunk(chunk_coords, seed_f_g)
+
+func generate_chunk(chunk_coords: Vector2i, seed_f_g: int = 12) -> void:
 	world_seed = seed_f_g
 	set_noise_and_seed()
 	
-	var half_w := int(float(map_width) / 2.0)
-	var half_h := int(float(map_height) / 2.0)
+	var half_w := int(float(chunk_size) / 2.0)
+	var half_h := int(float(chunk_size) / 2.0)
 	
-	var offset_x := region_pos.x * map_width
-	var offset_y := region_pos.y * map_height
+	var offset_x := chunk_coords.x * chunk_size
+	var offset_y := chunk_coords.y * chunk_size
 	
 	var new_trees: Array = []
 	var new_spawners: Array = []
@@ -78,11 +100,11 @@ func generate_region(region_pos: Vector2i, seed_f_g: int = 12) -> void:
 			var world_x := x + offset_x
 			var world_y := y + offset_y
 			
-			var world_value := world_noise.get_noise_2d(x, y)
-			var grass_value := grass_noise.get_noise_2d(x, y)
-			var tree_value := tree_noise.get_noise_2d(x, y)
-			var enemy_value := spawner_noise.get_noise_2d(x, y)
-			var stone_value := stone_noise.get_noise_2d(x, y)
+			var world_value := world_noise.get_noise_2d(world_x, world_y)
+			var grass_value := grass_noise.get_noise_2d(world_x, world_y)
+			var tree_value := tree_noise.get_noise_2d(world_x, world_y)
+			var enemy_value := spawner_noise.get_noise_2d(world_x, world_y)
+			var stone_value := stone_noise.get_noise_2d(world_x, world_y)
 			var tile_coords : Vector2i
 			
 			var distance_from_center := Vector2(world_x, world_y).length()
@@ -113,7 +135,7 @@ func generate_region(region_pos: Vector2i, seed_f_g: int = 12) -> void:
 				new_stones.append(global_pos)
 			
 			map.set_cell(Vector2i(world_x, world_y), 2, tile_coords)
-	emit_signal("region_generated", new_trees, new_spawners, new_stones, new_apple_trees)
+	emit_signal("chunk_generated", chunk_coords, new_trees, new_spawners, new_stones, new_apple_trees)
 
 func be_grass(grass_value: float) -> Vector2i:
 	if grass_value < -0.05:
@@ -159,3 +181,32 @@ func set_vignette_strength(target: float, duration: float) -> void:
 		target,
 		duration
 	)
+
+func get_broke_positions(chunk_coords: Vector2i) -> Array:
+	var pos_broke: Array = []
+	var mods: Dictionary = get_mods(chunk_coords)
+	for tile_pos: Vector2i in mods:
+		if mods[tile_pos].get("mod_type") == ModType.DESTROYED:
+			pos_broke.append(tile_pos)
+	return pos_broke
+
+func get_mods(chunk_coords: Vector2i) -> Dictionary:
+	var mods: Dictionary = {}
+	if world_data.has(chunk_coords):
+		mods = world_data[chunk_coords].get("chunk_mods", {})
+	return mods
+
+func set_chunk_mod(chunk_coords: Vector2i, tile_pos: Vector2i, mod_type: ModType, object_type: String) -> void:
+	var chunk_data: Dictionary = world_data.get_or_add(chunk_coords, {})
+	var chunk_mods: Dictionary = chunk_data.get_or_add("chunk_mods", {})
+	chunk_mods[tile_pos] = {
+		"mod_type": mod_type,
+		"object_type": object_type
+	}
+
+func get_chunk_mod(chunk_coords: Vector2i, tile_pos: Vector2i) -> Dictionary:
+	return world_data.get(chunk_coords, {}).get("chunk_mods", {}).get(tile_pos, {})
+
+func clear_chunk_mod(chunk_coords: Vector2i, tile_pos: Vector2i) -> void:
+	var chunk_mods: Dictionary = world_data.get(chunk_coords, {}).get("chunk_mods", {})
+	chunk_mods.erase(tile_pos)

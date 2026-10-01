@@ -34,7 +34,8 @@ func take_damage(amount: float, dmg_type: DamageTypes.DamageType, weapon_type: S
 		destroy()
 	else:
 		play_shake(0.7 if dmg_type == DamageTypes.DamageType.LONG_RANGE else 1.0)
-#
+	set_process(true)
+
 #func _process(delta: float) -> void:
 	#if !GameManager.is_game_loaded: return
 	#if health < max_health:
