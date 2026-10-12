@@ -2,50 +2,20 @@
 
 [ext_resource type="Script" uid="uid://3hbruww20tym" path="res://Scripts/Main/enemy_spawner.gd" id="1_ewhtn"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_4l55s"]
-radius = 352.00143
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_2a8ad"]
-size = Vector2(40, 40)
-
-[node name="Enemy_spawner" type="Node2D" unique_id=1040846501]
+[node name="Enemy_spawner" type="Marker2D" unique_id=1957363958]
 process_mode = 1
 script = ExtResource("1_ewhtn")
-spawn_time_randomizer = 80.0
-spawn_cooldown_time = 110.0
 
-[node name="Marker2D" type="Marker2D" parent="." unique_id=1934579825]
-
-[node name="ColorRect" type="ColorRect" parent="." unique_id=460340743]
-z_index = 68
+[node name="ColorRect" type="ColorRect" parent="." unique_id=652793889]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(1, 1, 1, 0.5137255)
-
-[node name="DisableArea" type="Area2D" parent="." unique_id=730801081]
-collision_layer = 64
-collision_mask = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DisableArea" unique_id=2045529879]
-shape = SubResource("CircleShape2D_4l55s")
-
-[node name="SpawnTimer" type="Timer" parent="." unique_id=632774133]
-wait_time = 60.0
-
-[node name="LightDetectionArea" type="Area2D" parent="." unique_id=1048351708]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="LightDetectionArea" unique_id=919525915]
-shape = SubResource("RectangleShape2D_2a8ad")
-
-[connection signal="body_entered" from="DisableArea" to="." method="_on_disable_area_body_entered"]
-[connection signal="body_exited" from="DisableArea" to="." method="_on_disable_area_body_exited"]
-[connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]
+color = Color(1, 0, 0, 0.2509804)

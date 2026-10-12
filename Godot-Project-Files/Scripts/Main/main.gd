@@ -369,7 +369,7 @@ func spawn_building(pos: Vector2, build_scene: PackedScene) -> void:
 func add_spawner(pos: Vector2) -> void:
 	var spawner := preload("res://Scenes/enemy_spawner.tscn").instantiate()
 	spawner.global_position = pos
-	spawner.main = self
+	#spawner.main = self
 	ThreatManager.spawners.append(spawner)
 	spawners.add_child(spawner)
 	_register_in_chunk(spawner)
