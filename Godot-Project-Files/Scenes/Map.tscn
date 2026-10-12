@@ -216,7 +216,13 @@ y_sort_enabled = true
 scale = Vector2(3, 3)
 script = ExtResource("1_qumfl")
 world_frequency = 0.035
+chunk_size = 8
 safe_spawn_area_radius = 12
+tree_threshold = -0.07999999999999996
+apple_tree_threshold = -0.19999999999999996
+forest_threshold = -0.09999999999999998
+stone_threshold = -0.65
+spawner_threshold = -0.4
 
 [node name="Map" type="TileMapLayer" parent="." unique_id=113042322]
 tile_set = SubResource("TileSet_5nsto")

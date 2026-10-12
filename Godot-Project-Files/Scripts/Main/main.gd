@@ -36,7 +36,7 @@ var nightmare_day_colors := {}
 var inventory_tint: CanvasModulate
 var the_core: TheCore
 var player: Player
-
+var chunk_objects: Dictionary = {} # {Vector2i: []}
 
 @export var base_enemy_aggro_radius: int = 750
 var enemy_aggro_radius: int = 750
@@ -171,11 +171,25 @@ func _ready() -> void:
 
 func generate(seed_f_g: int = 12) -> void:
 	print("Generating the world...")
-	map.generate_grid(32, seed_f_g)
+	map.world_seed = seed_f_g
 	spawn_player(Vector2(0, 0))
 	spawn_the_core(player.global_position + Vector2(0, -250))
 	if !OS.is_debug_build():
-		drop_item(ItemRegistry.items.get("wooden_axe"), Vector2(0, -150))
+		if !GameManager.is_loading_save:
+			drop_item(ItemRegistry.items.get("wooden_axe"), Vector2(0, -150))
+
+func _register_in_chunk(node: Node2D) -> void:
+	var coords := GridUtils.get_chunk_coords(node.global_position)
+	if not chunk_objects.has(coords):
+		chunk_objects[coords] = []
+	chunk_objects[coords].append(node)
+	node.tree_exiting.connect(
+		func() -> void:
+			if chunk_objects.has(coords):
+				chunk_objects[coords].erase(node)
+				if chunk_objects[coords].is_empty():
+					chunk_objects.erase(coords)
+	)
 
 func _on_mining_resource_destroyed(type: String, pos: Vector2) -> void:
 	var chunk_coords: Vector2i = GridUtils.get_chunk_coords(pos)
@@ -281,29 +295,34 @@ func _input(event: InputEvent) -> void:
 			var rand_pos: Vector2 = Vector2(randi_range(-200, 200), randi_range(-200, 200))
 			spawn_enemy(zombie_scene, get_global_mouse_position() + rand_pos)
 	
-	if event.is_action_pressed("DEBUG gameover"):
+	if event.is_action_pressed("DEBUG camera_zoom"):
 		if !OS.is_debug_build(): return
-		game_over()
+		var zoom: Vector2 = player.camera.zoom
+		if zoom == Vector2(1.0, 1.0):
+			player.camera.zoom = Vector2(0.25, 0.25)
+		else:
+			player.camera.zoom = Vector2(1.0, 1.0)
 	
 	if event.is_action_pressed("DEBUG turn night"):
 		if !OS.is_debug_build(): return
 		GameManager.set_hour(21)
 		hud.tint_hud(inventory_darken, 1)
 
-func _on_chunk_generated(chunk_coords: Vector2i, new_trees: Array, new_spawners: Array, new_stones: Array, new_apple_trees: Array) -> void:
+func _on_chunk_generated(chunk_coords: Vector2i, objects_positions: Dictionary) -> void:
 	var pos_broke: Array = map.get_broke_positions(chunk_coords)
 	
-	for pos: Vector2 in new_trees:
+	
+	for pos: Vector2 in objects_positions.get("trees"):
 		if pos in pos_broke:
 			continue
 		spawn_tree(pos)
-	for pos: Vector2 in new_spawners:
+	for pos: Vector2 in objects_positions.get("spawners"):
 		add_spawner(pos)
-	for pos: Vector2 in new_stones:
+	for pos: Vector2 in objects_positions.get("stones"):
 		if pos in pos_broke:
 			continue
 		spawn_stone(pos)
-	for pos: Vector2 in new_apple_trees:
+	for pos: Vector2 in objects_positions.get("apple_trees"):
 		if pos in pos_broke:
 			continue
 		var random_stage: int = randi_range(1, 3)
@@ -321,6 +340,7 @@ func spawn_tree(pos: Vector2) -> void:
 	tree.resource_destroyed.connect(_on_mining_resource_destroyed)
 	tree.global_position = pos
 	Ysort.add_child(tree)
+	_register_in_chunk(tree)
 
 func spawn_apple_tree(pos: Vector2, starting_stage: TheAppleTree.Stages) -> void:
 	var apple_tree := preload("res://Scenes/the_apple_tree.tscn").instantiate()
@@ -329,12 +349,14 @@ func spawn_apple_tree(pos: Vector2, starting_stage: TheAppleTree.Stages) -> void
 	apple_tree.growing = true
 	apple_tree.starting_stage = starting_stage
 	Ysort.add_child(apple_tree)
+	_register_in_chunk(apple_tree)
 
 func spawn_stone(pos: Vector2) -> void:
 	var stone := preload("res://Scenes/stone.tscn").instantiate()
 	stone.resource_destroyed.connect(_on_mining_resource_destroyed)
 	stone.global_position = pos
 	Ysort.add_child(stone)
+	_register_in_chunk(stone)
 
 func spawn_building(pos: Vector2, build_scene: PackedScene) -> void:
 	var building: BuildScene = build_scene.instantiate()
@@ -342,12 +364,16 @@ func spawn_building(pos: Vector2, build_scene: PackedScene) -> void:
 	building.preview_only = false
 	building.global_position = pos
 	Ysort.add_child(building)
+	_register_in_chunk(building)
 
 func add_spawner(pos: Vector2) -> void:
 	var spawner := preload("res://Scenes/enemy_spawner.tscn").instantiate()
 	spawner.global_position = pos
 	spawner.main = self
+	ThreatManager.spawners.append(spawner)
 	spawners.add_child(spawner)
+	_register_in_chunk(spawner)
+	spawner.tree_exiting.connect(func() -> void: if spawner in ThreatManager.spawners: ThreatManager.spawners.erase(spawner))
 
 func spawn_player(pos: Vector2) -> void:
 	player.global_position = pos

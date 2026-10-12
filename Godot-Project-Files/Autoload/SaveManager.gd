@@ -162,6 +162,11 @@ func vec2_to_dict(v: Vector2) -> Dictionary:
 
 func dict_to_vec2(d: Variant) -> Vector2:
 	if d is Dictionary:
+		if str(d.get("x")).is_valid_int() and str(d.get("y")).is_valid_int():
+			return Vector2i(
+				int(d.get("x", 0)),
+				int(d.get("y", 0))
+			)
 		return Vector2(
 			float(d.get("x", 0.0)),
 			float(d.get("y", 0.0))

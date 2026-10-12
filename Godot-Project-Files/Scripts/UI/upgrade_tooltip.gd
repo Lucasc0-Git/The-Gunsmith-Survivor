@@ -43,7 +43,7 @@ func show_tooltip(slot_data: SlotData) -> void:
 	
 	bb += "\n"
 	bb += "[b]Needed items:[/b]\n"
-	var needed_items: Dictionary = hud.player.get_needed_upgrade_materials(slot_data.item_data.crafting_recipe, level)
+	var needed_items: Dictionary = Player.get_needed_upgrade_materials(slot_data.item_data.crafting_recipe, level)
 	for item: ItemData in needed_items:
 		var player_has_item: bool = true if hud.inventory.find_item(item) >= needed_items[item] else false
 		bb += "%s%s%s - " % [has_enough(player_has_item), item.display_name, "[/color]"] + str(needed_items[item]) + "\n"

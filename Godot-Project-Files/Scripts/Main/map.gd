@@ -4,11 +4,14 @@ class_name Map
 @onready var map: TileMapLayer = get_node("Map")
 @onready var objects: TileMapLayer = get_node("Objects")
 @onready var vignette: ColorRect = $ScreenEffects/Vignette
+@onready var main: Main = get_parent()
+
+const WORLD_SEED_MISMATCH_ERR_STRING := "World seed in Map.gd is -1, skipping generation of chunk: "
 
 var player: Player
-var world_seed: int
+var world_seed: int = -1
 
-signal chunk_generated(new_tree_positions: Array, new_spawner_positions: Array, new_stones_position: Array, new_apple_trees_positions: Array)
+signal chunk_generated(chunk_coords: Vector2i, objects_positions: Dictionary)
 
 @export var world_frequency := 0.05
 @export var grass_frequency := 0.4
@@ -16,11 +19,20 @@ signal chunk_generated(new_tree_positions: Array, new_spawner_positions: Array, 
 @export var enemy_spawner_frequency := 1
 @export var stone_frequency := 0.9
 
-@export var map_width: int = 100
-@export var map_height: int = 100
+@export var map_width: int = 100 # outdated
+@export var map_height: int = 100 # outdated (map width + height is chosen in main's "generate()" function.
 @export var chunk_size := 16
 
 @export var safe_spawn_area_radius: int = 8
+@export var render_distance := 4
+@export var unload_distance: int = 5
+
+@export_subgroup("Generation Thresholds")
+@export_range(-1.0, 1.0) var tree_threshold: float = 0.0 ##Every value that is less than this value means valid position.
+@export_range(-1.0, 1.0) var apple_tree_threshold: float = 0.0 ##Every value that is less than this value means valid position.
+@export_range(-1.0, 1.0) var forest_threshold: float = 0.0 ##Every value that is less than this value means valid position.
+@export_range(-1.0, 1.0) var stone_threshold: float = 0.0 ##Every value that is less than this value means valid position.
+@export_range(-1.0, 1.0) var spawner_threshold: float = 0.0 ##Every value that is less than this value means valid position.
 
 var world_noise := FastNoiseLite.new()
 var grass_noise := FastNoiseLite.new()
@@ -28,8 +40,8 @@ var tree_noise := FastNoiseLite.new()
 var spawner_noise := FastNoiseLite.new()
 var stone_noise := FastNoiseLite.new()
 
-var render_distance := 4
 var loaded_chunks := {}
+var _last_player_chunk: Vector2i = Vector2i(0x7FFFFFFF, 0x7FFFFFFF)
 
 var world_mods: Array = [] # [{"pos":..., "type of mod":..., "type of object":..., }, {}]
 var world_data: Dictionary[Vector2i, Dictionary] = {} # {Vector2i:{"chunk_mods": {tile_coords:{"type_of_modification":..., "object_type":..., ...}, {}}, {}}
@@ -57,8 +69,10 @@ func _ready() -> void:
 	set_noise_and_seed()
 	assert(map.tile_set.tile_size == GridUtils.TILE_SIZE, "GridUtils.TILE_SIZE out of sync with TileSet")
 	assert(chunk_size == GridUtils.CHUNK_SIZE, "GridUtils.CHUNK_SIZE out of sync with TileSet")
+	assert(scale.x == GridUtils.MAP_SCALE, "GridUtils.MAP_SCALE out of sync with TileMapLayer")
 
 func set_noise_and_seed() -> void:
+	
 	world_noise.seed = world_seed
 	world_noise.frequency = world_frequency
 	grass_noise.seed = world_seed + 1
@@ -70,7 +84,12 @@ func set_noise_and_seed() -> void:
 	stone_noise.seed = world_seed + 4
 	stone_noise.frequency = stone_frequency
 
-func generate_grid(length: int, seed_f_g: int = 12, chunk_offset: Vector2i = Vector2i(0, 0)) -> void:
+func _process(_delta: float) -> void:
+	if not player:
+		return
+	update_chunks_around_player()
+
+func generate_grid(length: int, chunk_offset: Vector2i = Vector2i(0, 0)) -> void:
 	@warning_ignore("integer_division")
 	var half_length: int = length / 2
 	
@@ -78,64 +97,113 @@ func generate_grid(length: int, seed_f_g: int = 12, chunk_offset: Vector2i = Vec
 		for y in range(-half_length, half_length + (length % 2)):
 			
 			var chunk_coords: Vector2i = Vector2i(x, y) + chunk_offset
-			generate_chunk(chunk_coords, seed_f_g)
+			generate_chunk(chunk_coords)
 
-func generate_chunk(chunk_coords: Vector2i, seed_f_g: int = 12) -> void:
-	world_seed = seed_f_g
+func generate_chunk(chunk_coords: Vector2i) -> void:
+	if world_seed == -1:
+		push_error(WORLD_SEED_MISMATCH_ERR_STRING, chunk_coords)
+		return
 	set_noise_and_seed()
 	
-	var half_w := int(float(chunk_size) / 2.0)
-	var half_h := int(float(chunk_size) / 2.0)
+	var map_tiles: Dictionary = create_map_tiles(chunk_coords)
 	
-	var offset_x := chunk_coords.x * chunk_size
-	var offset_y := chunk_coords.y * chunk_size
+	for tile: Vector2i in map_tiles:
+		map.set_cell(tile, 2, map_tiles[tile])
+	
+	chunk_generated.emit(chunk_coords, create_object_positions(chunk_coords))
+
+func create_map_tiles(chunk_coords: Vector2i) -> Dictionary:
+	if world_seed == -1:
+		push_error(WORLD_SEED_MISMATCH_ERR_STRING, chunk_coords)
+		return {}
+	set_noise_and_seed()
+	
+	var origin := chunk_coords * chunk_size
+	
+	var d: Dictionary = {}
+	
+	for x in range(chunk_size):
+		for y in range(chunk_size):
+			
+			var world_x := origin.x + x
+			var world_y := origin.y + y
+			
+			var world_value := world_noise.get_noise_2d(world_x, world_y)
+			var grass_value := grass_noise.get_noise_2d(world_x, world_y)
+			var tile_coords : Vector2i
+			
+			
+			var distance_from_center := Vector2(world_x, world_y).length()
+			if distance_from_center < safe_spawn_area_radius:
+				tile_coords = be_grass(grass_value)
+				d[Vector2i(world_x, world_y)] = tile_coords
+				continue
+			
+			if world_value < forest_threshold: ## Forest
+				tile_coords = Vector2i(5, 0) # Forest podzol
+			else:
+				tile_coords = be_grass(grass_value)
+			
+			d[Vector2i(world_x, world_y)] = tile_coords
+	
+	
+	return d # will be {Vector2i: Vector2i, Vector2i: Vector2i}
+
+func create_object_positions(chunk_coords: Vector2i) -> Dictionary:
+	if world_seed == -1:
+		push_error(WORLD_SEED_MISMATCH_ERR_STRING, chunk_coords)
+		return {}
+	set_noise_and_seed()
+	
+	var origin := chunk_coords * chunk_size
 	
 	var new_trees: Array = []
 	var new_spawners: Array = []
 	var new_stones: Array = []
 	var new_apple_trees: Array = []
 	
-	for x in range(-half_w, half_w + 1):
-		for y in range(-half_h, half_h + 1):
-			var world_x := x + offset_x
-			var world_y := y + offset_y
+	for x in range(chunk_size):
+		for y in range(chunk_size):
+			
+			var world_x := origin.x + x
+			var world_y := origin.y + y
 			
 			var world_value := world_noise.get_noise_2d(world_x, world_y)
-			var grass_value := grass_noise.get_noise_2d(world_x, world_y)
 			var tree_value := tree_noise.get_noise_2d(world_x, world_y)
 			var enemy_value := spawner_noise.get_noise_2d(world_x, world_y)
 			var stone_value := stone_noise.get_noise_2d(world_x, world_y)
-			var tile_coords : Vector2i
 			
 			var distance_from_center := Vector2(world_x, world_y).length()
 			if distance_from_center < safe_spawn_area_radius:
-				tile_coords = be_grass(grass_value)
-				map.set_cell(Vector2i(world_x, world_y), 2, tile_coords)
 				continue
 			
 			var local_pos := map.map_to_local(Vector2i(world_x, world_y))
 			var global_pos := map.to_global(local_pos)
-			if world_value < -0.1: ## Forest
-				tile_coords = Vector2i(5, 0) ## Forest podzol
+			
+			if world_value < forest_threshold: ## Forest
 				
-				if world_value >= -0.18 and world_value < -0.1:
-					if tree_value < -0.2:
+				if world_value >= (forest_threshold - 0.08) and world_value < forest_threshold:
+					if tree_value < apple_tree_threshold:
 						new_apple_trees.append(global_pos)
 				else:
-					if tree_value < -0.08: ## Tree
+					if tree_value < tree_threshold: ## Tree
 						new_trees.append(global_pos)
 				
 			else: ##Plains
-				tile_coords = be_grass(grass_value) ## Grass
 				
-				if enemy_value < -0.5: ## Spawner
+				if enemy_value < spawner_threshold: ## Spawner
 					new_spawners.append(global_pos)
 				
-			if stone_value > 0.65: ## Stones
+			if stone_value < stone_threshold: ## Stones
 				new_stones.append(global_pos)
-			
-			map.set_cell(Vector2i(world_x, world_y), 2, tile_coords)
-	emit_signal("chunk_generated", chunk_coords, new_trees, new_spawners, new_stones, new_apple_trees)
+	
+	var d: Dictionary = {}
+	d["trees"] = new_trees
+	d["stones"] = new_stones
+	d["spawners"] = new_spawners
+	d["apple_trees"] = new_apple_trees
+	
+	return d # will be {"stones":[], "trees":[], ...}
 
 func be_grass(grass_value: float) -> Vector2i:
 	if grass_value < -0.05:
@@ -210,3 +278,64 @@ func get_chunk_mod(chunk_coords: Vector2i, tile_pos: Vector2i) -> Dictionary:
 func clear_chunk_mod(chunk_coords: Vector2i, tile_pos: Vector2i) -> void:
 	var chunk_mods: Dictionary = world_data.get(chunk_coords, {}).get("chunk_mods", {})
 	chunk_mods.erase(tile_pos)
+
+# ========================= CHUNK LOADING & UNLOADING =========================
+
+func load_chunk(chunk_coords: Vector2i) -> void:
+	if chunk_coords in loaded_chunks: return
+	loaded_chunks[chunk_coords] = true
+	
+	var map_tiles: Dictionary = create_map_tiles(chunk_coords)
+	for tile: Vector2i in map_tiles:
+		map.set_cell(tile, 2, map_tiles[tile])
+	
+	var object_positions: Dictionary = create_object_positions(chunk_coords)
+	
+	chunk_generated.emit(chunk_coords, object_positions)
+
+func unload_chunk(chunk_coords: Vector2i) -> void:
+	if not chunk_coords in loaded_chunks: return
+	loaded_chunks.erase(chunk_coords)
+	
+	var origin := chunk_coords * chunk_size
+	for x in range(chunk_size):
+		for y in range(chunk_size):
+			map.set_cell(origin + Vector2i(x, y), -1)
+	
+	if not main.chunk_objects.has(chunk_coords):
+		return
+	
+	var nodes: Array = main.chunk_objects[chunk_coords].duplicate()
+	print(self)
+	print(nodes)
+	for node: Node2D in nodes:
+		if is_instance_valid(node):
+			node.queue_free()
+	main.chunk_objects.erase(chunk_coords)
+
+func update_chunks_around_player() -> void:
+	var player_chunk: Vector2i = GridUtils.get_chunk_coords(player.global_position)
+	if player_chunk == _last_player_chunk:
+		return
+	
+	_last_player_chunk = player_chunk
+	
+	var needed: Dictionary = {}
+	
+	for x in range(player_chunk.x - render_distance, player_chunk.x + render_distance + 1):
+		for y in range(player_chunk.y - render_distance, player_chunk.y + render_distance + 1):
+			needed[Vector2i(x, y)] = true
+	
+	for coords: Vector2i in needed:
+		if not loaded_chunks.has(coords):
+			load_chunk(coords)
+	
+	var to_unload: Array[Vector2i] = []
+	for coords: Vector2i in loaded_chunks:
+		var dx := absi(coords.x - player_chunk.x)
+		var dy := absi(coords.y - player_chunk.y)
+		if maxi(dx, dy) > unload_distance:
+			to_unload.append(coords)
+	
+	for coords in to_unload:
+		unload_chunk(coords)

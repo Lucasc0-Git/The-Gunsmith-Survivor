@@ -24,6 +24,7 @@ var player_ready: bool = false
 @onready var inventory_ui: Control
 @onready var spawn_pos := global_position
 @onready var steps_player: AudioStreamPlayer = $StepsStreamPlayer
+@onready var camera: Camera2D = %Camera2D
 
 ## The export vars declaration
 @export var health_max := 100.0
