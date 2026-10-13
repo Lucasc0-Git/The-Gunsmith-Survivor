@@ -496,7 +496,7 @@ y_sort_enabled = true
 process_mode = 1
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=124717082]
-layer = 11
+layer = 10
 
 [node name="Label" type="Label" parent="CanvasLayer" unique_id=1845243131]
 custom_minimum_size = Vector2(100, 50)

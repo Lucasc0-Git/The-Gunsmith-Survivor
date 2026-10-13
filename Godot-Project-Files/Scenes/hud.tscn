@@ -45,6 +45,7 @@
 [ext_resource type="Resource" uid="uid://c8nuioxkkips2" path="res://items/Inv_items/FirePlace_item.tres" id="37_eqxyv"]
 [ext_resource type="Script" uid="uid://kip6x331bpa4" path="res://Scripts/UI/upgrade_tooltip.gd" id="40_te3lg"]
 [ext_resource type="PackedScene" uid="uid://tppkv2hqbl7y" path="res://Scenes/CoreLowHealthBar.tscn" id="44_jmo6y"]
+[ext_resource type="PackedScene" uid="uid://b3m2wxdlyr7xq" path="res://Scenes/the_core_arrow.tscn" id="46_7c2aa"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_36asn"]
 content_margin_left = 10.0
@@ -222,6 +223,7 @@ mouse_filter = 2
 script = ExtResource("3_7gr8i")
 
 [node name="TopBar" type="PanelContainer" parent="UI" unique_id=25031731]
+z_index = 1
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -260,6 +262,7 @@ mouse_filter = 2
 texture = ExtResource("4_7jysg")
 
 [node name="InventoryUI" type="Control" parent="." unique_id=1051386906]
+z_index = 1
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -957,6 +960,8 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="CoreLowHealthBar" parent="." unique_id=1635765706 instance=ExtResource("44_jmo6y")]
+
+[node name="TheCoreArrow" parent="." unique_id=487923431 instance=ExtResource("46_7c2aa")]
 
 [connection signal="mouse_entered" from="InventoryUI/Hotbar/PanelContainer" to="." method="_on_hotbar_mouse_entered"]
 [connection signal="mouse_exited" from="InventoryUI/Hotbar/PanelContainer" to="." method="_on_hotbar_mouse_exited"]

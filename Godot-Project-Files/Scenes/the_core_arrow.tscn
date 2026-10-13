@@ -1,0 +1,92 @@
+[gd_scene format=3 uid="uid://b3m2wxdlyr7xq"]
+
+[ext_resource type="Script" uid="uid://cwfd7qlvopiig" path="res://Scripts/UI/the_core_arrow.gd" id="1_acxep"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x3ddk"]
+bg_color = Color(1, 0, 0, 1)
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 1
+border_color = Color(0.5703979, 0, 0.075045265, 1)
+corner_radius_top_right = 60
+corner_detail = 1
+
+[sub_resource type="Theme" id="Theme_hq1vv"]
+Panel/styles/panel = SubResource("StyleBoxFlat_x3ddk")
+
+[sub_resource type="Animation" id="Animation_acxep"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_nw4qe"]
+resource_name = "hide"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_ljccg"]
+resource_name = "show"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5y0tg"]
+_data = {
+&"RESET": SubResource("Animation_acxep"),
+&"hide": SubResource("Animation_nw4qe"),
+&"show": SubResource("Animation_ljccg")
+}
+
+[node name="TheCoreArrow" type="Control" unique_id=487923431]
+layout_mode = 3
+anchors_preset = 0
+scale = Vector2(0.4, 1)
+script = ExtResource("1_acxep")
+
+[node name="Panel" type="Panel" parent="." unique_id=1482251831]
+layout_mode = 0
+offset_right = 60.0
+offset_bottom = 60.0
+theme = SubResource("Theme_hq1vv")
+
+[node name="Panel2" type="Panel" parent="." unique_id=740503321]
+layout_mode = 0
+offset_right = 60.0
+offset_bottom = 60.0
+scale = Vector2(-1, 1)
+theme = SubResource("Theme_hq1vv")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=20337328]
+unique_name_in_owner = true
+libraries/ = SubResource("AnimationLibrary_5y0tg")
