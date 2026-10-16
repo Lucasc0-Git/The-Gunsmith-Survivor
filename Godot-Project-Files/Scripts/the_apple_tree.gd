@@ -43,6 +43,11 @@ func _process(delta: float) -> void:
 
 func set_stage(stage: Stages) -> void:
 	animated_sprite.frame = stage
+	if main:
+		if main.map:
+			var chunk_coords: Vector2i = GridUtils.get_chunk_coords(global_position)
+			var tile_pos: Vector2i = GridUtils.global_pos_to_local_tile(global_position)
+			main.map.set_tile_mod(chunk_coords, tile_pos, Map.ModType.GROWN, "apple_tree", {"stage": stage})
 
 func get_stage() -> Stages:
 	return animated_sprite.frame as Stages

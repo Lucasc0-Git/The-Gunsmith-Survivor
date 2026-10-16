@@ -65,9 +65,12 @@ func load_save(save_name: String = "") -> bool:
 	
 	if save_data.get("version", -1) != CURRENT_VERSION:
 		push_warning("Save version mismatch for " + path + ". Migrating if possible...")
-		if save_data.get("version", -1) < 2:
-			_migrate_v1_to_v2(save_data)
-		
+		if save_data.get("version", -1) == -1:
+			push_warning("Unable to determine the version for this save.")
+		else:
+			if save_data.get("version", -1) < 2:
+				_migrate_v1_to_v2(save_data)
+	
 	
 	#GameManager.current_save_name = current_save_name
 	#GameManager.is_loading_save = true

@@ -25,5 +25,8 @@ static func tile_to_local(tile_pos: Vector2i) -> Vector2i:
 static func global_pos_to_local_tile(global_pos: Vector2) -> Vector2i:
 	return tile_to_local(global_to_tile(global_pos))
 
+#static func local_tile_to_global_pos(chunk_coords: Vector2i, tile_pos: Vector2i) -> Vector2:
+	#pass
+
 static func get_chunk_coords(pos: Vector2) -> Vector2i:
 	return tile_to_chunk(global_to_tile(pos))

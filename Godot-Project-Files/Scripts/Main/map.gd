@@ -61,6 +61,7 @@ var stone_positions := []
 
 enum ModType {
 	DESTROYED,
+	GROWN,
 	
 }
 
@@ -70,6 +71,8 @@ func _ready() -> void:
 	assert(map.tile_set.tile_size == GridUtils.TILE_SIZE, "GridUtils.TILE_SIZE out of sync with TileSet")
 	assert(chunk_size == GridUtils.CHUNK_SIZE, "GridUtils.CHUNK_SIZE out of sync with TileSet")
 	assert(scale.x == GridUtils.MAP_SCALE, "GridUtils.MAP_SCALE out of sync with TileMapLayer")
+	
+	print(str(Vector2i(1, 2)), " in tile space is equal to ", str(GridUtils.tile_to_global(Vector2i(1, 2))), " in global space")
 
 func set_noise_and_seed() -> void:
 	
@@ -255,7 +258,8 @@ func get_broke_positions(chunk_coords: Vector2i) -> Array:
 	var mods: Dictionary = get_mods(chunk_coords)
 	for tile_pos: Vector2i in mods:
 		if mods[tile_pos].get("mod_type") == ModType.DESTROYED:
-			pos_broke.append(tile_pos)
+			var global_pos: Vector2 = map.to_global(GridUtils.tile_to_local(tile_pos))
+			pos_broke.append(global_pos)
 	return pos_broke
 
 func get_mods(chunk_coords: Vector2i) -> Dictionary:
@@ -264,15 +268,16 @@ func get_mods(chunk_coords: Vector2i) -> Dictionary:
 		mods = world_data[chunk_coords].get("chunk_mods", {})
 	return mods
 
-func set_chunk_mod(chunk_coords: Vector2i, tile_pos: Vector2i, mod_type: ModType, object_type: String) -> void:
+func set_tile_mod(chunk_coords: Vector2i, tile_pos: Vector2i, mod_type: ModType, object_type: String, additional_args: Dictionary = {}) -> void:
 	var chunk_data: Dictionary = world_data.get_or_add(chunk_coords, {})
 	var chunk_mods: Dictionary = chunk_data.get_or_add("chunk_mods", {})
 	chunk_mods[tile_pos] = {
 		"mod_type": mod_type,
-		"object_type": object_type
+		"object_type": object_type,
+		"additional_args": additional_args
 	}
 
-func get_chunk_mod(chunk_coords: Vector2i, tile_pos: Vector2i) -> Dictionary:
+func get_tile_mod(chunk_coords: Vector2i, tile_pos: Vector2i) -> Dictionary:
 	return world_data.get(chunk_coords, {}).get("chunk_mods", {}).get(tile_pos, {})
 
 func clear_chunk_mod(chunk_coords: Vector2i, tile_pos: Vector2i) -> void:

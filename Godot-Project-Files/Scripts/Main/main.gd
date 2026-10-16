@@ -194,7 +194,7 @@ func _register_in_chunk(node: Node2D) -> void:
 func _on_mining_resource_destroyed(type: String, pos: Vector2) -> void:
 	var chunk_coords: Vector2i = GridUtils.get_chunk_coords(pos)
 	var tile_pos: Vector2i = GridUtils.global_pos_to_local_tile(pos)
-	map.set_chunk_mod(chunk_coords, tile_pos, Map.ModType.DESTROYED, type)
+	map.set_tile_mod(chunk_coords, tile_pos, Map.ModType.DESTROYED, type)
 	
 	if type == "tree":
 		var tree_respawn_timer := Timer.new()
@@ -325,8 +325,14 @@ func _on_chunk_generated(chunk_coords: Vector2i, objects_positions: Dictionary) 
 	for pos: Vector2 in objects_positions.get("apple_trees"):
 		if pos in pos_broke:
 			continue
-		var random_stage: int = randi_range(1, 3)
-		spawn_apple_tree(pos, random_stage)
+		var tile_pos: Vector2i = GridUtils.global_pos_to_local_tile(pos)
+		var mod: Dictionary = map.get_tile_mod(chunk_coords, tile_pos)
+		if mod == {}:
+			var random_stage: int = randi_range(1, 3)
+			spawn_apple_tree(pos, random_stage)
+		else:
+			var stage: int = map.get_tile_mod(chunk_coords, tile_pos).get("additional_args", {}).get("stage", 0)
+			spawn_apple_tree(pos, stage)
 
 func drop_item(item: ItemData, pos: Vector2, random_range: int = 0) -> void:
 	var dropped_item := preload("res://Scenes/dropped_item.tscn").instantiate()
