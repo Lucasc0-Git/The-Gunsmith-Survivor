@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="InteractableData" format=3 uid="uid://b1b0ay4r8swf5"]
+
+[ext_resource type="Texture2D" uid="uid://bs0rhp6broafw" path="res://Textures/RepairComponent.png" id="1_bifwi"]
+[ext_resource type="Script" uid="uid://bpy4tefu8pf6e" path="res://items/InteractableItems/ineractable_data.gd" id="1_cl6vf"]
+
+[resource]
+script = ExtResource("1_cl6vf")
+id = "repair_component"
+icon = ExtResource("1_bifwi")
+required_class = &"TheCore"
+custom_stats = {
+"repair": 150.0
+}
+metadata/_custom_type_script = "uid://bpy4tefu8pf6e"

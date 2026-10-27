@@ -112,6 +112,11 @@ func equip_item(slot_data: SlotData) -> void:
 		
 		can_shoot = reload_timer.time_left <= 0
 	
+	elif item is InteractableItemData:
+		var i := item as InteractableItemData
+		sprite.texture = i.interactable_data.icon
+		can_shoot = true
+		
 	else:
 		var i := item as ItemData
 		if i.icon:
@@ -119,7 +124,10 @@ func equip_item(slot_data: SlotData) -> void:
 		can_shoot = true
 
 func is_holding_usable_item() -> bool:
-	return true if equipped_item.item_data is HealItemData or BuildItemData else false
+	if not equipped_item or not equipped_item.item_data:
+		return false
+	var d := equipped_item.item_data
+	return d is HealItemData or d is BuildItemData or d is InteractableItemData
 
 ## Unequip the item
 func unequip() -> void:
@@ -179,6 +187,57 @@ func use_item(slot_data: SlotData) -> void:
 				unequip()
 			if build_preview.visible:
 				player.on_use_made()
+	elif equipped_item.item_data is InteractableItemData:
+		if _interact():
+			if equipped_item.amount <= 0:
+				unequip()
+			player.on_use_made()
+
+func _get_interactable_under_mouse() -> Node:
+	var space := get_world_2d().direct_space_state
+	var params := PhysicsPointQueryParameters2D.new()
+	params.position = get_global_mouse_position()
+	params.collision_mask = 0b10001000
+	params.collide_with_areas = true
+	params.collide_with_bodies = true
+	
+	var results := space.intersect_point(params, 8)
+	for r in results:
+		var collider: Node = r.collider
+		if collider.has_method("interact"):
+			return collider
+		var parent := collider.get_parent()
+		if parent and parent.has_method("interact"):
+			return parent
+	return null
+
+func _get_interactable_class(node: Node) -> StringName:
+	if node.has_method("get_interactable_class"):
+		return node.get_interactable_class()
+	return StringName(node.get_class())
+
+func _interact() -> bool:
+	var item_data: InteractableItemData = equipped_item.item_data as InteractableItemData
+	var interactable_data: InteractableData = item_data.interactable_data
+	if not item_data or not interactable_data:
+		return false
+	
+	var target := _get_interactable_under_mouse()
+	if target == null:
+		return false
+	
+	if interactable_data.required_class != &"":
+		var target_class := _get_interactable_class(target)
+		if target_class != interactable_data.required_class:
+			return false
+	
+	if not target.has_method("can_interact") or not target.can_interact(interactable_data):
+		return false
+	if not target.has_method("interact"):
+		return false
+	
+	var success: bool = target.interact(interactable_data, player)
+	return success and interactable_data.consume_on_use
 
 func _spawn_build() -> void:
 	GameManager.more_stats["Buildings built"] += 1
@@ -393,7 +452,9 @@ func _process(delta: float) -> void:
 			build_preview.visible = false
 			can_place = false
 			#set build scene preview visible = false
-		
+	
+	
+	
 	## Shoot if its supposed to shoot
 	if shooting and can_shoot and shoot_on and !hovering and !right_click_tooltip_shown:
 		player.use_selected_item()

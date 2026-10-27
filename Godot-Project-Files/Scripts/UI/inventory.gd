@@ -73,7 +73,7 @@ func _ready() -> void:
 	# Give some slots some items for debugging
 	if GameManager.is_loading_save: return
 	if OS.is_debug_build():
-		fill_slot(1, basic_station_item, 1)
+		fill_slot(1, ItemRegistry.items.get("repair_component"), 8)
 		fill_slot(8, basic_smithing_table_item, 1)
 		fill_slot(5, wood_item, 32)
 		fill_slot(2, torch_item, 16)

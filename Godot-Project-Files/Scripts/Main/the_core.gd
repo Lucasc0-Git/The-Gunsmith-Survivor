@@ -45,6 +45,28 @@ func update_target_color() -> void:
 	var health_ratio := health / max_health
 	target_color = low_health_modulate.lerp(full_health_modulate, health_ratio)
 
+func get_interactable_class() -> StringName:
+	return &"TheCore"
+
+func can_interact(data: InteractableData) -> bool:
+	if data.custom_stats.has("repair"):
+		return health < max_health
+	
+	# When adding more items that can interact with TheCore, somehow add "return true" here
+	
+	return false
+
+func interact(data: InteractableData, _player: Player) -> bool:
+	if data.custom_stats.has("repair"):
+		var amount: float = float(data.custom_stats["repair"])
+		health = minf(health + amount, max_health)
+		update_target_color()
+		
+		# Some sound of repairing The Core
+		
+		return true
+	return false
+
 func _on_crafting_area_body_entered(body: Node2D) -> void:
 	if body is Player:
 		player_entered_crafting_area.emit()

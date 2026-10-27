@@ -30,9 +30,12 @@ func show_tooltip(slot_data: SlotData) -> void:
 		bb += "Damage: %d" % [slot_data.item_data.weapon_data.damage * Player.get_damage_multiplier(slot_data.level)] + "\n"
 		bb += "Fire rate: %.2f" % [slot_data.item_data.weapon_data.fire_rate * Player.get_fire_rate_multiplier(slot_data.level)] + "\n"
 	elif slot_data.item_data is HealItemData:
-		bb += "Heal: " + str(slot_data.item_data.heal_data.heal) + " hp" + "\n"
+		bb += "Heal: " + str(slot_data.item_data.heal_data.heal) + " HP" + "\n"
 	elif slot_data.item_data is JustItemData:
 		pass
+	elif slot_data.item_data is InteractableItemData:
+		if slot_data.item_data.interactable_data.custom_stats.has("repair"):
+			bb += "Repair: %.1fHP" % [slot_data.item_data.interactable_data.custom_stats["repair"]] + "\n"
 	
 	
 	visible = true

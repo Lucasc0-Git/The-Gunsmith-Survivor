@@ -43,6 +43,8 @@
 [ext_resource type="Resource" uid="uid://bykwtjaftb02t" path="res://items/Inv_items/BasicSmithingTable_item.tres" id="34_7c2aa"]
 [ext_resource type="Resource" uid="uid://b0725nycjx8ul" path="res://items/Inv_items/Torch_item.tres" id="36_yfo6n"]
 [ext_resource type="Resource" uid="uid://c8nuioxkkips2" path="res://items/Inv_items/FirePlace_item.tres" id="37_eqxyv"]
+[ext_resource type="Texture2D" uid="uid://bs0rhp6broafw" path="res://Textures/RepairComponent.png" id="39_eqxyv"]
+[ext_resource type="Resource" uid="uid://cl7ur3hd1f4ec" path="res://items/Inv_items/RepairComponent_item.tres" id="40_gnip7"]
 [ext_resource type="Script" uid="uid://kip6x331bpa4" path="res://Scripts/UI/upgrade_tooltip.gd" id="40_te3lg"]
 [ext_resource type="PackedScene" uid="uid://tppkv2hqbl7y" path="res://Scenes/CoreLowHealthBar.tscn" id="44_jmo6y"]
 [ext_resource type="PackedScene" uid="uid://b3m2wxdlyr7xq" path="res://Scenes/the_core_arrow.tscn" id="46_7c2aa"]
@@ -780,7 +782,21 @@ script = ExtResource("20_q562m")
 item_data = ExtResource("37_eqxyv")
 metadata/_custom_type_script = "uid://def44bo4agrv4"
 
-[node name="Panel3" type="Panel" parent="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control4/BaseCraftingContainer3/MarginContainer/ScrollContainer/HBoxContainer" unique_id=648026212]
+[node name="FirePlace2" type="Button" parent="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control4/BaseCraftingContainer3/MarginContainer/ScrollContainer/HBoxContainer" unique_id=25722369]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+mouse_filter = 1
+theme = ExtResource("14_ba8gd")
+disabled = true
+action_mode = 0
+icon = ExtResource("39_eqxyv")
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("20_q562m")
+item_data = ExtResource("40_gnip7")
+metadata/_custom_type_script = "uid://def44bo4agrv4"
+
+[node name="Panel7" type="Panel" parent="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control4/BaseCraftingContainer3/MarginContainer/ScrollContainer/HBoxContainer" unique_id=335451128]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 mouse_filter = 1
@@ -802,6 +818,7 @@ mouse_filter = 1
 
 [node name="Tooltip" type="RichTextLabel" parent="." unique_id=107183822]
 visible = false
+z_index = 1
 custom_minimum_size = Vector2(350, 30)
 offset_right = 300.0
 offset_bottom = 30.0
@@ -864,6 +881,7 @@ scroll_active = false
 script = ExtResource("40_te3lg")
 
 [node name="RightClickTooltip" type="PanelContainer" parent="." unique_id=613036397]
+z_index = 1
 custom_minimum_size = Vector2(75, 0)
 anchors_preset = 8
 anchor_left = 0.5

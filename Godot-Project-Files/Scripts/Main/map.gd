@@ -72,7 +72,7 @@ func _ready() -> void:
 	assert(chunk_size == GridUtils.CHUNK_SIZE, "GridUtils.CHUNK_SIZE out of sync with TileSet")
 	assert(scale.x == GridUtils.MAP_SCALE, "GridUtils.MAP_SCALE out of sync with TileMapLayer")
 	
-	print(str(Vector2i(1, 2)), " in tile space is equal to ", str(GridUtils.tile_to_global(Vector2i(1, 2))), " in global space")
+	#print(str(Vector2i(1, 2)), " in tile space is equal to ", str(GridUtils.tile_to_global(Vector2i(1, 2))), " in global space")
 
 func set_noise_and_seed() -> void:
 	

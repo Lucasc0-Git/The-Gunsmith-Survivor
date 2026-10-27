@@ -208,6 +208,7 @@ unlock_region={
 2d_physics/layer_6="Bullets"
 2d_physics/layer_7="Spawners"
 2d_physics/layer_8="TheCore"
+2d_physics/layer_9="Interactable"
 
 [physics]
 

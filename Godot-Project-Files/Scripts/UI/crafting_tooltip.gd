@@ -48,6 +48,13 @@ func show_tooltip(item_data: ItemData) -> void:
 	elif item_data is JustItemData:
 		pass #Does nothing
 	
+	# Interactable stats
+	elif item_data is InteractableItemData:
+		if item_data.interactable_data.custom_stats.has("repair"):
+			bb += "[ul]\n"
+			bb += "Repair: %.1f HP" % [item_data.interactable_data.custom_stats["repair"]] + "\n"
+			bb += "[/ul]\n"
+	
 	bb += "\n"
 	
 	# Crafting requirements
