@@ -311,8 +311,6 @@ func unload_chunk(chunk_coords: Vector2i) -> void:
 		return
 	
 	var nodes: Array = main.chunk_objects[chunk_coords].duplicate()
-	print(self)
-	print(nodes)
 	for node: Node2D in nodes:
 		if is_instance_valid(node):
 			node.queue_free()

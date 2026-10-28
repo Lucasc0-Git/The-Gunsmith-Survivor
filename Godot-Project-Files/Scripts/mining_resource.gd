@@ -14,7 +14,7 @@ class_name MiningResource
 @export var full_health_modulate: Color = Color(1.0, 1.0, 1.0, 1.0)
 @export var low_health_modulate: Color = Color(0.256, 0.256, 0.256, 1.0)
 @export var score_for_destroy: int = 1
-@export var item_data: ItemData
+@export var item_id: String = ""
 @export_enum("stone", "tree", "apple_tree") var type: String
 
 signal resource_destroyed(type: String, pos: Vector2)
@@ -30,7 +30,7 @@ func _ready() -> void:
 
 func drop_items(amount: int, random_range: int) -> void:
 	for i in range(amount):
-		main.drop_item(item_data, global_position, random_range)
+		main.drop_item(get_item_data(item_id), global_position, random_range)
 
 func take_damage(amount: float, dmg_type: DamageTypes.DamageType) -> void:
 	if destroyed: return
@@ -62,10 +62,12 @@ func update_target_color() -> void:
 	var health_ratio := health / max_health
 	target_color = low_health_modulate.lerp(full_health_modulate, health_ratio)
 
-#func play_shake(intensity: float = 1.0) -> void:
-	#shake_player.stop()
-	#shake_player.speed_scale = intensity
-	#shake_player.play("shake_on_hit")
+func get_item_data(id: String) -> ItemData:
+	if not ItemRegistry: return null
+	if id == "":
+		return null
+	var item_data: ItemData = ItemRegistry.items.get(id, null)
+	return item_data
 
 func destroy() -> void:
 	GameManager.score += score_for_destroy

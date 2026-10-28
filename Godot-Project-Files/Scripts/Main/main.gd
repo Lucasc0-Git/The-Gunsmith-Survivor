@@ -335,6 +335,7 @@ func _on_chunk_generated(chunk_coords: Vector2i, objects_positions: Dictionary) 
 			spawn_apple_tree(pos, stage)
 
 func drop_item(item: ItemData, pos: Vector2, random_range: int = 0) -> void:
+	if item == null: return
 	var dropped_item := preload("res://Scenes/dropped_item.tscn").instantiate()
 	dropped_item.item_data = item
 	dropped_item.global_position = pos + Vector2(randi_range(random_range, -random_range), randi_range(random_range, -random_range))

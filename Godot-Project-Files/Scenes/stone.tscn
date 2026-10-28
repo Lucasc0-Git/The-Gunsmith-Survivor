@@ -2,7 +2,6 @@
 
 [ext_resource type="PackedScene" uid="uid://ccmkjea6pv848" path="res://Scenes/MiningResource.tscn" id="1_nqvck"]
 [ext_resource type="Script" uid="uid://bxxy8r5itc27i" path="res://Scripts/stone.gd" id="2_uu3e6"]
-[ext_resource type="Resource" uid="uid://4bpscjhtcwh6" path="res://items/Inv_items/Stone_item.tres" id="3_80wns"]
 [ext_resource type="Texture2D" uid="uid://5gr63lspi2op" path="res://Textures/stone.png" id="3_oaod5"]
 [ext_resource type="Texture2D" uid="uid://ba8x3n310am36" path="res://Textures/Fireplace_smoke.png" id="3_vvu2k"]
 
@@ -100,6 +99,13 @@ size = Vector2(26, 11)
 
 [node name="Stone" unique_id=1660284462 node_paths=PackedStringArray("collision", "shake_player") instance=ExtResource("1_nqvck")]
 script = ExtResource("2_uu3e6")
+drop_weights = {
+"copper_ore": 20.0,
+"gold_ore": 4.0,
+"iron_ore": 15.0,
+"platinum": 0.5,
+"stone": 65.0
+}
 collision = NodePath("CollisionShape2D")
 shake_player = NodePath("AnimatedSprite2D/Sprite2D#AnimationPlayer")
 damage_mulitpliers = Dictionary[int, float]({
@@ -110,7 +116,7 @@ regen = 0.0
 max_health = 900.0
 health = 900.0
 score_for_destroy = 25
-item_data = ExtResource("3_80wns")
+item_id = "stone"
 type = "stone"
 
 [node name="AnimatedSprite2D" parent="." index="0" unique_id=1877883017]

@@ -3,10 +3,11 @@
 [ext_resource type="Script" uid="uid://dgi6p7vrp0imi" path="res://items/ItemData/ItemData.gd" id="1_macn1"]
 [ext_resource type="Script" uid="uid://duhl153idv7v8" path="res://items/ItemData/WeaponItemData.gd" id="2_f4h1h"]
 [ext_resource type="Texture2D" uid="uid://b8xibgyex24gv" path="res://Textures/SURVIVAL HORROR WEAPONS PACK 16X16/14.png" id="2_g066i"]
-[ext_resource type="Resource" uid="uid://dmcom6xx0kjas" path="res://items/Inv_items/Glock_item.tres" id="2_oh4ko"]
 [ext_resource type="Resource" uid="uid://cc0anv7sdlwn4" path="res://items/Inv_items/Wood_item.tres" id="3_dmslx"]
+[ext_resource type="Resource" uid="uid://deibtfbf65wx2" path="res://items/Inv_items/IronOre_item.tres" id="4_djh1d"]
 [ext_resource type="Resource" uid="uid://4bpscjhtcwh6" path="res://items/Inv_items/Stone_item.tres" id="4_dmslx"]
 [ext_resource type="Resource" uid="uid://e5jqh3yjqeag" path="res://items/Weapons/Shooting_weapons/AssaultRifle.tres" id="4_j3h1m"]
+[ext_resource type="Resource" uid="uid://d3qjg6wskepmj" path="res://items/Inv_items/CopperOre_item.tres" id="5_dr8fu"]
 
 [resource]
 script = ExtResource("2_f4h1h")
@@ -17,9 +18,10 @@ display_name = "Assault Rifle"
 score_for_crafting = 20
 description = "An assault rifle. Comes handy in a horde."
 crafting_recipe = Dictionary[ExtResource("1_macn1"), int]({
-ExtResource("2_oh4ko"): 1,
-ExtResource("3_dmslx"): 32,
-ExtResource("4_dmslx"): 16
+ExtResource("3_dmslx"): 16,
+ExtResource("4_dmslx"): 16,
+ExtResource("4_djh1d"): 8,
+ExtResource("5_dr8fu"): 8
 })
 needed_stations = Dictionary[int, int]({
 0: 1,

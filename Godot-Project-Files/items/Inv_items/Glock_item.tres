@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://duhl153idv7v8" path="res://items/ItemData/WeaponItemData.gd" id="1_cv42g"]
 [ext_resource type="Script" uid="uid://dgi6p7vrp0imi" path="res://items/ItemData/ItemData.gd" id="1_iujff"]
 [ext_resource type="Texture2D" uid="uid://dgcfntfkmo1bg" path="res://Textures/SURVIVAL HORROR WEAPONS PACK 16X16/2.png" id="1_jx66i"]
+[ext_resource type="Resource" uid="uid://d3qjg6wskepmj" path="res://items/Inv_items/CopperOre_item.tres" id="2_ivvfo"]
 [ext_resource type="Resource" uid="uid://cc0anv7sdlwn4" path="res://items/Inv_items/Wood_item.tres" id="2_o4206"]
 [ext_resource type="Resource" uid="uid://clerpgrevvh7e" path="res://items/Weapons/Shooting_weapons/Glock.tres" id="3_iujff"]
 
@@ -16,6 +17,7 @@ score_for_crafting = 5
 description = "A nice and grateful handgun."
 crafting_description = "Basic handgun"
 crafting_recipe = Dictionary[ExtResource("1_iujff"), int]({
-ExtResource("2_o4206"): 16
+ExtResource("2_ivvfo"): 8,
+ExtResource("2_o4206"): 8
 })
 metadata/_custom_type_script = "uid://duhl153idv7v8"

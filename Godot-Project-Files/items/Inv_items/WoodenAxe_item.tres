@@ -16,6 +16,6 @@ score_for_crafting = 5
 description = "An axe. Possibly the worst possible quality. Who knows..."
 crafting_description = "A wooden axe. Excellents at deforestation!"
 crafting_recipe = Dictionary[ExtResource("1_13v0x"), int]({
-ExtResource("3_3lkuj"): 32
+ExtResource("3_3lkuj"): 16
 })
 metadata/_custom_type_script = "uid://ngdtvmokbgwc"
