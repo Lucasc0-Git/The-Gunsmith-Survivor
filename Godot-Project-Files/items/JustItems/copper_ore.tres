@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="JustData" format=3 uid="uid://pqibxs2sfv2n"]
+
+[ext_resource type="Script" uid="uid://d4l61gb5qgtsk" path="res://items/JustItems/just_data.gd" id="1_3d3h3"]
+[ext_resource type="Texture2D" uid="uid://ccca8cehb0yaa" path="res://Textures/Items/copper_ore_texture.png" id="1_f0sop"]
+
+[resource]
+script = ExtResource("1_3d3h3")
+id = "copper_ore"
+icon = ExtResource("1_f0sop")
+rarity = 3.5
+metadata/_custom_type_script = "uid://d4l61gb5qgtsk"

@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="JustItemData" format=3 uid="uid://deibtfbf65wx2"]
+
+[ext_resource type="Script" uid="uid://dgi6p7vrp0imi" path="res://items/ItemData/ItemData.gd" id="1_lbu6f"]
+[ext_resource type="Texture2D" uid="uid://bko3i45sgmbne" path="res://Textures/Items/iron_ore_texture.png" id="2_sel6w"]
+[ext_resource type="Script" uid="uid://dlibn88e2w8eo" path="res://items/ItemData/JustItemData.gd" id="2_yyo0b"]
+[ext_resource type="Resource" uid="uid://burtihgxiqvs7" path="res://items/JustItems/iron_ore.tres" id="3_63uko"]
+
+[resource]
+script = ExtResource("2_yyo0b")
+just_data = ExtResource("3_63uko")
+id = "iron_ore"
+icon = ExtResource("2_sel6w")
+display_name = "Iron Ore"
+max_stack = 32
+description = "An ore used for crafting durable weapons."
+metadata/_custom_type_script = "uid://dlibn88e2w8eo"

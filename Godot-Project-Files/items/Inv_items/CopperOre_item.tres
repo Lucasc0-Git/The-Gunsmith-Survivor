@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="JustItemData" format=3 uid="uid://d3qjg6wskepmj"]
+
+[ext_resource type="Script" uid="uid://dgi6p7vrp0imi" path="res://items/ItemData/ItemData.gd" id="1_8fqwu"]
+[ext_resource type="Script" uid="uid://dlibn88e2w8eo" path="res://items/ItemData/JustItemData.gd" id="2_h345d"]
+[ext_resource type="Texture2D" uid="uid://ccca8cehb0yaa" path="res://Textures/Items/copper_ore_texture.png" id="2_nr15i"]
+[ext_resource type="Resource" uid="uid://pqibxs2sfv2n" path="res://items/JustItems/copper_ore.tres" id="3_bqdta"]
+
+[resource]
+script = ExtResource("2_h345d")
+just_data = ExtResource("3_bqdta")
+id = "copper_ore"
+icon = ExtResource("2_nr15i")
+display_name = "Copper Ore"
+max_stack = 32
+description = "An ore used for crafting cheaper durable weapons and repair kits."
+metadata/_custom_type_script = "uid://dlibn88e2w8eo"

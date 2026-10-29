@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="JustData" format=3 uid="uid://burtihgxiqvs7"]
+
+[ext_resource type="Texture2D" uid="uid://bko3i45sgmbne" path="res://Textures/Items/iron_ore_texture.png" id="1_6t0wv"]
+[ext_resource type="Script" uid="uid://d4l61gb5qgtsk" path="res://items/JustItems/just_data.gd" id="1_qgmvi"]
+
+[resource]
+script = ExtResource("1_qgmvi")
+id = "iron_ore"
+icon = ExtResource("1_6t0wv")
+rarity = 4.5
+metadata/_custom_type_script = "uid://d4l61gb5qgtsk"

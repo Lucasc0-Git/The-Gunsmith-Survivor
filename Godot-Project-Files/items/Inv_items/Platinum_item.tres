@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="JustItemData" format=3 uid="uid://dbjenxg573i1d"]
+
+[ext_resource type="Script" uid="uid://dgi6p7vrp0imi" path="res://items/ItemData/ItemData.gd" id="1_kkaq4"]
+[ext_resource type="Texture2D" uid="uid://caav2wgk6dv8n" path="res://Textures/Items/platinum_texture.png" id="2_0rwfg"]
+[ext_resource type="Script" uid="uid://dlibn88e2w8eo" path="res://items/ItemData/JustItemData.gd" id="2_1rink"]
+[ext_resource type="Resource" uid="uid://dsw7su0gw0jyd" path="res://items/JustItems/platinum.tres" id="3_7wfg8"]
+
+[resource]
+script = ExtResource("2_1rink")
+just_data = ExtResource("3_7wfg8")
+id = "platinum"
+icon = ExtResource("2_0rwfg")
+display_name = "Platinum"
+max_stack = 32
+description = "An extremely rare ore."
+metadata/_custom_type_script = "uid://dlibn88e2w8eo"
