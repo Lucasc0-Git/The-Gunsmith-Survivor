@@ -153,24 +153,9 @@ func _on_basic_crafting_mouse_entered() -> void:
 func _on_basic_crafting_mouse_exited() -> void:
 	toggle_hovering(false)
 
-func _on_weapons_crafting_container_mouse_entered() -> void:
+func _on_crafting_container_mouse_entered() -> void:
 	toggle_hovering(true)
-func _on_weapons_crafting_container_mouse_exited() -> void:
-	toggle_hovering(false)
-
-func _on_tools_crafting_container_2_mouse_entered() -> void:
-	toggle_hovering(true)
-func _on_tools_crafting_container_2_mouse_exited() -> void:
-	toggle_hovering(false)
-
-func _on_crafting_stations_crafting_container_3_mouse_entered() -> void:
-	toggle_hovering(true)
-func _on_crafting_stations_crafting_container_3_mouse_exited() -> void:
-	toggle_hovering(false)
-
-func _on_base_crafting_container_3_mouse_entered() -> void:
-	toggle_hovering(true)
-func _on_base_crafting_container_3_mouse_exited() -> void:
+func _on_crafting_container_mouse_exited() -> void:
 	toggle_hovering(false)
 
 func toggle_hovering(hovering_on: bool) -> void:

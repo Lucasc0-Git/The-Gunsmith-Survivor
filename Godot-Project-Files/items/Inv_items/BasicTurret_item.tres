@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="BuildItemData" format=3 uid="uid://dn8lcdi2k5onj"]
+
+[ext_resource type="Script" uid="uid://dgi6p7vrp0imi" path="res://items/ItemData/ItemData.gd" id="1_01qat"]
+[ext_resource type="Resource" uid="uid://c0wumfo0u6b4t" path="res://items/BuildItems/BasicTurret.tres" id="1_d2hyu"]
+[ext_resource type="Script" uid="uid://bmqu0kgfa7xur" path="res://items/ItemData/BuildItemData.gd" id="2_btt7r"]
+[ext_resource type="Resource" uid="uid://deibtfbf65wx2" path="res://items/Inv_items/IronOre_item.tres" id="2_cyitt"]
+[ext_resource type="Resource" uid="uid://4bpscjhtcwh6" path="res://items/Inv_items/Stone_item.tres" id="3_baysk"]
+[ext_resource type="Resource" uid="uid://cc0anv7sdlwn4" path="res://items/Inv_items/Wood_item.tres" id="4_baysk"]
+[ext_resource type="Texture2D" uid="uid://pit83uwrvh5x" path="res://Textures/turret_base.png" id="6_wnl0h"]
+
+[resource]
+script = ExtResource("2_btt7r")
+build_data = ExtResource("1_d2hyu")
+id = "basic_turret"
+icon = ExtResource("6_wnl0h")
+display_name = "Basic Turret"
+max_stack = 4
+description = "A basic turret with no specialization... It's quite bad actually. Takes small self-damage."
+crafting_recipe = Dictionary[ExtResource("1_01qat"), int]({
+ExtResource("2_cyitt"): 2,
+ExtResource("3_baysk"): 8,
+ExtResource("4_baysk"): 4
+})
+needed_stations = Dictionary[int, int]({
+1: 1
+})
+metadata/_custom_type_script = "uid://bmqu0kgfa7xur"

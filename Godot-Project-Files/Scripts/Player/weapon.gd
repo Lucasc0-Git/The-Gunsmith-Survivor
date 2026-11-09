@@ -443,10 +443,10 @@ func _process(delta: float) -> void:
 			build_preview.global_position = mouse_pos #update position of the preview to the mouse_pos
 			var build_data: BuildItemData = equipped_item.item_data as BuildItemData
 			if is_placement_valid():
-				build_preview.sprite.modulate = build_data.build_data.transparent_color
+				build_preview.modulate = build_data.build_data.transparent_color
 				can_place = true
 			else:
-				build_preview.sprite.modulate = build_data.build_data.cant_build_color
+				build_preview.modulate = build_data.build_data.cant_build_color
 				can_place = false
 		else:
 			build_preview.visible = false

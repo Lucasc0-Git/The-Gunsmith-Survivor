@@ -74,12 +74,13 @@ func _ready() -> void:
 	if GameManager.is_loading_save: return
 	if OS.is_debug_build():
 		fill_slot(1, ItemRegistry.items.get("repair_component"), 8)
-		fill_slot(8, basic_smithing_table_item, 1)
-		fill_slot(5, wood_item, 32)
 		fill_slot(2, torch_item, 16)
 		fill_slot(3, assault_rifle_item, 1)
 		fill_slot(4, machine_gun_item, 1)
+		fill_slot(5, wood_item, 32)
 		fill_slot(6, wooden_axe_item, 1)
+		fill_slot(7, ItemRegistry.items.get("test_turret"), 1)
+		fill_slot(8, basic_smithing_table_item, 1)
 		fill_slot(10, shotgun_item, 1)
 		fill_slot(12, ItemRegistry.items.get("stone"), 50000)
 		fill_slot(13, ItemRegistry.items.get("wood"), 50000)

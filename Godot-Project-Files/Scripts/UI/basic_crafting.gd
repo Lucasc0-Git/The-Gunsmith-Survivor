@@ -88,6 +88,8 @@ func _on_button_toggled(toggled_on: bool, index: int) -> void:
 		basic_craftings.toggle_stations_crafting(toggled_on)
 	elif index == 3:
 		basic_craftings.toggle_base_crafting(toggled_on)
+	elif index == 4:
+		basic_craftings.toggle_automation_crafting(toggled_on)
 
 func _process(_delta: float) -> void:
 	if !GameManager.is_game_loaded: return

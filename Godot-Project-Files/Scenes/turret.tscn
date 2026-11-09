@@ -1,0 +1,89 @@
+[gd_scene format=3 uid="uid://n6psl3qmbi85"]
+
+[ext_resource type="PackedScene" uid="uid://dkitsyaxgt7kk" path="res://Scenes/BuildScene.tscn" id="1_fcprl"]
+[ext_resource type="Script" uid="uid://huariqcycy3q" path="res://Scripts/Building/turret.gd" id="2_hskch"]
+[ext_resource type="Texture2D" uid="uid://pit83uwrvh5x" path="res://Textures/turret_base.png" id="3_6spbj"]
+[ext_resource type="PackedScene" uid="uid://cbw45347x42n7" path="res://Scenes/Bullet.tscn" id="3_ahfaj"]
+[ext_resource type="Texture2D" uid="uid://j25ar5js7vcy" path="res://Textures/turret_barrel.png" id="4_pulj5"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_pulj5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_6spbj")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2a8ad"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_pulj5")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ahfaj"]
+resource_local_to_scene = true
+size = Vector2(16, 16)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_pulj5"]
+radius = 11.666667
+
+[node name="Turret" unique_id=1835171183 node_paths=PackedStringArray("sprite", "anim_player") instance=ExtResource("1_fcprl")]
+process_mode = 1
+script = ExtResource("2_hskch")
+self_damage_per_second = 1.0
+turret_modulate = Color(1, 1, 1, 1)
+turret_damage = 5.0
+turret_range = 350.0
+turret_shoot_cooldown = 0.5
+bullet_scene = ExtResource("3_ahfaj")
+bullet_speed_multiplier = 1.0
+bullet_scale = 1.0
+rotation_speed = 90.0
+sprite = NodePath("AnimatedSprite2D")
+anim_player = NodePath("Control/AnimationPlayer")
+cursor_proximity_dist = 40
+item_id = "test_turret"
+
+[node name="AnimatedSprite2D" parent="." index="0" unique_id=1408510289]
+sprite_frames = SubResource("SpriteFrames_pulj5")
+autoplay = "default"
+
+[node name="Barrel" type="AnimatedSprite2D" parent="." index="1" unique_id=1314362964]
+unique_name_in_owner = true
+rotation = -0.41538838
+sprite_frames = SubResource("SpriteFrames_2a8ad")
+offset = Vector2(2, 2)
+
+[node name="Muzzle" type="Marker2D" parent="Barrel" index="0" unique_id=1795727738]
+unique_name_in_owner = true
+position = Vector2(10, 10)
+gizmo_extents = 5.0
+
+[node name="CollisionShape2D" parent="." index="2" unique_id=2132263509]
+shape = SubResource("RectangleShape2D_ahfaj")
+
+[node name="CollisionShape2D" parent="MouseInputMonitor" parent_id_path=PackedInt32Array(1707325614) index="0" unique_id=487905519]
+shape = SubResource("CircleShape2D_pulj5")
+
+[node name="ReloadTimer" type="Timer" parent="." index="5" unique_id=1591593051]
+unique_name_in_owner = true
+
+[node name="TargetCheckingTimer" type="Timer" parent="." index="6" unique_id=1585290186]
+wait_time = 0.2
+autostart = true
+
+[node name="SelfDamageTimer" type="Timer" parent="." index="7" unique_id=1864975328]
+process_mode = 1
+autostart = true
+
+[connection signal="timeout" from="ReloadTimer" to="." method="_on_reload_timer_timeout"]
+[connection signal="timeout" from="TargetCheckingTimer" to="." method="_on_target_checking_timer_timeout"]
+[connection signal="timeout" from="SelfDamageTimer" to="." method="_on_self_damage_timer_timeout"]

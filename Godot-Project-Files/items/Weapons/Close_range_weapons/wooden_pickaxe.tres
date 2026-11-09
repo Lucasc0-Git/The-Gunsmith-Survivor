@@ -7,7 +7,7 @@
 script = ExtResource("1_0xd63")
 dmg_range = 20.0
 knockback = 150.0
-swing_duration = 0.05
+afterswing_time = 0.5
 id = "wooden_pickaxe"
 icon = ExtResource("1_4ta5a")
 damage = 30

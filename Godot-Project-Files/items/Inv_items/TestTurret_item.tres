@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="BuildItemData" format=3 uid="uid://hq6vnsiegff4"]
+
+[ext_resource type="Script" uid="uid://dgi6p7vrp0imi" path="res://items/ItemData/ItemData.gd" id="1_gkqs3"]
+[ext_resource type="Resource" uid="uid://bvbu1bdc0wcdl" path="res://items/BuildItems/TestTurret.tres" id="1_toe1m"]
+[ext_resource type="Script" uid="uid://bmqu0kgfa7xur" path="res://items/ItemData/BuildItemData.gd" id="2_u7hac"]
+[ext_resource type="Resource" uid="uid://cc0anv7sdlwn4" path="res://items/Inv_items/Wood_item.tres" id="3_djuql"]
+[ext_resource type="Texture2D" uid="uid://pit83uwrvh5x" path="res://Textures/turret_base.png" id="4_8m5sg"]
+
+[resource]
+script = ExtResource("2_u7hac")
+build_data = ExtResource("1_toe1m")
+id = "test_turret"
+icon = ExtResource("4_8m5sg")
+display_name = "Test Turret"
+description = "AAAAAAAAAAAAAAAAAAAAAAAA"
+crafting_description = "AAAaaaaAAAaaaaAAAAAaaaAAAaaAaaa"
+crafting_recipe = Dictionary[ExtResource("1_gkqs3"), int]({
+ExtResource("3_djuql"): 1
+})
+metadata/_custom_type_script = "uid://bmqu0kgfa7xur"

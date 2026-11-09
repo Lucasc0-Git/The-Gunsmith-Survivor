@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="BuildData" format=3 uid="uid://bvbu1bdc0wcdl"]
+
+[ext_resource type="Script" uid="uid://bvtttnj03tb3h" path="res://items/BuildItems/build_data.gd" id="1_43h27"]
+[ext_resource type="PackedScene" uid="uid://n6psl3qmbi85" path="res://Scenes/turret.tscn" id="1_b5go1"]
+[ext_resource type="Texture2D" uid="uid://pit83uwrvh5x" path="res://Textures/turret_base.png" id="2_w2lr8"]
+
+[resource]
+script = ExtResource("1_43h27")
+id = "test_turret"
+icon = ExtResource("2_w2lr8")
+build_scene = ExtResource("1_b5go1")
+cant_build_color = Color(0.8784314, 0, 0, 0.69411767)
+metadata/_custom_type_script = "uid://bvtttnj03tb3h"

@@ -30,6 +30,11 @@ func _on_node_added(node: Node) -> void:
 func _process(_delta: float) -> void:
 	mouse_right_click_icon.global_position = get_viewport().get_mouse_position() + mouse_right_click_icon_offset
 	
+	if not is_instance_valid(hovered_right_clickable):
+		hovered_right_clickable = null
+		mouse_right_click_icon.hide()
+		return
+	
 	if hovered_right_clickable is Slot:
 		if not hovered_right_clickable.slot_data or hovered_right_clickable.slot_data.is_empty():
 			return

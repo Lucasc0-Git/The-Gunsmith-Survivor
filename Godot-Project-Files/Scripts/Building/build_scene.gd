@@ -102,7 +102,7 @@ func _on_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> voi
 func _process(_delta: float) -> void:
 	if not GameManager or not "is_game_loaded" in GameManager:
 		return
-	if !GameManager.is_game_loaded: return
+	if not GameManager.is_game_loaded: return
 	if preview_only:
 		$MouseInputMonitor.monitoring = false
 	else:
@@ -110,17 +110,15 @@ func _process(_delta: float) -> void:
 	
 	var mouse_pos: Vector2 = get_global_mouse_position()
 	
-	if preview_only: return
-	if mouse_pos.distance_to(global_position) <= cursor_proximity_dist:
-		if anim_player.is_playing():
-			return
-		if !health_bar.visible:
-			anim_player.play("show_bar")
-	else:
-		if anim_player.is_playing():
-			return
-		if health_bar.visible:
-			anim_player.play("hide_bar")
+	if not preview_only:
+		if mouse_pos.distance_to(global_position) <= cursor_proximity_dist:
+			if not anim_player.is_playing():
+				if not health_bar.visible:
+					anim_player.play("show_bar")
+		else:
+			if not anim_player.is_playing():
+				if health_bar.visible:
+					anim_player.play("hide_bar")
 
 func save_data() -> Dictionary:
 	return {

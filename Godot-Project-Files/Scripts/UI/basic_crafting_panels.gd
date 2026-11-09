@@ -5,6 +5,7 @@ class_name BasicCraftingUIPanel
 @onready var tools_crafting_container: PanelContainer = $VBoxContainer/Control2/ToolsCraftingContainer2
 @onready var stations_crafting_container: PanelContainer = $VBoxContainer/Control3/CraftingStationsCraftingContainer3
 @onready var base_crafting_container: PanelContainer = $VBoxContainer/Control4/BaseCraftingContainer3
+@onready var automation_crafting_container: PanelContainer = $VBoxContainer/Control5/AutomationCraftingContainer
 
 @export var crafting_tooltip: CraftingTooltip
 
@@ -13,6 +14,7 @@ func _ready() -> void:
 	tools_crafting_container.visible = false
 	stations_crafting_container.visible = false
 	base_crafting_container.visible = false
+	automation_crafting_container.visible = false
 
 func toggle_weapons_crafting(_visible: bool) -> void:
 	weapons_crafting_container.visible = _visible
@@ -26,6 +28,8 @@ func toggle_stations_crafting(_visible: bool) -> void:
 func toggle_base_crafting(_visible: bool) -> void:
 	base_crafting_container.visible = _visible
 
+func toggle_automation_crafting(_visible: bool) -> void:
+	automation_crafting_container.visible = _visible
 
 func _on_item_button_mouse_entered(item_data: ItemData) -> void:
 	crafting_tooltip.show_tooltip(item_data)

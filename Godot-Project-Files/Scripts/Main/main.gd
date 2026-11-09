@@ -371,7 +371,7 @@ func spawn_building(pos: Vector2, build_scene: PackedScene) -> void:
 	building.preview_only = false
 	building.global_position = pos
 	Ysort.add_child(building)
-	_register_in_chunk(building)
+	#_register_in_chunk(building)
 
 func add_spawner(pos: Vector2) -> void:
 	var spawner := preload("res://Scenes/enemy_spawner.tscn").instantiate()
