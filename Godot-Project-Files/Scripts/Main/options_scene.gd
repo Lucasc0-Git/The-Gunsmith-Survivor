@@ -1,4 +1,5 @@
 extends Control
+class_name OptionsScene
 
 @onready var fullscreen_checkbox := %Fullscreen
 @onready var vsync_checkbox : CheckButton = %Vsync
@@ -6,6 +7,8 @@ extends Control
 @onready var master_sound_slider: HSlider = %MasterSoundSlider
 @onready var sfx_sound_slider: HSlider = %SFXSoundSlider
 @onready var music_sound_slider: HSlider = %MusicSoundSlider
+@onready var back_button: Button = $VBoxContainer2/Back
+@onready var rebinding_vbox_container: VBoxContainer = $TabContainer/KeyboardControl/PanelContainer/MarginContainer/VBoxContainer
 
 var _save_timer: Timer
 
@@ -25,6 +28,22 @@ func _ready() -> void:
 	Settings.fullscreen_changed.connect(_on_fullscreen_changed)
 	Settings.vsync_changed.connect(_on_vsync_changed)
 	Settings.sounds_changed.connect(_on_sounds_changed)
+	
+	for node in get_all_children(rebinding_vbox_container):
+		if node is KeyBindComponent:
+			node.binding_started.connect(
+				func () -> void: back_button.disabled = true; #rebinding_label.show()
+			)
+			node.binding_ended.connect(
+				func () -> void: back_button.disabled = false; #rebinding_label.hide()
+			)
+
+func get_all_children(node: Node) -> Array[Node]:
+	var nodes: Array[Node] = []
+	for child in node.get_children():
+		nodes.append(child)
+		nodes.append_array(get_all_children(child))
+	return nodes
 
 func _on_fullscreen_changed(enabled: bool) -> void:
 	fullscreen_checkbox.set_pressed_no_signal(enabled)

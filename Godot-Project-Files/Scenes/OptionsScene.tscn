@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://cmwljic48aed7" path="res://Scripts/Main/options_scene.gd" id="1_ax0sw"]
 [ext_resource type="Theme" uid="uid://cvrriksqai0xa" path="res://Themes/Options.tres" id="2_1hmx5"]
 [ext_resource type="Texture2D" uid="uid://cgvn2rp4tyj7h" path="res://Textures/Start_scene_bg_1.png" id="2_4k2k5"]
+[ext_resource type="PackedScene" uid="uid://mk2x00vvrpny" path="res://Scenes/options/key_bind_component.tscn" id="4_8c6yk"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4obyk"]
 bg_color = Color(0.4627451, 0.2784314, 0.105882354, 1)
@@ -68,6 +69,20 @@ font_size = 20
 font_color = Color(0.8745098, 0.8745098, 0.8745098, 1)
 outline_size = 5
 outline_color = Color(0.2509804, 0.14117648, 0.039215688, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_kx0co"]
+font_size = 12
+
+[sub_resource type="LabelSettings" id="LabelSettings_o0ah7"]
+font_size = 17
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_kx0co"]
+color = Color(0.23031491, 0.23031494, 0.23031494, 1)
+thickness = 2
+vertical = true
+
+[sub_resource type="Theme" id="Theme_2a8ad"]
+VSeparator/styles/separator = SubResource("StyleBoxLine_kx0co")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kp3y5"]
 draw_center = false
@@ -178,42 +193,46 @@ offset_bottom = 294.5
 grow_horizontal = 2
 grow_vertical = 2
 theme = SubResource("Theme_kx0co")
-current_tab = 0
+current_tab = 2
 tab_0/title = "Gameplay"
 tab_1/title = "Sound"
 tab_2/title = "Keyboard & Mouse"
 
-[node name="GamePlayContainer" type="PanelContainer" parent="TabContainer" unique_id=2055530194]
+[node name="GamePlayContainer" type="PanelContainer" parent="TabContainer" unique_id=1858470781]
+visible = false
 custom_minimum_size = Vector2(500, 550)
 layout_mode = 2
 theme = ExtResource("2_1hmx5")
 metadata/_tab_index = 0
 metadata/_tab_name = "Gameplay"
 
-[node name="MarginContainer" type="MarginContainer" parent="TabContainer/GamePlayContainer" unique_id=253842804]
+[node name="PanelContainer" type="ScrollContainer" parent="TabContainer/GamePlayContainer" unique_id=461114993]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="TabContainer/GamePlayContainer/PanelContainer" unique_id=253842804]
 layout_mode = 2
 theme_override_constants/margin_left = 25
 theme_override_constants/margin_top = 25
 theme_override_constants/margin_right = 25
 theme_override_constants/margin_bottom = 25
 
-[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/GamePlayContainer/MarginContainer" unique_id=2063363582]
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/GamePlayContainer/PanelContainer/MarginContainer" unique_id=2063363582]
 custom_minimum_size = Vector2(450, 500)
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="Fullscreen" type="CheckButton" parent="TabContainer/GamePlayContainer/MarginContainer/VBoxContainer" unique_id=778429721]
+[node name="Fullscreen" type="CheckButton" parent="TabContainer/GamePlayContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=778429721]
 unique_name_in_owner = true
 layout_mode = 2
 theme = ExtResource("2_1hmx5")
 text = "Fullscreen"
 
-[node name="Vsync" type="CheckButton" parent="TabContainer/GamePlayContainer/MarginContainer/VBoxContainer" unique_id=791878158]
+[node name="Vsync" type="CheckButton" parent="TabContainer/GamePlayContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=791878158]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Vsync"
 
-[node name="SoundsContainer" type="PanelContainer" parent="TabContainer" unique_id=45214093]
+[node name="SoundsContainer" type="PanelContainer" parent="TabContainer" unique_id=550779101]
 visible = false
 custom_minimum_size = Vector2(500, 550)
 layout_mode = 2
@@ -221,117 +240,280 @@ theme = ExtResource("2_1hmx5")
 metadata/_tab_index = 1
 metadata/_tab_name = "Sound"
 
-[node name="MarginContainer" type="MarginContainer" parent="TabContainer/SoundsContainer" unique_id=960342266]
+[node name="PanelContainer" type="ScrollContainer" parent="TabContainer/SoundsContainer" unique_id=2055209513]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="TabContainer/SoundsContainer/PanelContainer" unique_id=960342266]
 layout_mode = 2
 theme_override_constants/margin_left = 25
 theme_override_constants/margin_top = 25
 theme_override_constants/margin_right = 25
 theme_override_constants/margin_bottom = 25
 
-[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/SoundsContainer/MarginContainer" unique_id=2118406995]
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/SoundsContainer/PanelContainer/MarginContainer" unique_id=2118406995]
 custom_minimum_size = Vector2(450, 500)
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="GlobalSounds" type="CheckButton" parent="TabContainer/SoundsContainer/MarginContainer/VBoxContainer" unique_id=730689968]
+[node name="GlobalSounds" type="CheckButton" parent="TabContainer/SoundsContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=730689968]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Global sounds"
 
-[node name="MasterBusContainer" type="PanelContainer" parent="TabContainer/SoundsContainer/MarginContainer/VBoxContainer" unique_id=1076355721]
+[node name="MasterBusContainer" type="PanelContainer" parent="TabContainer/SoundsContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1076355721]
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="TabContainer/SoundsContainer/MarginContainer/VBoxContainer/MasterBusContainer" unique_id=2111392898]
+[node name="MarginContainer" type="MarginContainer" parent="TabContainer/SoundsContainer/PanelContainer/MarginContainer/VBoxContainer/MasterBusContainer" unique_id=2111392898]
 layout_mode = 2
 theme_override_constants/margin_left = 6
 theme_override_constants/margin_top = 3
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/SoundsContainer/MarginContainer/VBoxContainer/MasterBusContainer/MarginContainer" unique_id=2134656366]
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/SoundsContainer/PanelContainer/MarginContainer/VBoxContainer/MasterBusContainer/MarginContainer" unique_id=2134656366]
 layout_mode = 2
 
-[node name="Master" type="Label" parent="TabContainer/SoundsContainer/MarginContainer/VBoxContainer/MasterBusContainer/MarginContainer/VBoxContainer" unique_id=379655150]
+[node name="Master" type="Label" parent="TabContainer/SoundsContainer/PanelContainer/MarginContainer/VBoxContainer/MasterBusContainer/MarginContainer/VBoxContainer" unique_id=379655150]
 layout_mode = 2
 text = "Master"
 label_settings = SubResource("LabelSettings_2a8ad")
 
-[node name="MasterSoundSlider" type="HSlider" parent="TabContainer/SoundsContainer/MarginContainer/VBoxContainer/MasterBusContainer/MarginContainer/VBoxContainer" unique_id=1012351222]
+[node name="MasterSoundSlider" type="HSlider" parent="TabContainer/SoundsContainer/PanelContainer/MarginContainer/VBoxContainer/MasterBusContainer/MarginContainer/VBoxContainer" unique_id=1012351222]
 unique_name_in_owner = true
 layout_mode = 2
 max_value = 1.0
 step = 0.01
 value = 1.0
 
-[node name="SFXBusContainer" type="PanelContainer" parent="TabContainer/SoundsContainer/MarginContainer/VBoxContainer" unique_id=1888808297]
+[node name="SFXBusContainer" type="PanelContainer" parent="TabContainer/SoundsContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1888808297]
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="TabContainer/SoundsContainer/MarginContainer/VBoxContainer/SFXBusContainer" unique_id=1591228557]
+[node name="MarginContainer" type="MarginContainer" parent="TabContainer/SoundsContainer/PanelContainer/MarginContainer/VBoxContainer/SFXBusContainer" unique_id=1591228557]
 layout_mode = 2
 theme_override_constants/margin_left = 6
 theme_override_constants/margin_top = 3
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/SoundsContainer/MarginContainer/VBoxContainer/SFXBusContainer/MarginContainer" unique_id=2060647525]
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/SoundsContainer/PanelContainer/MarginContainer/VBoxContainer/SFXBusContainer/MarginContainer" unique_id=2060647525]
 layout_mode = 2
 
-[node name="SFX" type="Label" parent="TabContainer/SoundsContainer/MarginContainer/VBoxContainer/SFXBusContainer/MarginContainer/VBoxContainer" unique_id=1168593370]
+[node name="SFX" type="Label" parent="TabContainer/SoundsContainer/PanelContainer/MarginContainer/VBoxContainer/SFXBusContainer/MarginContainer/VBoxContainer" unique_id=1168593370]
 layout_mode = 2
 text = "SFX"
 label_settings = SubResource("LabelSettings_4k2k5")
 
-[node name="SFXSoundSlider" type="HSlider" parent="TabContainer/SoundsContainer/MarginContainer/VBoxContainer/SFXBusContainer/MarginContainer/VBoxContainer" unique_id=1593146634]
+[node name="SFXSoundSlider" type="HSlider" parent="TabContainer/SoundsContainer/PanelContainer/MarginContainer/VBoxContainer/SFXBusContainer/MarginContainer/VBoxContainer" unique_id=1593146634]
 unique_name_in_owner = true
 layout_mode = 2
 max_value = 1.0
 step = 0.01
 value = 1.0
 
-[node name="MusicBusContainer" type="PanelContainer" parent="TabContainer/SoundsContainer/MarginContainer/VBoxContainer" unique_id=989487989]
+[node name="MusicBusContainer" type="PanelContainer" parent="TabContainer/SoundsContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=989487989]
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="TabContainer/SoundsContainer/MarginContainer/VBoxContainer/MusicBusContainer" unique_id=1910234517]
+[node name="MarginContainer" type="MarginContainer" parent="TabContainer/SoundsContainer/PanelContainer/MarginContainer/VBoxContainer/MusicBusContainer" unique_id=1910234517]
 layout_mode = 2
 theme_override_constants/margin_left = 6
 theme_override_constants/margin_top = 3
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/SoundsContainer/MarginContainer/VBoxContainer/MusicBusContainer/MarginContainer" unique_id=320055377]
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/SoundsContainer/PanelContainer/MarginContainer/VBoxContainer/MusicBusContainer/MarginContainer" unique_id=320055377]
 layout_mode = 2
 
-[node name="Music" type="Label" parent="TabContainer/SoundsContainer/MarginContainer/VBoxContainer/MusicBusContainer/MarginContainer/VBoxContainer" unique_id=203198661]
+[node name="Music" type="Label" parent="TabContainer/SoundsContainer/PanelContainer/MarginContainer/VBoxContainer/MusicBusContainer/MarginContainer/VBoxContainer" unique_id=203198661]
 layout_mode = 2
 text = "Music"
 label_settings = SubResource("LabelSettings_4k2k5")
 
-[node name="MusicSoundSlider" type="HSlider" parent="TabContainer/SoundsContainer/MarginContainer/VBoxContainer/MusicBusContainer/MarginContainer/VBoxContainer" unique_id=1888811025]
+[node name="MusicSoundSlider" type="HSlider" parent="TabContainer/SoundsContainer/PanelContainer/MarginContainer/VBoxContainer/MusicBusContainer/MarginContainer/VBoxContainer" unique_id=1888811025]
 unique_name_in_owner = true
 layout_mode = 2
 max_value = 1.0
 step = 0.01
 value = 1.0
 
-[node name="KeyboardControl" type="PanelContainer" parent="TabContainer" unique_id=1425871549]
-visible = false
+[node name="KeyboardControl" type="PanelContainer" parent="TabContainer" unique_id=396108908]
 custom_minimum_size = Vector2(500, 550)
 layout_mode = 2
 theme = ExtResource("2_1hmx5")
 metadata/_tab_index = 2
 metadata/_tab_name = "Keyboard & Mouse"
 
-[node name="MarginContainer" type="MarginContainer" parent="TabContainer/KeyboardControl" unique_id=1948486515]
+[node name="PanelContainer" type="ScrollContainer" parent="TabContainer/KeyboardControl" unique_id=562935390]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="TabContainer/KeyboardControl/PanelContainer" unique_id=1948486515]
 layout_mode = 2
 theme_override_constants/margin_left = 25
 theme_override_constants/margin_top = 25
 theme_override_constants/margin_right = 25
 theme_override_constants/margin_bottom = 25
 
-[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/KeyboardControl/MarginContainer" unique_id=1102475697]
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/KeyboardControl/PanelContainer/MarginContainer" unique_id=1102475697]
 custom_minimum_size = Vector2(450, 500)
 layout_mode = 2
 theme_override_constants/separation = 10
+
+[node name="Label" type="Label" parent="TabContainer/KeyboardControl/PanelContainer/MarginContainer/VBoxContainer" unique_id=70000074]
+layout_mode = 2
+text = "Keybind Settings"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="TabContainer/KeyboardControl/PanelContainer/MarginContainer/VBoxContainer" unique_id=1611091745]
+custom_minimum_size = Vector2(450, 30)
+custom_maximum_size = Vector2(450, -1)
+layout_mode = 2
+text = "(Left-click to start binding, Esc to cancel binding, Right-click to reset to default)"
+label_settings = SubResource("LabelSettings_kx0co")
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/KeyboardControl/PanelContainer/MarginContainer/VBoxContainer" unique_id=2075940587]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/KeyboardControl/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=800156832]
+custom_minimum_size = Vector2(213, 0)
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="MovementLabel" type="Label" parent="TabContainer/KeyboardControl/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=196325174]
+layout_mode = 2
+text = "Movement"
+label_settings = SubResource("LabelSettings_o0ah7")
+horizontal_alignment = 1
+
+[node name="MoveUpKeybind" parent="TabContainer/KeyboardControl/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=2076406413 node_paths=PackedStringArray("options_scene") instance=ExtResource("4_8c6yk")]
+layout_mode = 2
+binding_action = "move_up"
+action_name = "Move up"
+options_scene = NodePath("../../../../../../../..")
+
+[node name="MoveDownKeybind" parent="TabContainer/KeyboardControl/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=1705367401 node_paths=PackedStringArray("options_scene") instance=ExtResource("4_8c6yk")]
+layout_mode = 2
+binding_action = "move_down"
+action_name = "Move down"
+options_scene = NodePath("../../../../../../../..")
+
+[node name="MoveLeftKeybind" parent="TabContainer/KeyboardControl/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=431216184 node_paths=PackedStringArray("options_scene") instance=ExtResource("4_8c6yk")]
+layout_mode = 2
+binding_action = "move_left"
+action_name = "Move left"
+options_scene = NodePath("../../../../../../../..")
+
+[node name="MoveRightKeybind" parent="TabContainer/KeyboardControl/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=1061236427 node_paths=PackedStringArray("options_scene") instance=ExtResource("4_8c6yk")]
+layout_mode = 2
+binding_action = "move_right"
+action_name = "Move right"
+options_scene = NodePath("../../../../../../../..")
+
+[node name="DodgeKeybind" parent="TabContainer/KeyboardControl/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=1476038137 node_paths=PackedStringArray("options_scene") instance=ExtResource("4_8c6yk")]
+layout_mode = 2
+binding_action = "Dodge"
+action_name = "Dodge"
+options_scene = NodePath("../../../../../../../..")
+
+[node name="ActionsLabel" type="Label" parent="TabContainer/KeyboardControl/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=898139612]
+layout_mode = 2
+text = "Actions"
+label_settings = SubResource("LabelSettings_o0ah7")
+horizontal_alignment = 1
+
+[node name="ShootKeybind" parent="TabContainer/KeyboardControl/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=1489538619 node_paths=PackedStringArray("options_scene") instance=ExtResource("4_8c6yk")]
+layout_mode = 2
+binding_action = "shoot"
+action_name = "Shoot"
+options_scene = NodePath("../../../../../../../..")
+
+[node name="MiscLabel" type="Label" parent="TabContainer/KeyboardControl/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=1547159277]
+layout_mode = 2
+text = "Misc"
+label_settings = SubResource("LabelSettings_o0ah7")
+horizontal_alignment = 1
+
+[node name="QuicksaveKeybind" parent="TabContainer/KeyboardControl/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=469525457 node_paths=PackedStringArray("options_scene") instance=ExtResource("4_8c6yk")]
+layout_mode = 2
+binding_action = "quick_save"
+action_name = "Quicksave"
+options_scene = NodePath("../../../../../../../..")
+
+[node name="FullscreenKeybind" parent="TabContainer/KeyboardControl/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=1424528404 node_paths=PackedStringArray("options_scene") instance=ExtResource("4_8c6yk")]
+layout_mode = 2
+binding_action = "fullscreen_toggle"
+action_name = "Toggle fullscreen"
+options_scene = NodePath("../../../../../../../..")
+
+[node name="VSeparator" type="VSeparator" parent="TabContainer/KeyboardControl/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1276199524]
+layout_mode = 2
+theme = SubResource("Theme_2a8ad")
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="TabContainer/KeyboardControl/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=2105394492]
+custom_minimum_size = Vector2(213, 0)
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="InventoryLabel" type="Label" parent="TabContainer/KeyboardControl/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2" unique_id=685318205]
+layout_mode = 2
+text = "Inventory"
+label_settings = SubResource("LabelSettings_o0ah7")
+horizontal_alignment = 1
+
+[node name="ToggleInventoryKeybind" parent="TabContainer/KeyboardControl/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2" unique_id=1230579316 node_paths=PackedStringArray("options_scene") instance=ExtResource("4_8c6yk")]
+layout_mode = 2
+binding_action = "toggle_inventory"
+action_name = "Toggle inventory"
+options_scene = NodePath("../../../../../../../..")
+
+[node name="HotbarLabel" type="Label" parent="TabContainer/KeyboardControl/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2" unique_id=1744024408]
+layout_mode = 2
+text = "Hotbar"
+label_settings = SubResource("LabelSettings_o0ah7")
+horizontal_alignment = 1
+
+[node name="HotbarSlotUpKeybind" parent="TabContainer/KeyboardControl/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2" unique_id=161031545 node_paths=PackedStringArray("options_scene") instance=ExtResource("4_8c6yk")]
+layout_mode = 2
+binding_action = "next_weapon"
+action_name = "Hotbar slot +"
+options_scene = NodePath("../../../../../../../..")
+
+[node name="HotbarSlotDownKeybind" parent="TabContainer/KeyboardControl/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2" unique_id=1381585346 node_paths=PackedStringArray("options_scene") instance=ExtResource("4_8c6yk")]
+layout_mode = 2
+binding_action = "prev_weapon"
+action_name = "Hotbar slot -"
+options_scene = NodePath("../../../../../../../..")
+
+[node name="HotbarSlot1Keybind" parent="TabContainer/KeyboardControl/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2" unique_id=862869302 node_paths=PackedStringArray("options_scene") instance=ExtResource("4_8c6yk")]
+layout_mode = 2
+binding_action = "slot_1_hotbar"
+action_name = "Slot 1"
+options_scene = NodePath("../../../../../../../..")
+
+[node name="HotbarSlot2Keybind" parent="TabContainer/KeyboardControl/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2" unique_id=106050593 node_paths=PackedStringArray("options_scene") instance=ExtResource("4_8c6yk")]
+layout_mode = 2
+binding_action = "slot_2_hotbar"
+action_name = "Slot 2"
+options_scene = NodePath("../../../../../../../..")
+
+[node name="HotbarSlot3Keybind" parent="TabContainer/KeyboardControl/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2" unique_id=1574362845 node_paths=PackedStringArray("options_scene") instance=ExtResource("4_8c6yk")]
+layout_mode = 2
+binding_action = "slot_3_hotbar"
+action_name = "Slot 3"
+options_scene = NodePath("../../../../../../../..")
+
+[node name="HotbarSlot4Keybind" parent="TabContainer/KeyboardControl/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2" unique_id=249028544 node_paths=PackedStringArray("options_scene") instance=ExtResource("4_8c6yk")]
+layout_mode = 2
+binding_action = "slot_4_hotbar"
+action_name = "Slot 4"
+options_scene = NodePath("../../../../../../../..")
+
+[node name="HotbarSlot5Keybind" parent="TabContainer/KeyboardControl/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2" unique_id=1512250484 node_paths=PackedStringArray("options_scene") instance=ExtResource("4_8c6yk")]
+layout_mode = 2
+binding_action = "slot_5_hotbar"
+action_name = "Slot 5"
+options_scene = NodePath("../../../../../../../..")
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="." unique_id=96857309]
 custom_minimum_size = Vector2(200, 50)
@@ -350,10 +532,10 @@ layout_mode = 2
 theme = SubResource("Theme_1hmx5")
 text = "Back"
 
-[connection signal="toggled" from="TabContainer/GamePlayContainer/MarginContainer/VBoxContainer/Fullscreen" to="." method="_on_fullscreen_toggled"]
-[connection signal="toggled" from="TabContainer/GamePlayContainer/MarginContainer/VBoxContainer/Vsync" to="." method="_on_vsync_toggled"]
-[connection signal="toggled" from="TabContainer/SoundsContainer/MarginContainer/VBoxContainer/GlobalSounds" to="." method="_on_global_sounds_toggled"]
-[connection signal="value_changed" from="TabContainer/SoundsContainer/MarginContainer/VBoxContainer/MasterBusContainer/MarginContainer/VBoxContainer/MasterSoundSlider" to="." method="_on_master_sound_slider_value_changed"]
-[connection signal="value_changed" from="TabContainer/SoundsContainer/MarginContainer/VBoxContainer/SFXBusContainer/MarginContainer/VBoxContainer/SFXSoundSlider" to="." method="_on_sfx_sound_slider_value_changed"]
-[connection signal="value_changed" from="TabContainer/SoundsContainer/MarginContainer/VBoxContainer/MusicBusContainer/MarginContainer/VBoxContainer/MusicSoundSlider" to="." method="_on_music_sound_slider_value_changed"]
+[connection signal="toggled" from="TabContainer/GamePlayContainer/PanelContainer/MarginContainer/VBoxContainer/Fullscreen" to="." method="_on_fullscreen_toggled"]
+[connection signal="toggled" from="TabContainer/GamePlayContainer/PanelContainer/MarginContainer/VBoxContainer/Vsync" to="." method="_on_vsync_toggled"]
+[connection signal="toggled" from="TabContainer/SoundsContainer/PanelContainer/MarginContainer/VBoxContainer/GlobalSounds" to="." method="_on_global_sounds_toggled"]
+[connection signal="value_changed" from="TabContainer/SoundsContainer/PanelContainer/MarginContainer/VBoxContainer/MasterBusContainer/MarginContainer/VBoxContainer/MasterSoundSlider" to="." method="_on_master_sound_slider_value_changed"]
+[connection signal="value_changed" from="TabContainer/SoundsContainer/PanelContainer/MarginContainer/VBoxContainer/SFXBusContainer/MarginContainer/VBoxContainer/SFXSoundSlider" to="." method="_on_sfx_sound_slider_value_changed"]
+[connection signal="value_changed" from="TabContainer/SoundsContainer/PanelContainer/MarginContainer/VBoxContainer/MusicBusContainer/MarginContainer/VBoxContainer/MusicSoundSlider" to="." method="_on_music_sound_slider_value_changed"]
 [connection signal="pressed" from="VBoxContainer2/Back" to="." method="_on_back_pressed"]

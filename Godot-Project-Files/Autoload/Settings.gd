@@ -8,6 +8,26 @@ var music_volume: float = 1.0
 var sfx_volume: float = 1.0
 var master_volume: float = 1.0
 
+var tracked_actions: Array[String] = [
+	"move_up",
+	"move_down",
+	"move_left",
+	"move_right",
+	"shoot",
+	"toggle_inventory",
+	"prev_weapon",
+	"next_weapon",
+	"slot_1_hotbar",
+	"slot_2_hotbar",
+	"slot_3_hotbar",
+	"slot_4_hotbar",
+	"slot_5_hotbar",
+	"Dodge",
+	"quick_save",
+	"fullscreen_toggle",
+	
+]
+
 const CONFIG_PATH := "user://settings.cfg"
 
 signal fullscreen_changed(enabled: bool)
@@ -76,20 +96,80 @@ func save() -> void:
 	cfg.set_value("sounds", "music_volume", music_volume)
 	cfg.set_value("sounds", "sfx_volume", sfx_volume)
 	cfg.set_value("global", "novice_mode", novice_mode)
+	
+	for action in tracked_actions:
+		var events := InputMap.action_get_events(action)
+		if events.is_empty():
+			continue
+		var event: InputEvent = events[0]
+		
+		if event is InputEventKey:
+			cfg.set_value("binding", action, {
+				"type": "key",
+				"keycode": event.physical_keycode if event.physical_keycode != KEY_NONE else event.keycode
+			})
+		elif event is InputEventMouseButton:
+			cfg.set_value("binding", action, {
+				"type": "mouse",
+				"button": event.button_index
+			})
+	
 	var err := cfg.save(CONFIG_PATH)
 	if err != OK:
 		push_warning("Failed to save settings! Error code: %d" % err)
 
 func load_cfg() -> void:
 	var cfg := ConfigFile.new()
-	if cfg.load(CONFIG_PATH) == OK:
-		fullscreen = cfg.get_value("video", "fullscreen", false)
-		vsync = cfg.get_value("video", "vsync", false)
-		sounds = cfg.get_value("sounds", "global_sounds", true)
-		novice_mode = cfg.get_value("global", "novice_mode", true)
-		master_volume = cfg.get_value("sounds", "master_volume", 1.0)
-		music_volume = cfg.get_value("sounds", "music_volume", 1.0)
-		sfx_volume = cfg.get_value("sounds", "sfx_volume", 1.0)
+	if cfg.load(CONFIG_PATH) != OK:
+		return
+	
+	##Video
+	fullscreen = cfg.get_value("video", "fullscreen", false)
+	vsync = cfg.get_value("video", "vsync", false)
+	##Audio
+	sounds = cfg.get_value("sounds", "global_sounds", true)
+	master_volume = cfg.get_value("sounds", "master_volume", 1.0)
+	music_volume = cfg.get_value("sounds", "music_volume", 1.0)
+	sfx_volume = cfg.get_value("sounds", "sfx_volume", 1.0)
+	##Global
+	novice_mode = cfg.get_value("global", "novice_mode", true)
+	##Binding
+	for action in tracked_actions:
+		if not cfg.has_section_key("binding", action):
+			continue
+		
+		var data: Variant = cfg.get_value("binding", action)
+		
+		if data is Dictionary:
+			InputMap.action_erase_events(action)
+			match data.get("type", ""):
+				"key":
+					var e := InputEventKey.new()
+					e.physical_keycode = data.get("keycode", KEY_NONE)
+					
+					InputMap.action_add_event(action, e)
+				"mouse":
+					var e := InputEventMouseButton.new()
+					e.button_index = data.get("button", MOUSE_BUTTON_LEFT)
+					
+					InputMap.action_add_event(action, e)
+
+func is_action_modified(action_name: String) -> bool:
+	var default_setting: Variant = ProjectSettings.get_setting("input/" + action_name)
+	if default_setting == null:
+		return false
+	
+	var default_events: Array = default_setting.get("events", [])
+	var current_events: Array = InputMap.action_get_events(action_name)
+	
+	if default_events.size() != current_events.size():
+		return true
+		
+	for i in range(current_events.size()):
+		if not current_events[i].is_match(default_events[i]):
+			return true
+			
+	return false
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("fullscreen_toggle"):

@@ -1,0 +1,57 @@
+[gd_scene format=3 uid="uid://mk2x00vvrpny"]
+
+[ext_resource type="StyleBox" uid="uid://dxh65jyslte1f" path="res://Themes/ButtonStyleBox.tres" id="1_ssvsx"]
+[ext_resource type="Script" uid="uid://c5ojei6v26yyx" path="res://Scripts/UI/key_bind_component.gd" id="1_ue2dl"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2xp0l"]
+bg_color = Color(0.48511398, 0.2920156, 0.11268645, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.3019608, 0.1764706, 0.05490196, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+expand_margin_left = 4.0
+expand_margin_top = 4.0
+expand_margin_right = 4.0
+expand_margin_bottom = 4.0
+
+[sub_resource type="Theme" id="Theme_iv5c4"]
+Button/styles/disabled = ExtResource("1_ssvsx")
+Button/styles/focus = ExtResource("1_ssvsx")
+Button/styles/hover = ExtResource("1_ssvsx")
+Button/styles/hover_pressed_mirrored = ExtResource("1_ssvsx")
+Button/styles/normal = ExtResource("1_ssvsx")
+Button/styles/pressed = ExtResource("1_ssvsx")
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_2xp0l")
+
+[sub_resource type="LabelSettings" id="LabelSettings_2xp0l"]
+font_size = 13
+
+[node name="KeyBindComponent" type="PanelContainer" unique_id=2076406413]
+custom_minimum_size = Vector2(0, 40)
+offset_right = 77.0
+offset_bottom = 40.0
+theme = SubResource("Theme_iv5c4")
+script = ExtResource("1_ue2dl")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=369962699]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer" unique_id=1722684069]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Test"
+label_settings = SubResource("LabelSettings_2xp0l")
+
+[node name="Button" type="Button" parent="HBoxContainer" unique_id=1679458503]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+theme_override_font_sizes/font_size = 13
+toggle_mode = true
+
+[connection signal="gui_input" from="HBoxContainer/Button" to="." method="_on_button_gui_input"]
+[connection signal="pressed" from="HBoxContainer/Button" to="." method="_on_button_pressed"]

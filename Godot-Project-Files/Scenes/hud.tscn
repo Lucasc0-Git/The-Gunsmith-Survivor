@@ -47,7 +47,7 @@
 [ext_resource type="Resource" uid="uid://cl7ur3hd1f4ec" path="res://items/Inv_items/RepairComponent_item.tres" id="40_gnip7"]
 [ext_resource type="Script" uid="uid://kip6x331bpa4" path="res://Scripts/UI/upgrade_tooltip.gd" id="40_te3lg"]
 [ext_resource type="Texture2D" uid="uid://pit83uwrvh5x" path="res://Textures/turret_base.png" id="41_3njvo"]
-[ext_resource type="Resource" uid="uid://dn8lcdi2k5onj" path="res://items/Inv_items/BasicTurret_item.tres" id="42_3njvo"]
+[ext_resource type="Resource" uid="uid://hq6vnsiegff4" path="res://items/Inv_items/TestTurret_item.tres" id="42_3njvo"]
 [ext_resource type="PackedScene" uid="uid://tppkv2hqbl7y" path="res://Scenes/CoreLowHealthBar.tscn" id="44_jmo6y"]
 [ext_resource type="PackedScene" uid="uid://b3m2wxdlyr7xq" path="res://Scenes/the_core_arrow.tscn" id="46_7c2aa"]
 
