@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="BuildItemData" format=3 uid="uid://cnafchdfph78h"]
+
+[ext_resource type="Script" uid="uid://dgi6p7vrp0imi" path="res://items/ItemData/ItemData.gd" id="1_ijwb7"]
+[ext_resource type="Resource" uid="uid://dwgpgdmwvvck2" path="res://items/BuildItems/TurretBuildItems/SniperTurret.tres" id="1_yr60o"]
+[ext_resource type="Script" uid="uid://bmqu0kgfa7xur" path="res://items/ItemData/BuildItemData.gd" id="2_g530f"]
+[ext_resource type="Texture2D" uid="uid://pit83uwrvh5x" path="res://Textures/turret_base.png" id="3_1xnuh"]
+[ext_resource type="Resource" uid="uid://deibtfbf65wx2" path="res://items/Inv_items/IronOre_item.tres" id="3_gs0ud"]
+[ext_resource type="Resource" uid="uid://4bpscjhtcwh6" path="res://items/Inv_items/Stone_item.tres" id="4_yr60o"]
+[ext_resource type="Resource" uid="uid://bk47ml2crjygp" path="res://items/Inv_items/GoldOre_item.tres" id="5_amu5s"]
+
+[resource]
+script = ExtResource("2_g530f")
+build_data = ExtResource("1_yr60o")
+id = "sniper_turret"
+icon = ExtResource("3_1xnuh")
+display_name = "Sniper Turret"
+max_stack = 4
+description = "A turret with big range and big damage. Shoots and rotates very slowly."
+crafting_recipe = Dictionary[ExtResource("1_ijwb7"), int]({
+ExtResource("3_gs0ud"): 16,
+ExtResource("4_yr60o"): 16,
+ExtResource("5_amu5s"): 4
+})
+needed_stations = Dictionary[int, int]({
+1: 1
+})
+metadata/_custom_type_script = "uid://bmqu0kgfa7xur"

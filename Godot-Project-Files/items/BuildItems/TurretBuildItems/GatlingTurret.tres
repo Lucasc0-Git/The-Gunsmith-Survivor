@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="TurretBuildData" format=3 uid="uid://buqth5sb26baa"]
+
+[ext_resource type="PackedScene" uid="uid://cbw45347x42n7" path="res://Scenes/Bullet.tscn" id="1_3l7xe"]
+[ext_resource type="Script" uid="uid://dv60haes2fxhl" path="res://items/BuildItems/TurretBuildItems/turret_build_data.gd" id="1_17nst"]
+[ext_resource type="PackedScene" uid="uid://n6psl3qmbi85" path="res://Scenes/turrets/turret.tscn" id="1_ixtrg"]
+[ext_resource type="Texture2D" uid="uid://pit83uwrvh5x" path="res://Textures/turret_base.png" id="3_ndlfj"]
+
+[resource]
+script = ExtResource("1_17nst")
+self_damage_per_second = 0.5
+turret_modulate = Color(0.7323323, 0.00040949642, 0.732327, 1)
+turret_damage = 2.0
+turret_range = 400.0
+turret_shoot_cooldown = 0.1
+bullet_scene = ExtResource("1_3l7xe")
+bullet_speed_multiplier = 1.25
+bullet_scale = 0.75
+id = "gatling_turret"
+icon = ExtResource("3_ndlfj")
+build_scene = ExtResource("1_ixtrg")
+metadata/_custom_type_script = "uid://dv60haes2fxhl"

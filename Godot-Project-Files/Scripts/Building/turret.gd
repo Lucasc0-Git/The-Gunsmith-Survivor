@@ -16,11 +16,14 @@ class_name Turret
 
 @export var rotation_speed: float = 45 ##In degrees per second
 
+@export var shoot_sound_volume: float = 0.0
 
 # Onready
 @onready var barrel_sprite: AnimatedSprite2D = %Barrel
 @onready var muzzle: Marker2D = %Muzzle
 @onready var reload_timer: Timer = %ReloadTimer
+@onready var range_circle: Circle = $RangeCircle
+@onready var turret_anim_player: AnimationPlayer = $TurretAnimPlayer
 
 # Simple var
 var can_shoot: bool = true
@@ -30,17 +33,59 @@ var target_rotation: float = 0.0
 
 func _ready() -> void:
 	super()
-	if !Engine.is_editor_hint():
+	if not Engine.is_editor_hint():
+		var item_data: ItemData = get_item_data()
+		if item_data is BuildItemData and item_data.build_data is TurretBuildData:
+			var turret_build_data: TurretBuildData = item_data.build_data as TurretBuildData
+			max_health = turret_build_data.max_health
+			self_damage_per_second = turret_build_data.self_damage_per_second
+			turret_modulate = turret_build_data.turret_modulate
+			turret_damage = turret_build_data.turret_damage
+			turret_range = turret_build_data.turret_range
+			turret_shoot_cooldown = turret_build_data.turret_shoot_cooldown
+			bullet_scene = turret_build_data.bullet_scene
+			bullet_speed_multiplier = turret_build_data.bullet_speed_multiplier
+			bullet_scale = turret_build_data.bullet_scale
+			rotation_speed = turret_build_data.rotation_speed
+			shoot_sound_volume = turret_build_data.shoot_sound_volume
+		else:
+			push_error("Turret data initialized unsuccessfully!")
+		
 		sprite.modulate = turret_modulate
 		barrel_sprite.modulate = turret_modulate
+		if is_instance_valid(range_circle):
+			range_circle.radius = turret_range / 3
+			range_circle.queue_redraw()
+			range_circle.visible = true
 
 func _process(_delta: float) -> void:
+	if not GameManager or not "is_game_loaded" in GameManager:
+		return
+	if not GameManager.is_game_loaded: return
 	super(_delta)
+	if is_instance_valid(range_circle):
+		if not range_circle.radius == turret_range / 3:
+			range_circle.radius = turret_range / 3
+			range_circle.queue_redraw()
+	
 	if sprite.modulate != turret_modulate or barrel_sprite.modulate != turret_modulate:
 		sprite.modulate = turret_modulate
 		barrel_sprite.modulate = turret_modulate
 	if preview_only:
+		if is_instance_valid(range_circle):
+			range_circle.visible = true
 		return
+	else:
+		var mouse_pos := get_global_mouse_position()
+		if mouse_pos.distance_to(global_position) <= cursor_proximity_dist:
+			if not anim_player.is_playing():
+				if not range_circle.visible:
+					turret_anim_player.play("show_range")
+		else:
+			if not anim_player.is_playing():
+				if range_circle.visible:
+					turret_anim_player.play("hide_range")
+	
 	
 	if is_instance_valid(target):
 		_update_target_rotation()
@@ -68,6 +113,8 @@ func _update_target_rotation() -> void:
 	target_rotation = (target.global_position - global_position).angle()
 
 func _update_target() -> Node:
+	if preview_only: return null
+	
 	var best_target: Node = null
 	
 	var enemy_data: Array[Dictionary] = []
@@ -95,8 +142,11 @@ func _update_target() -> Node:
 	return best_target
 
 func shoot() -> void:
+	if preview_only: return
+	
 	if can_shoot:
 		if _shoot():
+			AudioManager.play_sfx_2d("small_gun_shot", global_position, shoot_sound_volume)
 			can_shoot = false
 			reload_timer.start(turret_shoot_cooldown)
 
@@ -113,6 +163,7 @@ func _shoot() -> bool:
 	return true
 
 func _on_reload_timer_timeout() -> void:
+	if preview_only: return
 	can_shoot = true
 
 func _on_target_checking_timer_timeout() -> void:
@@ -124,6 +175,7 @@ func _on_target_checking_timer_timeout() -> void:
 	target = _update_target()
 
 func _on_self_damage_timer_timeout() -> void:
+	if preview_only: return
 	health -= self_damage_per_second
 	
 	if health <= 0:

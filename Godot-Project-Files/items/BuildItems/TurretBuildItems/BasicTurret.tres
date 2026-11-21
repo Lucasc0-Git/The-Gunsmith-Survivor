@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="TurretBuildData" format=3 uid="uid://bi6ye2dyu5afv"]
+
+[ext_resource type="PackedScene" uid="uid://n6psl3qmbi85" path="res://Scenes/turrets/turret.tscn" id="1_jpgvg"]
+[ext_resource type="Script" uid="uid://dv60haes2fxhl" path="res://items/BuildItems/TurretBuildItems/turret_build_data.gd" id="1_vsfde"]
+[ext_resource type="Texture2D" uid="uid://pit83uwrvh5x" path="res://Textures/turret_base.png" id="2_gpe3l"]
+[ext_resource type="PackedScene" uid="uid://cbw45347x42n7" path="res://Scenes/Bullet.tscn" id="2_urelm"]
+
+[resource]
+script = ExtResource("1_vsfde")
+self_damage_per_second = 0.5
+turret_modulate = Color(0.79839754, 0.5946809, 0.3318002, 1)
+turret_damage = 10.0
+turret_range = 500.0
+turret_shoot_cooldown = 0.4
+bullet_scene = ExtResource("2_urelm")
+bullet_speed_multiplier = 0.8
+bullet_scale = 0.8
+rotation_speed = 60.0
+shoot_sound_volume = -1.0
+id = "basic_turret"
+icon = ExtResource("2_gpe3l")
+build_scene = ExtResource("1_jpgvg")
+metadata/_custom_type_script = "uid://dv60haes2fxhl"

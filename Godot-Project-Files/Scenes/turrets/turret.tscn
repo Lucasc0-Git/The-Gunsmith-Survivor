@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://pit83uwrvh5x" path="res://Textures/turret_base.png" id="3_6spbj"]
 [ext_resource type="PackedScene" uid="uid://cbw45347x42n7" path="res://Scenes/Bullet.tscn" id="3_ahfaj"]
 [ext_resource type="Texture2D" uid="uid://j25ar5js7vcy" path="res://Textures/turret_barrel.png" id="4_pulj5"]
+[ext_resource type="Script" uid="uid://42uwrk446g63" path="res://Scripts/range_circle.gd" id="6_d5cxf"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_pulj5"]
 animations = [{
@@ -28,12 +29,102 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ahfaj"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d5cxf"]
 resource_local_to_scene = true
 size = Vector2(16, 16)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_pulj5"]
 radius = 11.666667
+
+[sub_resource type="Animation" id="Animation_d5cxf"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("RangeCircle:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("RangeCircle:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_n1kba"]
+resource_name = "hide_range"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("RangeCircle:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("RangeCircle:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_4xbqk"]
+resource_name = "show_range"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("RangeCircle:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("RangeCircle:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_21o36"]
+_data = {
+&"RESET": SubResource("Animation_d5cxf"),
+&"hide_range": SubResource("Animation_n1kba"),
+&"show_range": SubResource("Animation_4xbqk")
+}
 
 [node name="Turret" unique_id=1835171183 node_paths=PackedStringArray("sprite", "anim_player") instance=ExtResource("1_fcprl")]
 process_mode = 1
@@ -47,6 +138,7 @@ bullet_scene = ExtResource("3_ahfaj")
 bullet_speed_multiplier = 1.0
 bullet_scale = 1.0
 rotation_speed = 90.0
+shoot_sound_volume = null
 sprite = NodePath("AnimatedSprite2D")
 anim_player = NodePath("Control/AnimationPlayer")
 cursor_proximity_dist = 40
@@ -68,7 +160,7 @@ position = Vector2(10, 10)
 gizmo_extents = 5.0
 
 [node name="CollisionShape2D" parent="." index="2" unique_id=2132263509]
-shape = SubResource("RectangleShape2D_ahfaj")
+shape = SubResource("RectangleShape2D_d5cxf")
 
 [node name="CollisionShape2D" parent="MouseInputMonitor" parent_id_path=PackedInt32Array(1707325614) index="0" unique_id=487905519]
 shape = SubResource("CircleShape2D_pulj5")
@@ -83,6 +175,17 @@ autostart = true
 [node name="SelfDamageTimer" type="Timer" parent="." index="7" unique_id=1864975328]
 process_mode = 1
 autostart = true
+
+[node name="RangeCircle" type="Node2D" parent="." index="8" unique_id=1735304863]
+z_index = 831
+script = ExtResource("6_d5cxf")
+radius = 0.0
+color = Color(3.7541986e-06, 0.58839273, 0.58839273, 1)
+filled = false
+width = 2.0
+
+[node name="TurretAnimPlayer" type="AnimationPlayer" parent="." index="9" unique_id=1732011701]
+libraries/ = SubResource("AnimationLibrary_21o36")
 
 [connection signal="timeout" from="ReloadTimer" to="." method="_on_reload_timer_timeout"]
 [connection signal="timeout" from="TargetCheckingTimer" to="." method="_on_target_checking_timer_timeout"]

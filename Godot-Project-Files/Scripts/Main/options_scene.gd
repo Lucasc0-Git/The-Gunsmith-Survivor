@@ -9,6 +9,7 @@ class_name OptionsScene
 @onready var music_sound_slider: HSlider = %MusicSoundSlider
 @onready var back_button: Button = $VBoxContainer2/Back
 @onready var rebinding_vbox_container: VBoxContainer = $TabContainer/KeyboardControl/PanelContainer/MarginContainer/VBoxContainer
+@onready var tab_container: TabContainer = $TabContainer
 
 var _save_timer: Timer
 
@@ -18,6 +19,7 @@ func _ready() -> void:
 	_save_timer.wait_time = 0.5
 	add_child(_save_timer)
 	_save_timer.timeout.connect(_on_save_timer_timeout)
+	tab_container.current_tab = 0
 	
 	fullscreen_checkbox.set_pressed_no_signal(Settings.fullscreen)
 	vsync_checkbox.set_pressed_no_signal(Settings.vsync)

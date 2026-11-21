@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="TurretBuildData" format=3 uid="uid://xaj2l8po6oc0"]
+
+[ext_resource type="Script" uid="uid://dv60haes2fxhl" path="res://items/BuildItems/TurretBuildItems/turret_build_data.gd" id="1_7i2ws"]
+[ext_resource type="PackedScene" uid="uid://n6psl3qmbi85" path="res://Scenes/turrets/turret.tscn" id="1_b8wg6"]
+[ext_resource type="PackedScene" uid="uid://cbw45347x42n7" path="res://Scenes/Bullet.tscn" id="2_224qo"]
+[ext_resource type="Texture2D" uid="uid://pit83uwrvh5x" path="res://Textures/turret_base.png" id="2_xhhw5"]
+
+[resource]
+script = ExtResource("1_7i2ws")
+turret_modulate = Color(1.4920532e-06, 0, 0.52098125, 1)
+turret_damage = 60.0
+turret_range = 1400.0
+turret_shoot_cooldown = 10.0
+bullet_scene = ExtResource("2_224qo")
+bullet_speed_multiplier = 2.5
+bullet_scale = 0.6
+rotation_speed = 25.0
+shoot_sound_volume = 15.0
+id = "super_sniper_turret"
+icon = ExtResource("2_xhhw5")
+build_scene = ExtResource("1_b8wg6")
+metadata/_custom_type_script = "uid://dv60haes2fxhl"

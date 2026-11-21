@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="BuildItemData" format=3 uid="uid://eqjqiyoyfkxa"]
+
+[ext_resource type="Script" uid="uid://dgi6p7vrp0imi" path="res://items/ItemData/ItemData.gd" id="1_cg2ee"]
+[ext_resource type="Resource" uid="uid://buqth5sb26baa" path="res://items/BuildItems/TurretBuildItems/GatlingTurret.tres" id="1_egsye"]
+[ext_resource type="Script" uid="uid://bmqu0kgfa7xur" path="res://items/ItemData/BuildItemData.gd" id="2_3q2bj"]
+[ext_resource type="Resource" uid="uid://4bpscjhtcwh6" path="res://items/Inv_items/Stone_item.tres" id="3_egsye"]
+[ext_resource type="Texture2D" uid="uid://pit83uwrvh5x" path="res://Textures/turret_base.png" id="3_prehj"]
+[ext_resource type="Resource" uid="uid://deibtfbf65wx2" path="res://items/Inv_items/IronOre_item.tres" id="4_pwi7v"]
+[ext_resource type="Resource" uid="uid://d3qjg6wskepmj" path="res://items/Inv_items/CopperOre_item.tres" id="5_ahc8o"]
+[ext_resource type="Resource" uid="uid://bk47ml2crjygp" path="res://items/Inv_items/GoldOre_item.tres" id="6_clyrb"]
+
+[resource]
+script = ExtResource("2_3q2bj")
+build_data = ExtResource("1_egsye")
+id = "gatling_turret"
+icon = ExtResource("3_prehj")
+display_name = "Gatling Turret"
+max_stack = 4
+description = "Very fast-shooting turret."
+crafting_recipe = Dictionary[ExtResource("1_cg2ee"), int]({
+ExtResource("3_egsye"): 16,
+ExtResource("4_pwi7v"): 8,
+ExtResource("5_ahc8o"): 8,
+ExtResource("6_clyrb"): 1
+})
+needed_stations = Dictionary[int, int]({
+1: 1
+})
+metadata/_custom_type_script = "uid://bmqu0kgfa7xur"

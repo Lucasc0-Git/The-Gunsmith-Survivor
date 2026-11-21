@@ -96,6 +96,7 @@ func equip_item(slot_data: SlotData) -> void:
 		var b := item as BuildItemData
 		sprite.texture = b.build_data.icon
 		build_preview = item.build_data.build_scene.instantiate() #instantiate the build scene
+		build_preview._item_id = item.build_data.id
 		#build_preview.modulate = item.build_data.transparent_color #set transparency to 50
 		build_preview.collision_shape.set_deferred("disabled", true)
 		build_preview.preview_only = true
@@ -242,7 +243,7 @@ func _interact() -> bool:
 func _spawn_build() -> void:
 	GameManager.more_stats["Buildings built"] += 1
 	var build_item := equipped_item.item_data as BuildItemData
-	player.main.spawn_building(get_global_mouse_position(), build_item.build_data.build_scene)
+	player.main.spawn_building(get_global_mouse_position(), build_item.build_data.build_scene, build_item.build_data)
 
 func _swing_weapon() -> void:
 	var data: CloseWeaponItemData = equipped_item.item_data as CloseWeaponItemData

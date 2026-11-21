@@ -365,13 +365,15 @@ func spawn_stone(pos: Vector2) -> void:
 	Ysort.add_child(stone)
 	_register_in_chunk(stone)
 
-func spawn_building(pos: Vector2, build_scene: PackedScene) -> void:
+func spawn_building(pos: Vector2, build_scene: PackedScene, build_data: BuildData = null) -> void:
 	var building: BuildScene = build_scene.instantiate()
 	AudioManager.play_sfx_2d("building_built", pos)
 	building.preview_only = false
 	building.global_position = pos
+	if building is Turret:
+		if build_data:
+			building._item_id = build_data.id
 	Ysort.add_child(building)
-	#_register_in_chunk(building)
 
 func add_spawner(pos: Vector2) -> void:
 	var spawner := preload("res://Scenes/enemy_spawner.tscn").instantiate()

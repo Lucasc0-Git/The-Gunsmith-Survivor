@@ -47,8 +47,12 @@
 [ext_resource type="Resource" uid="uid://cl7ur3hd1f4ec" path="res://items/Inv_items/RepairComponent_item.tres" id="40_gnip7"]
 [ext_resource type="Script" uid="uid://kip6x331bpa4" path="res://Scripts/UI/upgrade_tooltip.gd" id="40_te3lg"]
 [ext_resource type="Texture2D" uid="uid://pit83uwrvh5x" path="res://Textures/turret_base.png" id="41_3njvo"]
-[ext_resource type="Resource" uid="uid://hq6vnsiegff4" path="res://items/Inv_items/TestTurret_item.tres" id="42_3njvo"]
+[ext_resource type="Resource" uid="uid://dn8lcdi2k5onj" path="res://items/Inv_items/BasicTurret_item.tres" id="42_3njvo"]
+[ext_resource type="Resource" uid="uid://eqjqiyoyfkxa" path="res://items/Inv_items/GatlingTurret_item.tres" id="43_5nah2"]
+[ext_resource type="Resource" uid="uid://cnafchdfph78h" path="res://items/Inv_items/SniperTurret_item.tres" id="44_g8vqp"]
 [ext_resource type="PackedScene" uid="uid://tppkv2hqbl7y" path="res://Scenes/CoreLowHealthBar.tscn" id="44_jmo6y"]
+[ext_resource type="Resource" uid="uid://d4it3qoho1e2m" path="res://items/Inv_items/SuperGatlingTurret_item.tres" id="45_wosp2"]
+[ext_resource type="Resource" uid="uid://b16nmc41on8ny" path="res://items/Inv_items/SuperSniperTurret_item.tres" id="46_1x1q1"]
 [ext_resource type="PackedScene" uid="uid://b3m2wxdlyr7xq" path="res://Scenes/the_core_arrow.tscn" id="46_7c2aa"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_36asn"]
@@ -867,12 +871,63 @@ script = ExtResource("20_q562m")
 item_data = ExtResource("42_3njvo")
 metadata/_custom_type_script = "uid://def44bo4agrv4"
 
-[node name="Panel5" type="Panel" parent="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control5/AutomationCraftingContainer/MarginContainer/ScrollContainer/HBoxContainer" unique_id=2136443183]
+[node name="GatlingTurret" type="Button" parent="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control5/AutomationCraftingContainer/MarginContainer/ScrollContainer/HBoxContainer" unique_id=693783417]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 mouse_filter = 1
+theme = ExtResource("14_ba8gd")
+disabled = true
+action_mode = 0
+icon = ExtResource("41_3njvo")
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("20_q562m")
+item_data = ExtResource("43_5nah2")
+metadata/_custom_type_script = "uid://def44bo4agrv4"
 
-[node name="Panel6" type="Panel" parent="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control5/AutomationCraftingContainer/MarginContainer/ScrollContainer/HBoxContainer" unique_id=898867341]
+[node name="SniperTurret" type="Button" parent="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control5/AutomationCraftingContainer/MarginContainer/ScrollContainer/HBoxContainer" unique_id=966478780]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+mouse_filter = 1
+theme = ExtResource("14_ba8gd")
+disabled = true
+action_mode = 0
+icon = ExtResource("41_3njvo")
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("20_q562m")
+item_data = ExtResource("44_g8vqp")
+metadata/_custom_type_script = "uid://def44bo4agrv4"
+
+[node name="SuperGatlingTurret" type="Button" parent="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control5/AutomationCraftingContainer/MarginContainer/ScrollContainer/HBoxContainer" unique_id=1012632927]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+mouse_filter = 1
+theme = ExtResource("14_ba8gd")
+disabled = true
+action_mode = 0
+icon = ExtResource("41_3njvo")
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("20_q562m")
+item_data = ExtResource("45_wosp2")
+metadata/_custom_type_script = "uid://def44bo4agrv4"
+
+[node name="SuperSniperTurret" type="Button" parent="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control5/AutomationCraftingContainer/MarginContainer/ScrollContainer/HBoxContainer" unique_id=429474709]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+mouse_filter = 1
+theme = ExtResource("14_ba8gd")
+disabled = true
+action_mode = 0
+icon = ExtResource("41_3njvo")
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("20_q562m")
+item_data = ExtResource("46_1x1q1")
+metadata/_custom_type_script = "uid://def44bo4agrv4"
+
+[node name="Panel5" type="Panel" parent="InventoryUI/BasicCrafting/BasicCraftingPanels/VBoxContainer/Control5/AutomationCraftingContainer/MarginContainer/ScrollContainer/HBoxContainer" unique_id=2136443183]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 mouse_filter = 1

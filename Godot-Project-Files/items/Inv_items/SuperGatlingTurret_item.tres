@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="BuildItemData" format=3 uid="uid://d4it3qoho1e2m"]
+
+[ext_resource type="Script" uid="uid://dgi6p7vrp0imi" path="res://items/ItemData/ItemData.gd" id="1_ajl6m"]
+[ext_resource type="Resource" uid="uid://bec4o3pydlnic" path="res://items/BuildItems/TurretBuildItems/SuperGatlingTurret.tres" id="1_g0hwg"]
+[ext_resource type="Script" uid="uid://bmqu0kgfa7xur" path="res://items/ItemData/BuildItemData.gd" id="2_lbtyc"]
+[ext_resource type="Resource" uid="uid://4bpscjhtcwh6" path="res://items/Inv_items/Stone_item.tres" id="3_g0hwg"]
+[ext_resource type="Texture2D" uid="uid://pit83uwrvh5x" path="res://Textures/turret_base.png" id="4_g0hwg"]
+[ext_resource type="Resource" uid="uid://dbjenxg573i1d" path="res://items/Inv_items/Platinum_item.tres" id="4_ruvcy"]
+[ext_resource type="Resource" uid="uid://deibtfbf65wx2" path="res://items/Inv_items/IronOre_item.tres" id="5_tuqw3"]
+
+[resource]
+script = ExtResource("2_lbtyc")
+build_data = ExtResource("1_g0hwg")
+id = "super_gatling_turret"
+icon = ExtResource("4_g0hwg")
+display_name = "Super Gatling Turret"
+max_stack = 4
+description = "A very, very fast shooting turret with better reach and higher DPS then normal gatling turret."
+crafting_recipe = Dictionary[ExtResource("1_ajl6m"), int]({
+ExtResource("3_g0hwg"): 32,
+ExtResource("4_ruvcy"): 1,
+ExtResource("5_tuqw3"): 16
+})
+needed_stations = Dictionary[int, int]({
+1: 1
+})
+metadata/_custom_type_script = "uid://bmqu0kgfa7xur"

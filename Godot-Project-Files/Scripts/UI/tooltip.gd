@@ -36,7 +36,14 @@ func show_tooltip(slot_data: SlotData) -> void:
 	elif slot_data.item_data is InteractableItemData:
 		if slot_data.item_data.interactable_data.custom_stats.has("repair"):
 			bb += "Repair: %.1fHP" % [slot_data.item_data.interactable_data.custom_stats["repair"]] + "\n"
-	
+	elif slot_data.item_data is BuildItemData:
+		var item_data: ItemData = slot_data.item_data
+		var build_data: BuildData = item_data.build_data
+		var scene: BuildScene = build_data.build_scene.instantiate()
+		if scene is Turret:
+			bb += "Damage: %1f" % [scene.turret_damage]
+			bb += "Fire rate: %2f" % [scene.turret_shoot_cooldown]
+			bb += "Range: %d" % [scene.turret_range]
 	
 	visible = true
 	self.bbcode_text = bb
